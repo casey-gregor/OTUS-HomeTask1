@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager : MonoBehaviour, IGameStartListener, IGamePauseListener, IGameResumeListener
     {
         [SerializeField] private int initialCount = 7;
         [SerializeField] private int spawnEveryNumOfSeconds = 5;
@@ -17,6 +17,7 @@ namespace ShootEmUp
         private EnemyFactory _enemyPool;
         private EnemyObserver _enemyObserver;
 
+
         private void Awake()
         {
             _enemyPool = new EnemyFactory(prefab, initialCount, container);
@@ -24,7 +25,8 @@ namespace ShootEmUp
         }
         private void Start()
         {
-            StartCoroutine(SpawnEnemies());
+            IGameListener.Register(this);
+            //StartCoroutine(SpawnEnemies());
         }
 
         private IEnumerator SpawnEnemies()
@@ -41,7 +43,6 @@ namespace ShootEmUp
         public void InitilizeEnemy(GameObject enemy)
         {
             enemy.transform.SetParent(this.worldTransform);
-
             var spawnPosition = this.enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
@@ -50,6 +51,21 @@ namespace ShootEmUp
 
             enemy.GetComponent<EnemyAttackAgent>().SetBulletSystem(bulletSystem);
             bulletSystem.SetTarget(this.character);
+        }
+
+        public void OnStart()
+        {
+            StartCoroutine(SpawnEnemies());
+        }
+
+        public void OnPause()
+        {
+            StopAllCoroutines();
+        }
+
+        public void OnResume()
+        {
+            StartCoroutine(SpawnEnemies());
         }
     }
 }

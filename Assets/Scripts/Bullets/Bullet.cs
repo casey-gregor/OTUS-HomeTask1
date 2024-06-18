@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ShootEmUp
 {
 
-    public sealed class Bullet : MonoBehaviour
+    public sealed class Bullet : MonoBehaviour, IGameFixedUpdateListener, IGamePauseListener, IGameResumeListener
     {
         [SerializeField] private BulletConfig bulletConfig;
 
@@ -13,16 +13,20 @@ namespace ShootEmUp
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
         private LevelBounds _levelBounds;
+        private Vector2 velocity;
 
         public event Action<GameObject> OnCollisionEntered;
         public event Action<GameObject> OnOutOfBounds;
 
         private void OnEnable()
         {
+            IGameListener.Register(this);
+
             if (TryGetComponent<Rigidbody2D>(out _rigidbody2D) == false)
                 Debug.LogError($"{this.name} is missing Rigidbody2D");
             if (TryGetComponent<SpriteRenderer>(out _spriteRenderer) == false)
                 Debug.LogError($"{this.name} is missing SpriteRenderer");
+            
         }
 
         public void InitializeBullet(Vector2 startPosition, Vector2 direction, LevelBounds _levelBounds)
@@ -31,20 +35,11 @@ namespace ShootEmUp
             SetLevelBounds(_levelBounds);
             SetColor(bulletConfig.color);
             SetStartPosition(startPosition);
-            SetVelocity(direction*bulletConfig.speed);
+            velocity = direction * bulletConfig.speed;
+            SetVelocity(velocity);
             SetIsActive(true);
         }
 
-        private void FixedUpdate()
-        {
-            if (!isActive)
-                return;
-            if (!_levelBounds.InBounds(this.transform.position))
-            {
-                this.OnOutOfBounds?.Invoke(this.gameObject);
-                isActive = false;
-            }
-        }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if(!collision.gameObject.TryGetComponent(out TeamComponent team))
@@ -83,5 +78,31 @@ namespace ShootEmUp
             this.isActive = value;
         }
 
+        public void OnFixedUpdate()
+        {
+            //Debug.Log("bullet fixed update");
+            if (!isActive)
+                return;
+            if (!_levelBounds.InBounds(this.transform.position))
+            {
+                this.OnOutOfBounds?.Invoke(this.gameObject);
+                isActive = false;
+            }
+        }
+
+        private void OnDisable()
+        {
+            IGameListener.Unregister(this);
+        }
+
+        public void OnPause()
+        {
+            SetVelocity(Vector2.zero);
+        }
+
+        public void OnResume()
+        {
+            SetVelocity(velocity);
+        }
     }
 }

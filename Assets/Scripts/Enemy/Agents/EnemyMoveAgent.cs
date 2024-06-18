@@ -2,11 +2,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MoveComponent
+    public sealed class EnemyMoveAgent : MoveComponent, IGameFixedUpdateListener
     {
         private Rigidbody2D _rigibody2d;
         private void OnEnable()
         {
+            IGameListener.Register(this);
+
             if (TryGetComponent<Rigidbody2D>(out _rigibody2d) == false)
                 Debug.LogError($"{this.name} is missing Rigidbody2D");
         }
@@ -25,22 +27,32 @@ namespace ShootEmUp
             this.isReached = false;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
-            if (this.isReached)
-            {
+            //Debug.Log("Enemy move");
+            var vector = this.destination - (Vector2)this.transform.position;
+
+            if (CheckIfReached(vector))
                 return;
-            }
-            
-            var vector = this.destination - (Vector2) this.transform.position;
-            if (vector.magnitude <= 0.25f)
-            {
-                this.isReached = true;
-                return;
-            }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
             MoveByRigidbodyVelocity(_rigibody2d, direction);
+        }
+
+        private bool CheckIfReached(Vector2 vector)
+        {
+           
+            if (vector.magnitude <= 0.25f)
+            {
+                this.isReached = true;
+            }
+            return this.isReached;
+
+        }
+
+        private void OnDisable()
+        {
+            IGameListener.Unregister(this);
         }
     }
 }

@@ -4,13 +4,18 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class InputManager : MonoBehaviour
+    public sealed class InputManager : MonoBehaviour, IGameUpdateListener
     {
         public event Action OnSpacePressedEvent;
         public int HorizontalDirection { get; private set; }
-
-        private void Update()
+        private void Start()
         {
+            IGameListener.Register(this);
+        }
+
+        public void OnUpdate()
+        {
+            //Debug.Log("input");
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 OnSpacePressedEvent?.Invoke();

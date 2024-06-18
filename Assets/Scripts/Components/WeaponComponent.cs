@@ -22,7 +22,6 @@ namespace ShootEmUp
                 }
             }
         }
-
         public Vector2 Position
         {
             get { return this._firePoint.position; }

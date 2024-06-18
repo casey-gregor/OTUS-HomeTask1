@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private float timeBetweenShots;
 
@@ -21,18 +21,9 @@ namespace ShootEmUp
 
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
-            if (CanAttack())
-            {
-                this._currentTime -= Time.fixedDeltaTime;
-                if (this._currentTime <= 0)
-                {
-                    //Debug.Log("shoot");
-                    this._bulletSystem.ShootBullet(_weaponComponent);
-                    this._currentTime += this.timeBetweenShots;
-                }
-            }
+            IGameListener.Register(this);
         }
 
         private bool CanAttack()
@@ -47,6 +38,25 @@ namespace ShootEmUp
         public void SetBulletSystem(BulletSystem bulletSystem)
         {
             this._bulletSystem = bulletSystem;
+        }
+
+        public void OnFixedUpdate()
+        {
+            if (CanAttack())
+            {
+                this._currentTime -= Time.fixedDeltaTime;
+                if (this._currentTime <= 0)
+                {
+                    //Debug.Log("shoot");
+                    this._bulletSystem.ShootBullet(_weaponComponent);
+                    this._currentTime += this.timeBetweenShots;
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            IGameListener.Unregister(this);
         }
     }
 }

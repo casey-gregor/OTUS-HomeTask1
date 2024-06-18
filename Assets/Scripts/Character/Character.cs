@@ -22,7 +22,7 @@ namespace ShootEmUp
             bulletSystem.ShootBullet(_weaponComponent);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             inputManager.OnSpacePressedEvent -= SpacePressedEventHandler;
         }
