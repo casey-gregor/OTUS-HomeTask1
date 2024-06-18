@@ -32,7 +32,7 @@ namespace ShootEmUp
 
         void Update()
         {
-            SwitchText(gameManager.state);
+            //SwitchText(gameManager.state);
         }
 
         void SwitchText(GameManager.State state)
@@ -48,14 +48,24 @@ namespace ShootEmUp
         public void OnStart()
         {
             button.gameObject.SetActive(true);
+            textMeshPro.text = "Pause";
         }
         public void OnButtonClick()
         {
             switch (gameManager.state)
             {
-                case GameManager.State.Start: gameManager.SetState(GameManager.State.Pause); break;
-                case GameManager.State.Resume: gameManager.SetState(GameManager.State.Pause); break;
-                case GameManager.State.Pause: gameManager.SetState(GameManager.State.Resume); break;
+                case GameManager.State.Start:
+                    textMeshPro.text = "Resume";
+                    gameManager.SetState(GameManager.State.Pause); 
+                    break;
+                case GameManager.State.Resume: 
+                    textMeshPro.text = "Resume";
+                    gameManager.SetState(GameManager.State.Pause);
+                    break;
+                case GameManager.State.Pause: 
+                    textMeshPro.text = "Pause";
+                    gameManager.SetState(GameManager.State.Resume);
+                    break;
             }
         }
     }
