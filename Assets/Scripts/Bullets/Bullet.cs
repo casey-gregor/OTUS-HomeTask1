@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ShootEmUp
 {
 
-    public sealed class Bullet : MonoBehaviour, IGameFixedUpdateListener, IGamePauseListener, IGameResumeListener
+    public sealed class Bullet : MonoBehaviour, IGameFixedUpdateListener, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         [SerializeField] private BulletConfig bulletConfig;
 
@@ -80,7 +80,6 @@ namespace ShootEmUp
 
         public void OnFixedUpdate()
         {
-            //Debug.Log("bullet fixed update");
             if (!isActive)
                 return;
             if (!_levelBounds.InBounds(this.transform.position))
@@ -103,6 +102,11 @@ namespace ShootEmUp
         public void OnResume()
         {
             SetVelocity(velocity);
+        }
+
+        public void OnFinish()
+        {
+            SetVelocity(Vector2.zero);
         }
     }
 }

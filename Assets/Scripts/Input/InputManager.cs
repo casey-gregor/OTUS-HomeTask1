@@ -15,7 +15,6 @@ namespace ShootEmUp
 
         public void OnUpdate()
         {
-            //Debug.Log("input");
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 OnSpacePressedEvent?.Invoke();

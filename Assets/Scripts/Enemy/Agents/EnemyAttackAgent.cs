@@ -53,7 +53,6 @@ namespace ShootEmUp
                 }
             }
         }
-
         private void OnDisable()
         {
             IGameListener.Unregister(this);

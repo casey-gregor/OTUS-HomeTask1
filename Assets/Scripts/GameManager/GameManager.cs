@@ -24,22 +24,15 @@ namespace ShootEmUp
         {
             IGameListener.RegisterEvent += RegisterEventHandler;
             IGameListener.UnregisterEvent += UnregisterEventHandler;
-            //Debug.Log("GameManager subscribed to Register Event");
         }
 
         private void RegisterEventHandler(IGameListener gameListener)
         {
             gameListeners.Add(gameListener);
-            
-            //if (gameListeners.Contains(gameListener))
-            //{
-            //    IGameListener.SuccessfulRegistration();
-            //}
         }
         private void UnregisterEventHandler(IGameListener gameListener)
         {
             gameListeners.Remove(gameListener);
-            Debug.Log($"{gameListener} removed from the list");
         }
         private void FixedUpdate()
         {
@@ -60,12 +53,9 @@ namespace ShootEmUp
             
             for (int i = 0; i < gameListeners.Count; i++)
             {
-
-                //Debug.Log("gameListener : " + gameListeners[i]);
                 if (gameListeners[i] is IGameUpdateListener updateListener)
                 {
                     updateListener.OnUpdate();
-                    //Debug.Log("OnUpdate");
                 }
             }
         }
@@ -77,40 +67,39 @@ namespace ShootEmUp
                 case State.Start:
                     for (int i = 0; i < gameListeners.Count; i++)
                     {
-
-                        //Debug.Log("gameListener : " + gameListeners[i]);
                         if (gameListeners[i] is IGameStartListener listener)
                         {
                             listener.OnStart();
-                            Debug.Log($"{listener} called OnStart");
                         }
                     }
                     break;
                 case State.Pause:
                     for (int i = 0; i < gameListeners.Count; i++)
                     {
-
-                        //Debug.Log("gameListener : " + gameListeners[i]);
                         if (gameListeners[i] is IGamePauseListener listener)
                         {
                             listener.OnPause();
-                            //Debug.Log("OnStart");
                         }
                     }
                     break;
                 case State.Resume:
                     for (int i = 0; i < gameListeners.Count; i++)
                     {
-
-                        //Debug.Log("gameListener : " + gameListeners[i]);
                         if (gameListeners[i] is IGameResumeListener listener)
                         {
                             listener.OnResume();
-                            //Debug.Log("OnStart");
                         }
                     }
                     break;
-
+                case State.Finish:
+                    for (int i = 0; i < gameListeners.Count; i++)
+                    {
+                        if (gameListeners[i] is IGameFinishListener listener)
+                        {
+                            listener.OnFinish();
+                        }
+                    }
+                    break;
             }
         }
 
@@ -126,7 +115,7 @@ namespace ShootEmUp
         public void FinishGame()
         {
             Debug.Log("Game over!");
-            Time.timeScale = 0;
+            SetState(State.Finish);
         }
 
         private bool CanUpdate()

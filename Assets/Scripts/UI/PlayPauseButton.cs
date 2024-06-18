@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public class PlayPauseButton : MonoBehaviour, IGameStartListener
+    public class PlayPauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameManager gameManager;
         private TextMeshProUGUI textMeshPro;
@@ -52,6 +52,11 @@ namespace ShootEmUp
                     gameManager.SetState(GameManager.State.Resume);
                     break;
             }
+        }
+
+        public void OnFinish()
+        {
+            button.gameObject.SetActive(false);
         }
     }
 

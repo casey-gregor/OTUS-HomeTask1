@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour, IGameStartListener, IGamePauseListener, IGameResumeListener
+    public sealed class EnemyManager : MonoBehaviour, IGameStartListener, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         [SerializeField] private int initialCount = 7;
         [SerializeField] private int spawnEveryNumOfSeconds = 5;
@@ -26,7 +26,6 @@ namespace ShootEmUp
         private void Start()
         {
             IGameListener.Register(this);
-            //StartCoroutine(SpawnEnemies());
         }
 
         private IEnumerator SpawnEnemies()
@@ -66,6 +65,11 @@ namespace ShootEmUp
         public void OnResume()
         {
             StartCoroutine(SpawnEnemies());
+        }
+
+        public void OnFinish()
+        {
+            StopAllCoroutines();
         }
     }
 }

@@ -10,7 +10,7 @@ public interface IGameListener
     static event Action<IGameListener> UnregisterEvent;
     static void Register(IGameListener gameListener)
     {
-        Debug.Log($"{gameListener} called Register");
+        //Debug.Log($"{gameListener} called Register");
         RegisterEvent?.Invoke(gameListener);
     }
 
