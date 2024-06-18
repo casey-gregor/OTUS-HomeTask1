@@ -30,21 +30,6 @@ namespace ShootEmUp
             IGameListener.Register(this);
         }
 
-        void Update()
-        {
-            //SwitchText(gameManager.state);
-        }
-
-        void SwitchText(GameManager.State state)
-        {
-            switch(state)
-            {
-                case GameManager.State.Start: textMeshPro.text = "Pause"; break;
-                case GameManager.State.Resume: textMeshPro.text = "Pause"; break;
-                case GameManager.State.Pause: textMeshPro.text = "Resume"; break;
-            }
-        }
-
         public void OnStart()
         {
             button.gameObject.SetActive(true);
