@@ -5,20 +5,25 @@ using UnityEngine;
 
 public class EnemyObserver : ObjectsObserver
 {
-    private IFactory _enemyFactory;
-    public EnemyObserver(IFactory factory) : base(factory)
+    private PoolManager _enemyPool;
+    private RegisterListenersComponent _registerListeners = new RegisterListenersComponent();
+    public EnemyObserver(PoolManager pool) : base(pool)
     {
-        this._enemyFactory = factory;
+        this._enemyPool = pool;
     }
 
-    public override void SubscribeToObject(GameObject obj)
+    public override void Subscribe(GameObject enemyObject)
     {
-        obj.GetComponent<HitPointsComponent>().hpEmpty += this.OnHPempty;
+        _registerListeners.RegisterListeners(enemyObject);
+        enemyObject.GetComponent<HitPointsComponent>().hpEmpty += this.HandleDisableEvent;
     }
 
-    void OnHPempty(GameObject enemy)
+    protected override void HandleDisableEvent(GameObject enemyObject)
     {
-        _enemyFactory.RemoveObject(enemy);
-        enemy.GetComponent<HitPointsComponent>().hpEmpty -= this.OnHPempty;
+        _registerListeners.UnregisterListeners(enemyObject);
+        _enemyPool.EnqueueItem(enemyObject);
+        enemyObject.GetComponent<HitPointsComponent>().hpEmpty -= this.HandleDisableEvent;
     }
+
+   
 }

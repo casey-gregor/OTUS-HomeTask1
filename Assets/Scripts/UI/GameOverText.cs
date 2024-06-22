@@ -11,10 +11,10 @@ namespace ShootEmUp
 
         private TextMeshProUGUI _textMeshPro;
 
-        private void Start()
-        {
-            IGameListener.Register(this);
-        }
+        //private void Start()
+        //{
+        //    IGameListener.Register(this);
+        //}
 
         public void OnFinish()
         {

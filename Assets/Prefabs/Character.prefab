@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3926786964091724597}
   - component: {fileID: 9028396711468705393}
   - component: {fileID: 7000264354682704667}
+  - component: {fileID: 4414282821800802407}
+  - component: {fileID: 5733765415597499300}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -179,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57ed31af8d94ec3b11df7e2b588d40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSystem: {fileID: 0}
-  _inputManager: {fileID: 0}
+  bulletSystem: {fileID: 0}
+  inputManager: {fileID: 0}
 --- !u!114 &7000264354682704667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &4414282821800802407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809540891661548873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bf5fef93f283d4bbf0cb35b0cdf0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  hitPointsComponent: {fileID: 3926786964091724599}
+--- !u!114 &5733765415597499300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809540891661548873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfd8c6b29a23d34888630a92bca62c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3926786963072264211
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +233,7 @@ GameObject:
   - component: {fileID: 3926786963072264220}
   m_Layer: 10
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: FirePoint
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

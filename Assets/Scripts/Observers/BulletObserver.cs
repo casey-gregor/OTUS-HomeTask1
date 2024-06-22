@@ -4,32 +4,25 @@ using UnityEngine;
 
 public class BulletObserver : ObjectsObserver
 {
-    private IFactory _bulletFactory;
-    public BulletObserver(BulletFactory bulletFactory) : base(bulletFactory)
+    private PoolManager _bulletPool;
+    private RegisterListenersComponent _registerListeners = new RegisterListenersComponent();
+    public BulletObserver(PoolManager bulletPool) : base(bulletPool)
     {
-        this._bulletFactory = bulletFactory;
+        this._bulletPool = bulletPool;
     }
 
-    public void SubscribeToBullet(GameObject bullet)
+    public override void Subscribe(GameObject bulletObject)
     {
-        bullet.GetComponent<Bullet>().OnCollisionEntered += this.OnBulletCollision;
-        bullet.GetComponent<Bullet>().OnOutOfBounds += this.OnBulletOutOfBounds;
+        _registerListeners.RegisterListeners(bulletObject);
+        bulletObject.GetComponent<CollisionCheckComponent>().OnCollisionEntered += this.HandleDisableEvent;
+        bulletObject.GetComponent<LevelBoundsCheckComponent>().OnOutOfBounds += this.HandleDisableEvent;
     }
 
-    public override void SubscribeToObject(GameObject obj)
+    protected override void HandleDisableEvent(GameObject bulletObject)
     {
-        obj.GetComponent<Bullet>().OnCollisionEntered += this.OnBulletCollision;
-        obj.GetComponent<Bullet>().OnOutOfBounds += this.OnBulletOutOfBounds;
-    }
-
-    void OnBulletCollision(GameObject bullet)
-    {
-        _bulletFactory.RemoveObject(bullet);
-        bullet.GetComponent<Bullet>().OnCollisionEntered -= this.OnBulletCollision;
-    }
-    void OnBulletOutOfBounds(GameObject bullet)
-    {
-        _bulletFactory.RemoveObject(bullet);
-        bullet.GetComponent<Bullet>().OnOutOfBounds -= this.OnBulletOutOfBounds;
+        _registerListeners.UnregisterListeners(bulletObject);
+        bulletObject.GetComponent<CollisionCheckComponent>().OnCollisionEntered -= this.HandleDisableEvent;
+        bulletObject.GetComponent<LevelBoundsCheckComponent>().OnOutOfBounds -= this.HandleDisableEvent;
+        _bulletPool.EnqueueItem(bulletObject);
     }
 }

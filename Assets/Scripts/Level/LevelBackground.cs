@@ -30,7 +30,7 @@ namespace ShootEmUp
         }
         private void Awake()
         {
-            IGameListener.Register(this);
+            //IGameListener.Register(this);
 
             this.startPositionY = this.parameters.startPositionY;
             this.endPositionY = this.parameters.endPositionY;

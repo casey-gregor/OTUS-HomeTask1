@@ -25,10 +25,10 @@ namespace ShootEmUp
             button.gameObject.SetActive(false);
         }
 
-        private void Start()
-        {
-            IGameListener.Register(this);
-        }
+        //private void Start()
+        //{
+        //    IGameListener.Register(this);
+        //}
 
         public void OnStart()
         {

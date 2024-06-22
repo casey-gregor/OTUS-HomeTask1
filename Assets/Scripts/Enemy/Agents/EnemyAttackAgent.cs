@@ -6,24 +6,19 @@ namespace ShootEmUp
     {
         [SerializeField] private float timeBetweenShots;
 
-        WeaponComponent _weaponComponent;
-        EnemyMoveAgent _moveAgent;
-        BulletSystem _bulletSystem;
+        private WeaponComponent _weaponComponent;
+        private EnemyMoveAgent _moveAgent;
+        private BulletSystem _bulletSystem;
 
         private float _currentTime;
 
-        private void Awake()
+        private void OnEnable()
         {
+            //Debug.Log("onEnable");
             if (TryGetComponent<WeaponComponent>(out _weaponComponent) == false)
                 Debug.LogError($"{this.name} is missing WeaponComponent");
             if (TryGetComponent<EnemyMoveAgent>(out _moveAgent) == false)
                 Debug.LogError($"{this.name} is missing EnemyMoveAgent");
-
-        }
-
-        private void OnEnable()
-        {
-            IGameListener.Register(this);
         }
 
         private bool CanAttack()
@@ -52,10 +47,6 @@ namespace ShootEmUp
                     this._currentTime += this.timeBetweenShots;
                 }
             }
-        }
-        private void OnDisable()
-        {
-            IGameListener.Unregister(this);
         }
     }
 }

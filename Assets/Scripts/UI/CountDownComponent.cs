@@ -1,6 +1,4 @@
-using Assets.Scripts;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +20,7 @@ namespace ShootEmUp
         public IEnumerator CountDown(float timer, float interval, GameManager.State stateToSet, bool isTextAnimatable)
         {
             float countdown = timer;
-            //float interval = 1f;
+
             while (countdown > 0)
             {
                 int seconds = Mathf.CeilToInt(countdown);

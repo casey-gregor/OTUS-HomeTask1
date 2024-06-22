@@ -11,27 +11,26 @@ namespace ShootEmUp
         [SerializeField] private Transform worldTransform;
         [SerializeField] private LevelBounds levelBounds;
 
-        private BulletFactory _bulletFactory;
+        private PoolManager _bulletPool;
         private BulletObserver _bulletObserver;
         public Transform target { get; private set; }
-
         public void Awake()
         {
-            _bulletFactory = new BulletFactory(prefab, initialCount, container);
-            _bulletObserver = new BulletObserver(_bulletFactory);
+            _bulletPool = new PoolManager(prefab, initialCount, container);
+            _bulletObserver = new BulletObserver(_bulletPool);
         }
 
         public void ShootBullet(WeaponComponent weapon)
         {
-            GameObject bullet = _bulletFactory.GetItem();
-            _bulletObserver.SubscribeToBullet(bullet);
-            bullet.transform.SetParent(this.worldTransform);
+            GameObject bulletObject = _bulletPool.GetItem();
+            _bulletObserver.Subscribe(bulletObject);
+            bulletObject.transform.SetParent(this.worldTransform);
 
             var startPosition = weapon.Position;
             Vector2 vector = this.target != null ? (Vector2)this.target.position - startPosition : Vector2.up;
             Vector2 endPosition = weapon.Rotation * vector.normalized;
-
-            bullet.GetComponent<Bullet>().InitializeBullet(startPosition, endPosition, levelBounds);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+            bullet.InitializeBullet(startPosition, endPosition, levelBounds);
         }
 
         public void SetTarget(Transform target)

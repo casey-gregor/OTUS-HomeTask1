@@ -14,19 +14,19 @@ namespace ShootEmUp
         [SerializeField] private Transform worldTransform;
         [SerializeField] private EnemyPositions enemyPositions;
 
-        private EnemyFactory _enemyPool;
+        private PoolManager _enemyPool;
         private EnemyObserver _enemyObserver;
 
 
         private void Awake()
         {
-            _enemyPool = new EnemyFactory(prefab, initialCount, container);
+            _enemyPool = new PoolManager(prefab, initialCount, container);
             _enemyObserver = new EnemyObserver(_enemyPool);
         }
-        private void Start()
-        {
-            IGameListener.Register(this);
-        }
+        //private void Start()
+        //{
+        //    IGameListener.Register(this);
+        //}
 
         private IEnumerator SpawnEnemies()
         {
@@ -35,7 +35,7 @@ namespace ShootEmUp
                 yield return new WaitForSeconds(spawnEveryNumOfSeconds);
                 GameObject enemy = this._enemyPool.GetItem();
                 InitilizeEnemy(enemy);
-                _enemyObserver.SubscribeToObject(enemy);
+                _enemyObserver.Subscribe(enemy);
             }
         }
 

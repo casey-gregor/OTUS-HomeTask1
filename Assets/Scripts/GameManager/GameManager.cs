@@ -19,11 +19,17 @@ namespace ShootEmUp
         public State state { get; private set; }
 
         private List<IGameListener> gameListeners = new();
+        private RegisterListenersComponent registerListenersComponent = new RegisterListenersComponent();
 
         private void Awake()
         {
             IGameListener.RegisterEvent += RegisterEventHandler;
             IGameListener.UnregisterEvent += UnregisterEventHandler;
+        }
+
+        private void Start()
+        {
+            InterateThroughSceneObjects();
         }
 
         private void RegisterEventHandler(IGameListener gameListener)
@@ -121,6 +127,29 @@ namespace ShootEmUp
         private bool CanUpdate()
         {
             return state is State.Start or State.Resume;
+        }
+
+        private void InterateThroughSceneObjects()
+        {
+            GameObject[] sceneRootObjects = gameObject.scene.GetRootGameObjects();
+            foreach (GameObject sceneObject in sceneRootObjects)
+            {
+                //Debug.Log("sceneObject : " + sceneObject.name);
+                RecursiveRegister(sceneObject.transform);
+            }
+        }
+
+        private void RecursiveRegister(Transform transform)
+        {
+            registerListenersComponent.RegisterListeners(transform.gameObject);
+            foreach(Transform child in transform)
+            {
+                //Debug.Log($"is child {child.name} active : " + child.gameObject.activeSelf);
+                if (!child.gameObject.activeSelf)
+                    return;
+                //Debug.Log("registered : " + child.name);
+                RecursiveRegister(child);
+            }
         }
 
     }
