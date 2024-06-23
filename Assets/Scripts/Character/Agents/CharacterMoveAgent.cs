@@ -15,11 +15,6 @@ namespace ShootEmUp
             if(_inputManager == null )
                 Debug.LogError($"{this.name} is missing InputManager");
         }
-
-        //private void Start()
-        //{
-        //    IGameListener.Register(this);
-        //}
         public void OnFixedUpdate()
         {
             MoveByRigidbodyVelocity(_rigidbody2d, new Vector2(_inputManager.HorizontalDirection, 0) * Time.fixedDeltaTime);

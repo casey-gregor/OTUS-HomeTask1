@@ -9,16 +9,18 @@ namespace ShootEmUp
         private WeaponComponent _weaponComponent;
         private EnemyMoveAgent _moveAgent;
         private BulletSystem _bulletSystem;
+        private Timer timer;
 
         private float _currentTime;
+        private bool timerLaunched;
 
         private void OnEnable()
         {
-            //Debug.Log("onEnable");
             if (TryGetComponent<WeaponComponent>(out _weaponComponent) == false)
                 Debug.LogError($"{this.name} is missing WeaponComponent");
             if (TryGetComponent<EnemyMoveAgent>(out _moveAgent) == false)
                 Debug.LogError($"{this.name} is missing EnemyMoveAgent");
+            timer = new Timer(this);
         }
 
         private bool CanAttack()
@@ -37,16 +39,28 @@ namespace ShootEmUp
 
         public void OnFixedUpdate()
         {
-            if (CanAttack())
+            if (CanAttack() && !timerLaunched)
             {
-                this._currentTime -= Time.fixedDeltaTime;
-                if (this._currentTime <= 0)
-                {
-                    //Debug.Log("shoot");
-                    this._bulletSystem.ShootBullet(_weaponComponent);
-                    this._currentTime += this.timeBetweenShots;
-                }
+                Shoot();
             }
+        }
+
+        private void HandleTimeOver()
+        {
+            
+            timer.StopCountdown();
+            timer.TimeIsOver -= HandleTimeOver;
+            timerLaunched = false;
+        }
+
+        private void Shoot()
+        {
+            this._bulletSystem.ShootBullet(_weaponComponent);
+
+            timer.Set(timeBetweenShots);
+            timer.TimeIsOver += HandleTimeOver;
+            timer.StartCountdown();
+            timerLaunched = true;
         }
     }
 }

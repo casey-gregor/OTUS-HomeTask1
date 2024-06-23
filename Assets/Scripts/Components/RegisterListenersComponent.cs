@@ -10,6 +10,7 @@ public class RegisterListenersComponent
 
         foreach (IGameListener listener in listeners)
         {
+            //Debug.Log("IGameListener registered : " +  listener);
             IGameListener.Register(listener);
         }
     }

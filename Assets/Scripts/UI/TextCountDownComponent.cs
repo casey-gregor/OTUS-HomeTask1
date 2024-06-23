@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CountDownComponent
+    public class TextCountDownComponent
     {
         private GameManager _gameManager;
         private MonoBehaviour _controlClass;
         private TextMeshProUGUI _countDownText;
 
-        public CountDownComponent(GameManager gameManager, MonoBehaviour controlClass, TextMeshProUGUI counDownText)
+        public TextCountDownComponent(GameManager gameManager, MonoBehaviour controlClass, TextMeshProUGUI counDownText)
         {
             this._gameManager = gameManager;
             this._controlClass = controlClass;

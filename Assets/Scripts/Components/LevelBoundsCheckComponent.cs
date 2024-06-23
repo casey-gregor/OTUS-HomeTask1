@@ -9,11 +9,6 @@ public class LevelBoundsCheckComponent : MonoBehaviour, IGameFixedUpdateListener
     [SerializeField] private Bullet bullet;
 
     public event Action<GameObject> OnOutOfBounds;
-    private void OnEnable()
-    {
-        //IGameListener.Register(this);
-        Debug.Log("onEnable");
-    }
     public void OnFixedUpdate()
     {
         if (!bullet.isActive)
@@ -24,9 +19,4 @@ public class LevelBoundsCheckComponent : MonoBehaviour, IGameFixedUpdateListener
             bullet.SetIsActive(false);
         }
     }
-
-    //private void OnDisable()
-    //{
-    //    IGameListener.Unregister(this);
-    //}
 }

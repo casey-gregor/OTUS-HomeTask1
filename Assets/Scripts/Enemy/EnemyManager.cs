@@ -16,30 +16,27 @@ namespace ShootEmUp
 
         private PoolManager _enemyPool;
         private EnemyObserver _enemyObserver;
+        private Timer _timer;
 
 
         private void Awake()
         {
             _enemyPool = new PoolManager(prefab, initialCount, container);
             _enemyObserver = new EnemyObserver(_enemyPool);
+            _timer = new Timer(this);
         }
-        //private void Start()
-        //{
-        //    IGameListener.Register(this);
-        //}
-
-        private IEnumerator SpawnEnemies()
+        public void OnStart()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(spawnEveryNumOfSeconds);
-                GameObject enemy = this._enemyPool.GetItem();
-                InitilizeEnemy(enemy);
-                _enemyObserver.Subscribe(enemy);
-            }
+            LaunchTimer();
         }
 
-        public void InitilizeEnemy(GameObject enemy)
+        private void SpawnEnemy()
+        {
+            GameObject enemy = this._enemyPool.GetItem();
+            InitilizeEnemy(enemy);
+            _enemyObserver.Subscribe(enemy);
+        }
+        private void InitilizeEnemy(GameObject enemy)
         {
             enemy.transform.SetParent(this.worldTransform);
             var spawnPosition = this.enemyPositions.RandomSpawnPosition();
@@ -51,25 +48,31 @@ namespace ShootEmUp
             enemy.GetComponent<EnemyAttackAgent>().SetBulletSystem(bulletSystem);
             bulletSystem.SetTarget(this.character);
         }
-
-        public void OnStart()
+        private void LaunchTimer()
         {
-            StartCoroutine(SpawnEnemies());
+            _timer.Set(spawnEveryNumOfSeconds);
+            _timer.StartCountdown();
+            _timer.TimeIsOver += HandleTimeOver;
         }
-
+        private void HandleTimeOver()
+        {
+            SpawnEnemy();
+            _timer.TimeIsOver -= HandleTimeOver;
+            LaunchTimer();
+        }
         public void OnPause()
         {
-            StopAllCoroutines();
+            _timer.StopCountdown();
         }
 
         public void OnResume()
         {
-            StartCoroutine(SpawnEnemies());
+            _timer.StartCountdown();
         }
 
         public void OnFinish()
         {
-            StopAllCoroutines();
+            _timer.StopCountdown();
         }
     }
 }

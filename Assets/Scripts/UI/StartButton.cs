@@ -11,7 +11,7 @@ namespace ShootEmUp
         [SerializeField] private float timer;
         [SerializeField] private TextMeshProUGUI countDownText;
 
-        private CountDownComponent countDownComponent;
+        private TextCountDownComponent countDownComponent;
         private Button startButton;
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace ShootEmUp
             if (startButton == null)
                 Debug.LogError($"{this.name} is missing StartButton");
 
-            countDownComponent = new CountDownComponent(gameManager, this, countDownText);
+            countDownComponent = new TextCountDownComponent(gameManager, this, countDownText);
             countDownText.color = new Color(countDownText.color.r, countDownText.color.g, countDownText.color.b, 0);
             countDownText.fontSize = 20;           
         }

@@ -147,7 +147,7 @@ namespace ShootEmUp
                 //Debug.Log($"is child {child.name} active : " + child.gameObject.activeSelf);
                 if (!child.gameObject.activeSelf)
                     return;
-                //Debug.Log("registered : " + child.name);
+                //Debug.Log("try to register : " + child.name);
                 RecursiveRegister(child);
             }
         }

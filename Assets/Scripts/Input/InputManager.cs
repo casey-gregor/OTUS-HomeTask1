@@ -8,11 +8,6 @@ namespace ShootEmUp
     {
         public event Action OnSpacePressedEvent;
         public int HorizontalDirection { get; private set; }
-        //private void Start()
-        //{
-        //    IGameListener.Register(this);
-        //}
-
         public void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
