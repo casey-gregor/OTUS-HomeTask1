@@ -14,7 +14,7 @@ namespace ShootEmUp
         private float positionX;
         private float positionZ;
 
-        private Transform transform;
+        private Transform objTransform;
 
         [Serializable]
         public sealed class Params
@@ -30,29 +30,27 @@ namespace ShootEmUp
         }
         private void Awake()
         {
-            //IGameListener.Register(this);
-
             this.startPositionY = this.parameters.startPositionY;
             this.endPositionY = this.parameters.endPositionY;
             this.movingSpeedY = this.parameters.movingSpeedY;
-            this.transform = this.transform;
-            var position = this.transform.position;
+            this.objTransform = this.transform;
+            var position = this.objTransform.position;
             this.positionX = position.x;
             this.positionZ = position.z;
         }
 
         public void OnFixedUpdate()
         {
-            if (this.transform.position.y <= this.endPositionY)
+            if (this.objTransform.position.y <= this.endPositionY)
             {
-                this.transform.position = new Vector3(
+                this.objTransform.position = new Vector3(
                     this.positionX,
                     this.startPositionY,
                     this.positionZ
                 );
             }
 
-            this.transform.position -= new Vector3(
+            this.objTransform.position -= new Vector3(
                 this.positionX,
                 this.movingSpeedY * Time.fixedDeltaTime,
                 this.positionZ
