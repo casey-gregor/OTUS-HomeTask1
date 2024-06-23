@@ -8,6 +8,7 @@ namespace ShootEmUp
         public int hitPoints;
 
         private int currentHitPoints;
+
         public event Action<GameObject> hpEmpty;
 
         private void OnEnable()

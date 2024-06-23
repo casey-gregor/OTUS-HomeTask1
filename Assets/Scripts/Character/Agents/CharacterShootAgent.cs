@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class CharacterShootAgent : MonoBehaviour
 {
-    private Character character;
-
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private BulletSpawner bulletSystem;
+    [SerializeField] private WeaponComponent weaponComponent;
     private void Awake()
     {
-        character = GetComponent<Character>();
-        character.InputManager.OnSpacePressedEvent += SpacePressedEventHandler;
+       inputManager.OnSpacePressedEvent += SpacePressedEventHandler;
     }
 
     void SpacePressedEventHandler()
     {
-        character.BulletSystem.ShootBullet(character.WeaponComponent);
+        bulletSystem.ShootBullet(weaponComponent);
     }
 
     private void OnDestroy()
     {
-        character.InputManager.OnSpacePressedEvent -= SpacePressedEventHandler;
+        inputManager.OnSpacePressedEvent -= SpacePressedEventHandler;
     }
 }

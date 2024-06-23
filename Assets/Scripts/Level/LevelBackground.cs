@@ -14,7 +14,7 @@ namespace ShootEmUp
         private float positionX;
         private float positionZ;
 
-        private Transform _transform;
+        private Transform transform;
 
         [Serializable]
         public sealed class Params
@@ -35,24 +35,24 @@ namespace ShootEmUp
             this.startPositionY = this.parameters.startPositionY;
             this.endPositionY = this.parameters.endPositionY;
             this.movingSpeedY = this.parameters.movingSpeedY;
-            this._transform = this.transform;
-            var position = this._transform.position;
+            this.transform = this.transform;
+            var position = this.transform.position;
             this.positionX = position.x;
             this.positionZ = position.z;
         }
 
         public void OnFixedUpdate()
         {
-            if (this._transform.position.y <= this.endPositionY)
+            if (this.transform.position.y <= this.endPositionY)
             {
-                this._transform.position = new Vector3(
+                this.transform.position = new Vector3(
                     this.positionX,
                     this.startPositionY,
                     this.positionZ
                 );
             }
 
-            this._transform.position -= new Vector3(
+            this.transform.position -= new Vector3(
                 this.positionX,
                 this.movingSpeedY * Time.fixedDeltaTime,
                 this.positionZ

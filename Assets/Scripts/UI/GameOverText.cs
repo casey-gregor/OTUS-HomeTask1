@@ -9,7 +9,7 @@ namespace ShootEmUp
     {
         [SerializeField] private GameManager gameManager;
 
-        private TextMeshProUGUI _textMeshPro;
+        private TextMeshProUGUI textMeshPro;
 
         //private void Start()
         //{
@@ -18,19 +18,19 @@ namespace ShootEmUp
 
         public void OnFinish()
         {
-            _textMeshPro.gameObject.SetActive(true);
-            _textMeshPro.text = "Game Over";
-            _textMeshPro.fontSize = 80;
+            textMeshPro.gameObject.SetActive(true);
+            textMeshPro.text = "Game Over";
+            textMeshPro.fontSize = 80;
         }
 
         private void Awake()
         {
             if (gameManager == null)
                 Debug.LogError($"{this.name} is missing GameManager");
-            _textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
-            if (_textMeshPro == null)
+            textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
+            if (textMeshPro == null)
                 Debug.LogError($"{this.name} is missing TextMesh component");
-            _textMeshPro.gameObject.SetActive( false );
+            textMeshPro.gameObject.SetActive( false );
         }
 
     }

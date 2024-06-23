@@ -5,34 +5,34 @@ namespace ShootEmUp
 {
     public class PoolManager
     {
-        public readonly Queue<GameObject> _itemsPool;
-        private GameObject _prefab;
-        private Transform _container;
+        public readonly Queue<GameObject> itemsPool;
+        private GameObject prefab;
+        private Transform container;
         public PoolManager(GameObject prefab, int initialCount, Transform container)
         {
-            this._prefab = prefab;
-            this._container = container;
+            this.prefab = prefab;
+            this.container = container;
 
-            _itemsPool = new Queue<GameObject>();
+            itemsPool = new Queue<GameObject>();
             for (int i = 0; i < initialCount; i++)
             {
                 GameObject item = GameObject.Instantiate(prefab, container);
-                _itemsPool.Enqueue(item);
+                itemsPool.Enqueue(item);
             }
         }
 
         public GameObject GetItem()
         {
-            _itemsPool.TryDequeue(out var item);
+            itemsPool.TryDequeue(out var item);
             if (item == null)
-                item = GameObject.Instantiate(this._prefab, this._container);
+                item = GameObject.Instantiate(this.prefab, this.container);
             return item;
         }
 
         public void EnqueueItem(GameObject item)
         {
-            item.transform.SetParent(this._container);
-            _itemsPool.Enqueue(item);
+            item.transform.SetParent(this.container);
+            itemsPool.Enqueue(item);
         }
     }
 }

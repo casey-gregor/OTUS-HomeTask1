@@ -3,27 +3,27 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour, IGameStartListener, IGamePauseListener, IGameResumeListener, IGameFinishListener
+    public sealed class EnemySpawner : MonoBehaviour, IGameStartListener, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         [SerializeField] private int initialCount = 7;
         [SerializeField] private int spawnEveryNumOfSeconds = 5;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform container;
         [SerializeField] private Transform character;
-        [SerializeField] private BulletSystem bulletSystem;
+        [SerializeField] private BulletSpawner bulletSystem;
         [SerializeField] private Transform worldTransform;
         [SerializeField] private EnemyPositions enemyPositions;
 
-        private PoolManager _enemyPool;
-        private EnemyObserver _enemyObserver;
-        private Timer _timer;
+        private PoolManager enemyPool;
+        private EnemyObserver enemyObserver;
+        private Timer timer;
 
 
         private void Awake()
         {
-            _enemyPool = new PoolManager(prefab, initialCount, container);
-            _enemyObserver = new EnemyObserver(_enemyPool);
-            _timer = new Timer(this);
+            enemyPool = new PoolManager(prefab, initialCount, container);
+            enemyObserver = new EnemyObserver(enemyPool);
+            timer = new Timer(this);
         }
         public void OnStart()
         {
@@ -32,9 +32,9 @@ namespace ShootEmUp
 
         private void SpawnEnemy()
         {
-            GameObject enemy = this._enemyPool.GetItem();
+            GameObject enemy = this.enemyPool.GetItem();
             InitilizeEnemy(enemy);
-            _enemyObserver.Subscribe(enemy);
+            enemyObserver.Subscribe(enemy);
         }
         private void InitilizeEnemy(GameObject enemy)
         {
@@ -50,29 +50,29 @@ namespace ShootEmUp
         }
         private void LaunchTimer()
         {
-            _timer.Set(spawnEveryNumOfSeconds);
-            _timer.StartCountdown();
-            _timer.TimeIsOver += HandleTimeOver;
+            timer.Set(spawnEveryNumOfSeconds);
+            timer.StartCountdown();
+            timer.TimeIsOver += HandleTimeOver;
         }
         private void HandleTimeOver()
         {
             SpawnEnemy();
-            _timer.TimeIsOver -= HandleTimeOver;
+            timer.TimeIsOver -= HandleTimeOver;
             LaunchTimer();
         }
         public void OnPause()
         {
-            _timer.StopCountdown();
+            timer.StopCountdown();
         }
 
         public void OnResume()
         {
-            _timer.StartCountdown();
+            timer.StartCountdown();
         }
 
         public void OnFinish()
         {
-            _timer.StopCountdown();
+            timer.StopCountdown();
         }
     }
 }

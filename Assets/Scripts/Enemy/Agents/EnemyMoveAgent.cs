@@ -5,6 +5,7 @@ namespace ShootEmUp
     public sealed class EnemyMoveAgent : MoveComponent, IGameFixedUpdateListener
     {
         public bool IsReached { get { return this.isReached; } }
+
         private bool isReached;
         private Vector2 destination;
         private Rigidbody2D _rigibody2d;
@@ -38,7 +39,7 @@ namespace ShootEmUp
                 return;
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            MoveByRigidbodyVelocity(_rigibody2d, direction);
+            Move(_rigibody2d, direction);
         }
     }
 }

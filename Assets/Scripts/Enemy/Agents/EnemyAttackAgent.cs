@@ -6,35 +6,35 @@ namespace ShootEmUp
     {
         [SerializeField] private float timeBetweenShots;
 
-        private WeaponComponent _weaponComponent;
-        private EnemyMoveAgent _moveAgent;
-        private BulletSystem _bulletSystem;
+        private bool timerLaunched;
+
+        private WeaponComponent weaponComponent;
+        private EnemyMoveAgent moveAgent;
+        private BulletSpawner bulletSystem;
         private Timer timer;
 
-        private float _currentTime;
-        private bool timerLaunched;
 
         private void OnEnable()
         {
-            if (TryGetComponent<WeaponComponent>(out _weaponComponent) == false)
+            if (TryGetComponent<WeaponComponent>(out weaponComponent) == false)
                 Debug.LogError($"{this.name} is missing WeaponComponent");
-            if (TryGetComponent<EnemyMoveAgent>(out _moveAgent) == false)
+            if (TryGetComponent<EnemyMoveAgent>(out moveAgent) == false)
                 Debug.LogError($"{this.name} is missing EnemyMoveAgent");
             timer = new Timer(this);
         }
 
         private bool CanAttack()
         {
-            return this._moveAgent.IsReached && IsTargetAlive();
+            return this.moveAgent.IsReached && IsTargetAlive();
         }
         private bool IsTargetAlive()
         {
-            HitPointsComponent targetHitPoints = this._bulletSystem.target?.GetComponent<HitPointsComponent>();
+            HitPointsComponent targetHitPoints = this.bulletSystem.target?.GetComponent<HitPointsComponent>();
             return targetHitPoints.IsAlive();
         }
-        public void SetBulletSystem(BulletSystem bulletSystem)
+        public void SetBulletSystem(BulletSpawner bulletSystem)
         {
-            this._bulletSystem = bulletSystem;
+            this.bulletSystem = bulletSystem;
         }
 
         public void OnFixedUpdate()
@@ -55,7 +55,7 @@ namespace ShootEmUp
 
         private void Shoot()
         {
-            this._bulletSystem.ShootBullet(_weaponComponent);
+            this.bulletSystem.ShootBullet(weaponComponent);
 
             timer.Set(timeBetweenShots);
             timer.TimeIsOver += HandleTimeOver;
