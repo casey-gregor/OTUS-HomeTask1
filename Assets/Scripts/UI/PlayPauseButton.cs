@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ShootEmUp
 {
     public class PlayPauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private GameManager gameManager;
+        [Inject] private GameManager gameManager;
         private TextMeshProUGUI textMeshPro;
-        private Transform button;
+        private Button button;
 
         private void Awake()
         {
@@ -19,17 +20,11 @@ namespace ShootEmUp
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
             if (textMeshPro == null)
                 Debug.LogError($"{this.name} is missing TextMesh component");
-            button = transform.GetChild(0);
+            button = GetComponentInChildren<Button>();
             if (button.GetComponent<Button>() == null)
                 Debug.LogError($"{this.name} is missing Button");
             button.gameObject.SetActive(false);
         }
-
-        //private void Start()
-        //{
-        //    IGameListener.Register(this);
-        //}
-
         public void OnStart()
         {
             button.gameObject.SetActive(true);

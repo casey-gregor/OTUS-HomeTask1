@@ -32,7 +32,6 @@ namespace ShootEmUp
 
         public void OnFixedUpdate()
         {
-            //Debug.Log("Enemy move");
             var vector = this.destination - (Vector2)this.transform.position;
 
             if (CheckIfReached(vector))
