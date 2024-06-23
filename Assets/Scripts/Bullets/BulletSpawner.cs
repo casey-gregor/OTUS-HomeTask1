@@ -3,27 +3,27 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSpawner : MonoBehaviour
     {
         [SerializeField] private int initialCount = 50;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform container;
         [SerializeField] private Transform worldTransform;
         [SerializeField] private LevelBounds levelBounds;
-
-        private PoolManager _bulletPool;
-        private BulletObserver _bulletObserver;
         public Transform target { get; private set; }
+
+        private Pool bulletPool;
+        private BulletObserver bulletObserver;
         public void Awake()
         {
-            _bulletPool = new PoolManager(prefab, initialCount, container);
-            _bulletObserver = new BulletObserver(_bulletPool);
+            bulletPool = new Pool(prefab, initialCount, container);
+            bulletObserver = new BulletObserver(bulletPool);
         }
 
         public void ShootBullet(WeaponComponent weapon)
         {
-            GameObject bulletObject = _bulletPool.GetItem();
-            _bulletObserver.Subscribe(bulletObject);
+            GameObject bulletObject = bulletPool.GetItem();
+            bulletObserver.Subscribe(bulletObject);
             bulletObject.transform.SetParent(this.worldTransform);
 
             var startPosition = weapon.Position;

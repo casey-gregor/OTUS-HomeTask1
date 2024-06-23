@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class EnemyObserver : ObjectsObserver
 {
-    private PoolManager _enemyPool;
-    private RegisterListenersComponent _registerListeners = new RegisterListenersComponent();
-    public EnemyObserver(PoolManager pool) : base(pool)
+    private Pool enemyPool;
+    private RegisterListenersComponent registerListeners = new RegisterListenersComponent();
+    public EnemyObserver(Pool pool) : base(pool)
     {
-        this._enemyPool = pool;
+        this.enemyPool = pool;
     }
 
     public override void Subscribe(GameObject enemyObject)
     {
-        _registerListeners.RegisterListeners(enemyObject);
+        registerListeners.RegisterListeners(enemyObject);
         enemyObject.GetComponent<HitPointsComponent>().hpEmpty += this.HandleDisableEvent;
     }
 
     protected override void HandleDisableEvent(GameObject enemyObject)
     {
-        _registerListeners.UnregisterListeners(enemyObject);
-        _enemyPool.EnqueueItem(enemyObject);
+        registerListeners.UnregisterListeners(enemyObject);
+        enemyPool.EnqueueItem(enemyObject);
         enemyObject.GetComponent<HitPointsComponent>().hpEmpty -= this.HandleDisableEvent;
     }
 

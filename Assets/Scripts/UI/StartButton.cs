@@ -7,8 +7,8 @@ namespace ShootEmUp
 {
     public class StartButton : MonoBehaviour
     {
-        [SerializeField] private GameManager gameManager;
         [SerializeField] private float timer;
+        [SerializeField] private GameManager gameManager;
         [SerializeField] private TextMeshProUGUI countDownText;
 
         private TextCountDownComponent countDownComponent;

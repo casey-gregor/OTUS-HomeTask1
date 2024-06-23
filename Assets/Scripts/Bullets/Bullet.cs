@@ -11,30 +11,30 @@ namespace ShootEmUp
         [SerializeField] private BulletConfig bulletConfig;
         public bool isActive { get; private set; }
         public Transform Transform { get => transform; }
-        public LevelBounds _levelBounds { get; private set; }
+        public LevelBounds levelBounds { get; private set; }
         public BulletConfig BulletConfig { get { return bulletConfig; } }
 
-        private Rigidbody2D _rigidbody2D;
-        private SpriteRenderer _spriteRenderer;
+        private Rigidbody2D rb;
+        private SpriteRenderer spriteRenderer;
         private Vector2 velocity;
 
 
         private void OnEnable()
         {
-            if (TryGetComponent<Rigidbody2D>(out _rigidbody2D) == false)
+            if (TryGetComponent<Rigidbody2D>(out rb) == false)
                 Debug.LogError($"{this.name} is missing Rigidbody2D");
-            if (TryGetComponent<SpriteRenderer>(out _spriteRenderer) == false)
+            if (TryGetComponent<SpriteRenderer>(out spriteRenderer) == false)
                 Debug.LogError($"{this.name} is missing SpriteRenderer"); 
         }
 
-        public void InitializeBullet(Vector2 startPosition, Vector2 direction, LevelBounds _levelBounds)
+        public void InitializeBullet(Vector2 startPosition, Vector2 direction, LevelBounds levelBounds)
         {
             this.gameObject.layer = (int)bulletConfig.physicsLayer;
-            this._levelBounds = _levelBounds;
-            this._spriteRenderer.color = bulletConfig.color;
+            this.levelBounds = levelBounds;
+            this.spriteRenderer.color = bulletConfig.color;
             this.transform.position = startPosition;
             this.velocity = direction * bulletConfig.speed;
-            this._rigidbody2D.velocity = velocity;
+            this.rb.velocity = velocity;
             SetIsActive(true);
         }
 
@@ -45,17 +45,17 @@ namespace ShootEmUp
 
         public void OnPause()
         {
-            this._rigidbody2D.velocity = Vector2.zero;
+            this.rb.velocity = Vector2.zero;
         }
 
         public void OnResume()
         {
-            this._rigidbody2D.velocity = velocity;
+            this.rb.velocity = velocity;
         }
 
         public void OnFinish()
         {
-            this._rigidbody2D.velocity = Vector2.zero;
+            this.rb.velocity = Vector2.zero;
         }
     }
 }

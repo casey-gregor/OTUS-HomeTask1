@@ -13,7 +13,7 @@ public class LevelBoundsCheckComponent : MonoBehaviour, IGameFixedUpdateListener
     {
         if (!bullet.isActive)
             return;
-        if (!bullet._levelBounds.InBounds(this.transform.position))
+        if (!bullet.levelBounds.InBounds(this.transform.position))
         {
             OnOutOfBounds?.Invoke(this.gameObject);
             bullet.SetIsActive(false);

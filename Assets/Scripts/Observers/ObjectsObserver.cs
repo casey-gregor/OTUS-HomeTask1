@@ -4,10 +4,10 @@ namespace ShootEmUp
 {
     public abstract class ObjectsObserver
     {
-        private PoolManager _poolManager;
-        protected ObjectsObserver(PoolManager poolManager)
+        private Pool pool;
+        protected ObjectsObserver(Pool pool)
         {
-            this._poolManager = poolManager;
+            this.pool = pool;
         }
         public abstract void Subscribe(GameObject obj);
         protected abstract void HandleDisableEvent(GameObject obj);
