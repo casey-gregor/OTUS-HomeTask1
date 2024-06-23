@@ -9,7 +9,7 @@ namespace ShootEmUp
 {
     public class PlayPauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
-        [Inject] private GameManager gameManager;
+        [SerializeField] private GameManager gameManager;
         private TextMeshProUGUI textMeshPro;
         private Button button;
 

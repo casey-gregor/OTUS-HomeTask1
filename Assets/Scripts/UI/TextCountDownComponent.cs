@@ -13,8 +13,7 @@ namespace ShootEmUp
         [SerializeField] GameManager.State stateToSet = GameManager.State.Start;
         [SerializeField] bool isTextAnimatable;
         [SerializeField] StartButton startButton;
-
-        [Inject] private GameManager gameManager;
+        [SerializeField] private GameManager gameManager;
         private TextMeshProUGUI countDownText;
 
         private void Awake()

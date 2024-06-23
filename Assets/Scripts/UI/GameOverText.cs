@@ -6,7 +6,7 @@ namespace ShootEmUp
 {
     public class GameOverText : MonoBehaviour, IGameFinishListener
     {
-        [Inject] private GameManager gameManager;
+        [SerializeField] private GameManager gameManager;
 
         private TextMeshProUGUI textMeshPro;
 

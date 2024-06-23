@@ -9,7 +9,7 @@ namespace ShootEmUp
 {
     public class StartButton : MonoBehaviour
     {
-        [Inject] private GameManager gameManager;
+        [SerializeField] private GameManager gameManager;
         private Button startButton;
 
         public event Action StartEvent;
