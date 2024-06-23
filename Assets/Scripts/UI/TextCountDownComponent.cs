@@ -1,23 +1,33 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class TextCountDownComponent
+    public class TextCountDownComponent : MonoBehaviour
     {
-        private GameManager gameManager;
-        private MonoBehaviour controlClass;
+        [SerializeField] float timer;
+        [SerializeField] int interval = 1;
+        [SerializeField] GameManager.State stateToSet = GameManager.State.Start;
+        [SerializeField] bool isTextAnimatable;
+        [SerializeField] StartButton startButton;
+
+        [Inject] private GameManager gameManager;
         private TextMeshProUGUI countDownText;
 
-        public TextCountDownComponent(GameManager gameManager, MonoBehaviour controlClass, TextMeshProUGUI counDownText)
+        private void Awake()
         {
-            this.gameManager = gameManager;
-            this.controlClass = controlClass;
-            this.countDownText = counDownText;
+            countDownText = GetComponentInChildren<TextMeshProUGUI>();
+            if (countDownText == null)
+                Debug.LogError($"{this.name} is missing TextMeshPro component");
+            countDownText.fontSize = 20;
+            countDownText.enabled = false;
+            startButton.StartEvent += HandleStartEvent;
         }
 
-        public IEnumerator CountDown(float timer, float interval, GameManager.State stateToSet, bool isTextAnimatable)
+        public IEnumerator CountDown()
         {
             float countdown = timer;
 
@@ -26,7 +36,7 @@ namespace ShootEmUp
                 int seconds = Mathf.CeilToInt(countdown);
                 if (isTextAnimatable)
                 {
-                    this.controlClass.StartCoroutine(AnimateText(seconds));
+                    StartCoroutine(AnimateText(seconds));
                 }
                 else
                 {
@@ -83,6 +93,12 @@ namespace ShootEmUp
                 this.countDownText.color = new Color(this.countDownText.color.r, this.countDownText.color.g, this.countDownText.color.b, 1 - progress);
                 yield return null;
             }
+        }
+
+        private void HandleStartEvent()
+        {
+            countDownText.enabled = true;
+            StartCoroutine(CountDown());
         }
     }
 

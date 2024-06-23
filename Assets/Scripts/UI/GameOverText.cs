@@ -1,20 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
     public class GameOverText : MonoBehaviour, IGameFinishListener
     {
-        [SerializeField] private GameManager gameManager;
+        [Inject] private GameManager gameManager;
 
         private TextMeshProUGUI textMeshPro;
-
-        //private void Start()
-        //{
-        //    IGameListener.Register(this);
-        //}
 
         public void OnFinish()
         {
