@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BulletObserver : ObjectsObserver
 {
-    private PoolManager bulletPool;
+    private Pool bulletPool;
     private RegisterListenersComponent registerListeners = new RegisterListenersComponent();
-    public BulletObserver(PoolManager bulletPool) : base(bulletPool)
+    public BulletObserver(Pool bulletPool) : base(bulletPool)
     {
         this.bulletPool = bulletPool;
     }

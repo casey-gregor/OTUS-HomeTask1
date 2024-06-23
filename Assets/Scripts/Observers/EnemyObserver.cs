@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyObserver : ObjectsObserver
 {
-    private PoolManager enemyPool;
+    private Pool enemyPool;
     private RegisterListenersComponent registerListeners = new RegisterListenersComponent();
-    public EnemyObserver(PoolManager pool) : base(pool)
+    public EnemyObserver(Pool pool) : base(pool)
     {
         this.enemyPool = pool;
     }

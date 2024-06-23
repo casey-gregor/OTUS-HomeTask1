@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class PoolManager
+    public class Pool
     {
         public readonly Queue<GameObject> itemsPool;
         private GameObject prefab;
         private Transform container;
-        public PoolManager(GameObject prefab, int initialCount, Transform container)
+        public Pool(GameObject prefab, int initialCount, Transform container)
         {
             this.prefab = prefab;
             this.container = container;

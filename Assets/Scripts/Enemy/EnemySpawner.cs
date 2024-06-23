@@ -14,14 +14,14 @@ namespace ShootEmUp
         [SerializeField] private Transform worldTransform;
         [SerializeField] private EnemyPositions enemyPositions;
 
-        private PoolManager enemyPool;
+        private Pool enemyPool;
         private EnemyObserver enemyObserver;
         private Timer timer;
 
 
         private void Awake()
         {
-            enemyPool = new PoolManager(prefab, initialCount, container);
+            enemyPool = new Pool(prefab, initialCount, container);
             enemyObserver = new EnemyObserver(enemyPool);
             timer = new Timer(this);
         }

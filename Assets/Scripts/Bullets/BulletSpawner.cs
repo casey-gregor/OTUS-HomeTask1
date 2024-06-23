@@ -12,11 +12,11 @@ namespace ShootEmUp
         [SerializeField] private LevelBounds levelBounds;
         public Transform target { get; private set; }
 
-        private PoolManager bulletPool;
+        private Pool bulletPool;
         private BulletObserver bulletObserver;
         public void Awake()
         {
-            bulletPool = new PoolManager(prefab, initialCount, container);
+            bulletPool = new Pool(prefab, initialCount, container);
             bulletObserver = new BulletObserver(bulletPool);
         }
 
