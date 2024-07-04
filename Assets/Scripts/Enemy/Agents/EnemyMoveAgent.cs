@@ -1,44 +1,56 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MoveComponent, IGameFixedUpdateListener
+    public sealed class EnemyMoveAgent : IGameFixedUpdateListener
     {
-        public bool IsReached { get { return this.isReached; } }
+        private Rigidbody2D rb;
+        private EnemyCheckDestinationAgent checkDestinationAgent;
+        private EnemySpawner spawner;
+        private BulletSpawnerComponent bulletSpawner;
 
-        private bool isReached;
-        private Vector2 destination;
-        private Rigidbody2D _rigibody2d;
-       
-        private void OnEnable()
+        private Dictionary<GameObject, Transform> objectsToMove;
+
+        public EnemyMoveAgent(EnemySpawner enemySpawner, EnemyCheckDestinationAgent checkDestinationAgent)
         {
-            if (TryGetComponent<Rigidbody2D>(out _rigibody2d) == false)
-                Debug.LogError($"{this.name} is missing Rigidbody2D");
+            this.spawner = enemySpawner;
+            this.checkDestinationAgent = checkDestinationAgent;
+
+            this.spawner.enemySpawnedEvent += SpawnEventHandler;
+            this.checkDestinationAgent.destinationReachedEvent += DestinationReachedEventHandler;
+            objectsToMove = new Dictionary<GameObject, Transform>();
+
+            IGameListener.Register(this);
+            //Debug.Log("Enemy move agent register");
         }
-       
-        private bool CheckIfReached(Vector2 vector)
+
+        private void SpawnEventHandler(GameObject obj, Transform destination)
         {
-            if (vector.magnitude <= 0.25f)
-            {
-                this.isReached = true;
-            }
-            return this.isReached;
+            objectsToMove.Add(obj, destination);
         }
-        public void SetDestination(Vector2 endPoint)
+
+        private void DestinationReachedEventHandler(GameObject obj)
         {
-            this.destination = endPoint;
-            this.isReached = false;
+            objectsToMove.Remove(obj);
+        }
+
+        public void Move(Rigidbody2D rb, Vector2 vector, float speed)
+        {
+            Vector2 nextPosition = rb.position + vector * speed;
+            rb.MovePosition(nextPosition);
         }
 
         public void OnFixedUpdate()
         {
-            var vector = this.destination - (Vector2)this.transform.position;
-
-            if (CheckIfReached(vector))
-                return;
-
-            var direction = vector.normalized * Time.fixedDeltaTime;
-            Move(_rigibody2d, direction);
+            foreach(GameObject obj in objectsToMove.Keys) 
+            {
+                Vector2 vector = objectsToMove[obj].position - obj.transform.position;
+                Vector2 direction = vector.normalized * Time.fixedDeltaTime;
+                Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+                Move(rb, direction, 5f);
+            }
         }
     }
 }

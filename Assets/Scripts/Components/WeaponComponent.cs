@@ -2,14 +2,19 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class WeaponComponent : MonoBehaviour
+    public sealed class WeaponComponent
     {
         private const string firePointTag = "FirePoint";
         private Transform _firePoint;
 
-        private void Awake()
+
+        public WeaponComponent()
         {
-            foreach(Transform child in transform)
+            
+        }
+        public Transform GetFirePoint(GameObject obj)
+        {
+            foreach (Transform child in obj.transform)
             {
                 if (child.tag == firePointTag)
                 {
@@ -17,10 +22,11 @@ namespace ShootEmUp
                 }
                 else
                 {
-                    _firePoint = this.transform;
-                    Debug.LogError($"No FirePoint child is found on {this.name}. Assigned {this.name} as the firePoint.");
+                    _firePoint = obj.transform;
+                    Debug.LogError($"No FirePoint child is found on {obj.name}. Assigned {obj.name} as the firePoint.");
                 }
             }
+            return _firePoint;
         }
         public Vector2 Position
         {

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
 
-    public sealed class GameManager : MonoBehaviour, IGameListener
+    public sealed class GameManager : MonoBehaviour, IGameListener, IFixedTickable, ITickable
     {
         public enum State
         {
@@ -26,45 +27,59 @@ namespace ShootEmUp
             IGameListener.RegisterEvent += RegisterEventHandler;
             IGameListener.UnregisterEvent += UnregisterEventHandler;
         }
+        [Inject]
+        private void Construct(ListenersStorage listenersStorage)
+        {
+            gameListeners = listenersStorage.gameListeners;
+            //Debug.Log("construct of Game Manager");
+        }
 
         private void Start()
         {
             InterateThroughSceneObjects();
+            //for (int i = 0; i < gameListeners.Count; i++)
+            //{
+            //    Debug.Log("gameListener : " + gameListeners[i]);
+            //}
         }
 
         private void RegisterEventHandler(IGameListener gameListener)
         {
-            gameListeners.Add(gameListener);
+            if(!gameListeners.Contains(gameListener))
+            {
+                gameListeners.Add(gameListener);
+                //Debug.Log("added from gameManager " + gameListener);
+            }
         }
         private void UnregisterEventHandler(IGameListener gameListener)
         {
             gameListeners.Remove(gameListener);
         }
-        private void FixedUpdate()
-        {
-            if(!CanUpdate()) return;
+        //private void FixedUpdate()
+        //{
+        //    if(!CanUpdate()) return;
 
-            for(int i = 0; i < gameListeners.Count; i++)
-            {
-                if (gameListeners[i] is IGameFixedUpdateListener fixedUpdateListener)
-                {
-                    fixedUpdateListener.OnFixedUpdate();
-                }
-            }
-        }
+        //    for(int i = 0; i < gameListeners.Count; i++)
+        //    {
+        //        if (gameListeners[i] is IGameFixedUpdateListener fixedUpdateListener)
+        //        {
+        //            fixedUpdateListener.OnFixedUpdate();
+        //        }
+        //    }
+        //}
 
-        private void Update()
-        {
-            if (!CanUpdate()) return;
+        //private void Update()
+        //{
+        //    if (!CanUpdate()) return;
             
-            for (int i = 0; i < gameListeners.Count; i++)
-            {
-                if (gameListeners[i] is IGameUpdateListener updateListener)
-                {
-                    updateListener.OnUpdate();
-                }
-            }
-        }
+        //    for (int i = 0; i < gameListeners.Count; i++)
+        //    {
+        //        if (gameListeners[i] is IGameUpdateListener updateListener)
+        //        {
+        //            updateListener.OnUpdate();
+        //        }
+        //    }
+        //}
 
         private void SwitchState(State state)
         {
@@ -152,5 +167,32 @@ namespace ShootEmUp
             }
         }
 
+        public void FixedTick()
+        {
+            if (!CanUpdate()) return;
+
+            for (int i = 0; i < gameListeners.Count; i++)
+            {
+                //Debug.Log("gameListener : " + gameListeners[i]);
+                if (gameListeners[i] is IGameFixedUpdateListener fixedUpdateListener)
+                {
+                    fixedUpdateListener.OnFixedUpdate();
+                }
+            }
+            //Debug.Log("end ============ ");
+        }
+
+        public void Tick()
+        {
+            if (!CanUpdate()) return;
+
+            for (int i = 0; i < gameListeners.Count; i++)
+            {
+                if (gameListeners[i] is IGameUpdateListener updateListener)
+                {
+                    updateListener.OnUpdate();
+                }
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ public interface IGameListener
 
     static void Unregister(IGameListener gameListener)
     {
+        //Debug.Log($"{gameListener} called UnRegister");
         UnregisterEvent?.Invoke(gameListener);
     }
 }

@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class MoveComponent : MonoBehaviour
+public abstract class MoveComponent
 {
-    [SerializeField] private float speed = 5.0f;
-
-    public void Move(Rigidbody2D rb, Vector2 vector)
+    public void Move(Rigidbody2D rb, Vector2 vector, float speed)
     {
-        Vector2 nextPosition = rb.position + vector * this.speed;
+        Vector2 nextPosition = rb.position + vector * speed;
         rb.MovePosition(nextPosition);
     }
 }

@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 3926786964091724599}
   - component: {fileID: 3926786964091724598}
   - component: {fileID: 3926786964091724597}
-  - component: {fileID: 7000264354682704667}
   - component: {fileID: 4414282821800802407}
-  - component: {fileID: 3705704651244433332}
+  - component: {fileID: -3839541084478305679}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -168,20 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
---- !u!114 &7000264354682704667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809540891661548873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521f86b32dd289b42930808eab3c5aea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  inputManager: {fileID: 0}
 --- !u!114 &4414282821800802407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   hitPointsComponent: {fileID: 3926786964091724599}
---- !u!114 &3705704651244433332
+--- !u!114 &-3839541084478305679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,12 +190,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 809540891661548873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bfd8c6b29a23d34888630a92bca62c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 0}
-  bulletSystem: {fileID: 0}
-  weaponComponent: {fileID: 3926786964091724598}
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 0}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &3926786963072264211
 GameObject:
   m_ObjectHideFlags: 0

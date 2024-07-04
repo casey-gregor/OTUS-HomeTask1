@@ -1,24 +1,34 @@
 using ShootEmUp;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Zenject;
 
-public class CharacterShootAgent : MonoBehaviour
+public class CharacterShootAgent : IInitializable, ILateDisposable
 {
-    [SerializeField] private InputManager inputManager;
-    [SerializeField] private BulletSpawner bulletSystem;
-    [SerializeField] private WeaponComponent weaponComponent;
-    private void Awake()
-    {
-       inputManager.OnSpacePressedEvent += SpacePressedEventHandler;
-    }
+    private InputManager inputManager;
+    private BulletSpawner bulletSpawner;
+    private WeaponComponentMono weaponComponent;
 
+    public CharacterShootAgent(
+        [Inject(Id=BindingIds.playerId)] BulletSpawner bulletSpawner, 
+        InputManager inputManager, 
+        WeaponComponentMono weaponComponent)
+    {
+        this.bulletSpawner = bulletSpawner;
+        this.inputManager = inputManager;
+        this.weaponComponent = weaponComponent;
+    }
     void SpacePressedEventHandler()
     {
-        bulletSystem.ShootBullet(weaponComponent);
+        bulletSpawner.ShootBullet(weaponComponent);
     }
 
-    private void OnDestroy()
+    public void Initialize()
+    {
+        inputManager.OnSpacePressedEvent += SpacePressedEventHandler;
+    }
+
+    public void LateDispose()
     {
         inputManager.OnSpacePressedEvent -= SpacePressedEventHandler;
     }

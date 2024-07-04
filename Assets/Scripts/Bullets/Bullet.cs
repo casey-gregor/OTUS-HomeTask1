@@ -2,46 +2,58 @@ using System;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace ShootEmUp
 {
-
-    public sealed class Bullet : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener
+    public sealed class Bullet : IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
-        [SerializeField] private BulletConfig bulletConfig;
         public bool isActive { get; private set; }
-        public Transform Transform { get => transform; }
-        public LevelBounds levelBounds { get; private set; }
-        public BulletConfig BulletConfig { get { return bulletConfig; } }
-
+        private BulletConfig bulletConfig;
+        private Transform transform;
+        public LevelBoundsMono levelBounds { get; private set; }
         private Rigidbody2D rb;
         private SpriteRenderer spriteRenderer;
+        private BulletSpawnerComponent spawner;
         private Vector2 velocity;
+        public BulletConfig BulletConfig { get { return bulletConfig; } }
+        public GameObject bulletObj { get; private set; }
 
-
-        private void OnEnable()
+        public Bullet(
+            BulletConfig bulletConfig, 
+            Transform transform, 
+            LevelBoundsMono levelBounds, 
+            Rigidbody2D rb, 
+            SpriteRenderer spriteRenderer)
         {
-            if (TryGetComponent<Rigidbody2D>(out rb) == false)
-                Debug.LogError($"{this.name} is missing Rigidbody2D");
-            if (TryGetComponent<SpriteRenderer>(out spriteRenderer) == false)
-                Debug.LogError($"{this.name} is missing SpriteRenderer"); 
+            this.bulletConfig = bulletConfig;
+            this.transform = transform;
+            this.levelBounds = levelBounds;
+            this.rb = rb;
+            this.spriteRenderer = spriteRenderer;
+
+            this.bulletObj = this.transform.gameObject;
+
+            IGameListener.Register(this);
         }
 
-        public void InitializeBullet(Vector2 startPosition, Vector2 direction, LevelBounds levelBounds)
+
+        public void InitializeBullet(Vector2 startPosition, Vector2 direction, LevelBoundsMono levelBounds)
         {
-            this.gameObject.layer = (int)bulletConfig.physicsLayer;
+            this.bulletObj.layer = (int)bulletConfig.physicsLayer;
             this.levelBounds = levelBounds;
             this.spriteRenderer.color = bulletConfig.color;
             this.transform.position = startPosition;
             this.velocity = direction * bulletConfig.speed;
             this.rb.velocity = velocity;
-            SetIsActive(true);
         }
 
-        public void SetIsActive(bool value)
-        {
-            this.isActive = value;
-        }
+        //public void SetIsActive(bool value)
+        //{
+        //    //Debug.Log("in SetIsActive incoming value is : " + value);
+        //    this.isActive = value;
+        //    //Debug.Log("in SetIsActive isActive : " + this.isActive);
+        //}
 
         public void OnPause()
         {

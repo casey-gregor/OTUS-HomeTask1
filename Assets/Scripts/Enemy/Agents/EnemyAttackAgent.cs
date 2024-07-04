@@ -1,66 +1,156 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
+    public sealed class EnemyAttackAgent : IGameFixedUpdateListener
     {
-        [SerializeField] private float timeBetweenShots;
+        private EnemyCheckDestinationAgent checkDestinationAgent;
+        private BulletSpawnerComponent bulletSpawner;
+        private EnemyConfig config;
+        private TickableManager tickableManager;
+        private Transform target;
+        private DiContainer diContainer;
 
-        private bool timerLaunched;
+        private Dictionary<GameObject, TimerService> attackingObjects;
 
-        private WeaponComponent weaponComponent;
-        private EnemyMoveAgent moveAgent;
-        private BulletSpawner bulletSystem;
-        private Timer timer;
-
-
-        private void OnEnable()
+        public EnemyAttackAgent(
+            BulletSpawnerComponent bulletSpawner,
+            EnemyCheckDestinationAgent checkDestinationAgent,
+            EnemyConfig enemyConfig,
+            DiContainer diContainer,
+            TickableManager tickableManager,
+            [Inject(Id = BindingIds.playerId)]Transform target)
         {
-            if (TryGetComponent<WeaponComponent>(out weaponComponent) == false)
-                Debug.LogError($"{this.name} is missing WeaponComponent");
-            if (TryGetComponent<EnemyMoveAgent>(out moveAgent) == false)
-                Debug.LogError($"{this.name} is missing EnemyMoveAgent");
-            timer = new Timer(this);
+            this.bulletSpawner = bulletSpawner;
+            this.checkDestinationAgent = checkDestinationAgent;
+            this.config = enemyConfig;
+            this.diContainer = diContainer;
+            this.tickableManager = tickableManager;
+
+            attackingObjects = new Dictionary<GameObject, TimerService>();
+
+            this.checkDestinationAgent.destinationReachedEvent += HandleReachedAttackPointEvent;
+
+            IGameListener.Register(this);
+            //Debug.Log("Enemy attack agent register");
+            this.target = target;
         }
 
+        private void HandleReachedAttackPointEvent(GameObject obj)
+        {
+            if (attackingObjects.ContainsKey(obj))
+                return;
+            TimerService timer = diContainer.Instantiate<TimerService>();
+            attackingObjects.Add(obj, timer);
+        }
         private bool CanAttack()
         {
-            return this.moveAgent.IsReached && IsTargetAlive();
+            return IsTargetAlive();
         }
+
         private bool IsTargetAlive()
         {
-            HitPointsComponent targetHitPoints = this.bulletSystem.target?.GetComponent<HitPointsComponent>();
+            HitPointsComponentMono targetHitPoints = target?.GetComponent<HitPointsComponentMono>();
             return targetHitPoints.IsAlive();
         }
-        public void SetBulletSystem(BulletSpawner bulletSystem)
+
+
+        private void HandleTimeOver(GameObject obj)
         {
-            this.bulletSystem = bulletSystem;
+            //Debug.Log("shoot");
+            Shoot(obj);
+        }
+
+        private void Shoot(GameObject obj)
+        {
+            this.bulletSpawner.ShootBullet(obj);
+            attackingObjects[obj].Set(obj, config.timeBetweenShots, HandleTimeOver);
         }
 
         public void OnFixedUpdate()
         {
-            if (CanAttack() && !timerLaunched)
+            if (CanAttack())
             {
-                Shoot();
+                foreach(GameObject obj in attackingObjects.Keys)
+                {
+                    if (!attackingObjects[obj].timerRunning)
+                    {
+                        Shoot(obj);
+                    }
+                }
+
             }
         }
-
-        private void HandleTimeOver()
-        {
-            
-            timer.StopCountdown();
-            timer.TimeIsOver -= HandleTimeOver;
-            timerLaunched = false;
-        }
-
-        private void Shoot()
-        {
-            this.bulletSystem.ShootBullet(weaponComponent);
-
-            timer.Set(timeBetweenShots);
-            timer.TimeIsOver += HandleTimeOver;
-            timer.StartCountdown();
-            timerLaunched = true;
-        }
     }
+
+    //public sealed class EnemyAttackAgent : IGameFixedUpdateListener
+    //{
+    //    private WeaponComponent weaponComponent;
+    //    private EnemyMoveAgent moveAgent;
+    //    private EnemyCheckDestinationAgent checkDestinationAgent;
+    //    private BulletSpawnerComponent bulletSpawner;
+    //    private EnemyConfig config;
+    //    private TimerService timer;
+
+    //    private bool timerLaunched = false;
+
+    //    public EnemyAttackAgent(
+    //        BulletSpawnerComponent bulletSpawner, 
+    //        WeaponComponent weaponComponent,
+    //        EnemyMoveAgent enemyMoveAgent,
+    //        EnemyCheckDestinationAgent checkDestinationAgent,
+    //        EnemyConfig enemyConfig, 
+    //        TimerService timer)
+    //    {
+    //        this.bulletSpawner = bulletSpawner;
+    //        this.weaponComponent = weaponComponent;
+    //        this.moveAgent = enemyMoveAgent;
+    //        this.checkDestinationAgent = checkDestinationAgent;
+    //        this.config = enemyConfig;
+    //        this.timer = timer;
+
+    //        IGameListener.Register(this);
+    //        Debug.Log("Enemy attack agent register");
+    //    }
+
+    //    private bool CanAttack()
+    //    {
+    //        return this.checkDestinationAgent.IsReached && IsTargetAlive();
+    //    }
+
+    //    private bool IsTargetAlive()
+    //    {
+    //        HitPointsComponent targetHitPoints = this.bulletSpawner.target?.GetComponent<HitPointsComponent>();
+    //        return targetHitPoints.IsAlive();
+    //    }
+
+    //    public void SetBulletSystem(BulletSpawnerComponent bulletSpawner)
+    //    {
+    //        this.bulletSpawner = bulletSpawner;
+    //    }
+
+    //    private void HandleTimeOver()
+    //    {
+    //        timerLaunched = false;
+    //    }
+
+    //    private void Shoot()
+    //    {
+    //        this.bulletSpawner.ShootBullet(weaponComponent);
+
+    //        timer.Set(config.timeBetweenShots, HandleTimeOver);
+    //        timerLaunched = true;
+    //    }
+
+    //    public void OnFixedUpdate()
+    //    {
+    //        if (CanAttack() && !timerLaunched)
+    //        {
+
+    //            Shoot();
+    //        }
+    //    }
+    //}
 }

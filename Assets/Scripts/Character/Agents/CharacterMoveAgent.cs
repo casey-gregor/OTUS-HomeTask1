@@ -1,20 +1,24 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class CharacterMoveAgent : MoveComponent, IGameFixedUpdateListener
+    public class CharacterMoveAgent : MoveComponent, IFixedTickable
     {
-        [SerializeField] private InputManager inputManager;
+        private PlayerConfig playerConfig;
+        private InputManager inputManager;
         private Rigidbody2D rb;
 
-        private void Awake()
+        public CharacterMoveAgent(PlayerConfig playerConfig, InputManager inputManager, Rigidbody2D rb)
         {
-            if (TryGetComponent<Rigidbody2D>(out rb) == false)
-                Debug.LogError($"{this.name} is missing Rigidbody2D");
+            this.playerConfig = playerConfig;
+            this.inputManager = inputManager;
+            this.rb = rb;
         }
-        public void OnFixedUpdate()
+     
+        public void FixedTick()
         {
-            Move(rb, new Vector2(inputManager.HorizontalDirection, 0) * Time.fixedDeltaTime);
+            Move(rb, new Vector2(inputManager.HorizontalDirection, 0) * Time.fixedDeltaTime, playerConfig.moveSpeed);        
         }
     }
 }

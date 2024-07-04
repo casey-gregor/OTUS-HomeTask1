@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealthObserver : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private HitPointsComponent hitPointsComponent;
+    [SerializeField] private HitPointsComponentMono hitPointsComponent;
 
     private void OnEnable()
     {

@@ -4,7 +4,9 @@ using Zenject;
 
 namespace Zenject.MemoryPoolMonitor
 {
-    [CreateAssetMenu(fileName = "MpmSettingsInstaller", menuName = "Installers/MpmSettingsInstaller")]
+    [CreateAssetMenu(
+        fileName = "MpmSettingsInstaller", 
+        menuName = "ZenjectInstallers/MpmSettingsInstaller")]
     public class MpmSettingsInstaller : ScriptableObjectInstaller<MpmSettingsInstaller>
     {
         public MpmView.Settings MpmView;

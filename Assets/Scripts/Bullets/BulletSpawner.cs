@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -8,19 +9,39 @@ namespace ShootEmUp
         [SerializeField] private int initialCount = 50;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform container;
-        [SerializeField] private Transform worldTransform;
-        [SerializeField] private LevelBounds levelBounds;
+
+        private Transform worldTransform;
+        private LevelBoundsComponent levelBounds;
+        private BulletPool bulletPool;
+        private BulletObserver bulletObserver;
+        private LevelBoundsCheckComponent levelBoundsCheckComponent;
+        private CollisionCheckAgent collisionCheckAgent;
+        private DiContainer diContainer;
+
+
+        [Inject] 
+        private void Construct(
+            LevelBoundsComponent levelBounds, 
+            [Inject(Id ="WorldTransform")] Transform worldTransform,
+            LevelBoundsCheckComponent levelBoundsCheckComponent,
+            CollisionCheckAgent collisionCheckAgent,
+            DiContainer diContainer)
+        {
+            this.levelBounds = levelBounds;
+            this.worldTransform = worldTransform;
+            this.levelBoundsCheckComponent = levelBoundsCheckComponent;
+            this.collisionCheckAgent = collisionCheckAgent;
+            this.diContainer = diContainer;
+        }
         public Transform target { get; private set; }
 
-        private Pool bulletPool;
-        private BulletObserver bulletObserver;
         public void Awake()
         {
-            bulletPool = new Pool(prefab, initialCount, container);
-            bulletObserver = new BulletObserver(bulletPool);
+            bulletPool = new BulletPool(this.prefab, this.initialCount, this.container, this.diContainer);
+            bulletObserver = new BulletObserver(bulletPool, this.collisionCheckAgent, this.levelBoundsCheckComponent);
         }
 
-        public void ShootBullet(WeaponComponent weapon)
+        public void ShootBullet(WeaponComponentMono weapon)
         {
             GameObject bulletObject = bulletPool.GetItem();
             bulletObserver.Subscribe(bulletObject);
@@ -29,7 +50,7 @@ namespace ShootEmUp
             var startPosition = weapon.Position;
             Vector2 vector = this.target != null ? (Vector2)this.target.position - startPosition : Vector2.up;
             Vector2 endPosition = weapon.Rotation * vector.normalized;
-            Bullet bullet = bulletObject.GetComponent<Bullet>();
+            BulletMono bullet = bulletObject.GetComponent<BulletMono>();
             bullet.InitializeBullet(startPosition, endPosition, levelBounds);
         }
 
