@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77961806bc7414945ad8ba8c4431a683, type: 3}
   m_Name: BulletSpawnerConfigInstaller
   m_EditorClassIdentifier: 
-  bulletSpawnerConfig: {fileID: 11400000, guid: 23c578119ca29f84582976578f381790,
+  bulletSpawnerConfig: {fileID: 11400000, guid: ae9fda4ca919e794ca748be09a0382e2,
     type: 2}

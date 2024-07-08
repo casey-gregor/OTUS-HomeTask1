@@ -6,21 +6,24 @@ using Zenject;
 public class CharacterShootAgent : IInitializable, ILateDisposable
 {
     private InputManager inputManager;
-    private BulletSpawner bulletSpawner;
-    private WeaponComponentMono weaponComponent;
+    private PlayerBulletSpawnerComponent bulletSpawner;
+    private WeaponComponent weaponComponent;
+    private Transform player;
 
     public CharacterShootAgent(
-        [Inject(Id=BindingIds.playerId)] BulletSpawner bulletSpawner, 
         InputManager inputManager, 
-        WeaponComponentMono weaponComponent)
+        PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
+        WeaponComponent weaponComponent,
+        [Inject(Id =BindingIds.playerId)] Transform player)
     {
-        this.bulletSpawner = bulletSpawner;
+        this.bulletSpawner = playerBulletSpawnerComponent;
         this.inputManager = inputManager;
         this.weaponComponent = weaponComponent;
+        this.player = player;
     }
     void SpacePressedEventHandler()
     {
-        bulletSpawner.ShootBullet(weaponComponent);
+        bulletSpawner.ShootBullet(weaponComponent.GetFirePoint(this.player.gameObject), null);
     }
 
     public void Initialize()

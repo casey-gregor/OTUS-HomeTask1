@@ -5,19 +5,19 @@ namespace ShootEmUp
 {
     public class CollisionCheckWrapper : MonoBehaviour
     {
-        private CollisionCheckAgent collisionCheckAgent;
+        private BulletCollisionCheckComponent collisionCheckComponent;
 
         [Inject]
-        public void Construct(CollisionCheckAgent collisionCheckAgent)
+        public void Construct(BulletCollisionCheckComponent collisionCheckAgent)
         {
             //Debug.Log("CollisionCheckWrapper construct");
-            this.collisionCheckAgent = collisionCheckAgent;
+            this.collisionCheckComponent = collisionCheckAgent;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //Debug.Log($"{this.gameObject} collides with {collision.gameObject.name}");
-            collisionCheckAgent.CheckCollision(collision, this.gameObject);
+            collisionCheckComponent.CheckCollision(collision, this.gameObject);
         }
     }
 

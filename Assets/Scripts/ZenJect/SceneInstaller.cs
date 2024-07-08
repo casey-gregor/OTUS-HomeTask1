@@ -7,8 +7,6 @@ using Zenject;
 
 public class SceneInstaller : MonoInstaller
 {
-    
-    [SerializeField] private BulletSpawner playerBulletSpawner;
     [SerializeField] private Transform worldTransform;
     [SerializeField] private Transform character;
     [SerializeField] private Transform enemyContainer;
@@ -32,27 +30,41 @@ public class SceneInstaller : MonoInstaller
   
     public override void InstallBindings()
     {
+        InstallCommonComponents();
+        InstallBulletRelatedComponents();
+        
+    }
+
+    private void InstallCommonComponents()
+    {
         Container.Bind<ListenersStorage>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<GameManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();
         Container.Bind<InputManager>().FromComponentInHierarchy().AsSingle();
+
+        Container.Bind<EnemyPositionsComponent>().
+            AsSingle().
+            WithArguments(enemyPositions.spawnPositions, enemyPositions.attackPositions).
+            NonLazy();
+
+        Container.Bind<Transform>().WithId(BindingIds.worldTransform).FromInstance(worldTransform);
+        Container.Bind<Transform>().WithId(BindingIds.playerId).FromInstance(character);
+        Container.Bind<Transform>().WithId(BindingIds.enemyContainer).FromInstance(enemyContainer);
+        Container.Bind<WeaponComponent>().AsSingle();
+    }
+
+    private void InstallBulletRelatedComponents()
+    {
+        //Container.Bind<BulletPool>().AsTransient().NonLazy();
+        Container.Bind<BulletInitializeComponent>().AsSingle();
+        Container.Bind<BulletCollisionCheckComponent>().AsSingle();
+        Container.Bind<LevelBoundsCheckComponent>().AsSingle();
+        Container.Bind<BulletObserver>().AsSingle().NonLazy();
+        Container.Bind<BulletMoveComponent>().AsSingle().NonLazy();
+
         Container.Bind<LevelBoundsComponent>().
             AsSingle().
             WithArguments(levelBounds.left, levelBounds.right, levelBounds.top, levelBounds.bottom).
             NonLazy();
-        Container.Bind<EnemyPositions>().
-            AsSingle().
-            WithArguments(enemyPositions.spawnPositions, enemyPositions.attackPositions).
-            NonLazy();
-        
-        
-        
-        Container.Bind<BulletSpawner>().WithId(BindingIds.playerId).FromInstance(playerBulletSpawner);
-
-        
-        Container.Bind<CollisionCheckAgent>().AsSingle();
-        Container.Bind<Transform>().WithId(BindingIds.worldTransform).FromInstance(worldTransform);
-        Container.Bind<Transform>().WithId(BindingIds.playerId).FromInstance(character);
-        Container.Bind<Transform>().WithId(BindingIds.enemyContainer).FromInstance(enemyContainer);
     }
 }

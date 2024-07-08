@@ -8,27 +8,25 @@ public class LevelBoundsCheckComponent : IGameFixedUpdateListener
 {
     private HashSet<GameObject> bulletsToCheck;
     private HashSet<GameObject> itemsToRemove;
-    private BulletSpawnerComponent bulletSpawner;
+    private BulletInitializeComponent bulletInitializeComponent;
     private LevelBoundsComponent levelBounds;
     
     public event Action<GameObject> OnOutOfBounds;
 
-    public LevelBoundsCheckComponent(LevelBoundsComponent levelBounds)
+    public LevelBoundsCheckComponent(BulletInitializeComponent bulletInitializeComponent, LevelBoundsComponent levelBounds)
     {
         bulletsToCheck = new HashSet<GameObject>();
-        //this.bulletSpawner = bulletSpawner;
+        itemsToRemove = new HashSet<GameObject>();
+        this.bulletInitializeComponent = bulletInitializeComponent;
         this.levelBounds = levelBounds;
 
-        itemsToRemove = new HashSet<GameObject>();
+        this.bulletInitializeComponent.bulletToMoveEvent += HandleBulletToMoveEvent;
+
         IGameListener.Register(this);
     }
 
-    public void SubscribeToSpawner(BulletSpawnerComponent bulletSpawner)
-    {
-        bulletSpawner.bulletSpawnEvent += HandleBulletSpawnEvent;
-    }
-
-    private void HandleBulletSpawnEvent(GameObject obj)
+   
+    private void HandleBulletToMoveEvent(GameObject obj, Vector2 _)
     {
         bulletsToCheck.Add(obj);
     }

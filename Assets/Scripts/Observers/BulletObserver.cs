@@ -4,44 +4,42 @@ using UnityEngine;
 
 public class BulletObserver
 {
-    private BulletPool bulletPool;
-    private CollisionCheckAgent collisionCheckAgent;
+    private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
+    private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+    private BulletCollisionCheckComponent collisionCheckAgent;
     private LevelBoundsCheckComponent levelBoundsCheckComponent;
 
     private RegisterListenersComponent registerListeners;
 
-    public BulletObserver(BulletPool bulletPool, CollisionCheckAgent collisionCheckAgent, LevelBoundsCheckComponent levelBoundsCheckComponent) 
+    public BulletObserver(
+        EnemyBulletSpawnerComponent enemyBulletSpawnerComponent, 
+        PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
+        BulletCollisionCheckComponent collisionCheckAgent, 
+        LevelBoundsCheckComponent levelBoundsCheckComponent
+        ) 
     {
-        this.bulletPool = bulletPool;
+        this.enemyBulletSpawnerComponent = enemyBulletSpawnerComponent;
+        this.playerBulletSpawnerComponent= playerBulletSpawnerComponent;
         this.collisionCheckAgent = collisionCheckAgent;
         this.levelBoundsCheckComponent = levelBoundsCheckComponent;
 
-        this.collisionCheckAgent.OnCollisionEntered += HandleDisableEvent;
+        this.collisionCheckAgent.CollisionEnterEvent += HandleDisableEvent;
         this.levelBoundsCheckComponent.OnOutOfBounds += HandleDisableEvent;
 
         this.registerListeners = new RegisterListenersComponent();
+
+        //Debug.Log("bullet observer created");
 }
 
     public void Subscribe(GameObject obj)
     {
         this.registerListeners.RegisterListeners(obj);
-        //obj.TryGetComponent<CollisionCheckComponentMono>(out CollisionCheckComponentMono collisionCheckComponentMono);
-        //if (collisionCheckComponentMono != null)
-        //{
-        //    collisionCheckComponentMono.OnCollisionEntered += this.HandleDisableEvent;
-        //}
-        //obj.TryGetComponent<CollisionCheckWrapper>(out CollisionCheckWrapper collisionCheckWrapper);
-      
-        //obj.TryGetComponent<LevelBoundsCheckMono>(out LevelBoundsCheckMono component);
-        //if (component != null)
-        //    component.OnOutOfBounds += this.HandleDisableEvent;
-        //levelBoundsCheckComponent.OnOutOfBounds += this.HandleDisableEvent;
     }
 
     protected void HandleDisableEvent(GameObject obj)
     {
-        //Debug.Log("calling Handle Disable event");
-        bulletPool.EnqueueItem(obj);
+        enemyBulletSpawnerComponent.BulletPool.EnqueueItem(obj);
+        playerBulletSpawnerComponent.BulletPool.EnqueueItem(obj);
         //Debug.Log($"{obj.name} disabled");
     }
 }

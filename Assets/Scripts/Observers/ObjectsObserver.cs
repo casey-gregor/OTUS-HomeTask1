@@ -9,7 +9,6 @@ namespace ShootEmUp
         {
             this.pool = pool;
         }
-        public abstract void Subscribe(GameObject obj);
         protected abstract void HandleDisableEvent(GameObject obj);
     }
 }

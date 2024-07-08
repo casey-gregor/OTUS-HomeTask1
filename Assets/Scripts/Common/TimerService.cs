@@ -4,12 +4,14 @@ using Zenject;
 
 public class TimerService : IGameFixedUpdateListener
 {
-    private GameObject obj;
+    public bool timerRunning { get; private set; }
+
     private float timer;
     private float elapsedTime;
+    private GameObject obj;
+
     private Action handlerFuncSimple;
     private Action<GameObject> handlerFuncObject;
-    public bool timerRunning { get; private set; }
     public TimerService()
     {
         IGameListener.Register(this);
@@ -17,7 +19,6 @@ public class TimerService : IGameFixedUpdateListener
 
     public void Set(GameObject objSet, float timer, Action<GameObject> handlerFunc)
     {
-        //Debug.Log($"obj timer started : {objSet.name}, {timer}, {handlerFunc.Method}");
         this.obj = objSet;
         this.timer = timer;
         elapsedTime = 0;
@@ -27,7 +28,6 @@ public class TimerService : IGameFixedUpdateListener
 
     public void Set(float timer, Action handlerFunc)
     {
-        //Debug.Log("non-obj timer started");
         this.timer = timer;
         elapsedTime = 0;
         timerRunning = true;
@@ -43,23 +43,7 @@ public class TimerService : IGameFixedUpdateListener
     {
         timerRunning = false;
     }
-    //public void FixedTick()
-    //{
-    //    if (timerRunning)
-    //    {
-            
-    //        elapsedTime += Time.fixedDeltaTime;
-    //        if (elapsedTime >= timer)
-    //        {
-    //            Stop();
-    //            //Debug.Log("elapsed time : " + elapsedTime);
-    //            //Debug.Log("objTimer : " + objTimer);
-    //            handlerFuncObject?.Invoke(obj);
-    //            handlerFuncSimple?.Invoke();
-    //        }
-    //    }
-    //}
-
+  
     public void OnFixedUpdate()
     {
         if (timerRunning)
@@ -69,8 +53,7 @@ public class TimerService : IGameFixedUpdateListener
             if (elapsedTime >= timer)
             {
                 Stop();
-                //Debug.Log("elapsed time : " + elapsedTime);
-                //Debug.Log("objTimer : " + objTimer);
+
                 handlerFuncObject?.Invoke(obj);
                 handlerFuncSimple?.Invoke();
             }

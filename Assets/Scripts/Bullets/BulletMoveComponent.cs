@@ -18,15 +18,15 @@ public class BulletMoveComponent : IGamePauseListener, IGameResumeListener, IGam
         IGameListener.Register(this);
     }
 
-    private void HandleBulletToMoveEvent(GameObject obj, Vector2 vector)
+    private void HandleBulletToMoveEvent(GameObject obj, Vector2 velocity)
     {
         if(bulletsToMove.ContainsKey(obj))
         {
-            bulletsToMove[obj] = vector;
+            bulletsToMove[obj] = velocity;
         }
         else
         {
-            bulletsToMove.Add(obj, vector);
+            bulletsToMove.Add(obj, velocity);
         }
     }
     public void OnFinish()

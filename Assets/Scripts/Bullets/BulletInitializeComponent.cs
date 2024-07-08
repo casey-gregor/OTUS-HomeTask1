@@ -9,39 +9,52 @@ namespace ShootEmUp
 {
     public sealed class BulletInitializeComponent
     {
-        
-        private BulletSpawnerComponent bulletSpawnerComponent;
-        private BulletConfig bulletConfig;
-        private LevelBoundsMono levelBounds;
+        private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
+        private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+        private Transform worldTransform;
 
         public event Action<GameObject, Vector2> bulletToMoveEvent;
         
         public BulletInitializeComponent(
-            BulletSpawnerComponent bulletSpawnerComponent,
-            BulletConfig bulletConfig
+            EnemyBulletSpawnerComponent enemyBulletSpawnerComponent,
+            PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
+            [Inject(Id = BindingIds.worldTransform)] Transform worldTransform
            )
         {
-            this.bulletSpawnerComponent = bulletSpawnerComponent;
-            this.bulletConfig = bulletConfig;
+            this.enemyBulletSpawnerComponent = enemyBulletSpawnerComponent;
+            this.playerBulletSpawnerComponent = playerBulletSpawnerComponent;
+            this.worldTransform = worldTransform;
 
-            this.bulletSpawnerComponent.bulletInitializeEvent += HandleBulletInitializeEvent;
+            this.enemyBulletSpawnerComponent.bulletSpawnedEvent += HandleBulletSpawnEvent;
+            this.playerBulletSpawnerComponent.bulletSpawnedEvent += HandleBulletSpawnEvent;
         }
 
-        private void HandleBulletInitializeEvent(GameObject obj, Vector2 startPosition, Vector2 endPosition)
+
+        private void HandleBulletSpawnEvent(GameObject obj, BulletConfig bulletConfig, Transform startPosition, Transform target)
         {
-            InitializeBullet(obj, startPosition, endPosition);
-            
+            InitializeBullet(obj, bulletConfig, startPosition, target);
         }
 
-        public void InitializeBullet(GameObject bulletObj, Vector2 startPosition, Vector2 direction)
+        //private void HandleBulletInitializeEvent(GameObject obj, Vector2 startPosition, Vector2 endPosition)
+        //{
+        //    InitializeBullet(obj, startPosition, endPosition);
+
+        //}
+
+        public void InitializeBullet(GameObject bulletObj, BulletConfig bulletConfig, Transform startPosition, Transform target)
         {
-            bulletObj.layer = (int)this.bulletConfig.physicsLayer;
+            bulletObj.layer = (int)bulletConfig.physicsLayer;
             bulletObj.GetComponent<SpriteRenderer>().color = bulletConfig.color;
-            bulletObj.GetComponent<Transform>().position = startPosition;
+            bulletObj.GetComponent<Transform>().position = startPosition.position;
 
-            Vector2 velocity = direction * bulletConfig.speed;
+            Vector2 vector = target != null ? (Vector2)target.position - (Vector2)startPosition.position : Vector2.up;
+            Vector2 endPosition = startPosition.rotation * vector.normalized;
+
+            Vector2 velocity = endPosition * bulletConfig.speed;
+            bulletObj.transform.SetParent(this.worldTransform);
+
             bulletObj.GetComponent<Rigidbody2D>().velocity = velocity;
-            
+
             bulletToMoveEvent?.Invoke(bulletObj, velocity);
         }
 
