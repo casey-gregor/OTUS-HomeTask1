@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +6,7 @@ namespace ShootEmUp
 
     [CreateAssetMenu(
         fileName = "EnemyConfigInstaller", 
-        menuName = "SOInstallers/New EnemySOInstaller"
+        menuName = "ConfigInstallers/New EnemyConfigInstaller"
         )]
     public class EnemyConfigInstaller : ScriptableObjectInstaller
     {

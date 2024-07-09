@@ -1,14 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName ="LevelbackgroundConfigInstaller", menuName ="SOInstallers/New LevelbackgroundConfigInstaller")]
-public class LevelBackgroundConfigInstaller : ScriptableObjectInstaller
+namespace ShootEmUp
 {
-    [SerializeField] private LevelbackgroundConfig LevelbackgroundConfig;
-    public override void InstallBindings()
+    [CreateAssetMenu(
+        fileName ="LevelbackgroundConfigInstaller", 
+        menuName ="ConfigInstallers/New LevelbackgroundConfigInstaller")]
+    public class LevelBackgroundConfigInstaller : ScriptableObjectInstaller
     {
-        Container.Bind<LevelbackgroundConfig>().FromInstance(LevelbackgroundConfig);
+        [SerializeField] private LevelbackgroundConfig LevelbackgroundConfig;
+        public override void InstallBindings()
+        {
+            Container.Bind<LevelbackgroundConfig>().FromInstance(LevelbackgroundConfig);
+        }
     }
+
 }

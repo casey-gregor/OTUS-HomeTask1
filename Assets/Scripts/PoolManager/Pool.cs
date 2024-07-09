@@ -6,8 +6,9 @@ namespace ShootEmUp
 {
     public class Pool
     {
-        public readonly Queue<GameObject> itemsPool;
-        public readonly Dictionary<GameObject, List<Object>> itemComponents;
+        public readonly Queue<GameObject> inactivateItems;
+        public readonly HashSet<GameObject> activeItems;
+
         private GameObject prefab;
         private Transform container;
         private DiContainer diContainer;
@@ -19,52 +20,42 @@ namespace ShootEmUp
             this.container = container;
             this.diContainer = diContainer;
 
-            itemsPool = new Queue<GameObject>();
-            itemComponents = new Dictionary<GameObject, List<Object>>();
+            this.inactivateItems = new Queue<GameObject>();
+            this.activeItems = new HashSet<GameObject>();
 
             for (int i = 0; i < initialCount; i++)
             {
                 GameObject item = GameObject.Instantiate(prefab, container);
                 item.name = $"{prefab.name}{i}";
-                itemCount++;
+                this.itemCount++;
                 this.diContainer.InjectGameObject(item);
-                //Debug.Log("injected in pool : " + item.name);
-                itemComponents[item] = new List<Object>();
-                //ResolveComponents(item);
-                this.itemsPool.Enqueue(item);
+                this.inactivateItems.Enqueue(item);
             }
         }
 
         public GameObject GetItem()
         {
-            itemsPool.TryDequeue(out var item);
-            //Debug.Log("in pool get item is " + item);
-            if(item != null)
-            {
-                //Debug.Log("items in pool : " + itemsPool.Count);
-                if(itemsPool.Count > 0)
-                {
-                    foreach(var _item in itemsPool)
-                    {
-                        //Debug.Log($"item {_item.name} still in pool");
-                    }
-                }
-            }
+            this.inactivateItems.TryDequeue(out var item);
+
             if (item == null)
             {
                 item = GameObject.Instantiate(this.prefab, this.container);
-                item.name = $"{prefab.name}{itemCount++}";
-                //Debug.Log("pool instantiated new bullet : " + item.name);
+                item.name = $"{prefab.name}{this.itemCount++}";
+
                 this.diContainer.InjectGameObject(item);
             }
+            this.activeItems.Add(item);
             return item;
         }
 
         public void EnqueueItem(GameObject item)
         {
-            //Debug.Log($"{item.name} is enqueued");
-            item.transform.SetParent(this.container);
-            itemsPool.Enqueue(item);
+            if (this.activeItems.Contains(item))
+            {
+                item.transform.SetParent(this.container);
+                this.inactivateItems.Enqueue(item);
+                this.activeItems.Remove(item);
+            }
         }
     }
 }

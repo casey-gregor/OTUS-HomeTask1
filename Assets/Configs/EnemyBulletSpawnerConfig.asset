@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befb0a352b58b4c458a81ae0b991617b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3708da2573dc10842b590e8d468d9636, type: 3}
   m_Name: EnemyBulletSpawnerConfig
   m_EditorClassIdentifier: 
   initialCount: 2

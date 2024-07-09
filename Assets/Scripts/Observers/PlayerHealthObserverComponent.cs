@@ -1,20 +1,21 @@
-using ShootEmUp;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthObserverComponent
+namespace ShootEmUp
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private PlayerHitPointsComponent hitPointsComponent;
-
-    public PlayerHealthObserverComponent(GameManager gameManager, PlayerHitPointsComponent hitPointsComponent)
+    public sealed class PlayerHealthObserverComponent
     {
-        this.gameManager = gameManager;
-        this.hitPointsComponent = hitPointsComponent;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private PlayerHitPointsComponent hitPointsComponent;
 
-        hitPointsComponent.hpEmptyEvent += this.HandleHPEmptyEvent;
+        public PlayerHealthObserverComponent(GameManager gameManager, PlayerHitPointsComponent hitPointsComponent)
+        {
+            this.gameManager = gameManager;
+            this.hitPointsComponent = hitPointsComponent;
+
+            hitPointsComponent.hpEmptyEvent += this.HandleHPEmptyEvent;
+        }
+
+        private void HandleHPEmptyEvent(GameObject _) => this.gameManager.FinishGame();
     }
 
-    private void HandleHPEmptyEvent(GameObject _) => this.gameManager.FinishGame();
 }

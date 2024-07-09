@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace ShootEmUp
 {
-
     [CreateAssetMenu(
         fileName = "PlayerConfigInstaller", 
-        menuName = "SOInstallers/New PlayerSOInstaller"
+        menuName = "ConfigInstallers/New PlayerConfigInstaller"
         )]
     public class PlayerConfigInstaller : ScriptableObjectInstaller
     {

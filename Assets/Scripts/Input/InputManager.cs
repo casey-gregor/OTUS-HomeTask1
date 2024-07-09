@@ -1,18 +1,22 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class InputManager : MonoBehaviour, IGameUpdateListener
+    public sealed class InputManager : IGameUpdateListener
     {
         public event Action OnSpacePressedEvent;
         public int HorizontalDirection { get; private set; }
+
+        public InputManager()
+        {
+            IGameListener.Register(this);
+        }
         public void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OnSpacePressedEvent?.Invoke();
+                this.OnSpacePressedEvent?.Invoke();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))

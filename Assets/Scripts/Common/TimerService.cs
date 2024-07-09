@@ -1,62 +1,65 @@
 using System;
 using UnityEngine;
-using Zenject;
 
-public class TimerService : IGameFixedUpdateListener
+namespace ShootEmUp
 {
-    public bool timerRunning { get; private set; }
-
-    private float timer;
-    private float elapsedTime;
-    private GameObject obj;
-
-    private Action handlerFuncSimple;
-    private Action<GameObject> handlerFuncObject;
-    public TimerService()
+    public sealed class TimerService : IGameFixedUpdateListener
     {
-        IGameListener.Register(this);
-    }
+        public bool timerRunning { get; private set; }
 
-    public void Set(GameObject objSet, float timer, Action<GameObject> handlerFunc)
-    {
-        this.obj = objSet;
-        this.timer = timer;
-        elapsedTime = 0;
-        timerRunning = true;
-        this.handlerFuncObject = handlerFunc;
-    }
+        private float timer;
+        private float elapsedTime;
+        private GameObject obj;
 
-    public void Set(float timer, Action handlerFunc)
-    {
-        this.timer = timer;
-        elapsedTime = 0;
-        timerRunning = true;
-        this.handlerFuncSimple = handlerFunc;
-    }
-
-    public void Resume()
-    {
-        timerRunning = true;
-    }
-
-    public void Stop()
-    {
-        timerRunning = false;
-    }
-  
-    public void OnFixedUpdate()
-    {
-        if (timerRunning)
+        private Action handlerFuncSimple;
+        private Action<GameObject> handlerFuncObject;
+        public TimerService()
         {
+            IGameListener.Register(this);
+        }
 
-            elapsedTime += Time.fixedDeltaTime;
-            if (elapsedTime >= timer)
+        public void Set(GameObject objSet, float timer, Action<GameObject> handlerFunc)
+        {
+            this.obj = objSet;
+            this.timer = timer;
+            this.elapsedTime = 0;
+            this.timerRunning = true;
+            this.handlerFuncObject = handlerFunc;
+        }
+
+        public void Set(float timer, Action handlerFunc)
+        {
+            this.timer = timer;
+            this.elapsedTime = 0;
+            this.timerRunning = true;
+            this.handlerFuncSimple = handlerFunc;
+        }
+
+        public void Resume()
+        {
+            this.timerRunning = true;
+        }
+
+        public void Stop()
+        {
+            this.timerRunning = false;
+        }
+  
+        public void OnFixedUpdate()
+        {
+            if (this.timerRunning)
             {
-                Stop();
 
-                handlerFuncObject?.Invoke(obj);
-                handlerFuncSimple?.Invoke();
+                this.elapsedTime += Time.fixedDeltaTime;
+                if (this.elapsedTime >= this.timer)
+                {
+                    Stop();
+
+                    this.handlerFuncObject?.Invoke(obj);
+                    this.handlerFuncSimple?.Invoke();
+                }
             }
         }
     }
+
 }

@@ -1,28 +1,24 @@
-using ShootEmUp;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObserver : ObjectsObserver
+namespace ShootEmUp
 {
-    private Pool enemyPool;
-    private EnemyHitPointsComponent hitPointsComponent;
-
-    private RegisterListenersComponent registerListeners = new RegisterListenersComponent();
-    public EnemyObserver(Pool pool, EnemyHitPointsComponent hitPointsComponent) : base(pool)
+    public sealed class EnemyObserver
     {
-        this.enemyPool = pool;
-        this.hitPointsComponent = hitPointsComponent;
+        private Pool enemyPool;
+        private EnemyHitPointsComponent hitPointsComponent;
 
-        hitPointsComponent.hpEmptyEvent += this.HandleDisableEvent;
+        public EnemyObserver(Pool pool, EnemyHitPointsComponent hitPointsComponent)
+        {
+            this.enemyPool = pool;
+            this.hitPointsComponent = hitPointsComponent;
+
+            hitPointsComponent.hpEmptyEvent += this.HandleHPEmptyEvent;
+        }
+
+        private void HandleHPEmptyEvent(GameObject enemyObject)
+        {
+            enemyPool.EnqueueItem(enemyObject);
+        }
     }
 
-    protected override void HandleDisableEvent(GameObject enemyObject)
-    {
-        
-        registerListeners.UnregisterListeners(enemyObject);
-        enemyPool.EnqueueItem(enemyObject);
-    }
-
-   
 }

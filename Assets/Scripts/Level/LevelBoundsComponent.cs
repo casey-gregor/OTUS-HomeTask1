@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -10,7 +9,13 @@ namespace ShootEmUp
         private Transform topBorder;
         private Transform downBorder;
 
-        public LevelBoundsComponent(Transform leftBorder, Transform rightBorder, Transform topBorder, Transform downBorder)
+        public LevelBoundsComponent
+            (
+            Transform leftBorder, 
+            Transform rightBorder, 
+            Transform topBorder, 
+            Transform downBorder
+            )
         {
             this.leftBorder = leftBorder;
             this.rightBorder = rightBorder;
