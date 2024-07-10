@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
     public sealed class TimerService : IGameFixedUpdateListener
     {
-        public bool timerRunning { get; private set; }
+        public bool TimerRunning { get; private set; }
+        public float ElapsedTime { get; private set; }
 
         private float timer;
         private float elapsedTime;
@@ -23,7 +25,7 @@ namespace ShootEmUp
             this.obj = objSet;
             this.timer = timer;
             this.elapsedTime = 0;
-            this.timerRunning = true;
+            this.TimerRunning = true;
             this.handlerFuncObject = handlerFunc;
         }
 
@@ -31,23 +33,24 @@ namespace ShootEmUp
         {
             this.timer = timer;
             this.elapsedTime = 0;
-            this.timerRunning = true;
+            this.TimerRunning = true;
             this.handlerFuncSimple = handlerFunc;
+            
         }
 
         public void Resume()
         {
-            this.timerRunning = true;
+            this.TimerRunning = true;
         }
 
         public void Stop()
         {
-            this.timerRunning = false;
+            this.TimerRunning = false;
         }
-  
-        public void OnFixedUpdate()
+
+        private void ExecuteTimer()
         {
-            if (this.timerRunning)
+            if (this.TimerRunning)
             {
 
                 this.elapsedTime += Time.fixedDeltaTime;
@@ -59,6 +62,11 @@ namespace ShootEmUp
                     this.handlerFuncSimple?.Invoke();
                 }
             }
+        }
+  
+        public void OnFixedUpdate()
+        {
+            ExecuteTimer();
         }
     }
 

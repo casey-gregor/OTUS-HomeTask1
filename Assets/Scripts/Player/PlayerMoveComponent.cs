@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class PlayerMoveComponent : IGameFixedUpdateListener
+    public sealed class PlayerMoveComponent : IGameFixedUpdateListener
     {
         private PlayerConfig playerConfig;
         private InputManager inputManager;

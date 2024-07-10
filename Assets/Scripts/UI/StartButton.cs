@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Collections;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public class StartButton : MonoBehaviour
+    public sealed class StartButton
     {
-        [Inject] private GameManager gameManager;
+        public event Action StartEvent;
+        
         private Button startButton;
 
-        public event Action StartEvent;
-        private void Awake()
+
+        public StartButton(Button startButton)
         {
-            if (gameManager == null)
-                Debug.LogError($"{this.name} is missing GameManager");
-            startButton = GetComponentInChildren<Button>();
-            if (startButton == null)
-                Debug.LogError($"{this.name} is missing StartButton");                 
+            this.startButton = startButton;
+            this.startButton.onClick.AddListener(OnButtonClick);
+            
         }
 
-        public void OnButtonClick()
+        private void OnButtonClick()
         {
-            startButton.gameObject.SetActive(false);
-            StartEvent?.Invoke();
+            this.startButton.gameObject.SetActive(false);
+            this.StartEvent?.Invoke();
         }
 
     }

@@ -45,7 +45,6 @@ namespace ShootEmUp
             GameObject[] sceneRootObjects = gameObject.scene.GetRootGameObjects();
             foreach (GameObject sceneObject in sceneRootObjects)
             {
-                //Debug.Log("sceneObject : " + sceneObject.name);
                 RecursiveRegister(sceneObject.transform);
             }
         }

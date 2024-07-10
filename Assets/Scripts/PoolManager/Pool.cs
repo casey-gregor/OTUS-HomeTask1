@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public class Pool
+    public sealed class Pool
     {
         public readonly Queue<GameObject> inactivateItems;
         public readonly HashSet<GameObject> activeItems;

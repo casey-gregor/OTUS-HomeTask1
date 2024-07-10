@@ -2,7 +2,7 @@ using ShootEmUp;
 using UnityEngine;
 using Zenject;
 
-public class PlayerInstaller : MonoInstaller
+public class MyPlayerInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {

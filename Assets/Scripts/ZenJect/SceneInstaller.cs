@@ -36,6 +36,7 @@ namespace ShootEmUp
 
         private void InstallCommonComponents()
         {
+   
             Container.Bind<ListenersStorage>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();

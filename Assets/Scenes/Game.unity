@@ -206,19 +206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 18339227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1562996698}
-        m_TargetAssemblyTypeName: ShootEmUp.PlayPauseButton, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &18339227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,9 +420,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 161176990}
-  - component: {fileID: 161176991}
   m_Layer: 5
-  m_Name: CountdownTextParent
+  m_Name: TextCountdownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,23 +448,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &161176991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161176989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 679a9e624cfc2414e92d712748221281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 3
-  interval: 1
-  stateToSet: 1
-  isTextAnimatable: 1
-  startButton: {fileID: 2053249249}
 --- !u!1 &178513671
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +551,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444850647}
-  - component: {fileID: 444850648}
   m_Layer: 5
   m_Name: GameOverTextParent
   m_TagString: Untagged
@@ -610,18 +579,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &444850648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444850646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3123b620e03194e9875a4f27907dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,12 +962,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1038025218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 809540891661548873, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3926786964592264468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1049219807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,6 +1007,10 @@ GameObject:
   - component: {fileID: 1084042745}
   - component: {fileID: 1084042746}
   - component: {fileID: 1084042744}
+  - component: {fileID: 1084042747}
+  - component: {fileID: 1084042748}
+  - component: {fileID: 1084042749}
+  - component: {fileID: 1084042750}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1084,6 +1039,10 @@ MonoBehaviour:
   - {fileID: 1084042746}
   - {fileID: 1084042742}
   - {fileID: 1084042744}
+  - {fileID: 1084042747}
+  - {fileID: 1084042748}
+  - {fileID: 1084042749}
+  - {fileID: 1084042750}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1201,6 +1160,60 @@ MonoBehaviour:
   bulletConfig: {fileID: 11400000, guid: 7138ae5d32d814e0ca50c616c65ea105, type: 2}
   bulletSpawnerConfig: {fileID: 11400000, guid: 9d99e71be9f362d49bdcccfac3a0265a,
     type: 2}
+--- !u!114 &1084042747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73883ff18c2810043b0a4935ee6b9c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 1381692016}
+--- !u!114 &1084042748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778910a84e7787b46974b32bd70ada23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 18339226}
+  textMeshPro: {fileID: 1176245606}
+--- !u!114 &1084042749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad241ba7138bb6544a2055f5eabe73c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: db2906be27af290419df05e5b6f82f5c, type: 2}
+  textMeshPro: {fileID: 40110282}
+--- !u!114 &1084042750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d8fa58d976aa9448c9ff162a2abb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 1259804304}
 --- !u!1 &1176245604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -118}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381692016
@@ -1616,19 +1629,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1381692017}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2053249249}
-        m_TargetAssemblyTypeName: ShootEmUp.StartButton, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1381692017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,7 +1739,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1562996697}
-  - component: {fileID: 1562996698}
   m_Layer: 5
   m_Name: PauseButtonParent
   m_TagString: Untagged
@@ -1767,18 +1767,6 @@ RectTransform:
   m_AnchoredPosition: {x: 94, y: -29}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1562996698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562996696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02f7e7e0b69772c4396c7bd8ad17d746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1645078361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,7 +2005,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053249248}
-  - component: {fileID: 2053249249}
   m_Layer: 5
   m_Name: StartButtonParent
   m_TagString: Untagged
@@ -2046,18 +2033,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2053249249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053249247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5dbe79b5e4020d458c3b44770e67a69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &61006797492197339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,32 +2398,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1683128698}
     m_Modifications:
-    - target: {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _monoInstallers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _installerPrefabs.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _monoInstallers.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _scriptableObjectInstallers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _scriptableObjectInstallers.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 62b4d42911edef646bbdb4239cd75384,
-        type: 2}
     - target: {fileID: 809540891661548872, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
         type: 3}
       propertyPath: m_RootOrder
@@ -2514,6 +2463,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1546550636550280239, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
+        type: 3}
+      propertyPath: _monoInstallers.Array.data[0]
+      value: 
+      objectReference: {fileID: 4414282821800802406}
     - target: {fileID: 3705704651244433332, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
         type: 3}
       propertyPath: bulletSystem
@@ -2554,12 +2508,7 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3926786964091724599, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
-    - {fileID: 4414282821800802407, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
-    - {fileID: 3926786964091724597, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
-    - {fileID: -3839541084478305679, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
-    - {fileID: 3926786964091724598, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
 --- !u!1 &3951702117947426121
 GameObject:
@@ -2668,37 +2617,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3926786964592264468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802401
+--- !u!114 &4414282821800802406 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2413512069771973493, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3926786964592264468}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038025218}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47ade90adb5e77547bacee9d13126247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4414282821800802402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038025218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: 62b4d42911edef646bbdb4239cd75384, type: 2}
-  _monoInstallers:
-  - {fileID: 4414282821800802401}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

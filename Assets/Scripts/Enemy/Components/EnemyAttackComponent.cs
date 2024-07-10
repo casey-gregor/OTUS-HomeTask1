@@ -74,7 +74,7 @@ namespace ShootEmUp
         {
             foreach (GameObject attacker in this.attackingObjects.Keys)
             {
-                if (!this.attackingObjects[attacker].timerRunning)
+                if (!this.attackingObjects[attacker].TimerRunning)
                 {
                     Shoot(attacker);
                 }

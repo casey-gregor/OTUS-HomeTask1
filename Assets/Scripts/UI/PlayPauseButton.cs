@@ -1,30 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public class PlayPauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
+    public sealed class PlayPauseButton : 
+        IGameStartListener, 
+        IGameFinishListener
     {
-        [Inject] private GameManager gameManager;
+        private GameManager gameManager;
         private TextMeshProUGUI textMeshPro;
         private Button button;
 
-        private void Awake()
+        public PlayPauseButton(GameManager gameManager, TextMeshProUGUI textMeshPro, Button button)
         {
-            if (gameManager == null)
-                Debug.LogError($"{this.name} is missing GameManager");
-            textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
-            if (textMeshPro == null)
-                Debug.LogError($"{this.name} is missing TextMesh component");
-            button = GetComponentInChildren<Button>();
-            if (button.GetComponent<Button>() == null)
-                Debug.LogError($"{this.name} is missing Button");
-            button.gameObject.SetActive(false);
+            this.gameManager = gameManager;
+            this.textMeshPro = textMeshPro;
+            this.button = button;
+
+            this.button.onClick.AddListener(OnButtonClick);
+
+            this.button.gameObject.SetActive(false);
+
+            IGameListener.Register(this);
         }
+
         public void OnStart()
         {
             button.gameObject.SetActive(true);

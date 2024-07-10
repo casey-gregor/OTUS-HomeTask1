@@ -3,7 +3,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public class PlayerShootComponent
+    public sealed class PlayerShootComponent
     {
         private InputManager inputManager;
         private PlayerBulletSpawnerComponent bulletSpawner;

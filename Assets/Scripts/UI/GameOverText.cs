@@ -1,30 +1,25 @@
 using TMPro;
-using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public class GameOverText : MonoBehaviour, IGameFinishListener
+    public sealed class GameOverText : IGameFinishListener
     {
-        [Inject] private GameManager gameManager;
-
         private TextMeshProUGUI textMeshPro;
+
+
+        public GameOverText(TextMeshProUGUI textMeshPro)
+        {
+            this.textMeshPro = textMeshPro;
+            this.textMeshPro.gameObject.SetActive(false);
+
+            IGameListener.Register(this);
+        }
 
         public void OnFinish()
         {
-            textMeshPro.gameObject.SetActive(true);
-            textMeshPro.text = "Game Over";
-            textMeshPro.fontSize = 80;
-        }
-
-        private void Awake()
-        {
-            if (gameManager == null)
-                Debug.LogError($"{this.name} is missing GameManager");
-            textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
-            if (textMeshPro == null)
-                Debug.LogError($"{this.name} is missing TextMesh component");
-            textMeshPro.gameObject.SetActive( false );
+            this.textMeshPro.gameObject.SetActive(true);
+            this.textMeshPro.text = "Game Over";
+            this.textMeshPro.fontSize = 80;
         }
 
     }
