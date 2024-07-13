@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace ShootEmUp
     public sealed class BulletMoveComponent : 
         IGamePauseListener, 
         IGameResumeListener, 
-        IGameFinishListener
+        IGameFinishListener,
+        IDisposable
     {
         private BulletInitializeComponent bulletInitializeComponent;
         private Dictionary<GameObject, Vector2> bulletsToMove;
@@ -55,6 +57,11 @@ namespace ShootEmUp
             {
                 bulletObject.GetComponent<Rigidbody2D>().velocity = this.bulletsToMove[bulletObject];
             }
+        }
+
+        public void Dispose()
+        {
+            this.bulletInitializeComponent.bulletToMoveEvent -= HandleBulletToMoveEvent;
         }
     }
 

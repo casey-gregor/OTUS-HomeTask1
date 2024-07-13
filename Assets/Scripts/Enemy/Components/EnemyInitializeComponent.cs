@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyInitializeComponent
+    public sealed class EnemyInitializeComponent : IDisposable
     {
         public event Action<GameObject, Transform> enemyInitializedEvent;
         
@@ -38,6 +38,11 @@ namespace ShootEmUp
             this.enemyInitializedEvent?.Invoke(enemyObject, attackPosition);
 
             enemyObject.transform.SetParent(this.worldTransform);
+        }
+
+        public void Dispose()
+        {
+            this.enemySpawner.enemySpawnedEvent -= HandleEnemySpawnedEvent;
         }
     }
 

@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackComponent : IGameFixedUpdateListener
+    public sealed class EnemyAttackComponent : IGameFixedUpdateListener, IDisposable
     {
         private WeaponComponent weaponComponent;
         private EnemyCheckDestinationComponent checkDestinationComponent;
@@ -79,6 +80,12 @@ namespace ShootEmUp
                     Shoot(attacker);
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            this.checkDestinationComponent.destinationReachedEvent -= HandleReachedAttackPointEvent;
+            this.enemyHitPointsComponent.hpEmptyEvent -= HandleHPEmptyEvent;
         }
     }
 }

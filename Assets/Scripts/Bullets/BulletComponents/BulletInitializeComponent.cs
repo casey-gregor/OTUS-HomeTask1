@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletInitializeComponent
+    public sealed class BulletInitializeComponent : IDisposable
     {
         public event Action<GameObject, Vector2> bulletToMoveEvent;
         
@@ -50,6 +50,10 @@ namespace ShootEmUp
             bulletToMoveEvent?.Invoke(bulletObj, velocity);
         }
 
-
+        public void Dispose()
+        {
+            this.enemyBulletSpawnerComponent.bulletSpawnedEvent -= HandleBulletSpawnEvent;
+            this.playerBulletSpawnerComponent.bulletSpawnedEvent -= HandleBulletSpawnEvent;
+        }
     }
 }

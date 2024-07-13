@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public sealed class StartButton
+    public sealed class StartButton : IDisposable
     {
         public event Action StartEvent;
         
@@ -23,5 +23,9 @@ namespace ShootEmUp
             this.StartEvent?.Invoke();
         }
 
+        public void Dispose()
+        {
+            this.startButton.onClick.RemoveListener(OnButtonClick);
+        }
     }
 }

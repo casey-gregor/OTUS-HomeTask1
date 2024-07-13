@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveComponent : IGameFixedUpdateListener
+    public sealed class EnemyMoveComponent : IGameFixedUpdateListener, IDisposable
     {
         private EnemyInitializeComponent initializer;
         private EnemyCheckDestinationComponent checkDestinationComponent;
@@ -52,6 +53,12 @@ namespace ShootEmUp
                 Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
                 Move(rb, direction, 5f);
             }
+        }
+
+        public void Dispose()
+        {
+            this.initializer.enemyInitializedEvent -= HandleSpawnEvent;
+            this.checkDestinationComponent.destinationReachedEvent -= DestinationReachedEventHandler;
         }
     }
 }

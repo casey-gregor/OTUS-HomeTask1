@@ -37,7 +37,7 @@ namespace ShootEmUp
         private void InstallCommonComponents()
         {
    
-            Container.Bind<ListenersStorage>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ListenersStorage>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();
             Container.Bind<InputManager>().AsSingle().NonLazy();
@@ -55,11 +55,11 @@ namespace ShootEmUp
 
         private void InstallBulletRelatedComponents()
         {
-            Container.Bind<BulletInitializeComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletInitializeComponent>().AsSingle();
             Container.Bind<BulletCollisionCheckComponent>().AsSingle();
-            Container.Bind<LevelBoundsCheckComponent>().AsSingle();
-            Container.Bind<BulletObserver>().AsSingle().NonLazy();
-            Container.Bind<BulletMoveComponent>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<LevelBoundsCheckComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletObserver>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BulletMoveComponent>().AsSingle().NonLazy();
 
             Container.Bind<LevelBoundsComponent>().
                 AsSingle().

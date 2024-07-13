@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyCheckDestinationComponent : IGameFixedUpdateListener
+    public sealed class EnemyCheckDestinationComponent : IGameFixedUpdateListener, IDisposable
     {
         public Vector2 direction { get; private set; }
 
@@ -56,6 +56,11 @@ namespace ShootEmUp
             {
                 this.objectsToCheck.Remove(key);
             }
+        }
+
+        public void Dispose()
+        {
+            this.initializer.enemyInitializedEvent -= HandleInitializedEvent;
         }
     }
 }

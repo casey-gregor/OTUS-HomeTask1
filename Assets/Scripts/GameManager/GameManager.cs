@@ -24,11 +24,7 @@ namespace ShootEmUp
         private ListenersStorage listenersStorage;
         private RegisterListenersComponent registerListenersComponent = new RegisterListenersComponent();
 
-        private void Awake()
-        {
-            IGameListener.RegisterEvent += RegisterEventHandler;
-            IGameListener.UnregisterEvent += UnregisterEventHandler;
-        }
+       
         [Inject]
         private void Construct(ListenersStorage listenersStorage)
         {
@@ -47,18 +43,6 @@ namespace ShootEmUp
             {
                 RecursiveRegister(sceneObject.transform);
             }
-        }
-
-        private void RegisterEventHandler(IGameListener gameListener)
-        {
-            if(!this.listenersStorage.gameListeners.Contains(gameListener))
-            {
-                this.listenersStorage.gameListeners.Add(gameListener);
-            }
-        }
-        private void UnregisterEventHandler(IGameListener gameListener)
-        {
-            this.listenersStorage.gameListeners.Remove(gameListener);
         }
 
         private void SwitchState(State state)

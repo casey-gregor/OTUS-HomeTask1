@@ -10,7 +10,7 @@ namespace ShootEmUp
         [SerializeField] private Button startButton;
         public override void InstallBindings()
         {
-            Container.Bind<StartButton>().AsSingle().WithArguments(startButton).NonLazy();
+            Container.BindInterfacesAndSelfTo<StartButton>().AsSingle().WithArguments(startButton).NonLazy();
         }
     }
 

@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletObserver
+    public sealed class BulletObserver : IDisposable
     {
         private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
         private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
@@ -25,12 +26,19 @@ namespace ShootEmUp
             this.collisionCheckAgent.CollisionEnterEvent += HandleDisableEvent;
             this.levelBoundsCheckComponent.OnOutOfBounds += HandleDisableEvent;
 
-    }
+        }
+
 
         private void HandleDisableEvent(GameObject obj)
         {
             this.enemyBulletSpawnerComponent.BulletPool.EnqueueItem(obj);
             this.playerBulletSpawnerComponent.BulletPool.EnqueueItem(obj);
         }
+        public void Dispose()
+        {
+            this.collisionCheckAgent.CollisionEnterEvent -= HandleDisableEvent;
+            this.levelBoundsCheckComponent.OnOutOfBounds -= HandleDisableEvent;
+        }
+
     }
 }

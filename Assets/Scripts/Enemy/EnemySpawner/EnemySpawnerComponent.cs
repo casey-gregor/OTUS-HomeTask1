@@ -52,7 +52,7 @@ namespace ShootEmUp
                     this.hitPoints 
                 });
 
-            this.hitPoints.SubscribeToSpawner(this);
+            this.hitPoints.SetSpawnerAndSubscribe(this);
 
             IGameListener.Register(this);
         }

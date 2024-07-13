@@ -1,11 +1,14 @@
+using System;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ShootEmUp
 {
     public sealed class PlayPauseButton : 
         IGameStartListener, 
-        IGameFinishListener
+        IGameFinishListener,
+        IDisposable
     {
         private GameManager gameManager;
         private TextMeshProUGUI textMeshPro;
@@ -22,6 +25,7 @@ namespace ShootEmUp
             this.button.gameObject.SetActive(false);
 
             IGameListener.Register(this);
+
         }
 
         public void OnStart()
@@ -51,6 +55,11 @@ namespace ShootEmUp
         public void OnFinish()
         {
             button.gameObject.SetActive(false);
+        }
+
+        public void Dispose()
+        {
+            this.button.onClick.RemoveListener(OnButtonClick);
         }
     }
 

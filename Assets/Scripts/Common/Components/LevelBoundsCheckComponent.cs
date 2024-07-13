@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class LevelBoundsCheckComponent : IGameFixedUpdateListener
+    public class LevelBoundsCheckComponent : IGameFixedUpdateListener, IDisposable
     {
         public event Action<GameObject> OnOutOfBounds;
     
@@ -20,8 +20,8 @@ namespace ShootEmUp
             LevelBoundsComponent levelBounds
             )
         {
-            bulletsToCheck = new HashSet<GameObject>();
-            itemsToRemove = new HashSet<GameObject>();
+            this.bulletsToCheck = new HashSet<GameObject>();
+            this.itemsToRemove = new HashSet<GameObject>();
 
             this.bulletInitializeComponent = bulletInitializeComponent;
             this.levelBounds = levelBounds;
@@ -55,6 +55,11 @@ namespace ShootEmUp
             {
                 this.bulletsToCheck.Remove(obj);
             }
+        }
+
+        public void Dispose()
+        {
+            this.bulletInitializeComponent.bulletToMoveEvent -= HandleBulletToMoveEvent;
         }
     }
 

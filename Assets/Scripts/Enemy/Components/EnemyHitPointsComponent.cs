@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyHitPointsComponent
+    public sealed class EnemyHitPointsComponent : IDisposable
     {
         public event Action<GameObject> hpEmptyEvent;
         
         private EnemyConfig enemyConfig;
         private BulletCollisionCheckComponent collisionCheckComponent;
         private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+
+        private EnemySpawnerComponent enemySpawnerComponent;
 
         private Dictionary<GameObject, int> hitPointsDict;
 
@@ -30,9 +32,10 @@ namespace ShootEmUp
             this.hitPointsDict = new Dictionary<GameObject, int>();
         }
 
-        public void SubscribeToSpawner(EnemySpawnerComponent spawner)
+        public void SetSpawnerAndSubscribe(EnemySpawnerComponent spawner)
         {
-            spawner.enemySpawnedEvent += HandleEnemySpawnEvent;
+            this.enemySpawnerComponent = spawner;
+            this.enemySpawnerComponent.enemySpawnedEvent += HandleEnemySpawnEvent;
         }
 
         private void HandleDealDamageEvent(GameObject damagedObject)
@@ -67,6 +70,11 @@ namespace ShootEmUp
             {
                 this.hpEmptyEvent?.Invoke(obj);
             }
+        }
+
+        public void Dispose()
+        {
+            this.enemySpawnerComponent.enemySpawnedEvent -= HandleEnemySpawnEvent;
         }
     }
 }

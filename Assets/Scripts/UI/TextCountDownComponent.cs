@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
+using System;
 using TMPro;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class TextCountdownComponent
+    public sealed class TextCountdownComponent : IDisposable
     { 
 
         private TextCountdownConfig config;
@@ -81,6 +82,11 @@ namespace ShootEmUp
                 this.countDownText.color = new Color(this.countDownText.color.r, this.countDownText.color.g, this.countDownText.color.b, 1 - progress);
                 await UniTask.Yield();
             }
+        }
+
+        public void Dispose()
+        {
+            startButton.StartEvent -= HandleStartEvent;
         }
 
         //public IEnumerator AnimateText(string text)
