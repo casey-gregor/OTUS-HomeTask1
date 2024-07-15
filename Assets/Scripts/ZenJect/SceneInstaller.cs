@@ -13,25 +13,39 @@ namespace ShootEmUp
         [SerializeField] private LevelBoundsSet levelBounds;
         [SerializeField] private EnemyPositionsSet enemyPositions;
 
-        [Serializable] public class LevelBoundsSet
-        {
-            public Transform left;
-            public Transform right;
-            public Transform top;
-            public Transform bottom;
-        }
+        [SerializeField] private Transform levelBoundsLeft;
+        [SerializeField] private Transform levelBoundsRight;
+        [SerializeField] private Transform levelBoundsTop;
+        [SerializeField] private Transform levelBoundsBottom;
 
-        [Serializable] public class EnemyPositionsSet
-        {
-            public Transform[] spawnPositions;
-            public Transform[] attackPositions;
-        }
+        [SerializeField] private Transform[] spawnPositions;
+        [SerializeField] private Transform[] attackPositions;
+       
   
         public override void InstallBindings()
         {
+            InstallLevelProvider();
             InstallCommonComponents();
             InstallBulletRelatedComponents();
         
+        }
+
+        private void InstallLevelProvider()
+        {
+            //Container.Bind<Transform>().WithId(IdCollection.worldTransform).FromInstance(worldTransform);
+            //Container.Bind<Transform>().WithId(IdCollection.playerId).FromInstance(character);
+            //Container.Bind<Transform>().WithId(IdCollection.enemyContainer).FromInstance(enemyContainer);
+            Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();
+            Container.Bind<LevelBoundsSet>().AsSingle().
+                WithArguments(levelBoundsLeft, levelBoundsRight, levelBoundsTop, levelBoundsBottom).
+                NonLazy();
+            Container.Bind<EnemyPositionsSet>().AsSingle().
+                WithArguments(spawnPositions, attackPositions).
+                NonLazy();
+            Container.Bind<LevelProvider>().
+                AsSingle().
+                WithArguments(worldTransform, character, enemyContainer, background).     
+                NonLazy();
         }
 
         private void InstallCommonComponents()
@@ -39,17 +53,9 @@ namespace ShootEmUp
    
             Container.BindInterfacesAndSelfTo<ListenersStorage>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameManager>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();
             Container.Bind<InputManager>().AsSingle().NonLazy();
+            Container.Bind<EnemyPositionsComponent>().AsSingle().NonLazy();
 
-            Container.Bind<EnemyPositionsComponent>().
-                AsSingle().
-                WithArguments(enemyPositions.spawnPositions, enemyPositions.attackPositions).
-                NonLazy();
-
-            Container.Bind<Transform>().WithId(IdCollection.worldTransform).FromInstance(worldTransform);
-            Container.Bind<Transform>().WithId(IdCollection.playerId).FromInstance(character);
-            Container.Bind<Transform>().WithId(IdCollection.enemyContainer).FromInstance(enemyContainer);
             Container.Bind<WeaponComponent>().AsSingle();
         }
 
@@ -57,14 +63,11 @@ namespace ShootEmUp
         {
             Container.BindInterfacesAndSelfTo<BulletInitializeComponent>().AsSingle();
             Container.Bind<BulletCollisionCheckComponent>().AsSingle();
-            Container.BindInterfacesAndSelfTo<LevelBoundsCheckComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelBoundsCheckController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BulletObserver>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<BulletMoveComponent>().AsSingle().NonLazy();
 
-            Container.Bind<LevelBoundsComponent>().
-                AsSingle().
-                WithArguments(levelBounds.left, levelBounds.right, levelBounds.top, levelBounds.bottom).
-                NonLazy();
+            Container.Bind<LevelBoundsController>().AsSingle().NonLazy();
         }
     }
 

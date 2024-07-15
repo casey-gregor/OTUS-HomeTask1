@@ -7,10 +7,14 @@ namespace ShootEmUp
         private Transform[] spawnPositions;
         private Transform[] attackPositions;
 
-        public EnemyPositionsComponent(Transform[] spawnPositions, Transform[] attackPositions)
+        private EnemyPositionsSet enemyPositionsSet;
+
+        public EnemyPositionsComponent(EnemyPositionsSet enemyPositionsSet)
         {
-            this.spawnPositions = spawnPositions;
-            this.attackPositions = attackPositions;
+            this.enemyPositionsSet = enemyPositionsSet;
+
+            this.spawnPositions = this.enemyPositionsSet.spawnPositions;
+            this.attackPositions = this.enemyPositionsSet.attackPositions;
         }
         public Transform RandomSpawnPosition()
         {

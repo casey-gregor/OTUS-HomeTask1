@@ -6,22 +6,24 @@ namespace ShootEmUp
     public sealed class PlayerShootComponent
     {
         private InputManager inputManager;
-        private PlayerBulletSpawnerComponent bulletSpawner;
+        private PlayerBulletSpawner bulletSpawner;
         private WeaponComponent weaponComponent;
+        private LevelProvider levelProvider;
         private Transform player;
 
         public PlayerShootComponent
             (
             InputManager inputManager, 
-            PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
+            PlayerBulletSpawner playerBulletSpawnerComponent,
             WeaponComponent weaponComponent,
-            [Inject(Id =IdCollection.playerId)] Transform player
+            LevelProvider levelProvider
             )
         {
             this.bulletSpawner = playerBulletSpawnerComponent;
             this.inputManager = inputManager;
             this.weaponComponent = weaponComponent;
-            this.player = player;
+            this.levelProvider = levelProvider;
+            this.player = this.levelProvider.player;
 
             this.inputManager.OnSpacePressedEvent += SpacePressedEventHandler;
 

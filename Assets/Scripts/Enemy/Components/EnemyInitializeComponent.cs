@@ -10,16 +10,18 @@ namespace ShootEmUp
         
         private EnemySpawnerComponent enemySpawner;
         private EnemyPositionsComponent enemyPositions;
+        private LevelProvider levelProvider;
         private Transform worldTransform;
 
         public EnemyInitializeComponent(
             EnemySpawnerComponent enemySpawner, 
             EnemyPositionsComponent enemyPositions,
-            [Inject(Id = IdCollection.worldTransform)] Transform worldTransform)
+            LevelProvider levelProvider)
         {
             this.enemySpawner = enemySpawner;
-            this.worldTransform = worldTransform;
+            this.levelProvider = levelProvider;
             this.enemyPositions = enemyPositions;
+            this.worldTransform = this.levelProvider.worldTransform;
             
             this.enemySpawner.enemySpawnedEvent += HandleEnemySpawnedEvent;
         }

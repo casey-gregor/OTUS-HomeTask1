@@ -10,11 +10,11 @@ namespace ShootEmUp
         IGameResumeListener, 
         IGameFinishListener
     {
-
+        private LevelProvider levelProvider;
         private Transform enemyContainer;
         private EnemySpawnerConfig spawnerConfig;
         private EnemyHitPointsComponent hitPoints;
-        private TimerService timer;
+        private Timer timer;
         private DiContainer diContainer;
         private Pool enemyPool;
         private EnemyObserver enemyObserver;
@@ -23,14 +23,15 @@ namespace ShootEmUp
 
         public EnemySpawnerComponent
             (
-            [Inject(Id = IdCollection.enemyContainer)] Transform container,
+            LevelProvider levelProvider,
             EnemySpawnerConfig spawnerConfig,
             EnemyHitPointsComponent hitPointComponent,
-            TimerService timer,
+            Timer timer,
             DiContainer diContainer
             )
         {
-            this.enemyContainer = container;
+            this.levelProvider = levelProvider;
+            this.enemyContainer = this.levelProvider.enemyContainer;
             this.diContainer = diContainer;
             this.spawnerConfig = spawnerConfig;
             this.timer = timer;

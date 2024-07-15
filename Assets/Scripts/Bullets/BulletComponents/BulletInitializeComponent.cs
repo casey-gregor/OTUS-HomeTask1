@@ -8,20 +8,22 @@ namespace ShootEmUp
     {
         public event Action<GameObject, Vector2> bulletToMoveEvent;
         
-        private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
-        private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+        private EnemyBulletSpawner enemyBulletSpawnerComponent;
+        private PlayerBulletSpawner playerBulletSpawnerComponent;
+        private LevelProvider levelProvider;
         private Transform worldTransform;
         
         public BulletInitializeComponent
             (
-            EnemyBulletSpawnerComponent enemyBulletSpawnerComponent,
-            PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
-            [Inject(Id = IdCollection.worldTransform)] Transform worldTransform
+            EnemyBulletSpawner enemyBulletSpawnerComponent,
+            PlayerBulletSpawner playerBulletSpawnerComponent,
+            LevelProvider levelProvider
             )
         {
             this.enemyBulletSpawnerComponent = enemyBulletSpawnerComponent;
             this.playerBulletSpawnerComponent = playerBulletSpawnerComponent;
-            this.worldTransform = worldTransform;
+            this.levelProvider = levelProvider;
+            this.worldTransform = this.levelProvider.worldTransform;
 
             this.enemyBulletSpawnerComponent.bulletSpawnedEvent += HandleBulletSpawnEvent;
             this.playerBulletSpawnerComponent.bulletSpawnedEvent += HandleBulletSpawnEvent;

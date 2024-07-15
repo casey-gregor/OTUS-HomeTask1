@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class PlayerBulletSpawnerComponent
+    public sealed class PlayerBulletSpawner
     {
         public BulletConfig BulletConfig => bulletConfig;
         public Pool BulletPool => bulletPool;
@@ -17,7 +17,7 @@ namespace ShootEmUp
         private Transform parent;
 
 
-        public PlayerBulletSpawnerComponent
+        public PlayerBulletSpawner
             (
             BulletConfig bulletConfig, 
             BulletSpawnerConfig bulletSpawnerConfig, 
