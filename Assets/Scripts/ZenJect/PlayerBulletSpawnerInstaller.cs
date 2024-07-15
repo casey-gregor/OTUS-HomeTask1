@@ -10,6 +10,6 @@ public class PlayerBulletSpawnerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<PlayerBulletSpawnerComponent>().AsSingle().WithArguments(bulletConfig, bulletSpawnerConfig, bulletContainer);
+        Container.Bind<PlayerBulletSpawner>().AsSingle().WithArguments(bulletConfig, bulletSpawnerConfig, bulletContainer);
     }
 }

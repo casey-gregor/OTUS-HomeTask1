@@ -10,7 +10,7 @@ namespace ShootEmUp
         
         private EnemyConfig enemyConfig;
         private BulletCollisionCheckComponent collisionCheckComponent;
-        private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+        private PlayerBulletSpawner playerBulletSpawnerComponent;
 
         private EnemySpawnerComponent enemySpawnerComponent;
 
@@ -20,7 +20,7 @@ namespace ShootEmUp
         public EnemyHitPointsComponent(
             EnemyConfig enemyConfig, 
             BulletCollisionCheckComponent collisionCheckComponent, 
-            PlayerBulletSpawnerComponent playerBulletSpawnerComponent
+            PlayerBulletSpawner playerBulletSpawnerComponent
             )
         {
             this.enemyConfig = enemyConfig;

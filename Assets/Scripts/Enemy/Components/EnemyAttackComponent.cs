@@ -9,18 +9,19 @@ namespace ShootEmUp
     {
         private WeaponComponent weaponComponent;
         private EnemyCheckDestinationComponent checkDestinationComponent;
-        private EnemyBulletSpawnerComponent bulletSpawner;
+        private EnemyBulletSpawner bulletSpawner;
         private EnemyConfig enemyConfig;
+        private LevelProvider levelProvider;
         private Transform target;
         private DiContainer diContainer;
         private EnemyHitPointsComponent enemyHitPointsComponent;
 
-        private Dictionary<GameObject, TimerService> attackingObjects;
+        private Dictionary<GameObject, Timer> attackingObjects;
 
         public EnemyAttackComponent
             (
-            [Inject(Id = IdCollection.playerId)]Transform target,
-            EnemyBulletSpawnerComponent bulletSpawner,
+            LevelProvider levelProvider,
+            EnemyBulletSpawner bulletSpawner,
             EnemyCheckDestinationComponent checkDestinationComponent,
             EnemyConfig enemyConfig,
             DiContainer diContainer,
@@ -28,7 +29,8 @@ namespace ShootEmUp
             EnemyHitPointsComponent hitPointsComponent
             )
         {
-            this.target = target;
+            this.levelProvider = levelProvider;
+            this.target = this.levelProvider.player;
             this.bulletSpawner = bulletSpawner;
             this.checkDestinationComponent = checkDestinationComponent;
             this.enemyConfig = enemyConfig;
@@ -40,7 +42,7 @@ namespace ShootEmUp
             this.checkDestinationComponent.destinationReachedEvent += HandleReachedAttackPointEvent;
             this.enemyHitPointsComponent.hpEmptyEvent += HandleHPEmptyEvent;
 
-            this.attackingObjects = new Dictionary<GameObject, TimerService>();
+            this.attackingObjects = new Dictionary<GameObject, Timer>();
 
             IGameListener.Register(this);
         }
@@ -55,7 +57,7 @@ namespace ShootEmUp
         {
             if (this.attackingObjects.ContainsKey(attacker))
                 return;
-            TimerService timer = diContainer.Instantiate<TimerService>();
+            Timer timer = diContainer.Instantiate<Timer>();
             this.attackingObjects.Add(attacker, timer);
         }
 

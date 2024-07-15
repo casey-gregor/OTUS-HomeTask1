@@ -11,7 +11,7 @@ namespace ShootEmUp
             Container.BindInterfacesAndSelfTo<EnemyCheckDestinationComponent>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyMoveComponent>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyAttackComponent>().AsSingle().NonLazy();
-            Container.Bind<TimerService>().AsSingle();
+            Container.Bind<Timer>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyHitPointsComponent>().AsSingle();
         }
     }

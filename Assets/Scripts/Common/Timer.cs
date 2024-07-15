@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class TimerService : IGameFixedUpdateListener
+    public sealed class Timer : IGameFixedUpdateListener
     {
         public bool TimerRunning { get; private set; }
         public float ElapsedTime { get; private set; }
@@ -13,9 +13,9 @@ namespace ShootEmUp
         private float elapsedTime;
         private GameObject obj;
 
-        private Action handlerFuncSimple;
-        private Action<GameObject> handlerFuncObject;
-        public TimerService()
+        private event Action handlerFuncSimple;
+        private event Action<GameObject> handlerFuncObject;
+        public Timer()
         {
             IGameListener.Register(this);
         }

@@ -11,7 +11,8 @@ namespace ShootEmUp
         private int hitPoints;
 
         private PlayerConfig playerConfig;
-        private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
+        private EnemyBulletSpawner enemyBulletSpawnerComponent;
+        private LevelProvider levelProvider;
         private Transform player;
 
 
@@ -19,14 +20,15 @@ namespace ShootEmUp
             (
             PlayerConfig playerConfig, 
             BulletCollisionCheckComponent collisionCheckComponent,
-            EnemyBulletSpawnerComponent enemyBulletSpawnerComponent,
-            [Inject(Id = IdCollection.playerId)] Transform player
+            EnemyBulletSpawner enemyBulletSpawnerComponent,
+            LevelProvider levelProvider
             )
         {
             this.playerConfig = playerConfig;
             this.hitPoints = this.playerConfig.hitPoints;
             this.enemyBulletSpawnerComponent = enemyBulletSpawnerComponent;
-            this.player = player;
+            this.levelProvider = levelProvider;
+            this.player = this.levelProvider.player;
             collisionCheckComponent.DealDamageEvent += HandleDealDamageEvent;
 
         }

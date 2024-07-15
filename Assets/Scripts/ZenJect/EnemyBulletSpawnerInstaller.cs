@@ -10,6 +10,6 @@ public class EnemyBulletSpawnerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<EnemyBulletSpawnerComponent>().AsSingle().WithArguments(bulletConfig, bulletSpawnerConfig, bulletContainer);
+        Container.Bind<EnemyBulletSpawner>().AsSingle().WithArguments(bulletConfig, bulletSpawnerConfig, bulletContainer);
     }
 }

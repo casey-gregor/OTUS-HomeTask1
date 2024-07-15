@@ -5,17 +5,17 @@ namespace ShootEmUp
 {
     public sealed class BulletObserver : IDisposable
     {
-        private EnemyBulletSpawnerComponent enemyBulletSpawnerComponent;
-        private PlayerBulletSpawnerComponent playerBulletSpawnerComponent;
+        private EnemyBulletSpawner enemyBulletSpawnerComponent;
+        private PlayerBulletSpawner playerBulletSpawnerComponent;
         private BulletCollisionCheckComponent collisionCheckAgent;
-        private LevelBoundsCheckComponent levelBoundsCheckComponent;
+        private LevelBoundsCheckController levelBoundsCheckComponent;
 
         public BulletObserver
             (
-            EnemyBulletSpawnerComponent enemyBulletSpawnerComponent, 
-            PlayerBulletSpawnerComponent playerBulletSpawnerComponent,
+            EnemyBulletSpawner enemyBulletSpawnerComponent, 
+            PlayerBulletSpawner playerBulletSpawnerComponent,
             BulletCollisionCheckComponent collisionCheckAgent, 
-            LevelBoundsCheckComponent levelBoundsCheckComponent
+            LevelBoundsCheckController levelBoundsCheckComponent
             ) 
         {
             this.enemyBulletSpawnerComponent = enemyBulletSpawnerComponent;
