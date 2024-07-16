@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 using Zenject;
 
 namespace ShootEmUp
@@ -37,6 +38,32 @@ namespace ShootEmUp
                     }
                 }
             }
+
+            //Alternative implementation with Zenject container.////
+            //var allBindings = this.diContainer.AllContracts;
+            //List<IGameListener> _listeners = new List<IGameListener>();
+            //foreach (var binding in allBindings)
+            //{
+            //    var contractType = binding.Type;
+            //    //Debug.Log("contractType : " + binding);
+
+            //    if (typeof(IGameListener).IsAssignableFrom(contractType))
+            //    {
+            //        var resolvedInstance = this.diContainer.ResolveAll(contractType).OfType<IGameListener>();
+                    
+
+            //        foreach( var instance in resolvedInstance)
+            //        {
+                        
+
+            //            if (resolvedInstance != null && !_listeners.Contains(instance))
+            //            {
+            //               _listeners.Add(instance);
+            //                Debug.Log("resolved instance : " + instance);
+            //            }
+            //        }
+            //    }
+            //}
         }
 
     }
