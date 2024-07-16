@@ -1,21 +1,20 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyInitializeComponent : IDisposable
+    public sealed class EnemyInitializeController : IDisposable
     {
         public event Action<GameObject, Transform> enemyInitializedEvent;
         
-        private EnemySpawnerComponent enemySpawner;
-        private EnemyPositionsComponent enemyPositions;
+        private EnemySpawnerController enemySpawner;
+        private EnemyPositionsController enemyPositions;
         private LevelProvider levelProvider;
         private Transform worldTransform;
 
-        public EnemyInitializeComponent(
-            EnemySpawnerComponent enemySpawner, 
-            EnemyPositionsComponent enemyPositions,
+        public EnemyInitializeController(
+            EnemySpawnerController enemySpawner, 
+            EnemyPositionsController enemyPositions,
             LevelProvider levelProvider)
         {
             this.enemySpawner = enemySpawner;

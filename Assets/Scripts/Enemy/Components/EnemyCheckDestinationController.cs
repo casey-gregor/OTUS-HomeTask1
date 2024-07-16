@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyCheckDestinationComponent : IGameFixedUpdateListener, IDisposable
+    public sealed class EnemyCheckDestinationController : IGameFixedUpdateListener, IDisposable
     {
         public Vector2 direction { get; private set; }
 
         public event Action<GameObject> destinationReachedEvent;
 
         private float proximityValue = 0.25f;
-        private EnemyInitializeComponent initializer;
+        private EnemyInitializeController initializer;
 
         private Dictionary<GameObject, Transform> objectsToCheck;
         private HashSet<GameObject> keysToRemove;
 
-        public EnemyCheckDestinationComponent(EnemyInitializeComponent enemyInitializer)
+        public EnemyCheckDestinationController(EnemyInitializeController enemyInitializer)
         {
             this.initializer = enemyInitializer;
 
@@ -24,8 +24,6 @@ namespace ShootEmUp
 
             this.objectsToCheck = new Dictionary<GameObject, Transform>();
             this.keysToRemove = new HashSet<GameObject>();
-
-            IGameListener.Register(this);
         }
 
         private bool CheckIfReached(GameObject obj)

@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace ShootEmUp
@@ -23,8 +22,6 @@ namespace ShootEmUp
             this.button.onClick.AddListener(OnButtonClick);
 
             this.button.gameObject.SetActive(false);
-
-            IGameListener.Register(this);
 
         }
 

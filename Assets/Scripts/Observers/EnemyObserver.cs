@@ -5,9 +5,9 @@ namespace ShootEmUp
     public sealed class EnemyObserver
     {
         private Pool enemyPool;
-        private EnemyHitPointsComponent hitPointsComponent;
+        private EnemyHitPointsController hitPointsComponent;
 
-        public EnemyObserver(Pool pool, EnemyHitPointsComponent hitPointsComponent)
+        public EnemyObserver(Pool pool, EnemyHitPointsController hitPointsComponent)
         {
             this.enemyPool = pool;
             this.hitPointsComponent = hitPointsComponent;

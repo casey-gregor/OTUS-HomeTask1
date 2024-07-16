@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemySpawnerComponent :
+    public sealed class EnemySpawnerController :
         IGameStartListener, 
         IGamePauseListener, 
         IGameResumeListener, 
@@ -13,7 +13,7 @@ namespace ShootEmUp
         private LevelProvider levelProvider;
         private Transform enemyContainer;
         private EnemySpawnerConfig spawnerConfig;
-        private EnemyHitPointsComponent hitPoints;
+        private EnemyHitPointsController hitPoints;
         private Timer timer;
         private DiContainer diContainer;
         private Pool enemyPool;
@@ -21,11 +21,11 @@ namespace ShootEmUp
 
         public event Action<GameObject> enemySpawnedEvent;
 
-        public EnemySpawnerComponent
+        public EnemySpawnerController
             (
             LevelProvider levelProvider,
             EnemySpawnerConfig spawnerConfig,
-            EnemyHitPointsComponent hitPointComponent,
+            EnemyHitPointsController hitPointComponent,
             Timer timer,
             DiContainer diContainer
             )
@@ -54,8 +54,6 @@ namespace ShootEmUp
                 });
 
             this.hitPoints.SetSpawnerAndSubscribe(this);
-
-            IGameListener.Register(this);
         }
 
         public void OnStart()

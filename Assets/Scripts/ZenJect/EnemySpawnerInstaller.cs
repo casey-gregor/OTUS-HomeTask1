@@ -6,13 +6,13 @@ namespace ShootEmUp
     {
         public override void InstallBindings()
         {
-            Container.Bind<EnemySpawnerComponent>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<EnemyInitializeComponent>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<EnemyCheckDestinationComponent>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<EnemyMoveComponent>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<EnemyAttackComponent>().AsSingle().NonLazy();
+            Container.Bind<EnemySpawnerController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyInitializeController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyCheckDestinationController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyMoveController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyAttackController>().AsSingle().NonLazy();
             Container.Bind<Timer>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemyHitPointsComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyHitPointsController>().AsSingle();
         }
     }
 

@@ -1,9 +1,8 @@
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class PlayerShootComponent
+    public sealed class PlayerShootController
     {
         private InputManager inputManager;
         private PlayerBulletSpawner bulletSpawner;
@@ -11,7 +10,7 @@ namespace ShootEmUp
         private LevelProvider levelProvider;
         private Transform player;
 
-        public PlayerShootComponent
+        public PlayerShootController
             (
             InputManager inputManager, 
             PlayerBulletSpawner playerBulletSpawnerComponent,

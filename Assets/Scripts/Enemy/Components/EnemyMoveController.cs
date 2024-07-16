@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveComponent : IGameFixedUpdateListener, IDisposable
+    public sealed class EnemyMoveController : IGameFixedUpdateListener, IDisposable
     {
-        private EnemyInitializeComponent initializer;
-        private EnemyCheckDestinationComponent checkDestinationComponent;
+        private EnemyInitializeController initializer;
+        private EnemyCheckDestinationController checkDestinationComponent;
 
         private Dictionary<GameObject, Transform> objectsToMove;
 
-        public EnemyMoveComponent
+        public EnemyMoveController
             (
-            EnemyInitializeComponent enemyInitializer, 
-            EnemyCheckDestinationComponent checkDestinationComponent
+            EnemyInitializeController enemyInitializer, 
+            EnemyCheckDestinationController checkDestinationComponent
             )
         {
             this.initializer = enemyInitializer;
@@ -24,8 +24,6 @@ namespace ShootEmUp
             this.checkDestinationComponent.destinationReachedEvent += DestinationReachedEventHandler;
 
             this.objectsToMove = new Dictionary<GameObject, Transform>();
-
-            IGameListener.Register(this);
         }
 
         private void HandleSpawnEvent(GameObject spawnedObject, Transform destination)

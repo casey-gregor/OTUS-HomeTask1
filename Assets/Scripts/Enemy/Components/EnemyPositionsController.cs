@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyPositionsComponent
+    public sealed class EnemyPositionsController
     {
         private Transform[] spawnPositions;
         private Transform[] attackPositions;
 
         private EnemyPositionsSet enemyPositionsSet;
 
-        public EnemyPositionsComponent(EnemyPositionsSet enemyPositionsSet)
+        public EnemyPositionsController(EnemyPositionsSet enemyPositionsSet)
         {
             this.enemyPositionsSet = enemyPositionsSet;
 

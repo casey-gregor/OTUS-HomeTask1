@@ -11,8 +11,6 @@ namespace ShootEmUp
         {
             this.textMeshPro = textMeshPro;
             this.textMeshPro.gameObject.SetActive(false);
-
-            IGameListener.Register(this);
         }
 
         public void OnFinish()

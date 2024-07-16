@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
@@ -15,10 +14,6 @@ namespace ShootEmUp
 
         private event Action handlerFuncSimple;
         private event Action<GameObject> handlerFuncObject;
-        public Timer()
-        {
-            IGameListener.Register(this);
-        }
 
         public void Set(GameObject objSet, float timer, Action<GameObject> handlerFunc)
         {

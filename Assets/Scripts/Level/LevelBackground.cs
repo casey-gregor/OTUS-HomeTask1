@@ -27,8 +27,6 @@ namespace ShootEmUp
             var position = this.objTransform.position;
             this.positionX = position.x;
             this.positionZ = position.z;
-
-            IGameListener.Register(this);
         }
 
         public void OnFixedUpdate()
