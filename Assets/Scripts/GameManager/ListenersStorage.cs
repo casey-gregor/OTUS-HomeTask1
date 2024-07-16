@@ -1,28 +1,16 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class ListenersStorage : IDisposable
+    public sealed class ListenersStorage
     {
-        public List<IGameListener> gameListeners = new();
-
-        public ListenersStorage()
+        private List<IGameListener> gameListeners = new();
+        public List<IGameListener> Listeners => gameListeners;
+        public void AddToListeners(IGameListener listener)
         {
-            IGameListener.RegisterEvent += RegisterEventHandler;
-        }
-       
-
-        private void RegisterEventHandler(IGameListener gameListener)
-        {
-            gameListeners.Add(gameListener);
+            this.gameListeners.Add(listener);
         }
 
-        public void Dispose()
-        {
-            IGameListener.RegisterEvent -= RegisterEventHandler;
-        }
     }
 
 }

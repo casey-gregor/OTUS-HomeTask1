@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class BulletCollisionCheckComponent
+    public class BulletCollisionCheckController
     {
         public event Action<GameObject> CollisionEnterEvent;
         public event Action<GameObject> DealDamageEvent;
@@ -13,7 +13,7 @@ namespace ShootEmUp
         private int playerBulletLayer;
         private int enemyBulletLayer;
 
-        public BulletCollisionCheckComponent()
+        public BulletCollisionCheckController()
         {
 
             this.playerLayer = LayerMask.NameToLayer(IdCollection.playerLayer);

@@ -1011,6 +1011,8 @@ GameObject:
   - component: {fileID: 1084042748}
   - component: {fileID: 1084042749}
   - component: {fileID: 1084042750}
+  - component: {fileID: 1084042752}
+  - component: {fileID: 1084042751}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1034,6 +1036,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26f55f53b06032c45895cbe1fcdef59c, type: 2}
   - {fileID: 11400000, guid: 455ff20d83ec5974f873f2fbc6e139c2, type: 2}
   - {fileID: 11400000, guid: 07bfd92c27e591746a346e1d387d362b, type: 2}
+  - {fileID: 11400000, guid: 62b4d42911edef646bbdb4239cd75384, type: 2}
   _monoInstallers:
   - {fileID: 1084042745}
   - {fileID: 1084042746}
@@ -1043,6 +1046,8 @@ MonoBehaviour:
   - {fileID: 1084042748}
   - {fileID: 1084042749}
   - {fileID: 1084042750}
+  - {fileID: 1084042752}
+  - {fileID: 1084042751}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1212,6 +1217,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 1259804304}
+--- !u!114 &1084042751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4117d4d4e16829540b7011c06fefa417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1084042752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084042739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ade90adb5e77547bacee9d13126247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRigidbody: {fileID: 4414282821800802414}
 --- !u!1 &1176245604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,11 +2491,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1546550636550280239, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
-        type: 3}
-      propertyPath: _monoInstallers.Array.data[0]
-      value: 
-      objectReference: {fileID: 4414282821800802406}
     - target: {fileID: 3705704651244433332, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
         type: 3}
       propertyPath: bulletSystem
@@ -2616,18 +2641,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3926786964592264468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802406 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2413512069771973493, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
+--- !u!50 &4414282821800802414 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5921868077925736255, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
     type: 3}
   m_PrefabInstance: {fileID: 3926786964592264468}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ade90adb5e77547bacee9d13126247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

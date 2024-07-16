@@ -5,10 +5,10 @@ namespace ShootEmUp
 {
     public sealed class CollisionCheckWrapper : MonoBehaviour
     {
-        private BulletCollisionCheckComponent collisionCheckComponent;
+        private BulletCollisionCheckController collisionCheckComponent;
 
         [Inject]
-        public void Construct(BulletCollisionCheckComponent collisionCheckAgent)
+        public void Construct(BulletCollisionCheckController collisionCheckAgent)
         {
             this.collisionCheckComponent = collisionCheckAgent;
         }

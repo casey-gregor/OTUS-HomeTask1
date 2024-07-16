@@ -10,13 +10,13 @@ namespace ShootEmUp
     
         private HashSet<GameObject> bulletsToCheck;
         private HashSet<GameObject> itemsToRemove;
-        private BulletInitializeComponent bulletInitializeComponent;
+        private BulletInitializeController bulletInitializeComponent;
         private LevelBoundsController levelBounds;
     
 
         public LevelBoundsCheckController
             (
-            BulletInitializeComponent bulletInitializeComponent, 
+            BulletInitializeController bulletInitializeComponent, 
             LevelBoundsController levelBounds
             )
         {
@@ -28,7 +28,6 @@ namespace ShootEmUp
 
             this.bulletInitializeComponent.bulletToMoveEvent += HandleBulletToMoveEvent;
 
-            IGameListener.Register(this);
         }
 
    
@@ -45,7 +44,6 @@ namespace ShootEmUp
             {
                 if (!this.levelBounds.IsInBounds(bulletObject.transform.position))
                 {
-                    //Debug.Log($"{obj.name} is out of bounds");
                     this.OnOutOfBounds?.Invoke(bulletObject);
                     this.itemsToRemove.Add(bulletObject);
                 }

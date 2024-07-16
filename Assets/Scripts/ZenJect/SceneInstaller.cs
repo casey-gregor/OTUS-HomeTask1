@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -27,14 +26,10 @@ namespace ShootEmUp
             InstallLevelProvider();
             InstallCommonComponents();
             InstallBulletRelatedComponents();
-        
         }
 
         private void InstallLevelProvider()
         {
-            //Container.Bind<Transform>().WithId(IdCollection.worldTransform).FromInstance(worldTransform);
-            //Container.Bind<Transform>().WithId(IdCollection.playerId).FromInstance(character);
-            //Container.Bind<Transform>().WithId(IdCollection.enemyContainer).FromInstance(enemyContainer);
             Container.Bind<LevelBackground>().AsSingle().WithArguments(background).NonLazy();
             Container.Bind<LevelBoundsSet>().AsSingle().
                 WithArguments(levelBoundsLeft, levelBoundsRight, levelBoundsTop, levelBoundsBottom).
@@ -53,19 +48,20 @@ namespace ShootEmUp
    
             Container.BindInterfacesAndSelfTo<ListenersStorage>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameManager>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<TimerFactory>().AsSingle().NonLazy();
             Container.Bind<InputManager>().AsSingle().NonLazy();
-            Container.Bind<EnemyPositionsComponent>().AsSingle().NonLazy();
+            Container.Bind<EnemyPositionsController>().AsSingle().NonLazy();
 
             Container.Bind<WeaponComponent>().AsSingle();
         }
 
         private void InstallBulletRelatedComponents()
         {
-            Container.BindInterfacesAndSelfTo<BulletInitializeComponent>().AsSingle();
-            Container.Bind<BulletCollisionCheckComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletInitializeController>().AsSingle();
+            Container.Bind<BulletCollisionCheckController>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelBoundsCheckController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BulletObserver>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<BulletMoveComponent>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BulletMoveController>().AsSingle().NonLazy();
 
             Container.Bind<LevelBoundsController>().AsSingle().NonLazy();
         }

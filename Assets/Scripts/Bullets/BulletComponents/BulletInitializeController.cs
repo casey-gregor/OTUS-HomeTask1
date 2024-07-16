@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletInitializeComponent : IDisposable
+    public sealed class BulletInitializeController : IDisposable
     {
         public event Action<GameObject, Vector2> bulletToMoveEvent;
         
@@ -13,7 +13,7 @@ namespace ShootEmUp
         private LevelProvider levelProvider;
         private Transform worldTransform;
         
-        public BulletInitializeComponent
+        public BulletInitializeController
             (
             EnemyBulletSpawner enemyBulletSpawnerComponent,
             PlayerBulletSpawner playerBulletSpawnerComponent,

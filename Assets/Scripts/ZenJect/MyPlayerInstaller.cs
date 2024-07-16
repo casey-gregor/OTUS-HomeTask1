@@ -1,15 +1,18 @@
-using ShootEmUp;
 using UnityEngine;
 using Zenject;
 
-public class MyPlayerInstaller : MonoInstaller
+namespace ShootEmUp
 {
-    public override void InstallBindings()
+    public class MyPlayerInstaller : MonoInstaller
     {
-        Container.Bind<Rigidbody2D>().FromComponentOnRoot().AsSingle();
-        Container.Bind<PlayerHitPointsComponent>().AsSingle().NonLazy();
-        Container.Bind<PlayerHealthObserverComponent>().AsSingle().NonLazy();
-        Container.Bind<PlayerShootComponent>().AsSingle().NonLazy();
-        Container.Bind<PlayerMoveComponent>().AsSingle().NonLazy();
+        [SerializeField] private Rigidbody2D playerRigidbody;
+        public override void InstallBindings()
+        {
+            Container.Bind<PlayerHitPointsComponent>().AsSingle().NonLazy();
+            Container.Bind<PlayerHealthObserverComponent>().AsSingle().NonLazy();
+            Container.Bind<PlayerShootController>().AsSingle().NonLazy();
+            Container.Bind<PlayerMoveController>().AsSingle().WithArguments(playerRigidbody).NonLazy();
+        }
     }
+
 }

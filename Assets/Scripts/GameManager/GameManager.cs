@@ -22,27 +22,11 @@ namespace ShootEmUp
         public State state { get; private set; }
 
         private ListenersStorage listenersStorage;
-        private RegisterListenersComponent registerListenersComponent = new RegisterListenersComponent();
 
-       
         [Inject]
         private void Construct(ListenersStorage listenersStorage)
         {
             this.listenersStorage = listenersStorage;
-        }
-
-        private void Start()
-        {
-            InterateThroughSceneObjects();
-        }
-
-        private void InterateThroughSceneObjects()
-        {
-            GameObject[] sceneRootObjects = gameObject.scene.GetRootGameObjects();
-            foreach (GameObject sceneObject in sceneRootObjects)
-            {
-                RecursiveRegister(sceneObject.transform);
-            }
         }
 
         private void SwitchState(State state)
@@ -50,36 +34,36 @@ namespace ShootEmUp
             switch (state)
             {
                 case State.Start:
-                    for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+                    for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
                     {
-                        if (this.listenersStorage.gameListeners[i] is IGameStartListener listener)
+                        if (this.listenersStorage.Listeners[i] is IGameStartListener listener)
                         {
                             listener.OnStart();
                         }
                     }
                     break;
                 case State.Pause:
-                    for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+                    for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
                     {
-                        if (this.listenersStorage.gameListeners[i] is IGamePauseListener listener)
+                        if (this.listenersStorage.Listeners[i] is IGamePauseListener listener)
                         {
                             listener.OnPause();
                         }
                     }
                     break;
                 case State.Resume:
-                    for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+                    for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
                     {
-                        if (this.listenersStorage.gameListeners[i] is IGameResumeListener listener)
+                        if (this.listenersStorage.Listeners[i] is IGameResumeListener listener)
                         {
                             listener.OnResume();
                         }
                     }
                     break;
                 case State.Finish:
-                    for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+                    for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
                     {
-                        if (this.listenersStorage.gameListeners[i] is IGameFinishListener listener)
+                        if (this.listenersStorage.Listeners[i] is IGameFinishListener listener)
                         {
                             listener.OnFinish();
                         }
@@ -108,27 +92,14 @@ namespace ShootEmUp
             return state is State.Start or State.Resume;
         }
 
-       
-
-        private void RecursiveRegister(Transform transform)
-        {
-            registerListenersComponent.RegisterListeners(transform.gameObject);
-            foreach(Transform child in transform)
-            {
-                if (!child.gameObject.activeSelf)
-                    return;
-                RecursiveRegister(child);
-            }
-        }
-
         public void FixedTick()
         {
             if (!CanUpdate()) return;
 
-            for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+            for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
             {
 
-                if (this.listenersStorage.gameListeners[i] is IGameFixedUpdateListener fixedUpdateListener)
+                if (this.listenersStorage.Listeners[i] is IGameFixedUpdateListener fixedUpdateListener)
                 {
                     fixedUpdateListener.OnFixedUpdate();
                 }
@@ -139,9 +110,9 @@ namespace ShootEmUp
         {
             if (!CanUpdate()) return;
 
-            for (int i = 0; i < this.listenersStorage.gameListeners.Count; i++)
+            for (int i = 0; i < this.listenersStorage.Listeners.Count; i++)
             {
-                if (this.listenersStorage.gameListeners[i] is IGameUpdateListener updateListener)
+                if (this.listenersStorage.Listeners[i] is IGameUpdateListener updateListener)
                 {
                     updateListener.OnUpdate();
                 }

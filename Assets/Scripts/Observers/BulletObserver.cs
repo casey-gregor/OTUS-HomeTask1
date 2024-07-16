@@ -7,14 +7,14 @@ namespace ShootEmUp
     {
         private EnemyBulletSpawner enemyBulletSpawnerComponent;
         private PlayerBulletSpawner playerBulletSpawnerComponent;
-        private BulletCollisionCheckComponent collisionCheckAgent;
+        private BulletCollisionCheckController collisionCheckAgent;
         private LevelBoundsCheckController levelBoundsCheckComponent;
 
         public BulletObserver
             (
             EnemyBulletSpawner enemyBulletSpawnerComponent, 
             PlayerBulletSpawner playerBulletSpawnerComponent,
-            BulletCollisionCheckComponent collisionCheckAgent, 
+            BulletCollisionCheckController collisionCheckAgent, 
             LevelBoundsCheckController levelBoundsCheckComponent
             ) 
         {

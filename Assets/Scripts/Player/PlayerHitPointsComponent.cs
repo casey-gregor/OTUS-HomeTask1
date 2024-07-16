@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
@@ -19,7 +18,7 @@ namespace ShootEmUp
         public PlayerHitPointsComponent
             (
             PlayerConfig playerConfig, 
-            BulletCollisionCheckComponent collisionCheckComponent,
+            BulletCollisionCheckController collisionCheckComponent,
             EnemyBulletSpawner enemyBulletSpawnerComponent,
             LevelProvider levelProvider
             )
