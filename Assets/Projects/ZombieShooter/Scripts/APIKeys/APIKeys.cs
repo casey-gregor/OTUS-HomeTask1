@@ -10,6 +10,7 @@ namespace ZombieShooter
         public const string RotateDirection = nameof(RotateDirection);
 
         public const string ShootAction = nameof(ShootAction);
+        public const string ShootRequest = nameof(ShootRequest);
 
         public const string TakeDamageAction = nameof(TakeDamageAction);
     }

@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635776048}
   - component: {fileID: 635776049}
+  - component: {fileID: 635776050}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -313,7 +314,7 @@ Transform:
   m_Children:
   - {fileID: 1454721078}
   - {fileID: 1228078807}
-  - {fileID: 1761302089}
+  - {fileID: 1548264682}
   m_Father: {fileID: 640104419}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -337,6 +338,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &635776050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635776047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bda1c9848af4694f9ba8d506c12ebad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &640104418
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,22 +399,26 @@ MonoBehaviour:
   _core:
     _camera: {fileID: 2136187572}
     MoveComponent:
+      IsMoving:
+        value: 0
       _root: {fileID: 640104419}
       _speed: 3
       _canMove: 1
       MoveDirection:
         value: {x: 0, y: 0, z: 0}
     RotationComponent:
+      RotateDirection:
+        value: {x: 0, y: 0, z: 0}
       _rotationRoot: {fileID: 635776048}
-      _rotateDirection: {x: 0, y: 0, z: 0}
       _rotateRate: 0.4
       _canRotate: 1
     LifeComponent:
       _hitPoints:
-        value: 5
-      isDead: 0
+        value: 3
+      isDead:
+        value: 0
     ShootComponent:
-      _reloadTime: 0.5
+      _reloadTime: 2
       _isReloading: 0
       _bulletPrefab: {fileID: 589476887268981740, guid: 3a2389ffb906cb143828a2aba2b11c36,
         type: 3}
@@ -409,8 +426,9 @@ MonoBehaviour:
       _canFire: 1
     _targetObject:
       value: {fileID: 0}
-  _visual:
+  _animation:
     _animator: {fileID: 635776049}
+    _animatorDispatcher: {fileID: 635776050}
 --- !u!54 &640104421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -729,15 +747,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationComponent:
+    RotateDirection:
+      value: {x: 0, y: 0, z: 0}
     _rotationRoot: {fileID: 1771246947}
-    _rotateDirection: {x: 0, y: 0, z: 0}
     _rotateRate: 0.2
     _canRotate: 1
   _lifeComponent:
     _hitPoints:
       value: 1
-    isDead: 0
+    isDead:
+      value: 0
   _moveComponent:
+    IsMoving:
+      value: 0
     _root: {fileID: 1164988017}
     _speed: 0.5
     _canMove: 1
@@ -1143,6 +1165,38 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1548264681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548264682}
+  m_Layer: 0
+  m_Name: GunPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1548264682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548264681}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0.4, y: 0.75, z: 0.3}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.7}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1761302089}
+  m_Father: {fileID: 635776048}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &1761302088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,14 +1222,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761302088}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.393, y: 0.77, z: 0.659}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.046666656, y: 0.13333319, z: 0.5128571}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 151995778}
-  m_Father: {fileID: 635776048}
-  m_RootOrder: 2
+  m_Father: {fileID: 1548264682}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1761302091
 MeshRenderer:

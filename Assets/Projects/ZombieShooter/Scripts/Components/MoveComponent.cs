@@ -10,6 +10,7 @@ namespace ZombieShooter
     public class MoveComponent : IAtomicUpdate
     {
         public AtomicEvent<Vector3> DirectionEvent;
+        public AtomicVariable<bool> IsMoving;
 
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
@@ -22,6 +23,10 @@ namespace ZombieShooter
         public void Construct()
         {
             DirectionEvent.Subscribe(SetDirection);
+            MoveDirection.Subscribe(direction =>
+            {
+                IsMoving.Value = direction.sqrMagnitude > 0;
+            });
         }
 
         private void SetDirection(Vector3 vector)

@@ -12,7 +12,7 @@ namespace ZombieShooter
         public AtomicEvent<int> TakeDamageEvent;
 
         [SerializeField] private AtomicVariable<int> _hitPoints;
-        [SerializeField] private bool isDead;
+        [SerializeField] public AtomicVariable<bool> isDead;
 
         public void Construct()
         {
@@ -22,18 +22,18 @@ namespace ZombieShooter
             {
                 if (hp <= 0)
                 {
-                    isDead = true;
+                    isDead.Value = true;
                 }
             });
         }
         public bool IsAlive()
         {
-            return !isDead;
+            return !isDead.Value;
         }
 
         public void TakeDamage(int damage)
         {
-            if (isDead)
+            if (isDead.Value)
                 return;
 
             _hitPoints.Value -= damage;

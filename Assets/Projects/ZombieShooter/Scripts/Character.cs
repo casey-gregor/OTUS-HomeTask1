@@ -11,7 +11,7 @@ namespace ZombieShooter
     public class Character : AtomicObject
     {
         [SerializeField] private CharacterCore _core;
-        [SerializeField] private CharacterVisual _visual;
+        [SerializeField] private CharacterAnimation _animation;
 
         [Get(APIKeys.MoveDirection)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
@@ -20,7 +20,10 @@ namespace ZombieShooter
         public IAtomicVariable<Vector3> RotateDirection => _core.RotationComponent.RotateDirection;
 
         [Get(APIKeys.ShootAction)]
-        public IAtomicAction ShootAction => _core.ShootComponent.ShootEvent;
+        public IAtomicAction ShootAction => _core.ShootComponent.ShootActionEvent;
+
+        [Get(APIKeys.ShootRequest)]
+        public IAtomicAction ShootRequest => _core.ShootComponent.ShootRequestEvent;
 
         [Get(APIKeys.TakeDamageAction)]
         public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.TakeDamageEvent;
@@ -28,7 +31,7 @@ namespace ZombieShooter
         private void Awake()
         {
             _core.Construct(this);
-            _visual.Construct(_core);
+            _animation.Construct(_core);
         }
         private void Update()
         {

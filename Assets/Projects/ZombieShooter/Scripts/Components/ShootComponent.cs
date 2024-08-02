@@ -9,7 +9,10 @@ namespace ZombieShooter
     [Serializable]
     public class ShootComponent : IAtomicUpdate
     {
-        public AtomicEvent ShootEvent;
+        public AtomicEvent ShootRequestEvent;
+        public AtomicEvent ShootActionEvent;
+        public AtomicEvent FireEvent;
+
         [SerializeField] private float _reloadTime = 2f;
         [SerializeField] private bool _isReloading;
         [SerializeField] private Bullet _bulletPrefab;
@@ -23,7 +26,14 @@ namespace ZombieShooter
 
         public void Construct()
         {
-            ShootEvent.Subscribe(Shoot);
+            ShootRequestEvent.Subscribe(() =>
+            {
+                if (CanFire())
+                {
+                    ShootActionEvent.Invoke();
+                }
+            });
+            FireEvent.Subscribe(Shoot);
         }
 
         public void OnUpdate(float deltaTime)
@@ -40,7 +50,7 @@ namespace ZombieShooter
 
         public bool CanFire()
         {
-            return _canFire;
+            return _canFire && !_isReloading;
         }
 
         public void AddCondition(Func<bool> condition)
@@ -50,9 +60,7 @@ namespace ZombieShooter
 
         private void Shoot()
         {
-            if (!_canFire)
-                return;
-            if (_isReloading)
+            if (!CanFire())
                 return;
 
             var bullet = UnityEngine.Object.Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
