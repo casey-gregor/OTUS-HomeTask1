@@ -12,6 +12,8 @@ namespace ZombieShooter
     {
         [SerializeField] private CharacterCore _core;
         [SerializeField] private CharacterAnimation _animation;
+        [SerializeField] private CharacterVFX _vfx;
+        [SerializeField] private CharacterSFX _sfx;
 
         [Get(APIKeys.MoveDirection)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
@@ -32,6 +34,9 @@ namespace ZombieShooter
         {
             _core.Construct(this);
             _animation.Construct(_core);
+            _vfx.Construct(_core);
+            _sfx.Construct(_core);
+
         }
         private void Update()
         {

@@ -60,7 +60,7 @@ namespace ZombieShooter
                 _rotationComponent._rotationEvent,
                 _moveComponent.DirectionEvent);
 
-            AddLogic(_findClosestTargetMechanics);
+            //AddLogic(_findClosestTargetMechanics);
             AddLogic(_lookAtTargetMechanics);
             AddLogic(_moveComponent);
         }
