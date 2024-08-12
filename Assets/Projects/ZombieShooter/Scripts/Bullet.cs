@@ -2,10 +2,7 @@ using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace ZombieShooter
 {

@@ -27,7 +27,7 @@ namespace ZombieShooter
         private float _bulletsCount;
         private bool _isReloading;
 
-        private BulletSpawner _spawner;
+        private BulletSpawnerMechanics _spawnerMechanics;
         private BulletInitiateMechanics _initiateMechanics;
 
         public void Construct()
@@ -45,7 +45,7 @@ namespace ZombieShooter
 
             _bulletsCount = _bulletsInMagazine;
 
-            _spawner = new BulletSpawner(_bulletPrefab, _initialBulletCount, _bulletParent, _world);
+            _spawnerMechanics = new BulletSpawnerMechanics(_bulletPrefab, _initialBulletCount, _bulletParent, _world);
             _initiateMechanics = new BulletInitiateMechanics();
         }
 
@@ -69,9 +69,9 @@ namespace ZombieShooter
             _reloadTimer = _reloadTime;
             _bulletsCount --;
 
-            Bullet bullet = _spawner.GetBullet();
+            Bullet bullet = _spawnerMechanics.GetBullet();
 
-            _initiateMechanics.InitiateBullet(bullet, _firePoint, _spawner.RemoveBulletEvent);
+            _initiateMechanics.InitiateBullet(bullet, _firePoint, _spawnerMechanics.RemoveBulletEvent);
         }
      
 

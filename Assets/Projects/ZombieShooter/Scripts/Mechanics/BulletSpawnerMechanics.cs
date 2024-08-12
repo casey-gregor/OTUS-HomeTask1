@@ -7,7 +7,7 @@ using ZombieShooter;
 
 namespace ZombieShooter
 {
-    public class BulletSpawner
+    public class BulletSpawnerMechanics
     {
         public AtomicEvent<Bullet> RemoveBulletEvent = new();
 
@@ -17,7 +17,7 @@ namespace ZombieShooter
         private Transform _bulletParent;
         private Transform _world;
 
-        public BulletSpawner(Bullet bulletPrefab, int initialBulletCount, Transform bulletParent, Transform world)
+        public BulletSpawnerMechanics(Bullet bulletPrefab, int initialBulletCount, Transform bulletParent, Transform world)
         {
             _bulletPrefab = bulletPrefab;
             _initialBulletCount = initialBulletCount;

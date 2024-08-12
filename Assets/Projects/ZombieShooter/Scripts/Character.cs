@@ -1,9 +1,5 @@
-using Assets.Scripts.ZombieShooterScripts.Mechanics;
 using Atomic.Elements;
 using Atomic.Objects;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZombieShooter
