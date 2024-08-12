@@ -74,7 +74,6 @@ namespace ZombieShooter
 
         public void EnqueueZombie(Zombie zombie)
         {
-            //Debug.Log("remove Zombie");
             _zombiePool.Enqueue(zombie);
         }
 

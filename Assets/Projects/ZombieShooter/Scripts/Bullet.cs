@@ -42,6 +42,7 @@ namespace ZombieShooter
 
         private void Update()
         {
+
             _moveComponent.OnUpdate(Time.deltaTime);
             _inBoundsCheckMechanics.OnUpdate();
         }
