@@ -1,7 +1,6 @@
 using Atomic.Elements;
 using Atomic.Objects;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -9,36 +8,29 @@ namespace ZombieShooter
     [Serializable]
     public class MoveComponent : IAtomicUpdate
     {
-        public AtomicEvent<Vector3> DirectionEvent;
-        public AtomicVariable<bool> IsMoving;
+        [HideInInspector] public AtomicVariable<bool> CanMove;
+        [HideInInspector] public AtomicVariable<Vector3> MoveDirection;
+        [HideInInspector] public AtomicVariable<bool> IsMoving;
 
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
-        [SerializeField] private bool _canMove;
-
-        public AtomicVariable<Vector3> MoveDirection;
 
         private readonly CompositeCondition _condition = new CompositeCondition();
         
         public void Construct()
         {
-            DirectionEvent.Subscribe(SetDirection);
             MoveDirection.Subscribe(direction =>
             {
                 IsMoving.Value = direction.sqrMagnitude > 0;
             });
         }
 
-        private void SetDirection(Vector3 vector)
-        {
-            MoveDirection.Value = vector;
-        }
-
         public void OnUpdate(float deltaTime)
         {
-            if (_condition.IsTrue() && _canMove)
+            if (_condition.IsTrue() && CanMove.Value)
             {
-                _root.position += MoveDirection.Value * _speed * deltaTime;
+                _root.position += MoveDirection.Value.normalized * _speed * deltaTime;
+
             }
         }
 

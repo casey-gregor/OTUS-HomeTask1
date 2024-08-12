@@ -93,10 +93,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176048589654007368}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &589476887268981740
 MonoBehaviour:
@@ -111,8 +111,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveComponent:
+    IsMoving:
+      value: 0
+    CanMove:
+      value: 1
     _root: {fileID: 1176048589654007372}
-    _speed: 3
-    _moveDirection: {x: 0, y: 0, z: 0}
-    _canMove: 1
-  _damage: 1
+    _speed: 20
+    MoveDirection:
+      value: {x: 0, y: 0, z: 0}
+  _damage:
+    value: 1

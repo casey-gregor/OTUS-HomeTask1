@@ -10,34 +10,36 @@ namespace ZombieShooter
         private IAtomicValue<Vector3> _target;
         private IAtomicValue<Vector3> _root;
         private IAtomicValue<bool> _hasTarget;
-        private IAtomicAction<Vector3> _rotationAction;
-        private IAtomicAction<Vector3> _directionAction;
+        private IAtomicVariable<Vector3> _rotationDirection;
+        private IAtomicVariable<Vector3> _moveDirection;
 
         public LookAtTargetMechanics(
             IAtomicValue<Vector3> target,
             IAtomicValue<Vector3> root,
             IAtomicValue<bool> hasTarget,
-            IAtomicAction<Vector3> rotationAction,
-            IAtomicAction<Vector3> directionAction)
+            IAtomicVariable<Vector3> rotationDirection,
+            IAtomicVariable<Vector3> moveDirection)
         {
             _target = target;
             _root = root;
-            _rotationAction = rotationAction;
             _hasTarget = hasTarget;
-            _directionAction = directionAction;
+            _rotationDirection = rotationDirection;
+            _moveDirection = moveDirection;
             
         }
 
         public void OnUpdate(float deltaTime)
         {
+            
             if (!_hasTarget.Value)
                 return;
 
             var direction = _target.Value - _root.Value;
             direction.y = 0;
 
-            _rotationAction.Invoke(direction);
-            _directionAction.Invoke(direction);
+            _rotationDirection.Value = direction;
+            _moveDirection.Value = direction;
+            
         }
 
     }

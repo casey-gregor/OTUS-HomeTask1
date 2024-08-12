@@ -12,15 +12,13 @@ namespace ZombieShooter
 
         [SerializeField] private Camera _camera;
 
-        [SerializeField] public MoveComponent MoveComponent;
+        public MoveComponent MoveComponent;
         public RotationComponent RotationComponent;
         public LifeComponent LifeComponent;
         public ShootComponent ShootComponent;
 
-        [SerializeField] private AtomicVariable<GameObject> _targetObject;
-
         private RotateOnMouseCoursorMechanics _rotateOnMouseCoursorMechanics;
-
+ 
         public void Construct(Character character)
         {
             MoveComponent.Construct();
@@ -32,22 +30,12 @@ namespace ZombieShooter
             MoveComponent.AddCondition(ShootComponent.CanFire);
             RotationComponent.AddCondition(LifeComponent.IsAlive);
 
-            var targetPosition = new AtomicFunction<Vector3>(() =>
-            {
-                return _targetObject.Value.transform.position;
-            });
-
-            var hasTarget = new AtomicFunction<bool>(() =>
-            {
-                return _targetObject != null;
-            });
-
             var rootPosition = new AtomicFunction<Vector3>(() =>
             {
                 return character.transform.position;
             });
 
-
+          
 
             _rotateOnMouseCoursorMechanics = new RotateOnMouseCoursorMechanics(_camera, rootPosition, character);
 
@@ -56,11 +44,5 @@ namespace ZombieShooter
             character.AddLogic(ShootComponent);
 
         }
-
-        public void TakeDamage(int damage)
-        {
-            LifeComponent.TakeDamage(damage);
-        }
-
     }
 }

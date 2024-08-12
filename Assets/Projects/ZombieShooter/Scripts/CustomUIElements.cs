@@ -19,6 +19,11 @@ namespace ZombieShooter
             {
                 actionHelper.DamageCharacter(actionHelper.damage);
             }
+
+            if (GUILayout.Button("KillZombie"))
+            {
+                actionHelper.KillZombie(actionHelper._zombie);
+            }
         }
     }
 }

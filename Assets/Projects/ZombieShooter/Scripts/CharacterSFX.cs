@@ -15,7 +15,7 @@ namespace ZombieShooter
         public void Construct(CharacterCore core)
         {
             core.ShootComponent.FireEvent.Subscribe(HandleShootActionEvent);
-            core.LifeComponent.TakeDamageEvent.Subscribe(HandleTakeDamageEvent);
+            core.LifeComponent.DeductHitPointEvent.Subscribe(HandleTakeDamageEvent);
         }
 
         private void HandleShootActionEvent()

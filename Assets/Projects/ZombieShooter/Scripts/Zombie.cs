@@ -1,40 +1,71 @@
-using Assets.Scripts.ZombieShooterScripts.Mechanics;
 using Atomic.Elements;
+using Atomic.Extensions;
 using Atomic.Objects;
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
 {
-    public class Zombie : AtomicObject, IDamagable
+    public class Zombie : AtomicObject
     {
-        [Get(APIKeys.TakeDamageAction)]
-        public IAtomicAction<int> TakeDamageAction => _lifeComponent.TakeDamageEvent;
+        [Get(APIKeys.DEDUCT_HITPOINTS)]
+        public IAtomicAction<int> TakeDamageAction => _lifeComponent.DeductHitPointEvent;
 
-        [Get(APIKeys.MoveDirection)]
+        [Get(APIKeys.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _moveComponent.MoveDirection;
-        public RotationComponent RotationComponent => _rotationComponent;
-        public LifeComponent LifeComponent => _lifeComponent;
+
+        [Get(APIKeys.IS_DEAD)]
+        public AtomicVariable<bool> IsDead => _lifeComponent.isDead;
+
+        [Get(APIKeys.DAMAGE)]
+        public AtomicVariable<int> Damage => _damageAmount;
+
+        [Get(APIKeys.DAMAGE_INTERVAL)]
+        public AtomicVariable<float> DamageInterval => _damageInterval;
+
+        [Get(APIKeys.HIT_POINTS)]
+        public IAtomicVariable<int> HitPoints => _lifeComponent._hitPoints;
+
+        [Get(APIKeys.TARGET)]
+        public AtomicVariable<AtomicObject> Target => _targetObject;
+
+        [Get(APIKeys.INITIATE)]
+        public IAtomicAction<AtomicVariable<AtomicObject>> Initiate => InitiateEvent;
+
+
+        public AtomicEvent<AtomicVariable<AtomicObject>> InitiateEvent;
+
+        [HideInInspector] public AtomicVariable<IAtomicEntity> _target;
 
         [SerializeField] private RotationComponent _rotationComponent;
-        [SerializeField] private LifeComponent _lifeComponent;
         [SerializeField] private MoveComponent _moveComponent;
+        [SerializeField] private LifeComponent _lifeComponent;
 
-        [SerializeField] private AtomicVariable<float> _radius;
-        [SerializeField] private AtomicVariable<LayerMask> _layerMask;
-        [SerializeField] private AtomicVariable<GameObject> _targetObject;
+        [SerializeField] private AtomicVariable<AtomicObject> _targetObject;
 
         private LookAtTargetMechanics _lookAtTargetMechanics;
-        private FindClosestTargetMechanics _findClosestTargetMechanics;
+        private MeleeAttackMechanics _attackMechanics;
 
-        private void Awake()
+        [SerializeField] private AtomicVariable<int> _damageAmount;
+        [SerializeField] private AtomicVariable<float> _damageInterval;
+
+        public void Awake()
         {
+            InitiateEvent.Subscribe(InitiateZombie);
+
             _moveComponent.AddCondition(_lifeComponent.IsAlive);
             
             _rotationComponent.Construct();
             _rotationComponent.AddCondition(_lifeComponent.IsAlive);
 
             _lifeComponent.Construct();
+
+
+            var targetEntity = new AtomicFunction<AtomicEntity>(() =>
+            {
+                return _targetObject.Value.GetComponent<AtomicEntity>(); ;
+            });
 
             var targetPosition = new AtomicFunction<Vector3>(() =>
             {
@@ -52,17 +83,36 @@ namespace ZombieShooter
                 return transform.position;
             });
 
-            _findClosestTargetMechanics = new FindClosestTargetMechanics(_targetObject, rootPosition, _radius, _layerMask);
+
             _lookAtTargetMechanics = new LookAtTargetMechanics(
                 targetPosition, 
                 rootPosition, 
                 hasTarget, 
-                _rotationComponent._rotationEvent,
-                _moveComponent.DirectionEvent);
+                _rotationComponent.RotateDirection,
+                _moveComponent.MoveDirection);
 
-            //AddLogic(_findClosestTargetMechanics);
+            _attackMechanics = new MeleeAttackMechanics(
+                _targetObject, 
+                rootPosition, 
+                _moveComponent.CanMove,
+                _damageInterval,
+                _damageAmount);
+
+
             AddLogic(_lookAtTargetMechanics);
             AddLogic(_moveComponent);
+            AddLogic(_attackMechanics);
+        }
+
+        public void InitiateZombie(AtomicVariable<AtomicObject> target)
+        {
+            _targetObject.Value = target.Value;
+
+            target.Subscribe((value) => 
+            { 
+                _targetObject.Value = value;
+            });
+
         }
 
         private void FixedUpdate()
@@ -76,11 +126,8 @@ namespace ZombieShooter
             float deltaTime = Time.deltaTime;
 
             OnUpdate(deltaTime);
+
         }
 
-        public void TakeDamage(int damage)
-        {
-            _lifeComponent.TakeDamage(damage);
-        }
     }
 }

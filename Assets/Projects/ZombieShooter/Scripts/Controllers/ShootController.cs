@@ -19,7 +19,7 @@ namespace ZombieShooter
 
         private void Shoot()
         {
-            _character.GetAction(APIKeys.ShootRequest).Invoke();
+            _character.GetAction(APIKeys.SHOOT_REQUEST).Invoke();
         }
     }
 }

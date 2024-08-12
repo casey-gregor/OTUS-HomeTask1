@@ -1,6 +1,5 @@
 using Atomic.Elements;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -9,37 +8,36 @@ namespace ZombieShooter
     [Serializable]
     public class LifeComponent
     {
-        public AtomicEvent<int> TakeDamageEvent;
+        [HideInInspector] public AtomicEvent<int> DeductHitPointEvent;
+        [HideInInspector] public AtomicVariable<bool> isDead;
 
-        [SerializeField] private AtomicVariable<int> _hitPoints;
-        [SerializeField] public AtomicVariable<bool> isDead;
+        public AtomicVariable<int> _hitPoints;
 
         public void Construct()
         {
-            TakeDamageEvent.Subscribe(TakeDamage);
+            DeductHitPointEvent.Subscribe(DeductHitPoints);
 
             _hitPoints.Subscribe((hp) =>
             {
                 if (hp <= 0)
                 {
+                    
                     isDead.Value = true;
                 }
             });
+
         }
         public bool IsAlive()
         {
             return !isDead.Value;
         }
 
-        public void TakeDamage(int damage)
+        public void DeductHitPoints(int amount)
         {
             if (isDead.Value)
                 return;
 
-            _hitPoints.Value -= damage;
-            Debug.Log("Take damage : " + damage);
-
-            
+            _hitPoints.Value -= amount;            
         }
     }
 }

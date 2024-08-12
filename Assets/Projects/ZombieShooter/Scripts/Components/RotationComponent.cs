@@ -8,8 +8,7 @@ namespace ZombieShooter
     [Serializable]
     public class RotationComponent
     {
-        public AtomicEvent<Vector3> _rotationEvent;
-        public AtomicVariable<Vector3> RotateDirection;
+        [HideInInspector] public AtomicVariable<Vector3> RotateDirection;
 
         [SerializeField] private Transform _rotationRoot;
         [SerializeField] private float _rotateRate;
@@ -39,9 +38,6 @@ namespace ZombieShooter
             var targetRotation = Quaternion.LookRotation(RotateDirection.Value, Vector3.up);
 
             _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
-
-
-
         }
 
         public void AddCondition(Func<bool> condition)

@@ -41,7 +41,7 @@ namespace ZombieShooter
 
         private void Move(Vector3 direction)
         {
-            _character.Get<IAtomicVariable<Vector3>>(APIKeys.MoveDirection).Value = direction;
+            _character.Get<IAtomicVariable<Vector3>>(APIKeys.MOVE_DIRECTION).Value = direction;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Assets.Scripts.ZombieShooterScripts.Mechanics
 
             if (colliders.Length != 0)
             {
-
+                //Debug.Log("colliders : " + colliders.Length);
                 float minDistance = float.MaxValue;
 
                 foreach (var collider in colliders)

@@ -1,5 +1,4 @@
 using Atomic.Elements;
-using Atomic.Extensions;
 using Atomic.Objects;
 using System;
 using UnityEngine;
@@ -9,23 +8,31 @@ namespace ZombieShooter
     [Serializable]
     public class ShootComponent : IAtomicUpdate
     {
-        public AtomicEvent ShootRequestEvent;
-        public AtomicEvent ShootActionEvent;
-        public AtomicEvent FireEvent;
-
-        [SerializeField] private float _reloadTime = 2f;
-        [SerializeField] private bool _isReloading;
-        [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Transform _firePoint;
+        public Transform _firePoint;
+        
+        [HideInInspector] public AtomicEvent ShootRequestEvent;
+        [HideInInspector] public AtomicEvent ShootActionEvent;
+        [HideInInspector] public AtomicEvent FireEvent;
 
         [SerializeField] private bool _canFire;
+        [SerializeField] private float _reloadTime = 2f;
+        [SerializeField] private int _bulletsInMagazine = 10;
+
+        [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private int _initialBulletCount;
+        [SerializeField] private Transform _bulletParent;
+        [SerializeField] private Transform _world;
 
         private float _reloadTimer;
+        private float _bulletsCount;
+        private bool _isReloading;
 
-        private readonly CompositeCondition _condition = new CompositeCondition();
+        private BulletSpawner _spawner;
+        private BulletInitiateMechanics _initiateMechanics;
 
         public void Construct()
         {
+            
             ShootRequestEvent.Subscribe(() =>
             {
                 if (CanFire())
@@ -33,19 +40,20 @@ namespace ZombieShooter
                     ShootActionEvent.Invoke();
                 }
             });
+
             FireEvent.Subscribe(Shoot);
+
+            _bulletsCount = _bulletsInMagazine;
+
+            _spawner = new BulletSpawner(_bulletPrefab, _initialBulletCount, _bulletParent, _world);
+            _initiateMechanics = new BulletInitiateMechanics();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_isReloading)
-            {
-                _reloadTimer -= deltaTime;
-                if (_reloadTimer <= 0)
-                {
-                    _isReloading = false;
-                }
-            }
+            CheckIfReloading();
+
+            RefillBulletMagazine();
         }
 
         public bool CanFire()
@@ -53,23 +61,45 @@ namespace ZombieShooter
             return _canFire && !_isReloading;
         }
 
-        public void AddCondition(Func<bool> condition)
-        {
-            _condition.AddCondition(condition);
-        }
-
         private void Shoot()
         {
             if (!CanFire())
                 return;
 
-            var bullet = UnityEngine.Object.Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-            bullet.GetVariable<Vector3>(APIKeys.MoveDirection).Value = _firePoint.forward;
-
             _reloadTimer = _reloadTime;
-            _isReloading = true;
+            _bulletsCount --;
 
-            Debug.Log("fire");
+            Bullet bullet = _spawner.GetBullet();
+
+            _initiateMechanics.InitiateBullet(bullet, _firePoint, _spawner.RemoveBulletEvent);
+        }
+     
+
+        private void RefillBulletMagazine()
+        {
+            if(_bulletsCount < _bulletsInMagazine)
+            {
+                _reloadTimer -= Time.deltaTime;
+                if(_reloadTimer <= 0 )
+                {
+                    _bulletsCount++;
+                    _reloadTimer = _reloadTime;
+                }
+            }
+
+        }
+
+        private void CheckIfReloading()
+        {
+            if (_bulletsCount <= 0)
+            {  
+                _isReloading = true;
+            }
+            else
+            {
+                _isReloading = false;
+            }
+
         }
     }
 }

@@ -15,20 +15,20 @@ namespace ZombieShooter
         [SerializeField] private CharacterVFX _vfx;
         [SerializeField] private CharacterSFX _sfx;
 
-        [Get(APIKeys.MoveDirection)]
+        [Get(APIKeys.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
 
-        [Get(APIKeys.RotateDirection)]
+        [Get(APIKeys.ROTATE_DIRECTION)]
         public IAtomicVariable<Vector3> RotateDirection => _core.RotationComponent.RotateDirection;
 
-        [Get(APIKeys.ShootAction)]
-        public IAtomicAction ShootAction => _core.ShootComponent.ShootActionEvent;
-
-        [Get(APIKeys.ShootRequest)]
+        [Get(APIKeys.SHOOT_REQUEST)]
         public IAtomicAction ShootRequest => _core.ShootComponent.ShootRequestEvent;
 
-        [Get(APIKeys.TakeDamageAction)]
-        public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.TakeDamageEvent;
+        [Get(APIKeys.DEDUCT_HITPOINTS)]
+        public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.DeductHitPointEvent;
+
+        [Get(APIKeys.IS_DEAD)]
+        public IAtomicValue<bool> IsDead => _core.LifeComponent.isDead;
 
         private void Awake()
         {
