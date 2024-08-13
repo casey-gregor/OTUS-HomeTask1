@@ -18,16 +18,12 @@ namespace ZombieShooter
 
         public const string DEDUCT_HITPOINTS = nameof(DEDUCT_HITPOINTS);
         public const string IS_DEAD = nameof(IS_DEAD);
-        public const string DEATH_ACTION = nameof(DEATH_ACTION);
-        public const string IS_ACTIVE = nameof(IS_ACTIVE);
 
-        public const string TRY_TAKE_DAMAGE_ACTION = nameof(TRY_TAKE_DAMAGE_ACTION);
         public const string DAMAGE = nameof(DAMAGE);
         public const string DAMAGE_INTERVAL = nameof(DAMAGE_INTERVAL);
 
         public const string HIT_POINTS = nameof(HIT_POINTS);
         public const string TARGET = nameof(TARGET);
 
-        public const string INITIATE = nameof(INITIATE);
     }
 }

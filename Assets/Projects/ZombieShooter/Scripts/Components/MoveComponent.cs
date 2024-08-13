@@ -8,12 +8,14 @@ namespace ZombieShooter
     [Serializable]
     public class MoveComponent : IAtomicUpdate
     {
-        [HideInInspector] public AtomicVariable<bool> CanMove;
+        public AtomicVariable<bool> CanMove;
         [HideInInspector] public AtomicVariable<Vector3> MoveDirection;
         [HideInInspector] public AtomicVariable<bool> IsMoving;
 
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
+
+        private float _currentSpeed;
 
         private readonly CompositeCondition _condition = new CompositeCondition();
         
@@ -35,6 +37,11 @@ namespace ZombieShooter
         }
 
         public void AddCondition(Func<bool> condition)
+        {
+            _condition.AddCondition(condition);
+        }
+
+        public void AddCondition(AtomicFunction<bool> condition)
         {
             _condition.AddCondition(condition);
         }

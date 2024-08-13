@@ -14,20 +14,22 @@ namespace ZombieShooter
         [Get(APIKeys.DAMAGE)]
         public IAtomicVariable<int> Damage => _damage;
 
-        [Get(APIKeys.IS_ACTIVE)]
-        public IAtomicVariable<bool> IsActive => _isActive;
+        [Get(APIKeys.IS_DEAD)]
+        public IAtomicVariable<bool> IsDead => _isDead;
 
         [HideInInspector] public Action<bool> InactiveHandler = null;
         
         [SerializeField] private MoveComponent _moveComponent;
         [SerializeField] private AtomicVariable<int> _damage;
-        private AtomicVariable<bool> _isActive = new AtomicVariable<bool> { Value = true };
+
+        private AtomicVariable<bool> _isDead = new();
 
         private InBoundsCheckMechanics _inBoundsCheckMechanics;
 
 
         private void Awake()
         {
+
             var rootPosition = new AtomicFunction<Vector3>(() =>
             {
                 return transform.position;
@@ -35,7 +37,7 @@ namespace ZombieShooter
 
             LevelBounds levelBounds = FindObjectOfType<LevelBounds>();
 
-            _inBoundsCheckMechanics = new InBoundsCheckMechanics(rootPosition, _isActive, levelBounds);
+            _inBoundsCheckMechanics = new InBoundsCheckMechanics(rootPosition, _isDead, levelBounds);
 
             
         }
@@ -53,7 +55,7 @@ namespace ZombieShooter
             {
                 entity.GetAction<int>(APIKeys.DEDUCT_HITPOINTS).Invoke(_damage.Value);
 
-                _isActive.Value = false;
+                _isDead.Value = true;
             }
         }
 

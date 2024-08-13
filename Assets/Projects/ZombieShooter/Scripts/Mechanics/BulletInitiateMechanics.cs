@@ -8,22 +8,43 @@ namespace ZombieShooter
 {
     public class BulletInitiateMechanics
     {
-        public void InitiateBullet(Bullet _bullet, Transform _firePoint, IAtomicAction<Bullet> _removeBulletAction)
+        IAtomicValue<Bullet> _bullet;
+        Transform _firePoint;
+        IAtomicAction<Bullet> _removeBulletAction;
+
+        public BulletInitiateMechanics(
+            IAtomicValue<Bullet> bullet, 
+            Transform firePoint, 
+            IAtomicAction<Bullet> removeBulletAction,
+            AtomicEvent BulletSpawnedEvent)
         {
-            _bullet.transform.position = _firePoint.position;
-            _bullet.GetVariable<Vector3>(APIKeys.MOVE_DIRECTION).Value = _firePoint.forward;
+            _bullet = bullet;
+            _firePoint = firePoint;
+            _removeBulletAction = removeBulletAction;
+            
+            BulletSpawnedEvent.Subscribe(InitiateBullet);
 
-            _bullet.GetVariable<bool>(APIKeys.IS_ACTIVE).Value = true;
+        }
 
-            IAtomicObservable<bool> IsActiveObservable = _bullet.GetObservable<bool>(APIKeys.IS_ACTIVE);
+        public void InitiateBullet()
+        {
+            Bullet bullet = _bullet.Value;
 
-            IsActiveObservable.Subscribe(_bullet.InactiveHandler = value =>
+            bullet.transform.position = _firePoint.position;
+
+            bullet.GetVariable<Vector3>(APIKeys.MOVE_DIRECTION).Value = _firePoint.forward;
+
+            bullet.GetVariable<bool>(APIKeys.IS_DEAD).Value = false;
+
+            IAtomicObservable<bool> IsActiveObservable = bullet.GetObservable<bool>(APIKeys.IS_DEAD);
+
+            IsActiveObservable.Subscribe(bullet.InactiveHandler = value =>
             {
-                IsActiveObservable.Unsubscribe(_bullet.InactiveHandler);
-                if (!value)
-                    _removeBulletAction.Invoke(_bullet);
+                IsActiveObservable.Unsubscribe(bullet.InactiveHandler);
+                if (value)
+                    _removeBulletAction.Invoke(bullet);
             });
- 
+
         }
 
     }

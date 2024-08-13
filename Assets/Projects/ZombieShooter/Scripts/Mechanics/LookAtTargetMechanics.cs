@@ -30,7 +30,6 @@ namespace ZombieShooter
 
         public void OnUpdate(float deltaTime)
         {
-            
             if (!_hasTarget.Value)
                 return;
 

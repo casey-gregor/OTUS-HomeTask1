@@ -9,7 +9,7 @@ namespace ZombieShooter
     public class LifeComponent
     {
         [HideInInspector] public AtomicEvent<int> DeductHitPointEvent;
-        [HideInInspector] public AtomicVariable<bool> isDead;
+        public AtomicVariable<bool> isDead;
 
         public AtomicVariable<int> _hitPoints;
 

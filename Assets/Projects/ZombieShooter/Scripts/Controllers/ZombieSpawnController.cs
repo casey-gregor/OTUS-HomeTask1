@@ -2,6 +2,7 @@
 using Atomic.Extensions;
 using Atomic.Objects;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -24,15 +25,15 @@ namespace ZombieShooter
         private float _timer;
         private bool _CanSpawn;
 
-        private InitiateZombieMechanics _initiateMechanics;
+        private ZombieInitiateMechanics _initiateMechanics;
 
         private void Awake()
         {
             _zombiePool = new Pool<Zombie>(_zombiePrefab, _numToSpawn, _parent, _world);
+            _initiateMechanics = new ZombieInitiateMechanics();
 
             ZombieDeadEvent.Subscribe(EnqueueZombie);
 
-            _initiateMechanics = new InitiateZombieMechanics();
         }
 
         private void Update()

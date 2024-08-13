@@ -34,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 7506970851776375423}
   - {fileID: 7506970850877606946}
-  - {fileID: 7506970851366294617}
   m_Father: {fileID: 7506970852030272009}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -197,65 +196,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7506970851366294616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7506970851366294617}
-  - component: {fileID: 7506970851366294622}
-  - component: {fileID: 7506970851366294623}
-  m_Layer: 0
-  m_Name: AttackObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7506970851366294617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7506970851366294616}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7506970850868664941}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7506970851366294622
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7506970851366294616}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.11822373, z: 0.8807811}
---- !u!114 &7506970851366294623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7506970851366294616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4841713539913343b74e56885beb882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _zombie: {fileID: 7506970852367960345}
 --- !u!1 &7506970851776375422
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,37 +358,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e367375b95606a4479907e0ddf7351c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
-    value:
-      serializedVersion: 2
-      m_Bits: 2048
-  _rotationComponent:
-    RotateDirection:
-      value: {x: 0, y: 0, z: 0}
-    _rotationRoot: {fileID: 7506970852030272009}
-    _rotateRate: 0.2
-    _canRotate: 1
-  _moveComponent:
-    IsMoving:
-      value: 0
-    CanMove:
+  _core:
+    _rotationComponent:
+      RotateDirection:
+        value: {x: 0, y: 0, z: 0}
+      _rotationRoot: {fileID: 7506970852030272009}
+      _rotateRate: 0.2
+      _canRotate: 1
+    _moveComponent:
+      CanMove:
+        value: 0
+      MoveDirection:
+        value: {x: 0, y: 0, z: 0}
+      IsMoving:
+        value: 0
+      _root: {fileID: 7506970852367960347}
+      _speed: 1
+    _lifeComponent:
+      isDead:
+        value: 0
+      _hitPoints:
+        value: 1
+    _targetObject:
+      value: {fileID: 0}
+    _damageAmount:
       value: 1
-    _root: {fileID: 7506970852367960347}
-    _speed: 0.5
-    MoveDirection:
-      value: {x: 0, y: 0, z: 0}
-  _lifeComponent:
-    isDead:
-      value: 0
-    _hitPoints:
+    _damageInterval:
       value: 1
-  _takeDamageComponent: {}
-  _targetObject:
-    value: {fileID: 0}
-  _damageAmount:
-    value: 1
-  _damageInterval:
-    value: 1
 --- !u!54 &7506970852367960350
 Rigidbody:
   m_ObjectHideFlags: 0

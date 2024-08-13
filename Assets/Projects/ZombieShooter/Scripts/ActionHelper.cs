@@ -27,7 +27,7 @@ namespace ZombieShooter
             //_spawnController.EnqueueZombie(zombie);
 
             if (zombie.TryGetAction<IAtomicEntity, AtomicEntity>
-                    (APIKeys.TRY_TAKE_DAMAGE_ACTION, out IAtomicAction<IAtomicEntity, AtomicEntity> tryTakeDamage))
+                    (APIKeys.DEDUCT_HITPOINTS, out IAtomicAction<IAtomicEntity, AtomicEntity> tryTakeDamage))
             {
                 tryTakeDamage.Invoke(zombie, _bullet);
             }

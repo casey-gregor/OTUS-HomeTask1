@@ -1,18 +1,11 @@
 ﻿using Atomic.Elements;
 using Atomic.Objects;
-using System.Collections;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using ZombieShooter;
 using Atomic.Extensions;
-using System;
 
 namespace ZombieShooter
 {
-    public class InitiateZombieMechanics
+    public class ZombieInitiateMechanics
     {
-
-        private Action<bool> isDeadHandler = null;
 
         public void InitiateZombie(Zombie _zombie, AtomicObject _target, AtomicEvent<Zombie> EnqueueAction)
         {
@@ -27,9 +20,9 @@ namespace ZombieShooter
 
             IAtomicObservable<bool> isDeadObservable = _zombie.GetObservable<bool>(APIKeys.IS_DEAD);
 
-            isDeadObservable.Subscribe(isDeadHandler = value =>
+            isDeadObservable.Subscribe(_zombie._core.isDeadHandler = value =>
             {
-                isDeadObservable.Unsubscribe(isDeadHandler);
+                isDeadObservable.Unsubscribe(_zombie._core.isDeadHandler);
                 if(value)
                     EnqueueAction.Invoke(_zombie);
             });

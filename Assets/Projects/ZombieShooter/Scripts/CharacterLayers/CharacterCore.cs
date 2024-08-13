@@ -18,7 +18,10 @@ namespace ZombieShooter
         public ShootComponent ShootComponent;
 
         private RotateOnMouseCoursorMechanics _rotateOnMouseCoursorMechanics;
- 
+        private BulletCountMechanics _bulletCountMechanics;
+        private BulletSpawnerMechanics _bulletSpawnerMechanics;
+        private BulletInitiateMechanics _bulletInitiateMechanics;
+
         public void Construct(Character character)
         {
             MoveComponent.Construct();
@@ -37,12 +40,34 @@ namespace ZombieShooter
 
           
 
-            _rotateOnMouseCoursorMechanics = new RotateOnMouseCoursorMechanics(_camera, rootPosition, character);
+            _rotateOnMouseCoursorMechanics = new RotateOnMouseCoursorMechanics(
+                _camera, 
+                rootPosition, 
+                character);
+
+            _bulletCountMechanics = new BulletCountMechanics(
+                ShootComponent._bulletsInMagazine, 
+                ShootComponent._reloadTime,
+                ShootComponent._isReloading,
+                ShootComponent.BulletShot);
+
+            _bulletSpawnerMechanics = new BulletSpawnerMechanics(
+                ShootComponent._initialBulletCount,
+                ShootComponent._bulletPrefab,
+                ShootComponent._bulletParent,
+                ShootComponent._world,
+                ShootComponent._newBullet,
+                ShootComponent.BulletShot);
+
+            _bulletInitiateMechanics = new BulletInitiateMechanics(
+                ShootComponent._newBullet,
+                ShootComponent._firePoint,
+                _bulletSpawnerMechanics.RemoveBulletEvent,
+                _bulletSpawnerMechanics.BulletSpawned);
 
             character.AddLogic(_rotateOnMouseCoursorMechanics);
             character.AddLogic(MoveComponent);
-            character.AddLogic(ShootComponent);
-
+            character.AddLogic(_bulletCountMechanics);
         }
     }
 }
