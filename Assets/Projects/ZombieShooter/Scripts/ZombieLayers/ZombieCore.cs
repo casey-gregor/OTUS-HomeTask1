@@ -34,7 +34,7 @@ namespace ZombieShooter
 
             var isTargetAlive = new AtomicFunction<bool>(() =>
             {
-                return !_targetObject.Value.GetVariable<bool>(APIKeys.IS_DEAD).Value;
+                return !_targetObject.Value.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value;
             });
 
             var targetPosition = new AtomicFunction<Vector3>(() =>

@@ -35,7 +35,7 @@ namespace ZombieShooter
                 Vector3 direction = pointLook - _root.Value;
                 direction.y = 0;
 
-                _entity.GetVariable<Vector3>(APIKeys.ROTATE_DIRECTION).Value = direction;
+                _entity.GetVariable<Vector3>(CharacterAPIKeys.ROTATE_DIRECTION).Value = direction;
 
             }
         }

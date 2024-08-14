@@ -45,5 +45,10 @@ namespace ZombieShooter
             _condition.AddCondition(condition);
         }
 
+        public void AddCondition(AtomicFunction<bool> condition)
+        {
+            _condition.AddCondition(condition);
+        }
+
     }
 }

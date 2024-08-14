@@ -1,4 +1,5 @@
 ﻿using Atomic.Elements;
+using Atomic.Extensions;
 using Atomic.Objects;
 using System;
 using System.Collections;
@@ -11,6 +12,7 @@ namespace ZombieShooter
     {
 
         [SerializeField] private Camera _camera;
+        [SerializeField] private ZombieSpawnController _zombieSpawnController;
 
         public MoveComponent MoveComponent;
         public RotationComponent RotationComponent;
@@ -21,24 +23,23 @@ namespace ZombieShooter
         private BulletCountMechanics _bulletCountMechanics;
         private BulletSpawnerMechanics _bulletSpawnerMechanics;
         private BulletInitiateMechanics _bulletInitiateMechanics;
+        private BulletsObserveMechanics _bulletsObserveMechanics;
 
         public void Construct(Character character)
         {
-            MoveComponent.Construct();
-            RotationComponent.Construct();
-            ShootComponent.Construct();
-            LifeComponent.Construct();
-
-            MoveComponent.AddCondition(LifeComponent.IsAlive);
-            MoveComponent.AddCondition(ShootComponent.CanFire);
-            RotationComponent.AddCondition(LifeComponent.IsAlive);
 
             var rootPosition = new AtomicFunction<Vector3>(() =>
             {
                 return character.transform.position;
             });
 
-          
+            var zombiesAlive = new AtomicFunction<bool>(() =>
+            {
+                if (_zombieSpawnController._zombiesAlive.Value <= 0)
+                    return false;
+
+                return true;
+            });
 
             _rotateOnMouseCoursorMechanics = new RotateOnMouseCoursorMechanics(
                 _camera, 
@@ -63,7 +64,29 @@ namespace ZombieShooter
                 ShootComponent._newBullet,
                 ShootComponent._firePoint,
                 _bulletSpawnerMechanics.RemoveBulletEvent,
-                _bulletSpawnerMechanics.BulletSpawned);
+                _bulletSpawnerMechanics.BulletSpawned,
+                ShootComponent._levelBounds);
+
+            _bulletsObserveMechanics = new BulletsObserveMechanics(
+                _bulletSpawnerMechanics.BulletSpawned,
+                ShootComponent._newBullet,
+                LifeComponent.isDead);
+
+
+
+
+            MoveComponent.Construct();
+            RotationComponent.Construct();
+            ShootComponent.Construct();
+            LifeComponent.Construct();
+
+            MoveComponent.AddCondition(LifeComponent.IsAlive);
+            MoveComponent.AddCondition(zombiesAlive);
+
+            RotationComponent.AddCondition(LifeComponent.IsAlive);
+            RotationComponent.AddCondition(zombiesAlive);
+
+            ShootComponent.AddCondition(zombiesAlive);
 
             character.AddLogic(_rotateOnMouseCoursorMechanics);
             character.AddLogic(MoveComponent);

@@ -15,8 +15,6 @@ namespace ZombieShooter
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
 
-        private float _currentSpeed;
-
         private readonly CompositeCondition _condition = new CompositeCondition();
         
         public void Construct()
@@ -29,8 +27,10 @@ namespace ZombieShooter
 
         public void OnUpdate(float deltaTime)
         {
+            
             if (_condition.IsTrue() && CanMove.Value)
             {
+                
                 _root.position += MoveDirection.Value.normalized * _speed * deltaTime;
 
             }

@@ -9,6 +9,7 @@ namespace ZombieShooter
     public class ShootComponent
     {
         public Transform _firePoint;
+        public AtomicVariable<LevelBounds> _levelBounds;
         
         [HideInInspector] public AtomicEvent ShootRequestEvent;
         [HideInInspector] public AtomicEvent ShootActionEvent;
@@ -24,9 +25,10 @@ namespace ZombieShooter
         public Bullet _bulletPrefab;
         public Transform _bulletParent;
         public Transform _world;
-
         
-        [SerializeField] private bool _canFire;
+        private bool _canFire = true;
+
+        private CompositeCondition _condition = new();
 
         public void Construct()
         {
@@ -45,7 +47,7 @@ namespace ZombieShooter
 
         public bool CanFire()
         {
-            return _canFire && !_isReloading.Value;
+            return _canFire && !_isReloading.Value && _condition.IsTrue();
         }
 
         private void Shoot()
@@ -55,6 +57,16 @@ namespace ZombieShooter
 
             BulletShot?.Invoke();
         }
-     
+
+        public void AddCondition(Func<bool> condition)
+        {
+            _condition.AddCondition(condition);
+        }
+
+        public void AddCondition(AtomicFunction<bool> condition)
+        {
+            _condition.AddCondition(condition);
+        }
+
     }
 }

@@ -8,25 +8,25 @@ namespace ZombieShooter
     {
         public ZombieCore _core;
 
-        [Get(APIKeys.TARGET)]
-        public AtomicVariable<AtomicObject> Target => _core._targetObject;
-
-        [Get(APIKeys.MOVE_DIRECTION)]
+        [Get(ZombieAPIKeys.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _core._moveComponent.MoveDirection;
 
-        [Get(APIKeys.IS_DEAD)]
+        [Get(ZombieAPIKeys.TARGET)]
+        public AtomicVariable<AtomicObject> Target => _core._targetObject;
+
+        [Get(ZombieAPIKeys.IS_DEAD)]
         public AtomicVariable<bool> IsDead => _core._lifeComponent.isDead;
 
-        [Get(APIKeys.DAMAGE)]
+        [Get(ZombieAPIKeys.DAMAGE)]
         public AtomicVariable<int> Damage => _core._damageAmount;
 
-        [Get(APIKeys.DAMAGE_INTERVAL)]
+        [Get(ZombieAPIKeys.DAMAGE_INTERVAL)]
         public AtomicVariable<float> DamageInterval => _core._damageInterval;
 
-        [Get(APIKeys.HIT_POINTS)]
+        [Get(ZombieAPIKeys.HIT_POINTS)]
         public IAtomicVariable<int> HitPoints => _core._lifeComponent._hitPoints;
 
-        [Get(APIKeys.DEDUCT_HITPOINTS)]
+        [Get(ZombieAPIKeys.DEDUCT_HITPOINTS)]
         public IAtomicAction<int> TakeDamageAction => _core._lifeComponent.DeductHitPointEvent;
       
 

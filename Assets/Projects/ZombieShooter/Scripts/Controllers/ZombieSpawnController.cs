@@ -22,6 +22,7 @@ namespace ZombieShooter
         private Pool<Zombie> _zombiePool;
 
         private AtomicEvent<Zombie> ZombieDeadEvent = new();
+        [HideInInspector] public AtomicVariable<int> _zombiesAlive = new();
         private float _timer;
         private bool _CanSpawn;
 
@@ -31,9 +32,9 @@ namespace ZombieShooter
         {
             _zombiePool = new Pool<Zombie>(_zombiePrefab, _numToSpawn, _parent, _world);
             _initiateMechanics = new ZombieInitiateMechanics();
+            _zombiesAlive.Value = _zombiesOnStage;
 
             ZombieDeadEvent.Subscribe(EnqueueZombie);
-
         }
 
         private void Update()
@@ -76,6 +77,7 @@ namespace ZombieShooter
         public void EnqueueZombie(Zombie zombie)
         {
             _zombiePool.Enqueue(zombie);
+            _zombiesAlive.Value--;
         }
 
         private Vector3 GetRandomSpawnPoint()

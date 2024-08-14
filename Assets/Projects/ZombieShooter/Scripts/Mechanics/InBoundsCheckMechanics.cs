@@ -9,7 +9,6 @@ namespace ZombieShooter
     {
         private IAtomicValue<Vector3> _bulletPosition;
         private AtomicVariable<bool> _isDead;
-
         private LevelBounds _levelBounds;
 
         public InBoundsCheckMechanics(IAtomicValue<Vector3> bulletPosition, AtomicVariable<bool> isDead, LevelBounds levelBounds)

@@ -8,7 +8,6 @@ namespace ZombieShooter
     {
         [SerializeField] private Character _character;
 
-       
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -19,7 +18,7 @@ namespace ZombieShooter
 
         private void Shoot()
         {
-            _character.GetAction(APIKeys.SHOOT_REQUEST).Invoke();
+            _character.GetAction(CharacterAPIKeys.SHOOT_REQUEST).Invoke();
         }
     }
 }

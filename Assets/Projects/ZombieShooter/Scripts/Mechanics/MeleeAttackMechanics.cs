@@ -58,7 +58,7 @@ namespace ZombieShooter
 
             if (CanDamage(target))
             {
-                target.GetAction<int>(APIKeys.DEDUCT_HITPOINTS).Invoke(damageAmount);
+                target.GetAction<int>(CharacterAPIKeys.DEDUCT_HITPOINTS).Invoke(damageAmount);
 
                 SetDamageTimer(_damageTimer.Value);
             }
@@ -66,7 +66,7 @@ namespace ZombieShooter
 
         private bool CanDamage(IAtomicEntity target)
         {
-            if (!target.GetValue<bool>(APIKeys.IS_DEAD).Value && _canDealDamage)
+            if (!target.GetValue<bool>(CharacterAPIKeys.IS_DEAD).Value && _canDealDamage)
             {
                 return true;
             }

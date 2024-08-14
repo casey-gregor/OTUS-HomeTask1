@@ -19,7 +19,7 @@ namespace ZombieShooter
 
         public void DamageCharacter(int damage)
         {
-            _character.GetAction<int>(APIKeys.DEDUCT_HITPOINTS).Invoke(damage);
+            _character.GetAction<int>(CharacterAPIKeys.DEDUCT_HITPOINTS).Invoke(damage);
         }
 
         public void KillZombie(Zombie zombie)
@@ -27,7 +27,7 @@ namespace ZombieShooter
             //_spawnController.EnqueueZombie(zombie);
 
             if (zombie.TryGetAction<IAtomicEntity, AtomicEntity>
-                    (APIKeys.DEDUCT_HITPOINTS, out IAtomicAction<IAtomicEntity, AtomicEntity> tryTakeDamage))
+                    (ZombieAPIKeys.DEDUCT_HITPOINTS, out IAtomicAction<IAtomicEntity, AtomicEntity> tryTakeDamage))
             {
                 tryTakeDamage.Invoke(zombie, _bullet);
             }

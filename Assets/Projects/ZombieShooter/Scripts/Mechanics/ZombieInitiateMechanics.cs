@@ -10,15 +10,15 @@ namespace ZombieShooter
         public void InitiateZombie(Zombie _zombie, AtomicObject _target, AtomicEvent<Zombie> EnqueueAction)
         {
            
-            if (_zombie.GetVariable<bool>(APIKeys.IS_DEAD).Value)
+            if (_zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value)
             {
-                _zombie.GetVariable<bool>(APIKeys.IS_DEAD).Value = false;
-                _zombie.GetVariable<int>(APIKeys.HIT_POINTS).Value = 1;
+                _zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value = false;
+                _zombie.GetVariable<int>(ZombieAPIKeys.HIT_POINTS).Value = 1;
             }
 
-            _zombie.GetVariable<AtomicObject>(APIKeys.TARGET).Value = _target;
+            _zombie.GetVariable<AtomicObject>(ZombieAPIKeys.TARGET).Value = _target;
 
-            IAtomicObservable<bool> isDeadObservable = _zombie.GetObservable<bool>(APIKeys.IS_DEAD);
+            IAtomicObservable<bool> isDeadObservable = _zombie.GetObservable<bool>(ZombieAPIKeys.IS_DEAD);
 
             isDeadObservable.Subscribe(_zombie._core.isDeadHandler = value =>
             {
