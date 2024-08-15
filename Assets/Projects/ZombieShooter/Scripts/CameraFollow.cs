@@ -12,8 +12,6 @@ namespace ZombieShooter
         private void Start()
         {
             _offset = transform.position - _target.position;
-
-            //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
         private void LateUpdate()

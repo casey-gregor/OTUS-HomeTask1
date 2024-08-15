@@ -1,5 +1,4 @@
 using Atomic.Elements;
-using Atomic.Objects;
 using System;
 using UnityEngine;
 
@@ -8,23 +7,23 @@ namespace ZombieShooter
     [Serializable]
     public class ShootComponent
     {
-        public Transform _firePoint;
-        public AtomicVariable<LevelBounds> _levelBounds;
+        public Transform FirePoint;
+        public AtomicVariable<LevelBounds> LevelBounds;
         
         [HideInInspector] public AtomicEvent ShootRequestEvent;
         [HideInInspector] public AtomicEvent ShootActionEvent;
         [HideInInspector] public AtomicEvent FireEvent;
         [HideInInspector] public AtomicEvent BulletShot;
 
-        [HideInInspector] public AtomicVariable<bool> _isReloading;
-        [HideInInspector] public AtomicVariable<Bullet> _newBullet;
-        public AtomicVariable<float> _reloadTime;
-        public AtomicVariable<int> _bulletsInMagazine;
+        [HideInInspector] public AtomicVariable<bool> IsReloading;
+        [HideInInspector] public AtomicVariable<Bullet> NewBullet;
+        public AtomicVariable<float> ReloadTime;
+        public AtomicVariable<int> BulletsInMagazine;
 
-        public int _initialBulletCount;
-        public Bullet _bulletPrefab;
-        public Transform _bulletParent;
-        public Transform _world;
+        public int InitialBulletCount;
+        public Bullet BulletPrefab;
+        public Transform BulletParent;
+        public Transform World;
         
         private bool _canFire = true;
 
@@ -36,7 +35,7 @@ namespace ZombieShooter
             ShootRequestEvent.Subscribe(() =>
             {
                 if (CanFire())
-                {
+                {    
                     ShootActionEvent.Invoke();
                 }
             });
@@ -47,7 +46,7 @@ namespace ZombieShooter
 
         public bool CanFire()
         {
-            return _canFire && !_isReloading.Value && _condition.IsTrue();
+            return _canFire && !IsReloading.Value && _condition.IsTrue();
         }
 
         private void Shoot()

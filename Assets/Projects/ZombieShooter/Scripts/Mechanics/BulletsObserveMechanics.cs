@@ -1,20 +1,19 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ZombieShooter
 {
     public class BulletsObserveMechanics
     {
-
         private HashSet<Bullet> activeBullets = new();
         private AtomicVariable<Bullet> _newBullet;
         public BulletsObserveMechanics(AtomicEvent bulletShot, AtomicVariable<Bullet> newBullet, AtomicVariable<bool> isDead)
         {
             _newBullet = newBullet;
+
             bulletShot.Subscribe(AddToActiveBullets);
+
             isDead.Subscribe(value =>
             {
                 if (value)
@@ -33,9 +32,9 @@ namespace ZombieShooter
 
             IAtomicObservable<bool> IsActiveObservable = bullet.GetObservable<bool>(BulletAPIKeys.IS_DEAD);
 
-            IsActiveObservable.Subscribe(bullet._core.InactiveHandler = value =>
+            IsActiveObservable.Subscribe(bullet.Core.InactiveHandler = value =>
             {
-                IsActiveObservable.Unsubscribe(bullet._core.InactiveHandler);
+                IsActiveObservable.Unsubscribe(bullet.Core.InactiveHandler);
                 if (value)
                     RemoveFromActiveBullets(bullet);
             });

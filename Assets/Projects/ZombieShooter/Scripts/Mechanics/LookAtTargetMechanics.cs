@@ -1,6 +1,5 @@
 using Atomic.Elements;
 using Atomic.Objects;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -33,12 +32,15 @@ namespace ZombieShooter
             if (!_hasTarget.Value)
                 return;
 
-            var direction = _target.Value - _root.Value;
+            Vector3 direction = _target.Value - _root.Value;
+            if(direction.magnitude < 1)
+            {
+                direction = Vector3.zero;
+            }
             direction.y = 0;
 
             _rotationDirection.Value = direction;
             _moveDirection.Value = direction;
-            
         }
 
     }

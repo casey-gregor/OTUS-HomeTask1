@@ -1,35 +1,48 @@
 ﻿using Atomic.Elements;
-using Atomic.Objects;
 using Atomic.Extensions;
+using Atomic.Objects;
 
 namespace ZombieShooter
 {
     public class ZombieInitiateMechanics
     {
-
-        public void InitiateZombie(Zombie _zombie, AtomicObject _target, AtomicEvent<Zombie> EnqueueAction)
+        private IAtomicValue<Zombie> _zombie;
+        private AtomicObject _target;
+        private IAtomicAction<Zombie> _enqueueAction;
+        public ZombieInitiateMechanics(
+            IAtomicValue<Zombie> zombie, 
+            AtomicObject target,
+            AtomicEvent initiateEvent,
+            IAtomicAction<Zombie> enqueueAction)
         {
-           
-            if (_zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value)
+            _zombie = zombie;
+            _target = target;
+            _enqueueAction = enqueueAction;
+
+            initiateEvent.Subscribe(InitiateZombie);
+        }
+
+        public void InitiateZombie()
+        {
+            Zombie zombie = _zombie.Value;
+
+            if (zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value)
             {
-                _zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value = false;
-                _zombie.GetVariable<int>(ZombieAPIKeys.HIT_POINTS).Value = 1;
+                zombie.GetVariable<bool>(ZombieAPIKeys.IS_DEAD).Value = false;
+                zombie.GetVariable<int>(ZombieAPIKeys.HIT_POINTS).Value = 1;
             }
 
-            _zombie.GetVariable<AtomicObject>(ZombieAPIKeys.TARGET).Value = _target;
+            zombie.GetVariable<AtomicObject>(ZombieAPIKeys.TARGET).Value = _target;
 
-            IAtomicObservable<bool> isDeadObservable = _zombie.GetObservable<bool>(ZombieAPIKeys.IS_DEAD);
+            zombie.ListenEvent<Zombie>(ZombieAPIKeys.DEAD_EVENT, RemoveZombie);
 
-            isDeadObservable.Subscribe(_zombie._core.isDeadHandler = value =>
-            {
-                isDeadObservable.Unsubscribe(_zombie._core.isDeadHandler);
-                if(value)
-                    EnqueueAction.Invoke(_zombie);
-            });
-            
 
         }
 
-       
+        private void RemoveZombie(Zombie zombie)
+        {
+            zombie.UnlistenEvent<Zombie>(ZombieAPIKeys.DEAD_EVENT, RemoveZombie);
+            _enqueueAction.Invoke(zombie);
+        }
     }
 }

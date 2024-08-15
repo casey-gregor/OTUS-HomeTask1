@@ -24,7 +24,7 @@ namespace ZombieShooter
         public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.DeductHitPointEvent;
 
         [Get(CharacterAPIKeys.IS_DEAD)]
-        public IAtomicValue<bool> IsDead => _core.LifeComponent.isDead;
+        public IAtomicValue<bool> IsDead => _core.LifeComponent.IsDead;
 
         private void Awake()
         {

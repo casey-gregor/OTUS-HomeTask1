@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
-namespace Assets.Projects.ZombieShooter.Scripts
+namespace ZombieShooter
 {
     public class AnimatorDispatcher : MonoBehaviour
     {

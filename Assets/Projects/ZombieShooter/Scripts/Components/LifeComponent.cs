@@ -9,35 +9,35 @@ namespace ZombieShooter
     public class LifeComponent
     {
         [HideInInspector] public AtomicEvent<int> DeductHitPointEvent;
-        public AtomicVariable<bool> isDead;
 
-        public AtomicVariable<int> _hitPoints;
+        public AtomicVariable<bool> IsDead;
+        public AtomicVariable<int> HitPoints;
 
         public void Construct()
         {
             DeductHitPointEvent.Subscribe(DeductHitPoints);
 
-            _hitPoints.Subscribe((hp) =>
+            HitPoints.Subscribe((hp) =>
             {
                 if (hp <= 0)
                 {
                     
-                    isDead.Value = true;
+                    IsDead.Value = true;
                 }
             });
 
         }
         public bool IsAlive()
         {
-            return !isDead.Value;
+            return !IsDead.Value;
         }
 
         public void DeductHitPoints(int amount)
         {
-            if (isDead.Value)
+            if (IsDead.Value)
                 return;
 
-            _hitPoints.Value -= amount;            
+            HitPoints.Value -= amount;            
         }
     }
 }

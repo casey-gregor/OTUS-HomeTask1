@@ -1,9 +1,5 @@
 ﻿using Atomic.Elements;
-using Atomic.Extensions;
-using System;
-using System.Collections;
 using UnityEngine;
-using ZombieShooter;
 
 namespace ZombieShooter
 {

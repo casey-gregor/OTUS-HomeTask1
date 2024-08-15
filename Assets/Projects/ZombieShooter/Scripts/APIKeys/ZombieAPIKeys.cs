@@ -5,15 +5,12 @@ namespace ZombieShooter
 {
     public static class ZombieAPIKeys
     {
-        public const string MOVE_DIRECTION = nameof(MOVE_DIRECTION);
 
         public const string TARGET = nameof(TARGET);
 
         public const string IS_DEAD = nameof(IS_DEAD);
 
-        public const string DAMAGE = nameof(DAMAGE);
-
-        public const string DAMAGE_INTERVAL = nameof(DAMAGE_INTERVAL);
+        public const string DEAD_EVENT = nameof(DEAD_EVENT);
 
         public const string DEDUCT_HITPOINTS = nameof(DEDUCT_HITPOINTS);
 

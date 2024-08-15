@@ -1,8 +1,5 @@
 ﻿using Atomic.Elements;
-using Atomic.Extensions;
-using Atomic.Objects;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -10,14 +7,13 @@ namespace ZombieShooter
     [Serializable]
     public class CharacterCore
     {
-
-        [SerializeField] private Camera _camera;
-        [SerializeField] private ZombieSpawnController _zombieSpawnController;
-
         public MoveComponent MoveComponent;
         public RotationComponent RotationComponent;
         public LifeComponent LifeComponent;
         public ShootComponent ShootComponent;
+
+        [SerializeField] private Camera _camera;
+        [SerializeField] private ZombieSpawnController _zombieSpawnController;
 
         private RotateOnMouseCoursorMechanics _rotateOnMouseCoursorMechanics;
         private BulletCountMechanics _bulletCountMechanics;
@@ -35,7 +31,7 @@ namespace ZombieShooter
 
             var zombiesAlive = new AtomicFunction<bool>(() =>
             {
-                if (_zombieSpawnController._zombiesAlive.Value <= 0)
+                if (_zombieSpawnController.ZombiesAlive.Value <= 0)
                     return false;
 
                 return true;
@@ -47,32 +43,30 @@ namespace ZombieShooter
                 character);
 
             _bulletCountMechanics = new BulletCountMechanics(
-                ShootComponent._bulletsInMagazine, 
-                ShootComponent._reloadTime,
-                ShootComponent._isReloading,
+                ShootComponent.BulletsInMagazine, 
+                ShootComponent.ReloadTime,
+                ShootComponent.IsReloading,
                 ShootComponent.BulletShot);
 
             _bulletSpawnerMechanics = new BulletSpawnerMechanics(
-                ShootComponent._initialBulletCount,
-                ShootComponent._bulletPrefab,
-                ShootComponent._bulletParent,
-                ShootComponent._world,
-                ShootComponent._newBullet,
+                ShootComponent.InitialBulletCount,
+                ShootComponent.BulletPrefab,
+                ShootComponent.BulletParent,
+                ShootComponent.World,
+                ShootComponent.NewBullet,
                 ShootComponent.BulletShot);
 
             _bulletInitiateMechanics = new BulletInitiateMechanics(
-                ShootComponent._newBullet,
-                ShootComponent._firePoint,
+                ShootComponent.NewBullet,
+                ShootComponent.FirePoint,
                 _bulletSpawnerMechanics.RemoveBulletEvent,
                 _bulletSpawnerMechanics.BulletSpawned,
-                ShootComponent._levelBounds);
+                ShootComponent.LevelBounds);
 
             _bulletsObserveMechanics = new BulletsObserveMechanics(
                 _bulletSpawnerMechanics.BulletSpawned,
-                ShootComponent._newBullet,
-                LifeComponent.isDead);
-
-
+                ShootComponent.NewBullet,
+                LifeComponent.IsDead);
 
 
             MoveComponent.Construct();

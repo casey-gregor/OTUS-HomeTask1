@@ -1,7 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter

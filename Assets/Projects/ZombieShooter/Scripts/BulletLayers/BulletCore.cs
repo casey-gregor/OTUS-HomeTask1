@@ -11,6 +11,7 @@ namespace ZombieShooter
         [HideInInspector] public Action<bool> InactiveHandler = null;
 
         public MoveComponent _moveComponent;
+
         public AtomicVariable<int> _damage;
         public AtomicVariable<bool> _isDead;
         public InBoundsCheckMechanics _inBoundsCheckMechanics;
@@ -22,7 +23,7 @@ namespace ZombieShooter
                 return bullet.transform.position;
             });
 
-            _inBoundsCheckMechanics = new InBoundsCheckMechanics(rootPosition, _isDead, bullet._levelBounds.Value);
+            _inBoundsCheckMechanics = new InBoundsCheckMechanics(rootPosition, _isDead, bullet.LevelBounds.Value);
 
         }
     }

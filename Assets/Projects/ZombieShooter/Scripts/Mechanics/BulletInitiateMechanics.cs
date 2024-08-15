@@ -1,6 +1,5 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
-using System;
 using UnityEngine;
 
 
@@ -8,10 +7,10 @@ namespace ZombieShooter
 {
     public class BulletInitiateMechanics
     {
-        IAtomicValue<Bullet> _bullet;
-        Transform _firePoint;
-        IAtomicAction<Bullet> _removeBulletAction;
-        IAtomicValue<LevelBounds> _levelBounds;
+        private IAtomicValue<Bullet> _bullet;
+        private Transform _firePoint;
+        private IAtomicAction<Bullet> _removeBulletAction;
+        private IAtomicValue<LevelBounds> _levelBounds;
 
         public BulletInitiateMechanics(
             IAtomicValue<Bullet> bullet,
@@ -34,7 +33,7 @@ namespace ZombieShooter
         {
             Bullet bullet = _bullet.Value;
 
-            bullet._levelBounds.Value = _levelBounds.Value;
+            bullet.LevelBounds.Value = _levelBounds.Value;
             
             bullet.transform.position = _firePoint.position;
             
@@ -46,9 +45,9 @@ namespace ZombieShooter
 
             IAtomicObservable<bool> IsActiveObservable = bullet.GetObservable<bool>(BulletAPIKeys.IS_DEAD);
 
-            IsActiveObservable.Subscribe(bullet._core.InactiveHandler = value =>
+            IsActiveObservable.Subscribe(bullet.Core.InactiveHandler = value =>
             {
-                IsActiveObservable.Unsubscribe(bullet._core.InactiveHandler);
+                IsActiveObservable.Unsubscribe(bullet.Core.InactiveHandler);
                 if (value)
                     _removeBulletAction.Invoke(bullet);
             });

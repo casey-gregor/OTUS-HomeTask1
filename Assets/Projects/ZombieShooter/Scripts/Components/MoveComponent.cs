@@ -21,7 +21,14 @@ namespace ZombieShooter
         {
             MoveDirection.Subscribe(direction =>
             {
+                if (!_condition.IsTrue())
+                {
+                    IsMoving.Value = false;
+                    return;
+                }
+
                 IsMoving.Value = direction.sqrMagnitude > 0;
+
             });
         }
 
@@ -30,9 +37,7 @@ namespace ZombieShooter
             
             if (_condition.IsTrue() && CanMove.Value)
             {
-                
                 _root.position += MoveDirection.Value.normalized * _speed * deltaTime;
-
             }
         }
 

@@ -6,33 +6,30 @@ namespace ZombieShooter
 {
     public class Zombie : AtomicObject
     {
-        public ZombieCore _core;
+        public ZombieCore Core;
+        public ZombieAnimation Animation;
 
-        [Get(ZombieAPIKeys.MOVE_DIRECTION)]
-        public IAtomicVariable<Vector3> MoveDirection => _core._moveComponent.MoveDirection;
 
         [Get(ZombieAPIKeys.TARGET)]
-        public AtomicVariable<AtomicObject> Target => _core._targetObject;
+        public AtomicVariable<AtomicObject> Target => Core.AttackComponent.TargetObject;
 
         [Get(ZombieAPIKeys.IS_DEAD)]
-        public AtomicVariable<bool> IsDead => _core._lifeComponent.isDead;
+        public AtomicVariable<bool> IsDead => Core.LifeComponent.IsDead;
 
-        [Get(ZombieAPIKeys.DAMAGE)]
-        public AtomicVariable<int> Damage => _core._damageAmount;
-
-        [Get(ZombieAPIKeys.DAMAGE_INTERVAL)]
-        public AtomicVariable<float> DamageInterval => _core._damageInterval;
+        [Get(ZombieAPIKeys.DEAD_EVENT)]
+        public AtomicEvent<Zombie> DeadEvent => Core.DeadEvent;
 
         [Get(ZombieAPIKeys.HIT_POINTS)]
-        public IAtomicVariable<int> HitPoints => _core._lifeComponent._hitPoints;
+        public AtomicVariable<int> HitPoints => Core.LifeComponent.HitPoints;
 
         [Get(ZombieAPIKeys.DEDUCT_HITPOINTS)]
-        public IAtomicAction<int> TakeDamageAction => _core._lifeComponent.DeductHitPointEvent;
-      
+        public IAtomicAction<int> TakeDamageAction => Core.LifeComponent.DeductHitPointEvent;
+
 
         public void Awake()
         {
-            _core.Construct(this);
+            Core.Construct(this);
+            Animation.Construct(Core);
         }
 
         private void FixedUpdate()

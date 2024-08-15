@@ -1,14 +1,18 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZombieShooter
 {
     public class ZombieSpawnController : MonoBehaviour
     {
+        [HideInInspector] public AtomicVariable<int> ZombiesAlive = new();
+
+        private AtomicEvent<Zombie> EnqueueEvent = new();
+        private AtomicEvent InitiateEvent = new();
+        private AtomicVariable<Zombie> _zombie = new();
+        
         [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private Transform _parent;
         [SerializeField] private Transform _world;
@@ -21,8 +25,6 @@ namespace ZombieShooter
 
         private Pool<Zombie> _zombiePool;
 
-        private AtomicEvent<Zombie> ZombieDeadEvent = new();
-        [HideInInspector] public AtomicVariable<int> _zombiesAlive = new();
         private float _timer;
         private bool _CanSpawn;
 
@@ -31,15 +33,16 @@ namespace ZombieShooter
         private void Awake()
         {
             _zombiePool = new Pool<Zombie>(_zombiePrefab, _numToSpawn, _parent, _world);
-            _initiateMechanics = new ZombieInitiateMechanics();
-            _zombiesAlive.Value = _zombiesOnStage;
+            _initiateMechanics = new ZombieInitiateMechanics(_zombie, _target, InitiateEvent, EnqueueEvent);
 
-            ZombieDeadEvent.Subscribe(EnqueueZombie);
+            ZombiesAlive.Value = _zombiesOnStage;
+
+            EnqueueEvent.Subscribe(EnqueueZombie);
         }
 
         private void Update()
         {
-            if (_timer <= 0)
+            if (_timer <= 0 && !_target.GetVariable<bool>(CharacterAPIKeys.IS_DEAD).Value)
             {
                 _CanSpawn = true;
             }
@@ -66,18 +69,17 @@ namespace ZombieShooter
 
         private void InstantiateZombie()
         {
-            Zombie zombie = _zombiePool.GetObject();
-            zombie.transform.position = GetRandomSpawnPoint();
+            _zombie.Value = _zombiePool.GetObject();
+            _zombie.Value.transform.position = GetRandomSpawnPoint();
 
-            _initiateMechanics.InitiateZombie(zombie, _target, ZombieDeadEvent);
-
+            InitiateEvent.Invoke();
         }
 
 
         public void EnqueueZombie(Zombie zombie)
         {
             _zombiePool.Enqueue(zombie);
-            _zombiesAlive.Value--;
+            ZombiesAlive.Value--;
         }
 
         private Vector3 GetRandomSpawnPoint()

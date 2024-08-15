@@ -1,6 +1,4 @@
-﻿using Assets.Projects.ZombieShooter.Scripts;
-using System;
-using System.Collections;
+﻿using System;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -15,7 +13,7 @@ namespace ZombieShooter
         private int _isShootingHash = Animator.StringToHash("Shoot");
         private int _isDeadHash = Animator.StringToHash("isDead");
 
-        private bool canSetShootTrigger = true;
+        private bool _canSetShootTrigger = true;
 
         private CharacterCore _core;
 
@@ -26,29 +24,29 @@ namespace ZombieShooter
             _core = core;
 
             _moveAnimationMechanics = new SetAnimationBoolMechanics(_animator, _isMovingHash, _core.MoveComponent.IsMoving);
-            _deadAnimationMechanics = new SetAnimationBoolMechanics(_animator, _isDeadHash, _core.LifeComponent.isDead);
+            _deadAnimationMechanics = new SetAnimationBoolMechanics(_animator, _isDeadHash, _core.LifeComponent.IsDead);
 
             _core.ShootComponent.ShootActionEvent.Subscribe(HandleShootActionEvent);
+
             _animatorDispatcher.AnimationEvent += HandleShootAction;
 
         }
-
 
         private void HandleShootAction(string value)
         {
             if(value == "Shoot")
             {
                 _core.ShootComponent.FireEvent?.Invoke();
-                canSetShootTrigger = true;
+                _canSetShootTrigger = true;
             }
         }
 
         private void HandleShootActionEvent()
         {
-            if(canSetShootTrigger)
+            if (_canSetShootTrigger)
             {
                 _animator.SetTrigger(_isShootingHash);
-                canSetShootTrigger = false;
+                _canSetShootTrigger = false;
             }
         }
 

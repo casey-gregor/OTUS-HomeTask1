@@ -1,5 +1,4 @@
 ﻿using Atomic.Extensions;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter

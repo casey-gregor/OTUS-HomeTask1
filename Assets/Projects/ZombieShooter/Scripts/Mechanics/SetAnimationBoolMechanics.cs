@@ -1,6 +1,4 @@
 ﻿using Atomic.Elements;
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ZombieShooter
@@ -20,6 +18,7 @@ namespace ZombieShooter
 
         private void SetBool(bool value)
         {
+            
             _animator.SetBool(_hash, value);
         }
     }
