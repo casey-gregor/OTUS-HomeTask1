@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36699011c9b47b2be41dfcc276f1784, type: 3}
+  m_Name: BluePlayerConfig
+  m_EditorClassIdentifier: 
+  heroes:
+  - heroImage: {fileID: 21300000, guid: 16ea401ccf7c8420988360f8fc9fb55d, type: 3}
+    attack: 4
+    health: 25
+    effect:
+      rid: 6819615689987325961
+  - heroImage: {fileID: 21300000, guid: 2059f3310f8404adcac5457e5e772e52, type: 3}
+    attack: 2
+    health: 50
+    effect:
+      rid: 6819615689987325960
+  - heroImage: {fileID: 21300000, guid: f6d397e5cec894f3cbbb28a24524a3db, type: 3}
+    attack: 7
+    health: 35
+    effect:
+      rid: 6819615689987325965
+  - heroImage: {fileID: 21300000, guid: 6f26327dca38144098a004666cd0e3b3, type: 3}
+    attack: 30
+    health: 30
+    effect:
+      rid: 6819615689987325963
+  references:
+    version: 2
+    RefIds:
+    - rid: 6819615689987325960
+      type: {class: FreezeTargetEffect, ns: EventBus, asm: Assembly-CSharp}
+    - rid: 6819615689987325961
+      type: {class: HealAllyHeroEffect, ns: EventBus, asm: Assembly-CSharp}
+      data:
+        HealAmount: 1
+    - rid: 6819615689987325963
+      type: {class: HollyShieldEffect, ns: EventBus, asm: Assembly-CSharp}
+      data:
+        AvailableQty: 1
+    - rid: 6819615689987325965
+      type: {class: DamageAllWhenHitEffect, ns: EventBus, asm: Assembly-CSharp}
+      data:
+        ExtraDamage: 1
