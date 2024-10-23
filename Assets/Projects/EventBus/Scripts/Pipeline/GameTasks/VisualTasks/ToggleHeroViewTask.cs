@@ -15,6 +15,7 @@ namespace EventBus
         }
         protected override void OnRun()
         {
+            Debug.Log("ToggleHeroViewTask run");
             _currentAttackHero.SetActive(_isActive);
             
             Finish();

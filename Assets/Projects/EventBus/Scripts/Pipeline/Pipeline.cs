@@ -1,24 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace EventBus
 {
     public abstract class Pipeline
     {
         public Action OnPipelineCompleted;
-        public Action OnPipelineStopped;
         
         private readonly List<GameTask> _gameTasks = new();
         private int _taskIndex = -1;
-        
-        private bool _stopped = false;
 
         public void AddGameTask(GameTask gameTask)
         {
             _gameTasks.Add(gameTask);
-            // Debug.Log("added gametask : " + gameTask);
         }
 
         public void ResetPipeline()
@@ -36,20 +30,9 @@ namespace EventBus
             _taskIndex = -1;
         }
         
-        public void Abort()
-        {
-            _stopped = true;
-        }
-        
         public int TasksCount => _gameTasks.Count;
         public void Run()
         {
-            if (_stopped)
-            {
-                OnPipelineStopped?.Invoke();
-                return;
-            }
-            
             _taskIndex++;
 
             if (_taskIndex >= _gameTasks.Count)

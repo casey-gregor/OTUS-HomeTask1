@@ -4,8 +4,8 @@ namespace EventBus
 {
     public sealed class LogicPipelineInstaller : IInitializable
     {
-        private LogicPipeline _logicPipeline;
-        private DiContainer _container;
+        private readonly LogicPipeline _logicPipeline;
+        private readonly DiContainer _container;
 
         public LogicPipelineInstaller(
             LogicPipeline logicPipeline, 
@@ -24,7 +24,7 @@ namespace EventBus
             _logicPipeline.AddGameTask(_container.Instantiate<PlayerInputTask>());
             _logicPipeline.AddGameTask(_container.Instantiate<LaunchExtraPipelineTask>());
             _logicPipeline.AddGameTask(_container.Instantiate<LaunchVisualPipelineTask>());
-            // _logicPipeline.AddGameTask(_container.Instantiate<ProcessTurnDataTask>());
+            _logicPipeline.AddGameTask(_container.Instantiate<ProcessTurnDataTask>());
             _logicPipeline.AddGameTask(_container.Instantiate<EndTurnTask>());
         }
     }

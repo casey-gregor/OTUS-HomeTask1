@@ -4,31 +4,22 @@ namespace EventBus
 {
     public sealed class IdentifyAttackerHeroIndexTask : GameTask
     {
-        private readonly PipelineContext _pipelineContext;
+        private readonly PipelineContext _context;
         
         private int _turnNum = 0;
         
-        public IdentifyAttackerHeroIndexTask(PipelineContext pipelineContext)
+        public IdentifyAttackerHeroIndexTask(PipelineContext context)
         {
-            _pipelineContext = pipelineContext;
+            _context = context;
         }
 
         protected override void OnRun()
         {
-            Debug.Log("second task started");
+            Debug.Log("IdentifyAttackerHeroIndexTask started");
             _turnNum++;
-
-            int currentAttackerIndex = _pipelineContext.AttackerIndex;
             
-            int attackerHeroIndex = SetCurrentAttackHeroIndex();
-            
-            if (attackerHeroIndex < 0)
-            {
-                Finish();
-                return;
-            }
-            
-            _pipelineContext.SetAttackerHeroEntityIndex(attackerHeroIndex);
+            int attackerHeroEntityIndex = SetCurrentAttackHeroIndex();
+            _context.SetAttackerHeroEntityIndex(attackerHeroEntityIndex);
 
             Finish();
         }
@@ -36,16 +27,14 @@ namespace EventBus
         private int SetCurrentAttackHeroIndex()
         {
             
-            PlayerEntity player = _pipelineContext.PlayerEntitiesDict[_pipelineContext.AttackerIndex];
+            PlayerEntity player = _context.PlayerEntitiesDict[_context.AttackerIndex];
             
             if (_turnNum == 1)
             {
-                player.HeroEntities.TryGetHeroEntity(_pipelineContext.AttackerHeroEntityIndex, out HeroEntity result);
-                _pipelineContext.SetAttackerHeroEntity(result);
-                return _pipelineContext.AttackerHeroEntityIndex;
+                return _context.AttackerHeroEntityIndex;
             }
-            int heroCount = player.GetAllHeroesCount();
-            int lastAttackerHeroIndex = player.LastAttackHeroIndex;
+            int heroCount = player.HeroComponent.GetAllHeroesCount();
+            int lastAttackerHeroIndex = player.HeroComponent.LastAttackHeroIndex;
             
             if (_turnNum > 2)
             {
@@ -60,16 +49,17 @@ namespace EventBus
             int index = startingIndex;
             do
             {
-                if(playerEntity.HeroEntities.TryGetHeroEntity(index, out HeroEntity result) && !result.IsDead)
+                if(playerEntity.HeroComponent.HeroEntities.TryGetHeroEntity
+                       (index, out HeroEntity heroEntity) && !heroEntity.HealthComponent.IsDead)
                 {
-                    if (result.SkipNumOfTurns == 0)
+                    if (heroEntity.TurnComponent.SkipNumOfTurns == 0)
                     {
-                        playerEntity.LastAttackHeroIndex = index;
-                        _pipelineContext.SetAttackerHeroEntity(result);
-                        // Debug.Log("attacker hero entity : " + result.View.name);
+                        playerEntity.HeroComponent.LastAttackHeroIndex = index;
                         return index;
                     }
-                    result.ModifyTurnsToSkip(-1);
+                    heroEntity.TurnComponent.EditSkipTurns(-1);
+                    if (playerEntity.HeroComponent.GetAliveHeroesCount() == 1)
+                        return -1;
                 }
                 index = (index + 1) % heroCount;
 

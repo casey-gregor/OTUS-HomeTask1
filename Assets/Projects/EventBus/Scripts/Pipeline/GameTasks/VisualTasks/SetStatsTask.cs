@@ -4,23 +4,24 @@ namespace EventBus
 {
     public sealed class SetStatsTask : GameTask
     {
-        private readonly HeroEntity _attacker;
-        private readonly HeroEntity _target;
+        private readonly HeroEntity _attackerHeroEntity;
+        private readonly HeroEntity _targetHeroEntity;
 
-        public SetStatsTask(HeroEntity attacker = default, HeroEntity target = default)
+        public SetStatsTask(HeroEntity attackerHeroEntity = default, HeroEntity targetHeroEntity = default)
         {
-            _attacker = attacker;
-            _target = target;
+            _attackerHeroEntity = attackerHeroEntity;
+            _targetHeroEntity = targetHeroEntity;
         }
 
         protected override void OnRun()
         {
-            Debug.Log("start set stats");
-            if(_attacker != null)
-                _attacker.SetStats();
+            Debug.Log("In SetStatsTask");
             
-            if(_target != null)
-                _target.SetStats();
+            if(_attackerHeroEntity != null)
+                _attackerHeroEntity.UIComponent.SetStats();
+            
+            if(_targetHeroEntity != null)
+                _targetHeroEntity.UIComponent.SetStats();
 
             Finish();
         }

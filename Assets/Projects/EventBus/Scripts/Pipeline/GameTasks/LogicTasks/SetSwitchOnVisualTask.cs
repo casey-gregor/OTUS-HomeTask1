@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UI;
+﻿using UI;
 using UnityEngine;
 
 namespace EventBus
@@ -7,26 +6,31 @@ namespace EventBus
     public sealed class SetSwitchOnVisualTask : GameTask
     {
         private readonly VisualPipeline _visualPipeline;
-        private readonly EventBus _eventBus;
-        private readonly PipelineContext _pipelineContext;
-        public SetSwitchOnVisualTask(VisualPipeline visualPipeline, EventBus eventBus, PipelineContext pipelineContext)
+        private readonly PipelineContext _context;
+        public SetSwitchOnVisualTask(VisualPipeline visualPipeline, PipelineContext context)
         {
             _visualPipeline = visualPipeline;
-            _eventBus = eventBus;
-            _pipelineContext = pipelineContext;
+            _context = context;
         }
 
         protected override void OnRun()
         {
             Debug.Log("SetSwitchOnVisualTask started");
 
-            int currentAttackerIndex = _pipelineContext.AttackerIndex;
-            PlayerEntity currentPlayer = _pipelineContext.PlayerEntitiesDict[currentAttackerIndex];
-            int currentHeroEntityIndex = _pipelineContext.AttackerHeroEntityIndex;
+            int attackerHeroEntityIndex = _context.AttackerHeroEntityIndex;
+            if (attackerHeroEntityIndex == -1)
+            {
+                Finish();
+                return;
+            }
             
-            currentPlayer.HeroEntities.TryGetHeroView(currentHeroEntityIndex, out HeroView attackerHeroView);
+            int attackerIndex = _context.AttackerIndex;
+            PlayerEntity player = _context.PlayerEntitiesDict[attackerIndex];
+            
+            player.HeroComponent.HeroEntities.TryGetHeroView
+                (attackerHeroEntityIndex, out HeroView attackerHeroView);
             _visualPipeline.AddGameTask(new ToggleHeroViewTask(attackerHeroView, true));
-            
+
             Finish();
         }
     }

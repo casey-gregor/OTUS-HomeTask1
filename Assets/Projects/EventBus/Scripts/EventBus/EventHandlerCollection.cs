@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EventBus
 {
-    public class EventHandlerCollection<T> : IEventHandlerCollection
+    public sealed class EventHandlerCollection<T> : IEventHandlerCollection
     {
         private readonly List<Delegate> _handlers = new();
         
@@ -24,7 +24,6 @@ namespace EventBus
             _handlers.RemoveAt(handlerIndex);
         }
         
-
         public void RaiseEvent<TEvent>(TEvent evt)
         {
             if (evt is T specificEvent)
@@ -36,8 +35,6 @@ namespace EventBus
                 }
                 counter = -1;
             }
-           
-            
         }
     }
 }

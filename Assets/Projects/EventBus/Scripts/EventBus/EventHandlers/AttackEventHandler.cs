@@ -16,12 +16,10 @@ namespace EventBus
         {
             Debug.Log("in Attack event handler");
 
-            if (evt.Attacker.IsDead) return;
+            if (evt.Attacker.HealthComponent.IsDead) return;
             
-            _eventBus.RaiseEvent(new UpdateTargetEvent(evt.Target));//ToDo - double-check if it's needed
-            
-            _eventBus.RaiseEvent(new AddAttackVisualTasksEvent(evt.Attacker, evt.Target));
-            
+            AttackVisualTask attackVisualTask = new AttackVisualTask(evt.Attacker, evt.Target);
+            _eventBus.RaiseEvent(new AddVisualTaskEvent(attackVisualTask));
             RaiseDealDamageEvent(evt);
         }
 

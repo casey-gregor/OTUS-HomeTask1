@@ -46,7 +46,7 @@ namespace EventBus
             int result = 0;
             foreach (HeroPair hero in _heroPairs)
             {
-                if (!hero.Entity.IsDead)
+                if (!hero.Entity.HealthComponent.IsDead)
                 {
                     result++;
                 }
@@ -60,7 +60,7 @@ namespace EventBus
             List<HeroEntity> result = new();
             foreach (HeroPair hero in _heroPairs)
             {
-                if (!hero.Entity.IsDead)
+                if (!hero.Entity.HealthComponent.IsDead)
                 {
                     result.Add(hero.Entity);
                 }

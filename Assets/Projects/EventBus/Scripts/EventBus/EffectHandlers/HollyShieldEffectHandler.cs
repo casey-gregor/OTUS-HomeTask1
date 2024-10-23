@@ -25,27 +25,24 @@ namespace EventBus
             }
             
             HeroEntity heroWithAbility = GetHeroWithAbility(effect);
-            
-            if (heroWithAbility.IsInvincible && _numOfExecutionsAvailable <= 0)
+            if (_numOfExecutionsAvailable <= 0)
             {
-                heroWithAbility.SetInvincible(false);
+                effect.RaisedSuccessfully = false;
                 return;
             }
 
             if (_numOfExecutionsAvailable > 0)
             {
-                heroWithAbility.SetInvincible(true);
+                heroWithAbility.HealthComponent.SetInvincible(true);
                 _numOfExecutionsAvailable--;
-                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect, heroWithAbility, effect.Target));
-                Debug.Log("Effect has been executed for " + heroWithAbility.View.name);
+                effect.RaisedSuccessfully = true;
             }
-            
         }
 
         private HeroEntity GetHeroWithAbility(HollyShieldEffect effect)
         {
             HeroEntity heroWithAbility;
-            if (effect.Source.TryGetEffect(out IEffect sourceEffect) && sourceEffect == effect)
+            if (effect.Source.AbilityComponent.TryGetEffect(out IEffect sourceEffect) && sourceEffect == effect)
             {
                 heroWithAbility = effect.Source;
             }

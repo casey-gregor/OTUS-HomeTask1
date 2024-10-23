@@ -4,23 +4,29 @@ namespace EventBus
 {
     public sealed class CheckTargetEffectsEventHandler : IInitializable, ILateDisposable
     {
-        private PipelineContext pipelineContext;
-        private EventBus _eventBus;
+        private readonly EventBus _eventBus;
 
-        public CheckTargetEffectsEventHandler(PipelineContext pipelineContext, EventBus eventBus)
+        public CheckTargetEffectsEventHandler(EventBus eventBus)
         {
-            this.pipelineContext = pipelineContext;
             _eventBus = eventBus;
         }
 
         private void HandleEvent(CheckTargetEffectsEvent evt)
         {
-            if(evt.Target.TryGetEffect(out IEffect enemyEffect) && enemyEffect.Type == evt.Type)
+            if(evt.Target.AbilityComponent.TryGetEffect(out IEffect targetEffect) 
+               && targetEffect.Type == evt.Type)
             {
-                enemyEffect.Source = evt.Target;
-                enemyEffect.Target = evt.Attacker;
-                _eventBus.RaiseEvent(enemyEffect); 
+                targetEffect.Source = evt.Target;
+                targetEffect.Target = evt.Attacker;
+                
+                _eventBus.RaiseEvent(targetEffect);
+                RaiseStoreEffectEvent(targetEffect);
             }
+        }
+        private void RaiseStoreEffectEvent(IEffect effect)
+        {
+            if(effect.RaisedSuccessfully)
+                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect));
         }
 
         public void Initialize()

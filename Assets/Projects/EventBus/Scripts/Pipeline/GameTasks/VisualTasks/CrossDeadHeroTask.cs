@@ -15,9 +15,10 @@ namespace EventBus
         }
         protected override void OnRun()
         {
-            // Debug.Log("cross dead hero task run?????");
-            GameObject crossImagePrefab = _uiService.GetCrossImagePrefab();
-            GameObject.Instantiate(crossImagePrefab, _targetView.gameObject.transform);
+            Debug.Log("CrossDeadHeroTask started");
+            
+            if(_uiService.TryGetCrossImagePrefab(out GameObject crossImagePrefab))
+                GameObject.Instantiate(crossImagePrefab, _targetView.gameObject.transform);
             
             Finish();
         }

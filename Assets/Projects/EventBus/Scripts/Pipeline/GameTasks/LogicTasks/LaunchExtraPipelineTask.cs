@@ -13,7 +13,7 @@ namespace EventBus
         
         protected override void OnRun()
         {
-            Debug.Log("Launch ExtraPipelineTask");
+            Debug.Log("LaunchExtraPipelineTask started");
 
             if (_extraPipeline.TasksCount != 0)
             {

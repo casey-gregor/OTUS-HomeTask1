@@ -8,7 +8,6 @@ namespace EventBus
     public sealed class PlayerEntitiesInitiator
     {
         private readonly UIService _uiService;
-        
         private readonly Dictionary<int, PlayerEntity> _playerEntityDict = new();
 
         public PlayerEntitiesInitiator(UIService uiService)
@@ -47,7 +46,7 @@ namespace EventBus
 
                 for (int i = 0; i < numberOfHeroesPerPlayer; i++)
                 {
-                    int randomIndex = UnityEngine.Random.Range(0, heroes.Count);
+                    int randomIndex = Random.Range(0, heroes.Count);
                     CreateHeroEntities(
                         i, 
                         playerEntity, 
@@ -58,105 +57,43 @@ namespace EventBus
                     
                     heroes.RemoveAt(randomIndex);
                 }
-                
                 _playerEntityDict.Add(index, playerEntity);
             }
         }
 
         private void CreateHeroEntities(
-            int id,
+            int index,
             PlayerEntity playerEntity,
             HeroConfig heroConfig, 
             HeroListView player,
             HeroEntitiesCollection entitiesCollection,
             IReadOnlyList<HeroView> heroViews)
         {
-            if (id < 0 || id >= heroViews.Count)
+            if (index < 0 || index >= heroViews.Count)
             {
-                Debug.LogError($"Index {id} is out of bounds for heroViews with count {heroViews.Count}.");
+                Debug.LogError($"Index {index} is out of bounds for heroViews with count {heroViews.Count}.");
                 return;
             }
             
-            heroViews[id].SetIcon(heroConfig.heroImage);
-            heroViews[id].name = heroConfig.heroImage.name;
-            // string stats = $"{heroConfig.attack}/{heroConfig.health}";
-            // heroViews[id].SetStats(stats);
-            Ability ability = new Ability
+            heroViews[index].SetIcon(heroConfig.heroImage);
+            heroViews[index].name = heroConfig.heroImage.name;
+            AbilityComponent abilityComponent = new AbilityComponent
             {
                 Effect = heroConfig.effect
             };
                 
-            HeroEntity hero = new HeroEntity(
-                id,
+            HeroEntity heroEntity = new HeroEntity(
                 playerEntity,
                 heroConfig.health,
                 heroConfig.attack,
-                heroViews[id],
-                ability);
+                heroViews[index],
+                abilityComponent);
                 
-            HeroPair heroPair = new HeroPair(heroViews[id], hero);
-            hero.SetStats();
+            HeroPair heroPair = new HeroPair(heroViews[index], heroEntity);
+            heroEntity.UIComponent.SetStats();
             entitiesCollection.AddHeroPair(heroPair);
         }
         
-        // public void CreatePlayerEntities(PlayerConfig[] configs)
-        // {
-        //     HeroListView[] playersArray = _uiService.GetPlayers();
-        //     
-        //     if (configs.Length != playersArray.Length)
-        //     {
-        //         throw new ArgumentException("Mismatch between config count and player array length.");
-        //     }
-        //     
-        //     for (int i = 0; i < configs.Length; i++)
-        //     {
-        //         IReadOnlyList<HeroView> heroViews = playersArray[i].GetViews();
-        //         var heroEntitiesCollection = new HeroEntitiesCollection();
-        //         
-        //         var playerEntity = new PlayerEntity(
-        //             i,
-        //             playersArray[i], 
-        //             heroViews, 
-        //             heroEntitiesCollection);
-        //         
-        //         CreateHeroEntities(playerEntity, configs[i], playersArray[i], heroEntitiesCollection, heroViews);
-        //         
-        //         _playerEntityDict.Add(i, playerEntity);
-        //     }
-        // }
-        //
-        // private void CreateHeroEntities(
-        //     PlayerEntity playerEntity,
-        //     PlayerConfig config, 
-        //     HeroListView player,
-        //     HeroEntitiesCollection entitiesCollection,
-        //     IReadOnlyList<HeroView> heroViews)
-        // {
-        //     for(int i = 0; i < config.heroes.Length; i++)
-        //     {
-        //         heroViews[i].SetIcon(config.heroes[i].heroImage);
-        //         heroViews[i].name = config.heroes[i].heroImage.name;
-        //         string stats = $"{config.heroes[i].attack}/{config.heroes[i].health}";
-        //         heroViews[i].SetStats(stats);
-        //         Ability ability = new Ability
-        //         {
-        //             Effect = config.heroes[i].effect
-        //         };
-        //         
-        //         HeroEntity hero = new HeroEntity(
-        //             i,
-        //             playerEntity,
-        //             config.heroes[i].heroImage,
-        //             config.heroes[i].health,
-        //             config.heroes[i].attack,
-        //             heroViews[i],
-        //             ability);
-        //         
-        //         HeroPair heroPair = new HeroPair(heroViews[i], hero);
-        //         entitiesCollection.AddHeroPair(heroPair);
-        //     }
-        // }
-        //
         public Dictionary<int,PlayerEntity> GetPlayerEntitiesDict()
         {
             return _playerEntityDict;

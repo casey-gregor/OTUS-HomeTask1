@@ -3,15 +3,10 @@ using UI;
 
 namespace EventBus
 {
-    public class PlayerEntity
+    public sealed class PlayerEntity
     {
-        public int PlayerId { get; private set; }
-        public HeroListView PlayerView;
-        public readonly IReadOnlyList<HeroView> HeroViews;
-        public readonly HeroEntitiesCollection HeroEntities;
-
-        public int LastAttackHeroIndex;
-        public Ability Ability;
+        public readonly int PlayerId;
+        public readonly HeroComponent HeroComponent;
         public PlayerEntity(
             int playerId,
             HeroListView playerView, 
@@ -19,44 +14,7 @@ namespace EventBus
             HeroEntitiesCollection heroEntities)
         {
             PlayerId = playerId;
-            PlayerView = playerView;
-            HeroViews = heroViews;
-            HeroEntities = heroEntities;
-
-            LastAttackHeroIndex = 0;
-
+            HeroComponent = new HeroComponent(playerView, heroViews, heroEntities);
         }
-
-        public int GetAliveHeroesCount()
-        {
-            return HeroEntities.GetAliveHeroesCount();
-        }
-
-        public int GetAllHeroesCount()
-        {
-            return HeroEntities.GetAllHeroesCount();
-        }
-        
-        public HeroEntity GetRandomHero()
-        {
-            if (GetAliveHeroesCount() == 0)
-            {
-                return null;
-            }
-
-            while (true)
-            {
-                int numOfHeroes = HeroViews.Count;
-                int randomIndex = UnityEngine.Random.Range(0, numOfHeroes);
-        
-                if (HeroEntities.TryGetHeroEntity(randomIndex, out HeroEntity heroEntity) && !heroEntity.IsDead)
-                {
-                    return heroEntity;
-                }
-            }
-        }
-        
-        
-        
     }
 }

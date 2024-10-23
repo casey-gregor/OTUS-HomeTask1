@@ -52,7 +52,7 @@ MonoBehaviour:
     attack: 7
     health: 35
     effect:
-      rid: 6819615807421546505
+      rid: 6819615807421546508
   references:
     version: 2
     RefIds:
@@ -87,6 +87,7 @@ MonoBehaviour:
       type: {class: FreezeTargetEffect, ns: EventBus, asm: Assembly-CSharp}
       data:
         Name: Freeze target when attacking
+        SkipTurnNum: 1
         EffectType: 2
     - rid: 6819615807421546504
       type: {class: HealAllyHeroEffect, ns: EventBus, asm: Assembly-CSharp}
@@ -94,8 +95,8 @@ MonoBehaviour:
         Name: Heal a random ally hero when attacking
         HealAmount: 1
         EffectType: 2
-    - rid: 6819615807421546505
-      type: {class: HitAllWhenHitEffect, ns: EventBus, asm: Assembly-CSharp}
+    - rid: 6819615807421546508
+      type: {class: DamageaAllWhenHitEffect, ns: EventBus, asm: Assembly-CSharp}
       data:
         Name: Hit all enemy heroes, when attacked
         ExtraDamage: 1

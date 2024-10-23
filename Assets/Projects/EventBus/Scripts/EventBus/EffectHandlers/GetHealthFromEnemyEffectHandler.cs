@@ -18,19 +18,18 @@ namespace EventBus
         private void HandleEffect(GetHealthFromEnemyEffect effect)
         {
             Debug.Log("In GetHealthFromEnemy effect handler");
-
-            if (!effect.Source.TryGetEffect(out IEffect sourceEffect) || sourceEffect != effect)
-            {
-                return;
-            }
             
             if (IsEffectTriggered())
             {
                 int healthToAdd = effect.Source.AttackDamage;
-                Debug.Log("health to add : " + healthToAdd);
                 HealEvent healEvent = new HealEvent(effect.Source, effect.Source, healthToAdd);
                 _extraPipeline.AddGameTask(new PostAttackTask<HealEvent>(_eventBus,healEvent));
-                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect, effect.Source, effect.Target));
+                effect.RaisedSuccessfully = true;
+                // _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect));
+            }
+            else
+            {
+                effect.RaisedSuccessfully = false;
             }
         }
 

@@ -41,19 +41,37 @@ namespace UI
             return playersArray;
         }
 
-        public GameObject GetGameOverPanel()
+        public bool TryGetGameOverPanel(out GameObject panel)
         {
-            return gameOverPanel;
+            if (gameOverPanel != null)
+            {
+                panel = gameOverPanel;
+                return true;
+            }
+            panel = null;
+            return false;
         }
 
-        public GameObject GetCrossImagePrefab()
+        public bool TryGetCrossImagePrefab(out GameObject prefab)
         {
-            return crossImagePrefab;
+            if (crossImagePrefab != null)
+            {
+                prefab = crossImagePrefab;
+                return true;
+            }
+            prefab = null;
+            return false;
         }
 
-        public GameObject GetInfoPanel()
+        public bool TryGetInfoPanel(out GameObject panel)
         {
-            return infoPanel;
+            if (infoPanel != null)
+            {
+                panel = infoPanel;
+                return true;
+            }
+            panel = null;
+            return false;
         }
         
     }

@@ -15,11 +15,9 @@ namespace EventBus
         private void HandleEffect(FreezeTargetEffect effect)
         {
             Debug.Log("in FreezeTargetEffectHandler");
-            if(effect.Source.TryGetEffect(out IEffect sourceEffect) && sourceEffect == effect)
-            {
-                effect.Target.ModifyTurnsToSkip(1);
-                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect, effect.Source, effect.Target));
-            }
+            effect.Target.TurnComponent.EditSkipTurns(effect.SkipTurnNum);
+            effect.RaisedSuccessfully = true;
+            // _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect));
         }
         public void Initialize()
         {

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 namespace EventBus
 {
@@ -16,7 +15,7 @@ namespace EventBus
         {
             HeroEntity finalTarget  = evt.Target;
 
-            if (TryApplyEffect(evt, out HeroEntity updatedTarget))
+            if (TryRaiseEffect(evt, out HeroEntity updatedTarget))
             {
                 finalTarget = updatedTarget;
             }
@@ -36,22 +35,26 @@ namespace EventBus
             _eventBus.UnsubscribeHandler<CheckAttackerEffectsEvent>(HandleEvent);
         }
         
-        private bool TryApplyEffect(CheckAttackerEffectsEvent evt, out HeroEntity updatedTarget)
+        private bool TryRaiseEffect(CheckAttackerEffectsEvent evt, out HeroEntity updatedTarget)
         {
             updatedTarget = evt.Target;
 
-            if (evt.Attacker.TryGetEffect(out IEffect attackerEffect) && evt.Type == EffectType.Offensive)
-            {
-                attackerEffect.Source = evt.Attacker;
-                attackerEffect.Target = evt.Target;
+            if (!evt.Attacker.AbilityComponent.TryGetEffect(out IEffect attackerEffect)
+                || evt.Type != EffectType.Offensive) return false;
+            
+            attackerEffect.Source = evt.Attacker;
+            attackerEffect.Target = evt.Target;
                 
-                _eventBus.RaiseEvent(attackerEffect);
+            _eventBus.RaiseEvent(attackerEffect);
+            RaiseStoreEffectEvent(attackerEffect);
+            updatedTarget = attackerEffect.Target;
+            return true;
+        }
 
-                updatedTarget = attackerEffect.Target;
-                return true;
-            }
-
-            return false;
+        private void RaiseStoreEffectEvent(IEffect effect)
+        {
+            if(effect.RaisedSuccessfully)
+                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect));
         }
     }
 }

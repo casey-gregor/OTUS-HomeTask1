@@ -7,23 +7,20 @@ namespace EventBus
     {
         private readonly EventBus _eventBus;
         private readonly UIService _uiService;
-        private readonly VisualPipeline _visualPipeline;
-        public CheckIfDeadEventHandler(EventBus eventBus, UIService uiService, VisualPipeline visualPipeline)
+        public CheckIfDeadEventHandler(EventBus eventBus, UIService uiService)
         {
             _eventBus = eventBus;
             _uiService = uiService;
-            _visualPipeline = visualPipeline;
         }
 
         private void HandleEvent(CheckIfDeadEvent evt)
         {
             if(evt.Target == null || evt.Target.HealthComponent.CurrentHealth > 0) return;
             
-            evt.Target.SetIsDead();
+            evt.Target.HealthComponent.SetIsDead();
 
-            HeroView targetView = evt.Target.View;
-            CrossDeadHeroTask crossDeadHeroTask = new CrossDeadHeroTask(_uiService, targetView);
-            _visualPipeline.AddGameTask(crossDeadHeroTask);
+            CrossDeadHeroTask crossDeadHeroTask = new CrossDeadHeroTask(_uiService, evt.Target.View);
+            _eventBus.RaiseEvent(new AddVisualTaskEvent(crossDeadHeroTask));
         }
         public void Initialize()
         {

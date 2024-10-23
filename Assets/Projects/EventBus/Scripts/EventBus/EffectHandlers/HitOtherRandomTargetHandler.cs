@@ -14,16 +14,11 @@ namespace EventBus
         private void HandleEffect(HitOtherRandomTargetEffect effect)
         {
             Debug.Log("In different random target effect handler");
-
-            if (!effect.Source.TryGetEffect(out IEffect sourceEffect) || sourceEffect != effect)
-            {
-                return;
-            }
             
             if (IsEffectTriggered())
             {
                 PlayerEntity targetEntity = effect.Target.PlayerEntity;
-                if (targetEntity.GetAliveHeroesCount() > 1)
+                if (targetEntity.HeroComponent.GetAliveHeroesCount() > 1)
                 {
                     HeroEntity differentTarget;
                     int maxAttempts = 10;
@@ -31,12 +26,16 @@ namespace EventBus
         
                     do
                     {
-                        differentTarget = targetEntity.GetRandomHero();
+                        differentTarget = targetEntity.HeroComponent.GetRandomHero();
                         attempts++;
                     } while (effect.Target == differentTarget && attempts < maxAttempts);
                     effect.Target = differentTarget;
                 }
-                _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect, effect.Source, effect.Target));
+                effect.RaisedSuccessfully = true;
+            }
+            else
+            {
+                effect.RaisedSuccessfully = false;
             }
         }
         

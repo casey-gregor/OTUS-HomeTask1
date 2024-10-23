@@ -5,13 +5,13 @@ namespace EventBus
     public sealed class EndTurnTask : GameTask
     {
         private readonly EventBus _eventBus;
-        private readonly PipelineContext _pipelineContext;
+        private readonly PipelineContext _context;
         private readonly VisualPipeline _visualPipeline;
 
-        public EndTurnTask(EventBus eventBus, PipelineContext pipelineContext, VisualPipeline visualPipeline)
+        public EndTurnTask(EventBus eventBus, PipelineContext context, VisualPipeline visualPipeline)
         {
             _eventBus = eventBus;
-            _pipelineContext = pipelineContext;
+            _context = context;
             _visualPipeline = visualPipeline;
         }
 
@@ -25,9 +25,15 @@ namespace EventBus
                 return;
             }
 
-            int attackerIndex = _pipelineContext.AttackerIndex;
-            int attackerHeroEntityIndex = _pipelineContext.AttackerHeroEntityIndex;
-            _pipelineContext.PlayerEntitiesDict[attackerIndex].HeroEntities
+            int attackerHeroEntityIndex = _context.AttackerHeroEntityIndex;
+            if (attackerHeroEntityIndex == -1)
+            {
+                Finish();
+                return;
+            }
+            
+            int attackerIndex = _context.AttackerIndex;
+            _context.PlayerEntitiesDict[attackerIndex].HeroComponent.HeroEntities
                 .TryGetHeroEntity(attackerHeroEntityIndex, out HeroEntity attackerHeroEntity);
             
             _visualPipeline.AddGameTask(new ToggleHeroViewTask(attackerHeroEntity.View, false));
@@ -37,15 +43,15 @@ namespace EventBus
         
         private bool CheckForGameOver()
         {
-            PlayerEntity attackerPlayerEntity = _pipelineContext.PlayerEntitiesDict[_pipelineContext.AttackerIndex];
-            PlayerEntity targetPlayerEntity = _pipelineContext.PlayerEntitiesDict[_pipelineContext.TargetIndex];
+            PlayerEntity attackerPlayerEntity = _context.PlayerEntitiesDict[_context.AttackerIndex];
+            PlayerEntity targetPlayerEntity = _context.PlayerEntitiesDict[_context.TargetIndex];
             
-            int attackerAliveCount = attackerPlayerEntity.GetAliveHeroesCount();
-            int targetAliveCount = targetPlayerEntity.GetAliveHeroesCount();
+            int attackerAliveCount = attackerPlayerEntity.HeroComponent.GetAliveHeroesCount();
+            int targetAliveCount = targetPlayerEntity.HeroComponent.GetAliveHeroesCount();
             
             if (attackerAliveCount == 0 || targetAliveCount == 0)
             {
-                var winnerPlayerEntity = attackerPlayerEntity.GetAliveHeroesCount() == 0 ? targetPlayerEntity : attackerPlayerEntity;
+                var winnerPlayerEntity = attackerAliveCount == 0 ? targetPlayerEntity : attackerPlayerEntity;
                 _eventBus.RaiseEvent(new GameOverEvent(winnerPlayerEntity));
                 
                 return true;

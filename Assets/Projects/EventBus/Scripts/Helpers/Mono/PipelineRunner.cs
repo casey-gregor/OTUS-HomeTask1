@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using Zenject;
@@ -13,20 +11,22 @@ namespace EventBus
         private LogicPipeline _logicPipeline;
         private PlayerEntitiesInitiator _initiator;
         private VisualPipeline _visualPipeline;
-        private EventBus _eventBus;
         private PipelineContext _pipelineContext;
 
         private const int StartingPlayerIndex = 0;
         private const int StartingHeroIndex = 0;
 
         [Inject]
-        private void Construct(LogicPipeline logicPipeline, PlayerEntitiesInitiator initiator,
-            VisualPipeline visualPipeline, EventBus eventBus, PipelineContext pipelineContext)
+        private void Construct(
+            LogicPipeline logicPipeline, 
+            PlayerEntitiesInitiator initiator,
+            VisualPipeline visualPipeline, 
+            EventBus eventBus, 
+            PipelineContext pipelineContext)
         {
             _logicPipeline = logicPipeline;
             _initiator = initiator;
             _visualPipeline = visualPipeline;
-            _eventBus = eventBus;
             _pipelineContext = pipelineContext;
 
             _logicPipeline.OnPipelineCompleted += HandleLogicPipelineCompleteEvent;
@@ -53,7 +53,7 @@ namespace EventBus
         {
             Dictionary<int, PlayerEntity> playerEntities = _initiator.GetPlayerEntitiesDict();
             PlayerEntity attackerEntity = playerEntities[StartingPlayerIndex];
-            HeroView attackHeroView = attackerEntity.HeroViews[StartingHeroIndex];
+            HeroView attackHeroView = attackerEntity.HeroComponent.HeroViews[StartingHeroIndex];
             
             ToggleHeroViewTask toggleHeroViewTask = new ToggleHeroViewTask(attackHeroView, true);
             

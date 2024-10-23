@@ -1,43 +1,45 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 namespace EventBus
 {
     public sealed class DealDamageHandler : IInitializable, ILateDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly VisualPipeline _visualPipeline;
 
-        public DealDamageHandler(EventBus eventBus, VisualPipeline visualPipeline)
+        public DealDamageHandler(EventBus eventBus)
         {
             _eventBus = eventBus;
-            _visualPipeline = visualPipeline;
         }
 
         private void HandleEvent(DealDamageEvent evt)
         {
-            ApplyDamage(evt.Target, evt.AttackerDamage);
-            ApplyDamage(evt.Attacker, evt.Target.AttackDamage);
+            if (evt.Target != null)
+            {
+                ApplyDamage(evt.Target, evt.AttackerDamage);
+                _eventBus.RaiseEvent(new CheckIfDeadEvent(evt.Target));
+            }
             
-            _eventBus.RaiseEvent(new CheckIfDeadEvent(evt.Attacker));
-            _eventBus.RaiseEvent(new CheckIfDeadEvent(evt.Target));
-          
+            if (evt.Attacker != null)
+            {
+                ApplyDamage(evt.Attacker, evt.Target.AttackDamage);
+                _eventBus.RaiseEvent(new CheckIfDeadEvent(evt.Attacker));
+            }
+            
         }
         
         private void ApplyDamage(HeroEntity target, int damage)
         {
-            if (target == null)
-                return;
-            
-            if (target.IsInvincible)
+            if (target.HealthComponent.IsInvincible)
             {
-                target.SetInvincible(false);
+                target.HealthComponent.SetInvincible(false);
                 return;
             }
             
             _eventBus.RaiseEvent(new StoreAttackDataEvent(target, damage));
-            target.DeductHealth(damage);
-            _visualPipeline.AddGameTask(new SetStatsTask(null, target));
+            target.HealthComponent.DeductHealth(damage);
+            
+            SetStatsTask setStatsTask = new SetStatsTask(null, target);
+            _eventBus.RaiseEvent(new AddVisualTaskEvent(setStatsTask));
         }
         
         public void Initialize()

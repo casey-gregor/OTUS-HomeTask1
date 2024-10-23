@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace EventBus
 {
-    public sealed class GameOverTask: GameTask
+    public sealed class GameOverVisualTask: GameTask
     {
         private readonly GameObject _gameOverPanel;
         private readonly PlayerEntity _playerEntity;
 
-        public GameOverTask(GameObject gameOverPanel, PlayerEntity playerEntity)
+        public GameOverVisualTask(GameObject gameOverPanel, PlayerEntity playerEntity)
         {
             _gameOverPanel = gameOverPanel;
             _playerEntity = playerEntity;
@@ -16,16 +16,18 @@ namespace EventBus
 
         protected override void OnRun()
         {
+            Debug.Log("Game Over visual task");
             GameObject gameOverPanel = _gameOverPanel;
             TextMeshProUGUI text = gameOverPanel.GetComponentInChildren<TextMeshProUGUI>();
 
             text.text = GetWinText(_playerEntity);
             gameOverPanel.SetActive(true);
+            Debug.Log("The pipeline execution stops here.");
         }
 
         private string GetWinText(PlayerEntity player)
         {
-            return $"{player.PlayerView.name} won! Game over.";
+            return $"{player.HeroComponent.PlayerView.name} won! Game over.";
         }
     }
 }

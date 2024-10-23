@@ -1,6 +1,6 @@
 ﻿namespace EventBus
 {
-    public class AttackedUsedData
+    public sealed class AttackedUsedData
     {
         public readonly HeroEntity Target;
         public readonly int DamageTaken;

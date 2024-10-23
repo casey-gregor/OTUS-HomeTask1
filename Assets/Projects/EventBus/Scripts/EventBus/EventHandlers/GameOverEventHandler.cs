@@ -1,4 +1,5 @@
 ﻿using UI;
+using UnityEngine;
 using Zenject;
 
 namespace EventBus
@@ -6,22 +7,23 @@ namespace EventBus
     public sealed class GameOverEventHandler : IInitializable, ILateDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly VisualPipeline _visualPipeline;
         private readonly UIService _uiService;
 
         public GameOverEventHandler(
             EventBus eventBus,
-            VisualPipeline visualPipeline, 
             UIService uiService)
         {
             _eventBus = eventBus;
-            _visualPipeline = visualPipeline;
             _uiService = uiService;
         }
 
         private void HandleEvent(GameOverEvent evt)
         {
-            _visualPipeline.AddGameTask(new GameOverTask(_uiService.GetGameOverPanel(), evt.Winner));
+            if (_uiService.TryGetGameOverPanel(out GameObject gameOverPanel))
+            {
+                GameOverVisualTask gameOverVisualTask = new GameOverVisualTask(gameOverPanel, evt.Winner);
+                _eventBus.RaiseEvent(new AddVisualTaskEvent(gameOverVisualTask));
+            }
         }
         public void Initialize()
         {

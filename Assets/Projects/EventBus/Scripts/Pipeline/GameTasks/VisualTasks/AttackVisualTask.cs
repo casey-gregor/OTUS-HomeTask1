@@ -26,10 +26,5 @@ namespace EventBus
             
             Finish();
         }
-
-        protected override void OnFinish()
-        {
-            Debug.Log("finished attack animation");
-        }
     }
 }

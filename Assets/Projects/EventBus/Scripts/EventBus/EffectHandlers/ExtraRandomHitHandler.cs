@@ -18,16 +18,17 @@ namespace EventBus
         private void HandleEffect(ExtraRandomHitEffect effect)
         {
             Debug.Log("In extra hit effect handler");
-
-            if (effect.Source.TryGetEffect(out IEffect sourceEffect) && sourceEffect == effect)
+            
+            HeroEntity hitNewTarget = ExecuteExtraHit(effect);
+            if (hitNewTarget != null)
             {
-                HeroEntity hitNewTarget = ExecuteExtraHit(effect);
-                if (hitNewTarget != null)
-                {
-                    Debug.Log("hitnewTarget : " + hitNewTarget.View.name);
-                    effect.RandomTarget = hitNewTarget;
-                    _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect, effect.Source, effect.RandomTarget));
-                };
+                effect.RandomTarget = hitNewTarget;
+                effect.RaisedSuccessfully = true;
+                // _eventBus.RaiseEvent(new StoreEffectsDataEvent(effect));
+            }
+            else
+            {
+                effect.RaisedSuccessfully = false;
             }
             
         }
@@ -36,14 +37,14 @@ namespace EventBus
         {
             PlayerEntity targetEntity = effect.Target.PlayerEntity;
             HeroEntity newTargetEntity = effect.Target;
-            if (targetEntity.GetAliveHeroesCount() > 1)
+            if (targetEntity.HeroComponent.GetAliveHeroesCount() > 1)
             {
                 int maxAttempts = 10;
                 int attempts = 0;
         
                 do
                 {
-                    newTargetEntity = targetEntity.GetRandomHero();
+                    newTargetEntity = targetEntity.HeroComponent.GetRandomHero();
                     attempts++;
                    
                 } while (effect.Target == newTargetEntity && attempts < maxAttempts);

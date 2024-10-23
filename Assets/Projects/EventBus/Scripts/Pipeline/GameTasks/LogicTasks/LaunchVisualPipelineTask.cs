@@ -13,7 +13,7 @@ namespace EventBus
 
         protected override void OnRun()
         {
-            Debug.Log("Launch VisualPipelineTask");
+            Debug.Log("LaunchVisualPipelineTask started ");
 
             if (_visualPipeline.TasksCount != 0)
             {
@@ -24,7 +24,6 @@ namespace EventBus
             {
                 Finish();
             }
-            
         }
 
         private void HandleVisualPipelineComplete()

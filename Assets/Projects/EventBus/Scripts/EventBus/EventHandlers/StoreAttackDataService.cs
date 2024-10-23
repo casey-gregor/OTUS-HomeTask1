@@ -3,7 +3,7 @@ using Zenject;
 
 namespace EventBus
 {
-    public class StoreAttackDataService: IInitializable, ILateDisposable
+    public sealed class StoreAttackDataService: IInitializable, ILateDisposable
     {
         public List<AttackedUsedData> Attacks = new();
         
@@ -22,16 +22,10 @@ namespace EventBus
         {
             _eventBus.SubscribeHandler<StoreAttackDataEvent>(HandleEvent);
         }
-
-
+        
         public void LateDispose()
         {
             _eventBus.UnsubscribeHandler<StoreAttackDataEvent>(HandleEvent);
-        }
-
-        public void ClearEffects()
-        {
-            Attacks.Clear();
         }
     }
 }
