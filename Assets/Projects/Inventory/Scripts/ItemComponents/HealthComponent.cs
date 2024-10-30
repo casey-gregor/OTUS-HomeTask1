@@ -1,5 +1,5 @@
 ﻿
-namespace Inventory.ItemComponents
+namespace Inventory
 {
     public sealed class HealthComponent: IItemComponent
     {

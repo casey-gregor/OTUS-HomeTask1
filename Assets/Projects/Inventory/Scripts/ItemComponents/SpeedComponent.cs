@@ -1,4 +1,4 @@
-﻿namespace Inventory.ItemComponents
+﻿namespace Inventory
 {
     public sealed class SpeedComponent: IItemComponent
     {
