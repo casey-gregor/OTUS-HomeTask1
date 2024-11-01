@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Drawing;
 using NUnit.Framework;
 using UnityEngine;
 
 namespace Inventory
 {
-    public class Character : IEntity
+    public class TestCharacter : IEntity
     {
         public int Health { get; set; }
         public int Armor { get; set; }
@@ -582,7 +581,7 @@ namespace Inventory
         public void ApplyEffectForWearableItem()
         {
             //Arrange
-            Character character = new Character();
+            TestCharacter testCharacter = new TestCharacter();
             
             InventorySlot bodySlot = new InventorySlot(SlotType.Body, 1);
             InventorySlot headSlot = new InventorySlot(SlotType.Head, 1);
@@ -592,7 +591,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableAdded += character.HandleAddEvent;
+            eventNotifier.OnWearableAdded += testCharacter.HandleAddEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -616,7 +615,7 @@ namespace Inventory
             
             //Act
             AddItemToInventory(inventory, itemConfig);
-            eventNotifier.OnWearableAdded -= character.HandleAddEvent;
+            eventNotifier.OnWearableAdded -= testCharacter.HandleAddEvent;
             
             //Assert
             Assert.AreEqual(1, headSlot.GetInventoryItems().Count);
@@ -624,14 +623,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(10, character.Armor);
+            Assert.AreEqual(10, testCharacter.Armor);
         }
         
         [Test]
         public void RemoveEffectFromWearableItem()
         {
             //Arrange
-            Character character = new Character();
+            TestCharacter testCharacter = new TestCharacter();
             
             InventorySlot bodySlot = new InventorySlot(SlotType.Body, 1);
             InventorySlot headSlot = new InventorySlot(SlotType.Head, 1);
@@ -641,7 +640,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableRemoved += character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved += testCharacter.HandleRemoveEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -666,7 +665,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             RemoveItemFromInventory(inventory, itemConfig);
-            eventNotifier.OnWearableRemoved -= character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved -= testCharacter.HandleRemoveEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -674,14 +673,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(0, character.Armor);
+            Assert.AreEqual(0, testCharacter.Armor);
         }
         
         [Test]
         public void RemoveArmorEffectNotGoBelowZeroItem()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Armor = -5
             };
@@ -694,7 +693,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableRemoved += character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved += testCharacter.HandleRemoveEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -719,7 +718,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             RemoveItemFromInventory(inventory, itemConfig);
-            eventNotifier.OnWearableRemoved -= character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved -= testCharacter.HandleRemoveEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -727,14 +726,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(0, character.Armor);
+            Assert.AreEqual(0, testCharacter.Armor);
         }
         
         [Test]
         public void RemoveHealthEffectNotGoBelowZeroItem()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Health = -5
             };
@@ -747,7 +746,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableRemoved += character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved += testCharacter.HandleRemoveEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -772,7 +771,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             RemoveItemFromInventory(inventory, itemConfig);
-            eventNotifier.OnWearableRemoved -= character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved -= testCharacter.HandleRemoveEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -780,14 +779,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(0, character.Health);
+            Assert.AreEqual(0, testCharacter.Health);
         }
         
         [Test]
         public void RemoveAttackEffectNotGoBelowZeroItem()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Attack = -5
             };
@@ -800,7 +799,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableRemoved += character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved += testCharacter.HandleRemoveEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -825,7 +824,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             RemoveItemFromInventory(inventory, itemConfig);
-            eventNotifier.OnWearableRemoved -= character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved -= testCharacter.HandleRemoveEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -833,14 +832,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(0, character.Attack);
+            Assert.AreEqual(0, testCharacter.Attack);
         }
         
         [Test]
         public void RemoveSpeedEffectNotGoBelowZeroItem()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Speed = -5
             };
@@ -853,7 +852,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableRemoved += character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved += testCharacter.HandleRemoveEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -878,7 +877,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             RemoveItemFromInventory(inventory, itemConfig);
-            eventNotifier.OnWearableRemoved -= character.HandleRemoveEvent;
+            eventNotifier.OnWearableRemoved -= testCharacter.HandleRemoveEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -886,14 +885,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(0, character.Speed);
+            Assert.AreEqual(0, testCharacter.Speed);
         }
         
         [Test]
         public void ApplyEffectForConsumableItem()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Health = 0
             };
@@ -906,7 +905,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnItemConsumed += character.HandleAddEvent;
+            eventNotifier.OnItemConsumed += testCharacter.HandleAddEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -931,7 +930,7 @@ namespace Inventory
             //Act
             AddItemToInventory(inventory, itemConfig);
             ConsumeItem(inventory, itemConfig);
-            eventNotifier.OnItemConsumed -= character.HandleAddEvent;
+            eventNotifier.OnItemConsumed -= testCharacter.HandleAddEvent;
             
             //Assert
             Assert.AreEqual(0, headSlot.GetInventoryItems().Count);
@@ -939,14 +938,14 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(20, character.Health);
+            Assert.AreEqual(20, testCharacter.Health);
         }
         
         [Test]
         public void NotApplyEffectIfItemComponentIsNullAndNotThrowNullReference()
         {
             //Arrange
-            Character character = new Character()
+            TestCharacter testCharacter = new TestCharacter()
             {
                 Speed = 1
             };
@@ -959,7 +958,7 @@ namespace Inventory
             
             EventNotifier eventNotifier = new EventNotifier();
 
-            eventNotifier.OnWearableAdded += character.HandleAddEvent;
+            eventNotifier.OnWearableAdded += testCharacter.HandleAddEvent;
             
             SlotsManager manager = new SlotsManager(
                 headSlot, 
@@ -983,7 +982,7 @@ namespace Inventory
             
             //Act
             AddItemToInventory(inventory, itemConfig);
-            eventNotifier.OnWearableAdded -= character.HandleAddEvent;
+            eventNotifier.OnWearableAdded -= testCharacter.HandleAddEvent;
             
             //Assert
             Assert.AreEqual(1, headSlot.GetInventoryItems().Count);
@@ -991,7 +990,7 @@ namespace Inventory
             Assert.AreEqual(0, armsSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, feetSlot.GetInventoryItems().Count);
             Assert.AreEqual(0, backpackSlot.GetInventoryItems().Count);
-            Assert.AreEqual(1, character.Speed);
+            Assert.AreEqual(1, testCharacter.Speed);
         }
 
         [Test]
