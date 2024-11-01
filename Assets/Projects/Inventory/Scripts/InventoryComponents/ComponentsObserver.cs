@@ -24,7 +24,7 @@ namespace Inventory
 
         private void HandleWearableRemoved(InventoryItem item)
         {
-            foreach (var component in item.itemComponents)
+            foreach (IItemComponent component in item.itemComponents)
             {
                 component.Remove(_entity);
             }
@@ -32,7 +32,7 @@ namespace Inventory
         
         private void HandleWearableAdded(InventoryItem item)
         {
-            foreach (var component in item.itemComponents)
+            foreach (IItemComponent component in item.itemComponents)
             {
                 component.Apply(_entity);
             }

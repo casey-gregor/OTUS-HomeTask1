@@ -31,6 +31,7 @@ namespace Inventory
             if (item.inventoryType == InventoryType.None)
             {
                 EventNotifier.NotifyInventoryTypeNone();
+                return;
             }
 
             if(!TryAddItem(item))

@@ -18,11 +18,11 @@ MonoBehaviour:
     inventoryType: 2
     slotType: 1
     itemComponents:
-    - rid: 6819616006830030851
+    - rid: 6819616006830030868
   references:
     version: 2
     RefIds:
-    - rid: 6819616006830030851
-      type: {class: DefenceComponent, ns: Inventory, asm: Assembly-CSharp}
+    - rid: 6819616006830030868
+      type: {class: ArmorComponent, ns: Inventory, asm: Inventory}
       data:
-        Defence: 10
+        Armor: 10

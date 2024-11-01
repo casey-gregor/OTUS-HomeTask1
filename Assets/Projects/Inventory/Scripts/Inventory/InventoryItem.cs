@@ -16,6 +16,11 @@ namespace Inventory
        
         public InventoryItem Clone()
         {
+            if (name == "")
+            {
+                Debug.LogWarning("Item name is empty");
+                return null;
+            }
             return new InventoryItem()
             {
                 name = name,
@@ -31,6 +36,8 @@ namespace Inventory
             List<IItemComponent> components = new List<IItemComponent>();
             foreach (var component in itemComponents)
             {
+                if(component == null)
+                    continue;
                 component.Clone();
                 components.Add(component);
             }

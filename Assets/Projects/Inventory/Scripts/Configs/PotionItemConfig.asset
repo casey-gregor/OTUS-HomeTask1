@@ -18,11 +18,11 @@ MonoBehaviour:
     inventoryType: 5
     slotType: 0
     itemComponents:
-    - rid: 6819616006830030852
+    - rid: 6819616006830030861
   references:
     version: 2
     RefIds:
-    - rid: 6819616006830030852
-      type: {class: HealthComponent, ns: Inventory, asm: Assembly-CSharp}
+    - rid: 6819616006830030861
+      type: {class: HealthComponent, ns: Inventory, asm: Inventory}
       data:
-        Health: 20
+        Health: 30

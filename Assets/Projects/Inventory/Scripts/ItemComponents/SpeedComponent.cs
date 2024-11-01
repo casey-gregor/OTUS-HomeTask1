@@ -1,4 +1,6 @@
-﻿namespace Inventory
+﻿using System;
+
+namespace Inventory
 {
     public sealed class SpeedComponent: IItemComponent
     {
@@ -11,15 +13,14 @@
             };
         }
 
-        public void Apply(Entity entity)
+        public void Apply(IEntity entity)
         {
-            entity.speed += Speed;
+            entity.Speed += Speed;
         }
 
-        public void Remove(Entity entity)
+        public void Remove(IEntity entity)
         {
-            if(entity.speed > 0)
-                entity.speed -= Speed;
+            entity.Speed = Math.Max(0, entity.Speed - Speed);
         }
     }
 }

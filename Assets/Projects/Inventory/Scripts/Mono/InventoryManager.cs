@@ -24,6 +24,15 @@ namespace Inventory
         [Inject]
         private void Construct(EventNotifier eventNotifier)
         {
+            if (headSlotCapacity < -1 ||
+                bodySlotCapacity < -1 ||
+                armsSlotCapacity < -1 ||
+                feetSlotCapacity < -1 ||
+                backpackSlotCapacity < -1)
+            {
+                Debug.LogWarning("Incorrect capacity specified for one of the slots. Can be -1 or greater.");
+            }
+            
             SlotsManager = new SlotsManager(
                 new InventorySlot(SlotType.Head, headSlotCapacity),
                 new InventorySlot(SlotType.Body, bodySlotCapacity),
@@ -40,7 +49,8 @@ namespace Inventory
         public void AddItemToInventory()
         {
             InventoryItem item = config.inventoryItem.Clone();
-            Inventory.AddItem(item);
+            if (item != null)
+                Inventory.AddItem(item);
         }
         
         [Button]

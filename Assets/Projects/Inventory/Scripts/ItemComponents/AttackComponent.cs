@@ -2,25 +2,25 @@
 
 namespace Inventory
 {
-    public sealed class HealthComponent: IItemComponent
+    public sealed class AttackComponent: IItemComponent
     {
-        public int Health = 1;
+        public int Attack = 1;
         public IItemComponent Clone()
         {
-            return new HealthComponent()
+            return new AttackComponent()
             {
-                Health = Health
+                Attack = Attack
             };
         }
 
         public void Apply(IEntity entity)
         {
-            entity.Health += Health;
+            entity.Attack += Attack;
         }
 
         public void Remove(IEntity entity)
         {
-            entity.Health = Math.Max(0, entity.Health - Health);
+            entity.Attack = Math.Max(0, entity.Attack - Attack);
         }
     }
 }
