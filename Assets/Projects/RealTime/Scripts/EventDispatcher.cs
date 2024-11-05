@@ -9,14 +9,14 @@ namespace RealTime
         private readonly ChestLockChecker _chestLockChecker;
         private readonly ChestLocker _chestLocker;
         private readonly ChestSpawner _chestSpawner;
-        private readonly SessionLogger _sessionLogger;
         private readonly ApplyChestReward _applyChestReward;
+        private readonly ChestButtonTracker _chestButtonTracker;
+        private readonly SessionLogger _sessionLogger;
         private readonly ServerTimeGetter _serverTimeGetter;
         private readonly ServerTimeProcessor _serverTimeProcessor;
         private readonly SessionDataManager _sessionDataManager;
         private readonly SessionPresenter _sessionPresenter;
         private readonly ServerConnectPresenter _serverConnectPresenter;
-        private readonly ChestButtonTracker _chestButtonTracker;
 
         public EventDispatcher(
             ChestSaveLoader chestSaveLoader,
@@ -35,20 +35,20 @@ namespace RealTime
             _chestSaveLoader = chestSaveLoader;
             _chestLockChecker = chestLockChecker;
             _chestSpawner = chestSpawner;
-            _sessionLogger = sessionLogger;
             _applyChestReward = applyChestReward;
+            _chestButtonTracker = chestButtonTracker;
+            _chestLocker = chestLocker;
+            _sessionLogger = sessionLogger;
             _serverTimeGetter = serverTimeGetter;
             _serverTimeProcessor = serverTimeProcessor;
             _sessionDataManager = sessionDataManager;
             _sessionPresenter = sessionPresenter;
             _serverConnectPresenter = serverConnectPresenter;
-            _chestButtonTracker = chestButtonTracker;
-            _chestLocker = chestLocker;
 
-            _sessionLogger.OnUtcTimeReceived += HandleUtcTimeReceivedEvent;
             _chestLockChecker.OnChestUnlocked += HandleChestUnlocked;
             _chestLocker.OnChestLocked += HandleChestLocked;
             _chestButtonTracker.OnChestButtonPressed += HandleChestOpened;
+            _sessionLogger.OnUtcTimeReceived += HandleUtcTimeReceivedEvent;
             _serverTimeGetter.OnServerConnectStarted += HandleServerConnectStarted;
             _serverTimeGetter.OnServerTimeReceived += HandleOnServerTimeGetterReceived;
             _sessionDataManager.OnCurrentSessionStartSaved += HandleOnCurrentSessionStart;
