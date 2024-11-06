@@ -16,7 +16,7 @@ MonoBehaviour:
     name: BodyArmor
     icon: {fileID: 21300000, guid: f1cb9427dd36aa248a700a237d292353, type: 3}
     inventoryType: 2
-    slotType: 3
+    equipmentSlotType: 3
     itemComponents:
     - rid: 6819616006830030866
   references:
