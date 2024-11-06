@@ -1,8 +1,8 @@
 ﻿namespace Inventory
 {
-    public enum SlotType
+    public enum EquipmentSlotType
     {
-        Backpack,
+        None,
         Head,
         Arms,
         Body,

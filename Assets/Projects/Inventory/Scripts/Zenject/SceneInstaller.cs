@@ -6,10 +6,10 @@ namespace Inventory.Zenject
     {
         public override void InstallBindings()
         {
-            Container.Bind<Entity>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<EventNotifier>().AsSingle().NonLazy();
+            Container.Bind<IEntity>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<InventoryEventNotifier>().AsSingle().NonLazy();
             Container.Bind<InventoryManager>().FromComponentInHierarchy().AsSingle().NonLazy();
-            Container.Bind<ComponentsObserver>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ComponentsObserver>().AsSingle().NonLazy();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Inventory
 {
@@ -10,7 +11,7 @@ namespace Inventory
         public string name;
         public Sprite icon;
         public InventoryType inventoryType;
-        public SlotType slotType;
+        public EquipmentSlotType equipmentSlotType;
         
         [SerializeReference] public List<IItemComponent> itemComponents;
        
@@ -26,7 +27,7 @@ namespace Inventory
                 name = name,
                 icon = icon,
                 inventoryType = inventoryType,
-                slotType = slotType,
+                equipmentSlotType = equipmentSlotType,
                 itemComponents = CloneComponents()
             };
         }

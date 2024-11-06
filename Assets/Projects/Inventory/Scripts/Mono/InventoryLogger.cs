@@ -7,26 +7,44 @@ namespace Inventory
     {
         [SerializeField] private InventoryManager inventoryManager;
         private Inventory Inventory => inventoryManager.Inventory;
-        private EventNotifier EventNotifier => Inventory.EventNotifier;
+        private InventoryEventNotifier InventoryEventNotifier => Inventory.InventoryEventNotifier;
         
         private void Awake()
         {
-            EventNotifier.OnSlotUpdated += HandleInventoryChange;
-            EventNotifier.OnInventoryTypeNone += HandleInventoryTypeNone;
-            EventNotifier.OnItemAdded += HandleItemAdded;
-            EventNotifier.OnItemAddFailed += HandleItemAddFailed;
-            EventNotifier.OnItemConsumeFailed += HandleItemConsumedFailed;
-            EventNotifier.OnItemRemoveFailed += HandleItemRemoveFailed;
-            EventNotifier.OnItemRemoved += HandleItemRemoved;
-            EventNotifier.OnItemConsumed += HandleItemConsumed;
+            InventoryEventNotifier.OnInventoryUpdated += HandleInventoryChange;
+            InventoryEventNotifier.OnInventoryTypeNone += HandleInventoryTypeNone;
+            InventoryEventNotifier.OnItemEquipped += HandleItemEquipped;
+            InventoryEventNotifier.OnItemAddFailed += HandleItemAddFailed;
+            InventoryEventNotifier.OnItemConsumeFailed += HandleItemConsumedFailed;
+            InventoryEventNotifier.OnItemRemoveFailed += HandleItemRemoveFailed;
+            InventoryEventNotifier.OnItemUnequipped += HandleItemUnequipped;
+            InventoryEventNotifier.OnItemConsumed += HandleItemConsumed;
+            InventoryEventNotifier.OnItemRemovedFromInventory += HandleItemRemovedFromInventory;
+            InventoryEventNotifier.OnItemNotEquipped += HandleItemNotEquipped;
+            InventoryEventNotifier.OnItemNotWearable += HandleItemNotWearable;
         }
 
-        private void HandleItemAdded(InventoryItem item, InventorySlot slot)
+        private void HandleItemNotWearable(string itemName)
+        {
+            Debug.Log($"Item {itemName} can not be equipped.");
+        }
+
+        private void HandleItemNotEquipped(string itemName)
+        {
+            Debug.Log($"Item {itemName} is not equipped.");
+        }
+
+        private void HandleItemRemovedFromInventory(InventoryItem item)
+        {
+            Debug.Log($"Item {item.name} was removed from Inventory.");
+        }
+
+        private void HandleItemEquipped(InventoryItem item, EquipmentSlot slot)
         {
             Debug.Log($"Item {item.name} was added to {slot.GetSlotType()}.");
         }
         
-        private void HandleItemRemoved(InventoryItem item, InventorySlot slot)
+        private void HandleItemUnequipped(InventoryItem item, EquipmentSlot slot)
         {
             Debug.Log($"Item {item.name} was removed from {slot.GetSlotType()}.");
         }
@@ -43,7 +61,7 @@ namespace Inventory
 
         private void HandleItemConsumedFailed(string itemName)
         {
-            Debug.Log($"Item {itemName} was not found in the backpack or is not consumable.");
+            Debug.Log($"Item {itemName} was not found in the Inventory or is not consumable.");
         }
 
         private void HandleItemAddFailed(string itemName)
@@ -56,14 +74,14 @@ namespace Inventory
             Debug.LogWarning("Cannot add item. 'None' type is set.");
         }
 
-        private void HandleInventoryChange(InventorySlot slot)
+        private void HandleInventoryChange()
         {
-            LogInventoryContents(slot);
+            LogInventoryContents();
         }
         
-        public void LogInventoryContents(InventorySlot slot)
+        public void LogInventoryContents()
         {
-            Dictionary<InventoryItem, int> inventoryItems = slot.GetInventoryItems();
+            Dictionary<InventoryItem, int> inventoryItems = Inventory.GetInventoryItems();
             
             Dictionary<string, (int totalQuantity, int slotsOccupied)> inventorySummary = new();
             foreach (var entry in inventoryItems)
@@ -96,6 +114,20 @@ namespace Inventory
                 Debug.Log($"{itemName} with qty of {totalQuantity} occupies {slotsOccupied} slot(s) of Inventory");
             }
             // Debug.Log($"slot {slot.GetSlotType()} size is {inventoryItems.Count}");
+        }
+
+        private void OnDestroy()
+        {
+            InventoryEventNotifier.OnInventoryUpdated -= HandleInventoryChange;
+            InventoryEventNotifier.OnInventoryTypeNone -= HandleInventoryTypeNone;
+            InventoryEventNotifier.OnItemEquipped -= HandleItemEquipped;
+            InventoryEventNotifier.OnItemAddFailed -= HandleItemAddFailed;
+            InventoryEventNotifier.OnItemConsumeFailed -= HandleItemConsumedFailed;
+            InventoryEventNotifier.OnItemRemoveFailed -= HandleItemRemoveFailed;
+            InventoryEventNotifier.OnItemUnequipped -= HandleItemUnequipped;
+            InventoryEventNotifier.OnItemConsumed -= HandleItemConsumed;
+            InventoryEventNotifier.OnItemRemovedFromInventory -= HandleItemRemovedFromInventory;
+            InventoryEventNotifier.OnItemNotEquipped -= HandleItemNotEquipped;
         }
     }
 }

@@ -4,32 +4,16 @@ namespace Inventory
 {
     public sealed class Entity : MonoBehaviour, IEntity
     {
-        public int health = 0;
-        public int armor = 0;
-        public int attack = 0;
-        public int speed = 0;
-        public int Health
-        {
-            get => health;
-            set => health = value;
-        }
+        [field: SerializeField]
+        public int Health { get; set; } = 0;
+        
+        [field: SerializeField]
+        public int Armor {get; set;} = 0;
 
-        public int Armor
-        {
-            get => armor;
-            set => armor = value;
-        }
-
-        public int Attack
-        {
-            get => attack;
-            set => attack = value;
-        }
-
-        public int Speed
-        {
-            get => speed;
-            set => speed = value;
-        }
+        [field: SerializeField]
+        public int Attack { get; set; } = 0;
+        
+        [field: SerializeField]
+        public int Speed  { get; set; } = 0;
     }
 }
