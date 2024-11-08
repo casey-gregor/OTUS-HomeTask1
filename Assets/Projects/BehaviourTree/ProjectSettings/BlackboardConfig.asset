@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10f62366b8b4b15b1bf35e2b066b073, type: 3}
+  m_Name: BlackboardConfig
+  m_EditorClassIdentifier: 
+  Namespace: Game
+  directoryPath: Assets/Projects/BehaviourTree/Scripts/CodoGen
+  className: BlackboardAPI
+  imports:
+  - Game.Engine
+  - UnityEngine
+  keys:
+  - id: 0
+    name: UNDEFINED
+    type: 
+  - id: 1
+    name: Character
+    type: 'GameObject : class'
+  - id: 2
+    name: TreeService
+    type: 'TreeService : class'
+  - id: 3
+    name: Target
+    type: 'GameObject : class'
+  - id: 4
+    name: NoTreesView
+    type: 'GameObject : class'
+  - id: 5
+    name: StoppingDistance
+    type: float
+  - id: 6
+    name: Barn
+    type: 'GameObject : class'
+  - id: 7
+    name: FullBarnView
+    type: 'GameObject : class'
+  - id: 8
+    name: Waypoints
+    type: 'Transform[] : class'
+  - id: 9
+    name: WaypointIndex
+    type: int
+  - id: 10
+    name: WaypointPause
+    type: float
+  - id: 11
+    name: WaypointTime
+    type: float
+  - id: 12
+    name: Enemy
+    type: 'GameObject : class'

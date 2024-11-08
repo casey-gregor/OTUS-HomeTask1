@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class MoveComponent : MonoBehaviour
+namespace ShootEmUp
 {
-    [SerializeField] private float speed = 5.0f;
-
-    public void Move(Rigidbody2D rb, Vector2 vector)
+    public class MoveComponent : MonoBehaviour
     {
-        Vector2 nextPosition = rb.position + vector * this.speed;
-        rb.MovePosition(nextPosition);
+        [SerializeField] private float speed = 5.0f;
+
+        public void Move(Rigidbody2D rb, Vector2 vector)
+        {
+            Vector2 nextPosition = rb.position + vector * this.speed;
+            rb.MovePosition(nextPosition);
+        }
     }
+    
 }
