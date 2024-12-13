@@ -36,7 +36,7 @@ namespace ShootEmUp
         {
             foreach (GameObject bulletObject in this.bulletsToMove.Keys)
             {
-                bulletObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                bulletObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             }
             this.bulletsToMove.Clear();
         }
@@ -45,7 +45,7 @@ namespace ShootEmUp
         {
             foreach (GameObject bulletObject in this.bulletsToMove.Keys)
             {
-                bulletObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                bulletObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             }
         }
 
@@ -53,7 +53,7 @@ namespace ShootEmUp
         {
             foreach (GameObject bulletObject in this.bulletsToMove.Keys)
             {
-                bulletObject.GetComponent<Rigidbody2D>().velocity = this.bulletsToMove[bulletObject];
+                bulletObject.GetComponent<Rigidbody2D>().linearVelocity = this.bulletsToMove[bulletObject];
             }
         }
 

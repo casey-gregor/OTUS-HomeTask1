@@ -47,7 +47,7 @@ namespace ShootEmUp
             Vector2 velocity = endPosition * bulletConfig.speed;
             bulletObj.transform.SetParent(this.worldTransform);
 
-            bulletObj.GetComponent<Rigidbody2D>().velocity = velocity;
+            bulletObj.GetComponent<Rigidbody2D>().linearVelocity = velocity;
 
             bulletToMoveEvent?.Invoke(bulletObj, velocity);
         }
