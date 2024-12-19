@@ -37,7 +37,7 @@
 }</component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -45,7 +45,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -57,6 +57,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -67,6 +70,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
