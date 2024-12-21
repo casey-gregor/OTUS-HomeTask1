@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    //Менять нельзя!
     public sealed class HeroView : MonoBehaviour
     {
         internal event UnityAction OnClicked
@@ -113,5 +112,6 @@ namespace UI
 
             return tcs.Task;
         }
+        
     }
 }

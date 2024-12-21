@@ -50,8 +50,7 @@ namespace EventBus
                     CreateHeroEntities(
                         i, 
                         playerEntity, 
-                        heroes[randomIndex], 
-                        playersArray[index], 
+                        heroes[randomIndex],
                         heroEntitiesCollection,
                         heroViews);
                     
@@ -64,8 +63,7 @@ namespace EventBus
         private void CreateHeroEntities(
             int index,
             PlayerEntity playerEntity,
-            HeroConfig heroConfig, 
-            HeroListView player,
+            HeroConfig heroConfig,
             HeroEntitiesCollection entitiesCollection,
             IReadOnlyList<HeroView> heroViews)
         {
@@ -74,7 +72,6 @@ namespace EventBus
                 Debug.LogError($"Index {index} is out of bounds for heroViews with count {heroViews.Count}.");
                 return;
             }
-            
             heroViews[index].SetIcon(heroConfig.heroImage);
             heroViews[index].name = heroConfig.heroImage.name;
             AbilityComponent abilityComponent = new AbilityComponent

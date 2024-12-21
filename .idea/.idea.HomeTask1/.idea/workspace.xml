@@ -6,7 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/BluePlayerConfig.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/BluePlayerConfig.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/NewAllHeroesConfig.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/NewAllHeroesConfig.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/OrcConfig.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/OrcConfig.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/RedPlayerConfig.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Configs/RedPlayerConfig.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Prefabs/UI/HeroView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/EventBus/Prefabs/UI/HeroView.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Scenes/Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/EventBus/Scenes/Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Scripts/Helpers/NonMono/PlayerEntitiesInitiator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/EventBus/Scripts/Helpers/NonMono/PlayerEntitiesInitiator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/EventBus/Scripts/UI/HeroView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/EventBus/Scripts/UI/HeroView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,18 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "casey-gregor"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;casey-gregor&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/casey-gregor/OTUS-HomeTask1.git",
-    "accountId": "3e937566-cbd2-451d-a0c5-fabaea19f148"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/casey-gregor/OTUS-HomeTask1.git&quot;,
+    &quot;accountId&quot;: &quot;3e937566-cbd2-451d-a0c5-fabaea19f148&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/b0/03477ec7/IDisposable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
@@ -45,16 +56,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Standalone Player.Start Unity.executor": "Debug",
-    "XThreadsFramesViewSplitterKey": "0.6426799",
-    "git-widget-placeholder": "EventBus"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.6426799&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;EventBus&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
@@ -132,6 +143,7 @@
       <workItem from="1729520226154" duration="37009000" />
       <workItem from="1729618806379" duration="12023000" />
       <workItem from="1734607651050" duration="2516000" />
+      <workItem from="1734797296169" duration="2241000" />
     </task>
     <servers />
   </component>
