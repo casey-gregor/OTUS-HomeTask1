@@ -29,7 +29,6 @@ namespace Game.GamePlay.Upgrades
         public bool CanSpendMoney(int amount)
         {
             var result = amount <= _money;
-            Debug.Log($"Can spend {amount} of all money {_money} = {result}");
             return result;
         }
     }

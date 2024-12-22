@@ -25,8 +25,8 @@ namespace UpgradesManager
 
         protected override void OnLevelUpgrade()
         {
-            conveyorEntity.Get<IConveyor_SetLoadStorageComponent>().
-                SetLoadStorage(NextLevelCapacity);
+            conveyorEntity.Get<IConveyor_SetProduceTimeComponent>().
+                SetProduceTime(NextLevelCapacity);
         }
     }
 }

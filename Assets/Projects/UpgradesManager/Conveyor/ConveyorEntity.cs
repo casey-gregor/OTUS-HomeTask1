@@ -1,17 +1,18 @@
 using Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UpgradesManager
 {
     public class ConveyorEntity : MonoEntityBase
     {
-        [SerializeField] private ConveyorModel _model;
+        [SerializeField] private ConveyorModel model;
         
         private void Awake()
         {
-            Add(new Conveyor_SetLoadStorageComponent(_model.LoadStorageCapacity));            
-            Add(new Conveyor_SetUnloadStorageComponent(_model.UnloadStorageCapacity));            
-            Add(new Conveyor_SetProduceTimeComponent(_model.ProduceTime));            
+            Add(new Conveyor_SetLoadStorageComponent(model.LoadStorageCapacity));            
+            Add(new Conveyor_SetUnloadStorageComponent(model.UnloadStorageCapacity));            
+            Add(new Conveyor_SetProduceTimeComponent(model.ProduceTime));            
         }
         
     }

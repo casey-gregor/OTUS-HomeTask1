@@ -7,9 +7,12 @@
     <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Fonts/GrenzeGotisch-VariableFont_wght SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/GrenzeGotisch-VariableFont_wght SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Prefabs/UpgradeButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Prefabs/UpgradeButton.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Scenes/Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Scenes/Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Views/MoneyView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Views/MoneyView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Conveyor/ConveyorEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Conveyor/ConveyorEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/MoneyStorage/MoneyStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/MoneyStorage/MoneyStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Upgrades/UpgradeProcessingTime.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/UpgradesManager/Upgrades/UpgradeProcessingTime.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +141,7 @@
       <workItem from="1729691347697" duration="41801000" />
       <workItem from="1729864985710" duration="17263000" />
       <workItem from="1729941752400" duration="4120000" />
-      <workItem from="1734877198897" duration="382000" />
+      <workItem from="1734877198897" duration="1574000" />
     </task>
     <servers />
   </component>
