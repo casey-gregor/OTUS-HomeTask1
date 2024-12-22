@@ -1,4 +1,5 @@
 ﻿using UI;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace EventBus
@@ -15,10 +16,15 @@ namespace EventBus
         }
         protected override void OnRun()
         {
-            Debug.Log("CrossDeadHeroTask started");
-            
-            if(_uiService.TryGetCrossImagePrefab(out GameObject crossImagePrefab))
-                GameObject.Instantiate(crossImagePrefab, _targetView.gameObject.transform);
+            if (_uiService.TryGetCrossImagePrefab(out GameObject crossImagePrefab))
+            {
+                GameObject.Instantiate(
+                    crossImagePrefab,
+                    _targetView.gameObject.transform.position, 
+                    quaternion.identity, 
+                    _targetView.gameObject.transform);
+            }
+               
             
             Finish();
         }
