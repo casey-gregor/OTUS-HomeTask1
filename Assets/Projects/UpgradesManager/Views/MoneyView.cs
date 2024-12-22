@@ -14,7 +14,7 @@ namespace UpgradesManager
         
         public void UpdateMoneyView(int value)
         {
-            _moneyTextComponent.text = $"Money Available : {value}";
+            _moneyTextComponent.text = $"{value}";
         }
     }
 }
