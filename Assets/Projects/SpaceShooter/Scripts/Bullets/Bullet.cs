@@ -34,7 +34,7 @@ namespace ShootEmUp
             this.spriteRenderer.color = bulletConfig.color;
             this.transform.position = startPosition;
             this.velocity = direction * bulletConfig.speed;
-            this.rb.velocity = velocity;
+            this.rb.linearVelocity = velocity;
             SetIsActive(true);
         }
 
@@ -45,17 +45,17 @@ namespace ShootEmUp
 
         public void OnPause()
         {
-            this.rb.velocity = Vector2.zero;
+            this.rb.linearVelocity = Vector2.zero;
         }
 
         public void OnResume()
         {
-            this.rb.velocity = velocity;
+            this.rb.linearVelocity = velocity;
         }
 
         public void OnFinish()
         {
-            this.rb.velocity = Vector2.zero;
+            this.rb.linearVelocity = Vector2.zero;
         }
     }
 }
