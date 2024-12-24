@@ -11,6 +11,8 @@ namespace Inventory
         
         public Entity entity;
         public ItemConfig config;
+        public ItemView itemPrefab;
+        public Transform itemContainer;
         
         public int headSlotCapacity = 1;
         public int bodySlotCapacity = 1;
@@ -20,6 +22,8 @@ namespace Inventory
         
         public Inventory Inventory { get; private set; }
         public SlotsManager SlotsManager { get; private set; }
+        
+        private ItemInstantiator _itemInstantiator;
         
         [Inject]
         private void Construct(EventNotifier eventNotifier)
@@ -31,6 +35,8 @@ namespace Inventory
                 new InventorySlot(SlotType.Feet, feetSlotCapacity),
                 new InventorySlot(SlotType.Backpack, backpackSlotCapacity));
             
+            _itemInstantiator = new ItemInstantiator();
+            
             Inventory = new Inventory(eventNotifier, SlotsManager);
             
             OnInventoryInitialized?.Invoke();
@@ -40,6 +46,7 @@ namespace Inventory
         public void AddItemToInventory()
         {
             InventoryItem item = config.inventoryItem.Clone();
+            _itemInstantiator.CreateItem(itemPrefab, item, itemContainer);
             Inventory.AddItem(item);
         }
         
