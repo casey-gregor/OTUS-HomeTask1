@@ -11,6 +11,8 @@ namespace Inventory
         
         public Entity entity;
         public ItemConfig config;
+        public ItemView itemPrefab;
+        public Transform itemContainer;
         [Min(-1)]
         public int inventoryCapacity = -1;// -1 is unlimited
         [Min(1)]
@@ -25,6 +27,8 @@ namespace Inventory
         public Inventory Inventory { get; private set; }
         public EquipmentManager EquipmentManager { get; private set; }
         
+        private ItemInstantiator _itemInstantiator;
+        
         [Inject]
         private void Construct(InventoryEventNotifier inventoryEventNotifier)
         {
@@ -37,6 +41,7 @@ namespace Inventory
                 new EquipmentSlot(EquipmentSlotType.Feet, feetSlotCapacity),
                 Inventory);
             
+            _itemInstantiator = new ItemInstantiator();
             
             OnInventoryInitialized?.Invoke();
         }
@@ -45,6 +50,7 @@ namespace Inventory
         public void AddItemToInventory()
         {
             InventoryItem item = config.inventoryItem.Clone();
+            _itemInstantiator.CreateItem(itemPrefab, item, itemContainer);
             if (item != null)
                 Inventory.AddItem(item);
         }
