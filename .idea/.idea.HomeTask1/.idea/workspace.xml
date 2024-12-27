@@ -4,43 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentEventNotifier.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentEventNotifier.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs.meta" afterDir="false" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="added ui, added functionality for adding to the ui&#10;fixed tests and bugs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Prefabs/ItemPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Prefabs/ItemPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scenes/Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scenes/Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/BodyArmorItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/BodyArmorItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/BootsItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/BootsItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/HelmetItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/HelmetItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/PotionItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/PotionItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/ShieldItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/ShieldItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/SwordItemConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Configs/SwordItemConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Enums/EquipmentSlotType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Enums/EquipmentSlotType.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/Inventory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/InventoryItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/InventoryItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/ComponentsObserver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/ComponentsObserver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryEventNotifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryEventNotifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/ItemInstantiator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/ItemInstantiator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/TypeToParentConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/UISlotProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/TypeToParentConverter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/UISlotProvider.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/ItemComponents/ArmorComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/ItemComponents/ArmorComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryLogger.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/ItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/ItemView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/UI/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Zenject/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Zenject/SceneInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Tests/InventoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Tests/InventoryTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +47,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/7e/a8da36e0/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Development/Unity_projects/OTUSProjects/Untangle&amp;ZenjectHT/HomeTask1/Assets/Projects/Inventory/Scripts/Configs/BodyArmorItemConfig.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Runtime/TMP/TextMeshProUGUI.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -186,7 +163,7 @@
       <workItem from="1735064633673" duration="34399000" />
       <workItem from="1735229118612" duration="7615000" />
       <workItem from="1735294630351" duration="952000" />
-      <workItem from="1735295607021" duration="4279000" />
+      <workItem from="1735295607021" duration="4928000" />
     </task>
     <task id="LOCAL-00001" summary="removed unnecessary projects and asset packs">
       <option name="closed" value="true" />
@@ -236,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735042567334</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added ui, added functionality for adding to the ui&#10;fixed tests and bugs">
+      <option name="closed" value="true" />
+      <created>1735300099452</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735300099452</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -265,6 +250,7 @@
     <MESSAGE value="imported assets and odin" />
     <MESSAGE value="added UI elements" />
     <MESSAGE value="added item instantiator" />
-    <option name="LAST_COMMIT_MESSAGE" value="added item instantiator" />
+    <MESSAGE value="added ui, added functionality for adding to the ui&#10;fixed tests and bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ui, added functionality for adding to the ui&#10;fixed tests and bugs" />
   </component>
 </project>

@@ -19,19 +19,35 @@ namespace Inventory
         public event Action<int, InventoryItem> OnStackableItemRemoved;
 
        
-        public void NotifyInventoryUpdated() => OnInventoryUpdated?.Invoke();
-        public void NotifyItemAddedFailed(string itemName) => OnItemAddFailed?.Invoke(itemName);
-        public void NotifyItemConsumedFailed(string itemName) => OnItemConsumeFailed?.Invoke(itemName);
-        public void NotifyItemRemovedFailed(string itemName) => OnItemRemoveFailed?.Invoke(itemName);
-        public void NotifyInventoryTypeNone() => OnInventoryTypeNone?.Invoke();
-        public void NotifyItemConsumed(InventoryItem item) => OnItemConsumed?.Invoke(item);
+        public void NotifyInventoryUpdated() => 
+            OnInventoryUpdated?.Invoke();
+        
+        public void NotifyItemAddedFailed(string itemName) => 
+            OnItemAddFailed?.Invoke(itemName);
+        
+        public void NotifyItemConsumedFailed(string itemName) => 
+            OnItemConsumeFailed?.Invoke(itemName);
+        
+        public void NotifyItemRemovedFailed(string itemName) => 
+            OnItemRemoveFailed?.Invoke(itemName);
+        
+        public void NotifyInventoryTypeNone() => 
+            OnInventoryTypeNone?.Invoke();
+        
+        public void NotifyItemConsumed(InventoryItem item) => 
+            OnItemConsumed?.Invoke(item);
         
         public void NotifyItemAddedToInventory(InventoryItem item) => 
             OnItemAddedToInventory?.Invoke(item);
-        public void NotifyExistingItemAddedToInventory(int qty, InventoryItem item) => OnExistingItemAdded?.Invoke(qty, item);
+        
+        public void NotifyExistingItemAddedToInventory(int qty, InventoryItem item) => 
+            OnExistingItemAdded?.Invoke(qty, item);
+        
         public void NotifyItemRemovedFromInventory(InventoryItem item) => 
             OnItemRemovedFromInventory?.Invoke(item);
-        public void NotifyStackableItemRemoved(int qty, InventoryItem item) => OnStackableItemRemoved?.Invoke(qty, item);
+        
+        public void NotifyStackableItemRemoved(int qty, InventoryItem item) => 
+            OnStackableItemRemoved?.Invoke(qty, item);
         
         
     }

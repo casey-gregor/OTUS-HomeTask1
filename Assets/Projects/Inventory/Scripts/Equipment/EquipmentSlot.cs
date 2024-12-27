@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace Inventory
 {
@@ -47,10 +46,6 @@ namespace Inventory
             }
             return false;
         }
-
-        public Dictionary<InventoryItem, int> GetSlotItems() => _inventoryItems;
-        
-        private bool HasCapacity() => Capacity == -1 || _currentItemCount < Capacity;
         
         public bool TryFindItem(InventoryItem item, out InventoryItem foundItem)
         {
@@ -65,6 +60,10 @@ namespace Inventory
             foundItem = null;
             return false;
         }
+
+        public Dictionary<InventoryItem, int> GetSlotItems() => _inventoryItems;
+        
+        private bool HasCapacity() => Capacity == -1 || _currentItemCount < Capacity;
         
         private void AddItem(InventoryItem item)
         {

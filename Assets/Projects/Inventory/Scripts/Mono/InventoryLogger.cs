@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Inventory
 {
@@ -22,6 +21,48 @@ namespace Inventory
 
             SubscribeToInventoryEvents();
         }
+        
+        public void LogInventoryContents()
+        {
+            IReadOnlyDictionary<InventoryItem, int> inventoryItems = _inventory.GetInventoryItems();
+            
+            Dictionary<string, (int totalQuantity, int slotsOccupied)> inventorySummary = new();
+            foreach (var entry in inventoryItems)
+            {
+                string itemName = entry.Key.name;
+                int quantity = entry.Value;
+                if (inventorySummary.ContainsKey(itemName))
+                {
+                    (int totalQuantity, int slotsOccupied) currentSummary = inventorySummary[itemName];
+                    inventorySummary[itemName] = (
+                        currentSummary.totalQuantity + quantity,
+                        currentSummary.slotsOccupied + 1
+                    );
+                }
+                else
+                {
+                    inventorySummary[itemName] = (
+                        quantity,
+                        1
+                    );
+                }
+            }
+            
+            foreach (var summary in inventorySummary)
+            {
+                string itemName = summary.Key;
+                int totalQuantity = summary.Value.totalQuantity;
+                int slotsOccupied = summary.Value.slotsOccupied;
+        
+                Debug.Log($"{itemName} with qty of {totalQuantity} occupies {slotsOccupied} slot(s) of Inventory");
+            }
+        }
+
+        public void Dispose()
+        {
+            UnsubscribeFromInventoryEvents();
+        }
+        
         private void SubscribeToInventoryEvents()
         {
             _inventoryEventNotifier.OnInventoryUpdated += HandleInventoryChange;
@@ -106,48 +147,6 @@ namespace Inventory
         private void HandleInventoryChange()
         {
             LogInventoryContents();
-        }
-        
-        public void LogInventoryContents()
-        {
-            IReadOnlyDictionary<InventoryItem, int> inventoryItems = _inventory.GetInventoryItems();
-            
-            Dictionary<string, (int totalQuantity, int slotsOccupied)> inventorySummary = new();
-            foreach (var entry in inventoryItems)
-            {
-                string itemName = entry.Key.name;
-                int quantity = entry.Value;
-                if (inventorySummary.ContainsKey(itemName))
-                {
-                    (int totalQuantity, int slotsOccupied) currentSummary = inventorySummary[itemName];
-                    inventorySummary[itemName] = (
-                        currentSummary.totalQuantity + quantity,
-                        currentSummary.slotsOccupied + 1
-                    );
-                }
-                else
-                {
-                    inventorySummary[itemName] = (
-                        quantity,
-                        1
-                    );
-                }
-            }
-            
-            foreach (var summary in inventorySummary)
-            {
-                string itemName = summary.Key;
-                int totalQuantity = summary.Value.totalQuantity;
-                int slotsOccupied = summary.Value.slotsOccupied;
-        
-                Debug.Log($"{itemName} with qty of {totalQuantity} occupies {slotsOccupied} slot(s) of Inventory");
-            }
-            // Debug.Log($"slot {slot.GetSlotType()} size is {inventoryItems.Count}");
-        }
-
-        public void Dispose()
-        {
-            UnsubscribeFromInventoryEvents();
         }
     }
 }

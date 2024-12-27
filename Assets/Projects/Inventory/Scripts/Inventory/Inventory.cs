@@ -18,12 +18,9 @@ namespace Inventory
             _slotsNum = slotsNum;
             _capacity = capacity;
         }
-
-        private bool HasCapacity(InventoryItem item) =>
-            _capacity == -1 || _inventoryItems[item] < _capacity;
-
-        private bool HasFreeSlots() => _inventoryItems.Count < _slotsNum;
         
+        public IReadOnlyDictionary<InventoryItem, int> GetInventoryItems() => _inventoryItems;
+
         public void AddItem(InventoryItem item)
         {
             if (item.inventoryType == InventoryType.None)
@@ -85,11 +82,6 @@ namespace Inventory
             InventoryEventNotifier.NotifyItemRemovedFailed(item.name);
             return false;
         }
-
-        private void DestroyInventoryItem(InventoryItem item)
-        {
-            item.Dispose();
-        }
         
         public bool TryConsumeItem(InventoryItem item)
         {
@@ -103,8 +95,6 @@ namespace Inventory
             return false;
         }
         
-        public IReadOnlyDictionary<InventoryItem, int> GetInventoryItems() => _inventoryItems;
-        
         public bool TryFindItemToRemove(InventoryItem item, out InventoryItem foundItem)
         {
             foundItem = null;
@@ -116,6 +106,16 @@ namespace Inventory
                 }
             }
             return foundItem != null;
+        }
+        
+        private bool HasCapacity(InventoryItem item) =>
+            _capacity == -1 || _inventoryItems[item] < _capacity;
+
+        private bool HasFreeSlots() => _inventoryItems.Count < _slotsNum;
+       
+        private void DestroyInventoryItem(InventoryItem item)
+        {
+            item.Dispose();
         }
 
         private bool CheckIfConsumable(InventoryItem item) =>

@@ -33,6 +33,17 @@ namespace Inventory
             _equipmentNotifier.OnItemUnequipped += HandleItemUnequipped;
         }
 
+        public void Dispose()
+        {
+            _inventoryNotifier.OnItemAddedToInventory -= HandleNewItemEvent;
+            _inventoryNotifier.OnExistingItemAdded -= HandleExistingItemEvent;
+            _inventoryNotifier.OnItemRemovedFromInventory -= HandleItemRemoved;
+            _inventoryNotifier.OnStackableItemRemoved -= HandleStackableItemRemoved;
+            
+            _equipmentNotifier.OnItemEquipped -= HandleItemEquipped;
+            _equipmentNotifier.OnItemUnequipped -= HandleItemUnequipped;
+        }
+        
         private void HandleItemUnequipped(InventoryItem item, EquipmentSlot slot)
         {
             item.RemoveItemView();
@@ -71,17 +82,6 @@ namespace Inventory
             var itemView = item.GetItemView();
             itemView.UpdateQtyPopup(qty);
             itemView.ToggleQtyPopup(true);
-        }
-
-        public void Dispose()
-        {
-            _inventoryNotifier.OnItemAddedToInventory -= HandleNewItemEvent;
-            _inventoryNotifier.OnExistingItemAdded -= HandleExistingItemEvent;
-            _inventoryNotifier.OnItemRemovedFromInventory -= HandleItemRemoved;
-            _inventoryNotifier.OnStackableItemRemoved -= HandleStackableItemRemoved;
-            
-            _equipmentNotifier.OnItemEquipped -= HandleItemEquipped;
-            _equipmentNotifier.OnItemUnequipped -= HandleItemUnequipped;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Inventory
 
         public InventoryItem()
         {
-            
+            //Used for cloning;
         }
         public InventoryItem(
             string name, 
