@@ -4,21 +4,25 @@ namespace Inventory
 {
     public sealed class Inventory
     {
-        public int Capacity;
-        private int _currentItemCount;
         public InventoryEventNotifier InventoryEventNotifier { get; }
+        private readonly int _capacity;
+        private readonly int _slotsNum;
     
         private readonly Dictionary<InventoryItem, int> _inventoryItems = new();
         public Inventory(
+            int slotsNum,
             int capacity,
             InventoryEventNotifier inventoryEventNotifier)
         {
             InventoryEventNotifier = inventoryEventNotifier;
-            Capacity = capacity;
+            _slotsNum = slotsNum;
+            _capacity = capacity;
         }
-        
-        private bool HasCapacity() => Capacity == -1 || _currentItemCount < Capacity;
 
+        private bool HasCapacity(InventoryItem item) =>
+            _capacity == -1 || _inventoryItems[item] < _capacity;
+
+        private bool HasFreeSlots() => _inventoryItems.Count < _slotsNum;
         
         public void AddItem(InventoryItem item)
         {
@@ -30,7 +34,6 @@ namespace Inventory
 
             if (TryAddItem(item))
             {
-                InventoryEventNotifier.NotifyItemAddedToInventory(item);
                 InventoryEventNotifier.NotifyInventoryUpdated();
             }
             else
@@ -39,26 +42,11 @@ namespace Inventory
             }
         }
         
-        
-        private bool TryAddItem(InventoryItem item)
-        {
-            if (!HasCapacity())
-            {
-                return false;
-            }
-
-            if (TryFindItem(item, out InventoryItem foundItem))
-            {
-                return HandleExistingItem(foundItem, item);
-            }
-            return AddNewItem(item);
-        }
-        
         public bool TryFindItem(InventoryItem item, out InventoryItem foundItem)
         {
             foreach (InventoryItem key in _inventoryItems.Keys)
             {
-                if (key.name == item.name)
+                if (key.name == item.name && HasCapacity(key))
                 {
                     foundItem = key;
                     return true;
@@ -68,70 +56,104 @@ namespace Inventory
             return false;
         }
         
-        private bool AddNewItem(InventoryItem item)
+        public void RemoveItemCompletely(InventoryItem item)
         {
-            _inventoryItems[item] = 1;
-            _currentItemCount++;
-            return true;
-        }
-        
-        private bool HandleExistingItem(InventoryItem foundItem, InventoryItem item)
-        {
-            if ((item.inventoryType & InventoryType.Stackable) == InventoryType.Stackable)
+            if (RemoveFromInventory(item))
             {
-                _inventoryItems[foundItem] += 1;
-                _currentItemCount++;
-                return true;
+                DestroyInventoryItem(item);
             }
-    
-            return AddNewItem(item);
         }
-        
-        public bool TryRemoveItem(InventoryItem item)
+
+        public bool RemoveFromInventory(InventoryItem item)
         {
-            if (TryFindItem(item, out InventoryItem foundItem))
+            if (TryFindItemToRemove(item, out InventoryItem foundItem))
             {
                 if ((foundItem.inventoryType & InventoryType.Stackable) == InventoryType.Stackable
                     && _inventoryItems[foundItem] > 1)
                 {
-                    _inventoryItems[foundItem] -= 1;
-                    _currentItemCount--;
+                    _inventoryItems[foundItem]--;
+                    InventoryEventNotifier.NotifyStackableItemRemoved(_inventoryItems[foundItem], foundItem);
                 }
                 else
                 {
                     _inventoryItems.Remove(foundItem);
+                    InventoryEventNotifier.NotifyItemRemovedFromInventory(foundItem);
                 }
-                
-                InventoryEventNotifier.NotifyItemRemovedFromInventory(item);
                 InventoryEventNotifier.NotifyInventoryUpdated();
                 return true;
             }
             InventoryEventNotifier.NotifyItemRemovedFailed(item.name);
             return false;
         }
+
+        private void DestroyInventoryItem(InventoryItem item)
+        {
+            item.Dispose();
+        }
         
         public bool TryConsumeItem(InventoryItem item)
         {
             if (CheckIfConsumable(item))
             {
-                TryRemoveItem(item);
                 InventoryEventNotifier.NotifyItemConsumed(item);
+                RemoveItemCompletely(item);
                 return true;
             }
             InventoryEventNotifier.NotifyItemConsumedFailed(item.name);
             return false;
         }
         
-        public bool CheckIfConsumable(InventoryItem item)
+        public IReadOnlyDictionary<InventoryItem, int> GetInventoryItems() => _inventoryItems;
+        
+        public bool TryFindItemToRemove(InventoryItem item, out InventoryItem foundItem)
         {
-            if ((item.inventoryType & InventoryType.Consumable) == InventoryType.Consumable)
+            foundItem = null;
+            foreach (InventoryItem key in _inventoryItems.Keys)
             {
+                if (key.name == item.name)
+                {
+                    foundItem = key;
+                }
+            }
+            return foundItem != null;
+        }
+
+        private bool CheckIfConsumable(InventoryItem item) =>
+            (item.inventoryType & InventoryType.Consumable) == InventoryType.Consumable;
+        
+        
+        private bool TryAddItem(InventoryItem item)
+        {
+            if ((item.inventoryType & InventoryType.Stackable) == InventoryType.Stackable)
+            {
+                return HandleStackableItem(item);
+            }
+            
+            return AddNewItem(item);
+        }
+        
+        private bool AddNewItem(InventoryItem item)
+        {
+            if (HasFreeSlots())
+            {
+                _inventoryItems[item] = 1;
+                InventoryEventNotifier.NotifyItemAddedToInventory(item);
                 return true;
             }
             return false;
         }
         
-        public Dictionary<InventoryItem, int> GetInventoryItems() => _inventoryItems;
+        private bool HandleStackableItem(InventoryItem item)
+        {
+            if (TryFindItem(item, out var foundItem))
+            {
+                _inventoryItems[foundItem] += 1;
+                InventoryEventNotifier.NotifyExistingItemAddedToInventory(_inventoryItems[foundItem], foundItem);
+                return true;
+            }
+    
+            return AddNewItem(item);
+        }
         
     }
 }

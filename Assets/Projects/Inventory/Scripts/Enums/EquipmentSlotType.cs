@@ -4,8 +4,9 @@
     {
         None,
         Head,
-        Arms,
         Body,
+        RightHand,
+        LeftHand,
         Feet
     }
 }

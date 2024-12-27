@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -7,19 +8,24 @@ namespace Inventory
         private readonly Dictionary<EquipmentSlotType, EquipmentSlot> _equipmentSlots = new();
         
         private readonly Inventory _inventory;
+        private readonly EquipmentEventNotifier _equipmentEventNotifier;
 
         public EquipmentManager(
             EquipmentSlot headSlot, 
             EquipmentSlot bodySlot, 
-            EquipmentSlot armsSlot, 
-            EquipmentSlot feetSlot, 
-            Inventory inventory)
+            EquipmentSlot rightHandSlot,
+            EquipmentSlot leftHandSlot,
+            EquipmentSlot feetSlot,
+            Inventory inventory, 
+            EquipmentEventNotifier equipmentEventNotifier)
         {
             _inventory = inventory;
+            _equipmentEventNotifier = equipmentEventNotifier;
 
             _equipmentSlots.Add(EquipmentSlotType.Head, headSlot);
             _equipmentSlots.Add(EquipmentSlotType.Body, bodySlot);
-            _equipmentSlots.Add(EquipmentSlotType.Arms, armsSlot);
+            _equipmentSlots.Add(EquipmentSlotType.RightHand, rightHandSlot);
+            _equipmentSlots.Add(EquipmentSlotType.LeftHand, leftHandSlot);
             _equipmentSlots.Add(EquipmentSlotType.Feet, feetSlot);
         }
         
@@ -27,16 +33,16 @@ namespace Inventory
         {
             if (_inventory.TryFindItem(item, out var foundItem))
             {
-                var slot = GetSlotFromDict(item.equipmentSlotType);
+                var slot = GetSlotFromDict(foundItem.equipmentSlotType);
                 if (slot != default && slot.TryAddItem(foundItem))
                 {
-                    _inventory.InventoryEventNotifier.NotifyItemEquipped(foundItem, slot);
-                    _inventory.TryRemoveItem(foundItem);
+                    _inventory.RemoveFromInventory(foundItem);
+                    _equipmentEventNotifier.NotifyItemEquipped(foundItem, slot);
                     return true;
                 }
             }
 
-            _inventory.InventoryEventNotifier.NotifyItemNotEquippable(item.name);
+            _equipmentEventNotifier.NotifyItemNotEquippable(item.name);
             return false;
         }
 
@@ -47,20 +53,23 @@ namespace Inventory
             {
                 if (slot.TryRemoveItem(foundItem))
                 {
-                    _inventory.InventoryEventNotifier.NotifyItemUnequipped(foundItem, slot);
+                    _equipmentEventNotifier.NotifyItemUnequipped(foundItem, slot);
+                    
                     _inventory.AddItem(item);
                     return true;
                 }
             }
 
-            _inventory.InventoryEventNotifier.NotifyItemNotEquipped(item.name);
+            _equipmentEventNotifier.NotifyItemNotEquipped(item.name);
             return false;
         }
 
         public EquipmentSlot GetSlotFromDict(EquipmentSlotType equipmentSlotType)
         {
-            if(_equipmentSlots.TryGetValue(equipmentSlotType, out var slot))
+            if (_equipmentSlots.TryGetValue(equipmentSlotType, out var slot))
+            {
                 return slot;
+            }
             return default;
         }
         

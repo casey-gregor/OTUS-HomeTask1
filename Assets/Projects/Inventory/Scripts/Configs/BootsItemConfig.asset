@@ -16,7 +16,7 @@ MonoBehaviour:
     name: Boots
     icon: {fileID: 21300000, guid: 1b08214279ff3fa4db8f0ca660e491f1, type: 3}
     inventoryType: 2
-    slotType: 4
+    equipmentSlotType: 5
     itemComponents:
     - rid: 6819616006830030867
     - rid: 6819616006830030859

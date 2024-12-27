@@ -16,7 +16,7 @@ MonoBehaviour:
     name: Sword
     icon: {fileID: 21300000, guid: 28b12533d82aa2f4b9897109c1fd7e31, type: 3}
     inventoryType: 2
-    slotType: 2
+    equipmentSlotType: 3
     itemComponents:
     - rid: 6819616006830030871
     - rid: 6819616006830030872

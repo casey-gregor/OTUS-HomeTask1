@@ -16,13 +16,18 @@ MonoBehaviour:
     name: BodyArmor
     icon: {fileID: 21300000, guid: f1cb9427dd36aa248a700a237d292353, type: 3}
     inventoryType: 2
-    equipmentSlotType: 3
+    equipmentSlotType: 2
     itemComponents:
-    - rid: 6819616006830030866
+    - rid: 5470158870032417016
+    - rid: 5470158870032417017
   references:
     version: 2
     RefIds:
-    - rid: 6819616006830030866
+    - rid: 5470158870032417016
       type: {class: ArmorComponent, ns: Inventory, asm: Inventory}
       data:
-        Armor: 30
+        Armor: 50
+    - rid: 5470158870032417017
+      type: {class: HealthComponent, ns: Inventory, asm: Inventory}
+      data:
+        Health: 20

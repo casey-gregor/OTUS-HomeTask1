@@ -11,6 +11,7 @@ namespace Inventory
         private Inventory _inventory;
         private EquipmentManager _equipmentManager;
         private InventoryEventNotifier _inventoryEventNotifier;
+        private EquipmentEventNotifier _equipmentEventNotifier;
         private TestCharacter _testCharacter;
         private ComponentsObserver _componentsObserver;
 
@@ -19,20 +20,27 @@ namespace Inventory
         {
             _testCharacter = new TestCharacter();
             _inventoryEventNotifier = new InventoryEventNotifier();
-            _componentsObserver = new ComponentsObserver(_inventoryEventNotifier, _testCharacter);
-            _inventory = new Inventory(-1, _inventoryEventNotifier);
+            _equipmentEventNotifier = new EquipmentEventNotifier();
+            _componentsObserver = new ComponentsObserver(
+                _inventoryEventNotifier, 
+                _equipmentEventNotifier,
+                _testCharacter);
+            _inventory = new Inventory(12,-1, _inventoryEventNotifier);
             
             var bodySlot = new EquipmentSlot(EquipmentSlotType.Body, 1);
             var headSlot = new EquipmentSlot(EquipmentSlotType.Head, 1);
-            var armsSlot = new EquipmentSlot(EquipmentSlotType.Arms, 2);
-            var feetSlot = new EquipmentSlot(EquipmentSlotType.Feet, 2);
+            var rightHandSlot = new EquipmentSlot(EquipmentSlotType.RightHand, 1);
+            var leftHandSlot = new EquipmentSlot(EquipmentSlotType.LeftHand, 1);
+            var feetSlot = new EquipmentSlot(EquipmentSlotType.Feet, 1);
             
             _equipmentManager = TestHelper.CreateEquipmentManager(
-                bodySlot,
                 headSlot,
-                armsSlot,
+                bodySlot,
+                rightHandSlot,
+                leftHandSlot,
                 feetSlot,
-                _inventory);
+                _inventory,
+                _equipmentEventNotifier);
         }
         
         [Test]
@@ -55,7 +63,8 @@ namespace Inventory
             // //Assert
             Assert.AreEqual(1, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Head).GetSlotItems().Count);
             Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Body).GetSlotItems().Count);
-            Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Arms).GetSlotItems().Count);
+            Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.RightHand).GetSlotItems().Count);
+            Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.LeftHand).GetSlotItems().Count);
             Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Feet).GetSlotItems().Count);
         }
         
@@ -432,7 +441,7 @@ namespace Inventory
             
             //Act
             TestHelper.TryEquipItem(_equipmentManager, itemConfig);
-            _inventoryEventNotifier.OnItemEquipped -= _componentsObserver.HandleItemAdded;
+            _equipmentEventNotifier.OnItemEquipped -= _componentsObserver.HandleItemAdded;
             
             //Assert
             Assert.AreEqual(1, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Head).GetSlotItems().Count);
@@ -460,7 +469,7 @@ namespace Inventory
             
             //Act
             TestHelper.TryUnequipItem(_equipmentManager, itemConfig);
-            _inventoryEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
+            _equipmentEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
             
             //Assert
             Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Head).GetSlotItems().Count);
@@ -489,7 +498,7 @@ namespace Inventory
             
             //Act
             TestHelper.TryUnequipItem(_equipmentManager, itemConfig);
-            _inventoryEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
+            _equipmentEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
             
             //Assert
             Assert.AreEqual(0, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Head).GetSlotItems().Count);
@@ -518,7 +527,7 @@ namespace Inventory
             
             //Act
             TestHelper.TryEquipItem(_equipmentManager, itemConfig);
-            _inventoryEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
+            _equipmentEventNotifier.OnItemUnequipped -= _componentsObserver.HandleItemUnequipped;
             
             //Assert
             Assert.AreEqual(1, _equipmentManager.GetSlotFromDict(EquipmentSlotType.Head).GetSlotItems().Count);
@@ -548,7 +557,7 @@ namespace Inventory
         public void WhenTryAddItemToInventory_AndInventoryCapacityIsFull_TheNotAddItemToInventory()
         {
             //Arrange
-            Inventory inventory = new Inventory(1, _inventoryEventNotifier);
+            Inventory inventory = new Inventory(1,1, _inventoryEventNotifier);
             var itemComponents = new List<IItemComponent>();
             
             var itemConfig = TestHelper.CreateItemConfig(
@@ -600,16 +609,20 @@ namespace Inventory
         public static EquipmentManager CreateEquipmentManager(
             EquipmentSlot headSlot,
             EquipmentSlot bodySlot,
-            EquipmentSlot armsSlot,
+            EquipmentSlot rightHandSlot,
+            EquipmentSlot leftHandSlot,
             EquipmentSlot feetSlot,
-            Inventory inventory)
+            Inventory inventory,
+            EquipmentEventNotifier equipmentEventNotifier)
         {
             return new EquipmentManager(
                 headSlot, 
                 bodySlot, 
-                armsSlot, 
+                rightHandSlot, 
+                leftHandSlot,
                 feetSlot,
-                inventory);
+                inventory,
+                equipmentEventNotifier);
         }
         public static ItemConfig CreateItemConfig(
             string itemName, 
@@ -618,15 +631,14 @@ namespace Inventory
             List<IItemComponent> itemComponents)
         {
             var itemConfig = ScriptableObject.CreateInstance<ItemConfig>();
-            InventoryItem item = new InventoryItem()
-            {
-                name = itemName,
-                inventoryType = inventoryType,
-                equipmentSlotType = equipmentSlotType,
-                itemComponents = itemComponents
-            };
+            InventoryItem item = new InventoryItem(
+                name: itemName, 
+                inventoryType: inventoryType, 
+                equipmentSlotType: equipmentSlotType, 
+                itemComponents: itemComponents);
             itemConfig.inventoryItem = item;
             return itemConfig;
+            
         }
         
         public static bool TryAddItemToInventory(Inventory inventory, ItemConfig config)
@@ -653,7 +665,7 @@ namespace Inventory
         public static bool TryRemoveItemFromInventory(Inventory inventory, ItemConfig config)
         {
             InventoryItem item = config.inventoryItem.Clone();
-            return inventory.TryRemoveItem(item);
+            return inventory.RemoveFromInventory(item);
         }
 
         public static bool TryConsumeItem(Inventory inventory, ItemConfig config)

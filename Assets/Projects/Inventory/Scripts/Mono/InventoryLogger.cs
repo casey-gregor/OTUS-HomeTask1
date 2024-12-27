@@ -1,29 +1,58 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Inventory
 {
-    public sealed class InventoryLogger : MonoBehaviour
+    public sealed class InventoryLogger : IDisposable
     {
-        [SerializeField] private InventoryManager inventoryManager;
-        private Inventory Inventory => inventoryManager.Inventory;
-        private InventoryEventNotifier InventoryEventNotifier => Inventory.InventoryEventNotifier;
-        
-        private void Awake()
+        private readonly Inventory _inventory;
+        private readonly InventoryEventNotifier _inventoryEventNotifier;
+        private readonly EquipmentEventNotifier _equipmentEventNotifier;
+
+        public InventoryLogger(
+            Inventory inventory, 
+            InventoryEventNotifier inventoryEventNotifier, 
+            EquipmentEventNotifier equipmentEventNotifier)
         {
-            InventoryEventNotifier.OnInventoryUpdated += HandleInventoryChange;
-            InventoryEventNotifier.OnInventoryTypeNone += HandleInventoryTypeNone;
-            InventoryEventNotifier.OnItemEquipped += HandleItemEquipped;
-            InventoryEventNotifier.OnItemAddFailed += HandleItemAddFailed;
-            InventoryEventNotifier.OnItemConsumeFailed += HandleItemConsumedFailed;
-            InventoryEventNotifier.OnItemRemoveFailed += HandleItemRemoveFailed;
-            InventoryEventNotifier.OnItemUnequipped += HandleItemUnequipped;
-            InventoryEventNotifier.OnItemConsumed += HandleItemConsumed;
-            InventoryEventNotifier.OnItemRemovedFromInventory += HandleItemRemovedFromInventory;
-            InventoryEventNotifier.OnItemNotEquipped += HandleItemNotEquipped;
-            InventoryEventNotifier.OnItemNotWearable += HandleItemNotWearable;
+            _inventory = inventory;
+            _inventoryEventNotifier = inventoryEventNotifier;
+            _equipmentEventNotifier = equipmentEventNotifier;
+
+            SubscribeToInventoryEvents();
+        }
+        private void SubscribeToInventoryEvents()
+        {
+            _inventoryEventNotifier.OnInventoryUpdated += HandleInventoryChange;
+            _inventoryEventNotifier.OnInventoryTypeNone += HandleInventoryTypeNone;
+            _inventoryEventNotifier.OnItemAddFailed += HandleItemAddFailed;
+            _inventoryEventNotifier.OnItemConsumeFailed += HandleItemConsumedFailed;
+            _inventoryEventNotifier.OnItemRemoveFailed += HandleItemRemoveFailed;
+            _inventoryEventNotifier.OnItemConsumed += HandleItemConsumed;
+            _inventoryEventNotifier.OnItemRemovedFromInventory += HandleItemRemovedFromInventory;
+            
+            _equipmentEventNotifier.OnItemUnequipped += HandleItemUnequipped;
+            _equipmentEventNotifier.OnItemEquipped += HandleItemEquipped;
+            _equipmentEventNotifier.OnItemNotEquipped += HandleItemNotEquipped;
+            _equipmentEventNotifier.OnItemNotWearable += HandleItemNotWearable;
         }
 
+        private void UnsubscribeFromInventoryEvents()
+        {
+            _inventoryEventNotifier.OnInventoryUpdated -= HandleInventoryChange;
+            _inventoryEventNotifier.OnInventoryTypeNone -= HandleInventoryTypeNone;
+            _inventoryEventNotifier.OnItemAddFailed -= HandleItemAddFailed;
+            _inventoryEventNotifier.OnItemConsumeFailed -= HandleItemConsumedFailed;
+            _inventoryEventNotifier.OnItemRemoveFailed -= HandleItemRemoveFailed;
+            _inventoryEventNotifier.OnItemConsumed -= HandleItemConsumed;
+            _inventoryEventNotifier.OnItemRemovedFromInventory -= HandleItemRemovedFromInventory;
+            
+            _equipmentEventNotifier.OnItemUnequipped -= HandleItemUnequipped;
+            _equipmentEventNotifier.OnItemEquipped -= HandleItemEquipped;
+            _equipmentEventNotifier.OnItemNotEquipped -= HandleItemNotEquipped;
+        }
+        
         private void HandleItemNotWearable(string itemName)
         {
             Debug.Log($"Item {itemName} can not be equipped.");
@@ -81,7 +110,7 @@ namespace Inventory
         
         public void LogInventoryContents()
         {
-            Dictionary<InventoryItem, int> inventoryItems = Inventory.GetInventoryItems();
+            IReadOnlyDictionary<InventoryItem, int> inventoryItems = _inventory.GetInventoryItems();
             
             Dictionary<string, (int totalQuantity, int slotsOccupied)> inventorySummary = new();
             foreach (var entry in inventoryItems)
@@ -116,18 +145,9 @@ namespace Inventory
             // Debug.Log($"slot {slot.GetSlotType()} size is {inventoryItems.Count}");
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
-            InventoryEventNotifier.OnInventoryUpdated -= HandleInventoryChange;
-            InventoryEventNotifier.OnInventoryTypeNone -= HandleInventoryTypeNone;
-            InventoryEventNotifier.OnItemEquipped -= HandleItemEquipped;
-            InventoryEventNotifier.OnItemAddFailed -= HandleItemAddFailed;
-            InventoryEventNotifier.OnItemConsumeFailed -= HandleItemConsumedFailed;
-            InventoryEventNotifier.OnItemRemoveFailed -= HandleItemRemoveFailed;
-            InventoryEventNotifier.OnItemUnequipped -= HandleItemUnequipped;
-            InventoryEventNotifier.OnItemConsumed -= HandleItemConsumed;
-            InventoryEventNotifier.OnItemRemovedFromInventory -= HandleItemRemovedFromInventory;
-            InventoryEventNotifier.OnItemNotEquipped -= HandleItemNotEquipped;
+            UnsubscribeFromInventoryEvents();
         }
     }
 }

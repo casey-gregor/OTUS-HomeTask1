@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItem:
     name: HealthPotion
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: c6c016b5f4c60654a90b7c25670452dc, type: 3}
     inventoryType: 5
-    slotType: 0
+    equipmentSlotType: 0
     itemComponents:
-    - rid: 6819616006830030861
+    - rid: 5470158870032417007
   references:
     version: 2
     RefIds:
-    - rid: 6819616006830030861
+    - rid: 5470158870032417007
       type: {class: HealthComponent, ns: Inventory, asm: Inventory}
       data:
         Health: 30
