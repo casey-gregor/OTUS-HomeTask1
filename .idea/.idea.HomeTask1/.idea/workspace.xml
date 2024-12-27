@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="added ui, added functionality for adding to the ui&#10;fixed tests and bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Equipment/EquipmentSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Interfaces/IInventoryHandler.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/InventoryItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Inventory/InventoryItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryEventNotifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryEventNotifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/InventoryComponents/InventoryUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/ItemComponents/ArmorComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/ItemComponents/ArmorComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/Inventory/Scripts/Mono/InventoryManager.cs" afterDir="false" />
-    </list>
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,7 +150,7 @@
       <workItem from="1735064633673" duration="34399000" />
       <workItem from="1735229118612" duration="7615000" />
       <workItem from="1735294630351" duration="952000" />
-      <workItem from="1735295607021" duration="4928000" />
+      <workItem from="1735295607021" duration="5394000" />
     </task>
     <task id="LOCAL-00001" summary="removed unnecessary projects and asset packs">
       <option name="closed" value="true" />
@@ -221,7 +208,23 @@
       <option name="project" value="LOCAL" />
       <updated>1735300099452</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="minor edits">
+      <option name="closed" value="true" />
+      <created>1735300603882</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1735300603882</updated>
+    </task>
+    <task id="LOCAL-00009" summary="minor updates">
+      <option name="closed" value="true" />
+      <created>1735301032264</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1735301032264</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -251,6 +254,8 @@
     <MESSAGE value="added UI elements" />
     <MESSAGE value="added item instantiator" />
     <MESSAGE value="added ui, added functionality for adding to the ui&#10;fixed tests and bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ui, added functionality for adding to the ui&#10;fixed tests and bugs" />
+    <MESSAGE value="minor edits" />
+    <MESSAGE value="minor updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor updates" />
   </component>
 </project>
