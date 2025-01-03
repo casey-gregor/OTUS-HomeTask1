@@ -1,47 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RealTime
 {
     public sealed class ChestSpawner
     {
-        public List<Chest> SpawnedChests = new();
+        public event Action SpawnedSavedChests;
+        public List<ChestModel> SpawnedChests = new();
+        private readonly Dictionary<string, ChestConfigData> _chestConfigDataDict = new();
+        private readonly SavedChestsInitializer _savedChestsInitializer;
 
-        private readonly ChestInitializer _chestInitializer;
-
-        public ChestSpawner(ChestInitializer chestInitializer)
+        public ChestSpawner(
+            IReadOnlyList<ChestConfigData> chestConfigsData,
+            SavedChestsInitializer savedChestsInitializer)
         {
-            _chestInitializer = chestInitializer;
+            _chestConfigDataDict = chestConfigsData.ToDictionary(configData => configData.ChestId);
+            _savedChestsInitializer = savedChestsInitializer;
         }
         public void SpawnSavedChests(
-            List<ChestConfig> chestConfigs, 
             ChestCollection chestCollection,
             Transform chestContainer)
         {
-            foreach (ChestData chestData in chestCollection.chests)
+            foreach (ChestSaveData chestSaveData in chestCollection.chests)
             {
-                ChestConfig config = chestConfigs.Find(chestConfig => chestConfig != null &&
-                    chestConfig.chestId == chestData.ChestId);
-                if (config != null)
+                if (_chestConfigDataDict.TryGetValue(chestSaveData.ChestId, out ChestConfigData chestConfigData))
                 {
-                    Chest chestComponent = SpawnChest(config, chestContainer);
-                    _chestInitializer.InitializeChest(chestComponent, chestData);
+                    ChestModel chestModelComponent = SpawnChest(chestConfigData.ChestPrefab, chestContainer);
+                    _savedChestsInitializer.InitializeSavedChest(
+                        chestModelComponent,
+                        chestConfigData.ChestId,
+                        chestConfigData.Rewards,
+                        chestConfigData.InitialTimer,
+                        chestSaveData.ReceivedTime,
+                        chestSaveData.TimeToOpen,
+                        chestSaveData.IsUnlocked,
+                        chestSaveData.CurrentTimer);
                 }
             }
+            SpawnedSavedChests?.Invoke();
+            
         }
 
-        public Chest SpawnChest(ChestConfig config, Transform chestContainer)
+        public ChestModel SpawnChest(GameObject prefab, Transform chestContainer)
         {
-            GameObject chest = GameObject.Instantiate(config.chestPrefab, chestContainer);
-            chest.name = config.chestId;
-            Chest chestComponent = chest.GetComponent<Chest>();
-            chestComponent.SetId(config.chestId);
-            chestComponent.SetBonuses(config.bonuses);
-            chestComponent.SetTimerMinutes(TimeSpan.FromMinutes(config.minutesBeforeOpen));
-            SpawnedChests.Add(chestComponent);
-
-            return chestComponent;
+            GameObject chest = GameObject.Instantiate(prefab, chestContainer);
+            ChestView chestView = chest.GetComponentInChildren<ChestView>();
+            ChestPresenter chestPresenter = new ChestPresenter(chestView);
+            ChestModel chestModel = new ChestModel(chestPresenter);
+            SpawnedChests.Add(chestModel);
+            
+            return chestModel;
         }
     }
+    
 }

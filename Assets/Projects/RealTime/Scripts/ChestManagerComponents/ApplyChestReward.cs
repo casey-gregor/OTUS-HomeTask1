@@ -1,4 +1,6 @@
-﻿namespace RealTime
+﻿using System.Collections.Generic;
+
+namespace RealTime
 {
     public class ApplyChestReward
     {
@@ -9,9 +11,9 @@
             _entity = entity;
         }
 
-        public void ApplyReward(Chest chest)
+        public void ApplyReward(List<IReward> rewards)
         {
-            foreach (IReward reward in chest.Rewards)
+            foreach (IReward reward in rewards)
             {
                 reward.Apply(_entity);
             }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestId: SilverChest
   chestType: 1
-  chestPrefab: {fileID: 4706838887061533981, guid: 9d0183bb7a8906f43965566c59d5ace4, type: 3}
+  chestPrefab: {fileID: 55295776530463539, guid: fafc9ae38399f44459bcf2c544f4b3b4, type: 3}
   minutesBeforeOpen: 50
   bonuses:
   - rid: 2115232896257622017

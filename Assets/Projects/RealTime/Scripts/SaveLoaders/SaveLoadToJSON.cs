@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -24,6 +23,11 @@ namespace RealTime
         
         public void SaveChests(ChestCollection chestCollection)
         {
+            string directory = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             string json = JsonConvert.SerializeObject(chestCollection);
             File.WriteAllText(filePath, json);
         }

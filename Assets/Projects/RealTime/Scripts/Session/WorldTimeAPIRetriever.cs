@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 
 namespace RealTime
 {
-    public sealed class ServerTimeGetter
+    public sealed class WorldTimeAPIRetriever : IServerTimeRetriever
     {
         public event Action OnServerConnectStarted;
-        public event Action<string, TimeSpan> OnServerTimeReceived;
-        
+        public event Action<DateTime, TimeSpan> OnServerTimeReceived;
+
         private readonly string utcTimeURL = "http://worldtimeapi.org/api/timezone/etc/utc";
         private readonly CancellationTokenSource _cancellationToken = new();
         
-        public async UniTask GetServerTime()
+        public void RetrieveServerTime()
+        {
+            ConnectToServer().Forget();
+        }
+        
+        public async UniTask ConnectToServer()
         {
             DateTime start = DateTime.Now;
 
@@ -36,7 +42,7 @@ namespace RealTime
                         string responseText = request.downloadHandler.text;
                         TimeSpan serverResponseDuration = DateTime.Now - start;
                         
-                        OnServerTimeReceived?.Invoke(responseText, serverResponseDuration);
+                       ConvertServerResponse(responseText, serverResponseDuration);
                     }
                     else
                     {
@@ -50,6 +56,15 @@ namespace RealTime
                     await UniTask.Delay(1000);
                 }
             }
+        }
+        
+        private void ConvertServerResponse(string serverTimeText, TimeSpan responseDuration)
+        {
+            ServerTimeData serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(serverTimeText);
+            DateTime serverCurrentUtcTime = TextFormatter.StringToDateTimeUtcNonStrict(serverTimeData.utc_datetime);
+            // Debug.Log($"serverTime at {serverTime}");
+            
+            OnServerTimeReceived?.Invoke(serverCurrentUtcTime, responseDuration);
         }
 
         public void CancelServerTimeRequest()

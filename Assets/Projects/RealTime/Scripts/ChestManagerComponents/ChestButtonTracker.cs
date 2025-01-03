@@ -5,38 +5,45 @@ namespace RealTime
 {
     public sealed class ChestButtonTracker
     {
-        public event Action<Chest> OnChestButtonPressed;
-        private readonly List<Chest> _chests = new();
+        public event Action<ChestModel> OnChestButtonPressed;
+        private readonly Dictionary<ChestView, ChestModel> _chests = new();
 
-        public void AddToList(Chest chest)
+        public void AddToList(ChestModel chestModel)
         {
-            _chests.Add(chest);
-            SubscribeToChest(chest);
+            _chests.Add(chestModel.GetChestView(), chestModel);
+            SubscribeToChest(chestModel.GetChestView());
         }
 
-        public void RemoveFromList(Chest chest)
+        private void RemoveFromList(ChestView chestView)
         {
-            _chests.Remove(chest);
-            UnsubscribeFromChest(chest);
+            _chests.Remove(chestView);
+            UnsubscribeFromChest(chestView);
         }
 
-        private void UnsubscribeFromChest(Chest chest)
+        private void UnsubscribeFromChest(ChestView chestView)
         {
-            ButtonClickProcessor button = chest.openButton.GetComponent<ButtonClickProcessor>();
-            if(button != null)
+            ButtonClickProcessor button = chestView.OpenButton.GetComponent<ButtonClickProcessor>();
+            if (button != null)
+            {
                 button.OnButtonClick -= HandleOpenButton;
+            }
         }
 
-        private void SubscribeToChest(Chest chest)
+        private void SubscribeToChest(ChestView chestView)
         {
-            ButtonClickProcessor button = chest.openButton.GetComponent<ButtonClickProcessor>();
-            if(button != null)
+            
+            ButtonClickProcessor button = chestView.OpenButton.GetComponent<ButtonClickProcessor>();
+            if (button != null)
+            {
                 button.OnButtonClick += HandleOpenButton;
+            }
         }
 
-        public void HandleOpenButton(Chest chest)
+        public void HandleOpenButton(ChestView chestView)
         {
-            OnChestButtonPressed?.Invoke(chest);
+            ChestModel chestModel = _chests[chestView];
+            OnChestButtonPressed?.Invoke(chestModel);
+            RemoveFromList(chestView);
         }
     }
 }

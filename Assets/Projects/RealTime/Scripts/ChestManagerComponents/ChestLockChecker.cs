@@ -7,50 +7,73 @@ namespace RealTime
 {
     public sealed class ChestLockChecker
     {
-        public event Action<Chest> OnChestUnlocked;
+        public event Action<ChestModel> OnChestUnlocked;
         private readonly ChestSpawner _chestSpawner;
-        private readonly SessionLogger _sessionLogger;
+        private readonly SessionController _sessionController;
         
-        private bool _launchChecker;
+        private bool _checkerIsRunning;
+        private bool _notifyAllChestsUnlocked;
 
         public ChestLockChecker(
             ChestSpawner chestSpawner, 
-            SessionLogger sessionLogger)
+            SessionController sessionController)
         {
             _chestSpawner = chestSpawner;
-            _sessionLogger = sessionLogger;
+            _sessionController = sessionController;
         }
 
-        public void HandleUtcTimeReceivedEvent(DateTime _)
-        {
-            if (!_launchChecker && _chestSpawner.SpawnedChests.Count > 0)
-            {
-                RunChestChecker().Forget();
-                _launchChecker = true;
-            }
-        }
+        // public void StartChecking(DateTime _)
+        // {
+        //     if (!_checkerIsRunning && _chestSpawner.SpawnedChests.Count > 0)
+        //     {
+        //         _notifyAllChestsUnlocked = true;
+        //         _checkerIsRunning = true;
+        //         RunChestChecker().Forget();
+        //     }
+        // }
 
         public async UniTask RunChestChecker()
         {
-            while (!_chestSpawner.SpawnedChests.All(chest => chest.IsUnlocked))
+            while (!_chestSpawner.SpawnedChests.All(chest => chest.IsUnlocked))//Is going to run checks until all chests are unlocked;
             {
-                CheckChests();
-            
-                await UniTask.Delay(TimeSpan.FromMinutes(1)); 
+                Debug.Log("Waiting for chest to unlock");
+                _notifyAllChestsUnlocked = false;
+                CheckLockedChests();
+                await UniTask.Delay(TimeSpan.FromMinutes(1));
+            }
+
+            if (_notifyAllChestsUnlocked)//Needs to run once on startup to subscribe all chests' open button to open event;
+            {
+                Debug.Log("checking unlock on startup");
+                NotifyAllChestsUnlocked();
+                _notifyAllChestsUnlocked = false;
             }
         }
 
-        private void CheckChests()
+        private void CheckLockedChests()
         {
-            Debug.Log("Checking chests");
-            DateTime currentTime = _sessionLogger.UtcSessionStartTime.Add(_sessionLogger.SessionDuration);
-            foreach (Chest chest in _chestSpawner.SpawnedChests)
+            // _sessionController.GetCurrentUtcTime(out var currentUtcTime);
+            // foreach (Chest chest in _chestSpawner.SpawnedChests)
+            // {
+            //     TimeSpan timeLeft = currentUtcTime - chest.TimeToOpen;
+            //     if (timeLeft <= TimeSpan.Zero && !chest.IsUnlocked)
+            //     {
+            //         Debug.Log("chest unlocked");
+            //         chest.SetIsUnlocked(true);
+            //         OnChestUnlocked?.Invoke(chest);
+            //     }
+            //     else
+            //     {
+            //         chest.CountdownTimer(timeLeft);
+            //     }
+            // }
+        }
+
+        private void NotifyAllChestsUnlocked()
+        {
+            foreach (ChestModel chest in _chestSpawner.SpawnedChests)
             {
-                if (chest.TimeToOpen <= currentTime && !chest.IsUnlocked)
-                {
-                    chest.SetIsUnlocked(true);
-                    OnChestUnlocked?.Invoke(chest);
-                }
+                OnChestUnlocked?.Invoke(chest);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace RealTime
 {
@@ -13,18 +14,18 @@ namespace RealTime
             _chestActivator = chestActivator;
         }
 
-        private async UniTask InitiateChestLockAnimation(Chest chest)
+        private async UniTask LockChest(ChestModel chestModel)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(5));
-            chest.CloseChest();
+            chestModel.GetChestPresenter().CloseChest();
+            chestModel.SetIsUnlocked(false);
+            _chestActivator.ActivateChest(chestModel.InitialTimer.Minutes, chestModel);
+            OnChestLocked?.Invoke();
         }
 
-        public void LockChest(Chest chest)
+        public void InitiateChestLock(ChestModel chestModel)
         {
-            InitiateChestLockAnimation(chest).Forget();
-            chest.SetIsUnlocked(false);
-            _chestActivator.ActivateChest(chest.TimerMinutes.Minutes, chest);
-            OnChestLocked?.Invoke();
+            LockChest(chestModel).Forget();
         }
     }
 }

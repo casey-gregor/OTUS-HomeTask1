@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -7,19 +9,21 @@ namespace RealTime
 {
     public sealed class LogManager : MonoBehaviour
     {
-        private SessionLogger _sessionLogger;
+        private SessionController _sessionController;
         private SessionDataManager _sessionDataManager;
-        private ServerTimeGetter _serverTimeGetter;
+        private IServerTimeRetriever _serverTimeRetriever;
+        
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
 
         [Inject]
         private void Construct(
-            SessionLogger sessionLogger, 
+            SessionController sessionController, 
             SessionDataManager sessionDataManager, 
-            ServerTimeGetter serverTimeGetter)
+            IServerTimeRetriever serverTimeRetriever)
         {
-            _sessionLogger = sessionLogger;
+            _sessionController = sessionController;
             _sessionDataManager = sessionDataManager;
-            _serverTimeGetter = serverTimeGetter;
+            _serverTimeRetriever = serverTimeRetriever;
         }
 
         private void Start()
@@ -27,27 +31,39 @@ namespace RealTime
             _sessionDataManager.TryLoadSessionStartFromPrefs();
             _sessionDataManager.TryLoadSessionDurationFromPrefs();
             
-            var startData = _sessionLogger.LogStartSession();
+            var startData = _sessionController.LogUserStartSession();
             _sessionDataManager.SaveSessionStartToPrefs(startData);
             
-            var durationData = _sessionLogger.UpdateSessionDuration();
+            var durationData = _sessionController.UpdateUserSessionDuration();
             _sessionDataManager.SaveSessionDurationToPrefs(durationData);
-            
-            StartCoroutine(UpdateSessionDuration());
-            _serverTimeGetter.GetServerTime().Forget();
+
+            SaveSessionDuration(_sessionController.SessionDuration, _cancellationTokenSource.Token).Forget();
+            _serverTimeRetriever.RetrieveServerTime();
         }
         
         private void OnApplicationQuit()
         {
-            _sessionLogger.UpdateSessionDuration();
+            _sessionController.UpdateUserSessionDuration();
         }
 
-        private IEnumerator UpdateSessionDuration()
+        private void Update()
         {
-            yield return new WaitForSeconds(10);
-            var data = _sessionLogger.UpdateSessionDuration();
-            _sessionDataManager.SaveSessionDurationToPrefs(data);
-            StartCoroutine(UpdateSessionDuration());
+            _sessionController.UpdateUserSessionDuration();
         }
+
+        private async UniTaskVoid SaveSessionDuration(TimeSpan duration, CancellationToken cancelToken)
+        {
+            while (!cancelToken.IsCancellationRequested)
+            {
+                _sessionDataManager.SaveSessionDurationToPrefs(duration);
+                await UniTask.Delay(TimeSpan.FromSeconds(5), cancellationToken: cancelToken);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _cancellationTokenSource.Cancel();
+        }
+        
     }
 }

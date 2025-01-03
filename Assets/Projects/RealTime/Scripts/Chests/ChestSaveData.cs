@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace RealTime
 {
     [Serializable]
-    public sealed class ChestData
+    public sealed class ChestSaveData
     {
         [JsonProperty("chest_id")]
         public string ChestId { get; set; }
@@ -15,23 +16,30 @@ namespace RealTime
         [JsonProperty("time_to_open")]
         public string TimeToOpen { get; set; }
         
-        [JsonProperty("timer_minutes")]
-        public int TimerMinutes { get; set; }
+        [JsonProperty("initial_timer_minutes")]
+        public int InitialTimerMinutes { get; set; }
+        
+        [JsonProperty("current_timer_minutes")]
+        public int CurrentTimer { get; set; }
         
         [JsonProperty("is_unlocked")]
         public bool IsUnlocked { get; set; }
+        
 
-        public ChestData(
+        public ChestSaveData(
             string chestId, 
             string receivedTime, 
             string timeToOpen,
-            int timerMinutes,
-            bool isUnlocked)
+            int initialTimerMinutes,
+            int currentTimer,
+            bool isUnlocked
+            )
         {
             ChestId = chestId;
             ReceivedTime = receivedTime;
             TimeToOpen = timeToOpen;
-            TimerMinutes = timerMinutes;
+            InitialTimerMinutes = initialTimerMinutes;
+            CurrentTimer = currentTimer;
             IsUnlocked = isUnlocked;
         }
     }

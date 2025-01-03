@@ -10,18 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9ad09a59554a4e86af3320682fc93f, type: 3}
-  m_Name: BronzeChestConfig
+  m_Name: GoldChestConfig
   m_EditorClassIdentifier: 
-  chestId: BronzeChest
-  chestType: 0
+  chestId: GoldChest
+  chestType: 2
   chestPrefab: {fileID: 55295776530463539, guid: fafc9ae38399f44459bcf2c544f4b3b4, type: 3}
-  minutesBeforeOpen: 1
+  minutesBeforeOpen: 20
   bonuses:
-  - rid: 2115232896257622016
+  - rid: 2115232896257622017
+  - rid: 2115232896257622018
   references:
     version: 2
     RefIds:
-    - rid: 2115232896257622016
+    - rid: 2115232896257622017
       type: {class: MoneyReward, ns: RealTime, asm: Assembly-CSharp}
       data:
-        Money: 10
+        Money: 50
+    - rid: 2115232896257622018
+      type: {class: ResourceReward, ns: RealTime, asm: Assembly-CSharp}
+      data:
+        Resource: 40

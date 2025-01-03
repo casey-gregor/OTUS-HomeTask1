@@ -4,24 +4,102 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="changed ui">
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/SavedChestsInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestDestroyer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestDestroyer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestPresenter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestPresenter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerCalculator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerCalculator.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerPresenter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerPresenter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ChestEventsDispatcher.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ServerEventDispatcher.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ServerEventDispatcher.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IServerTimeRetriever.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IServerTimeRetriever.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoaders.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/TestServerTimeRetriever.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/TestServerTimeRetriever.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/BronzeChestConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/BronzeChestConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/SilverChestConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/SilverChestConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Prefabs/Chest.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Prefabs/Chest.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scenes/Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scenes/Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ButtonClickProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ButtonClickProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ButtonClickProcessor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ButtonClickProcessor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ApplyChestReward.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ApplyChestReward.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestActivator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestActivator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestButtonTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestButtonTracker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestCollection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestDataFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestDataFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestInitializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestInitializer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/SavedChestsInitializer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLockChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLockChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLocker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLocker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSaveLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/Chest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/Chest.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestModel.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestSaveData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestSaveData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatcher.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatcher.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ChestEventsDispatcher.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IChestSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IChestSaveLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoadToJSON.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoaders/SaveLoadToJSON.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoadToJSON.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoaders/SaveLoadToJSON.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ScriptableObjects/ChestConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ScriptableObjects/ChestConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/LogManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/LogManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/PlayerPrefsSessionSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoaders/PlayerPrefsSessionSaveLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/PlayerPrefsSessionSaveLoader.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/SaveLoaders/PlayerPrefsSessionSaveLoader.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/ServerTimeGetter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/WorldTimeAPIRetriever.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/ServerTimeGetter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/WorldTimeAPIRetriever.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/ServerTimeProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/ServerTimeProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/SessionLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/SessionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/SessionLogger.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/SessionController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/UtcTimeCalculator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Session/UtcTimeCalculator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DpaMonitoringSettings">
-    <option name="autoShow" value="false" />
+    <option name="firstShow" value="false" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;casey-gregor&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/casey-gregor/OTUS-HomeTask1.git&quot;,
+    &quot;accountId&quot;: &quot;3e937566-cbd2-451d-a0c5-fabaea19f148&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/b0/03477ec7/IDisposable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/7e/a8da36e0/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ac0682aa4f74ee59eb5d5c917c9f1c98a000/dd/44c22864/JsonConvert.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Projects/EventBus/Scripts/Zenject/SceneInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Projects/Inventory/Tests/InventoryTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -35,21 +113,23 @@
   &quot;keyToString&quot;: {
     &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.6426799&quot;
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.6426799&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;RealTime&quot;
   }
 }</component>
-  <component name="RunManager" selected="Standalone Player.Start Unity">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -debugCodeOptimization" />
-      <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../OTUS/Untangle&amp;ZenjectHT/HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -61,16 +141,24 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="29908">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="29908" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list>
+          <MonoRuntime />
+        </list>
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -116,9 +204,23 @@
       <workItem from="1730197812255" duration="1257000" />
       <workItem from="1730199098672" duration="35452000" />
       <workItem from="1730284979332" duration="55966000" />
+      <workItem from="1735412618524" duration="22609000" />
+      <workItem from="1735663196336" duration="1574000" />
+      <workItem from="1735727655827" duration="42579000" />
+      <workItem from="1735899650315" duration="26193000" />
     </task>
+    <task id="LOCAL-00001" summary="changed ui">
+      <option name="closed" value="true" />
+      <created>1735412657690</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1735412657690</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />
@@ -128,5 +230,7 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="changed ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed ui" />
   </component>
 </project>

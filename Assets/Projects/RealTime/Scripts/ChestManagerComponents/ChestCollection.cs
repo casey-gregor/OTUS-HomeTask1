@@ -6,6 +6,6 @@ namespace RealTime
     [Serializable]
     public sealed class ChestCollection
     {
-        public List<ChestData> chests = new();
+        public List<ChestSaveData> chests = new();
     }
 }

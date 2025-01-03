@@ -1,17 +1,21 @@
+using UnityEngine;
+
 namespace RealTime
 {
     public sealed class ChestDataFactory
     {
-        public ChestData CreateChestData(Chest chest)
+        public ChestSaveData CreateChestData(ChestModel chestModel)
         {
-            string receivedTime = TextFormatter.DateTimeToString(chest.ReceivedTime);
-            string timeToOpen = TextFormatter.DateTimeToString(chest.TimeToOpen);
-            return new ChestData(
-                chest.ChestId, 
+            string receivedTime = TextFormatter.DateTimeToString(chestModel.ReceivedTime);
+            string timeToOpen = TextFormatter.DateTimeToString(chestModel.TimeToOpen);
+            Debug.Log("is chest data factory. default timer : " + chestModel.InitialTimer);
+            return new ChestSaveData(
+                chestModel.ChestId, 
                 receivedTime, 
                 timeToOpen,
-                chest.TimerMinutes.Minutes,
-                chest.IsUnlocked);;
+                chestModel.InitialTimer.Minutes,
+                chestModel.CurrentTimer.Minutes,
+                chestModel.IsUnlocked);;
         }
     }
 }

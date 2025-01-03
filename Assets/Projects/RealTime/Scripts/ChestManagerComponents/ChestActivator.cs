@@ -1,21 +1,36 @@
-﻿using UnityEngine;
+﻿
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace RealTime
 {
     public sealed class ChestActivator
     {
-        private readonly SessionLogger _sessionLogger;
+        private readonly SessionController _sessionController;
 
-        public ChestActivator(SessionLogger sessionLogger)
+        public ChestActivator(SessionController sessionController)
         {
-            _sessionLogger = sessionLogger;
+            _sessionController = sessionController;
         }
 
-        public void ActivateChest(int minutes, Chest chest)
+        public void ActivateChest(int minutes, ChestModel chestModel)
         {
-            chest.SetReceivedTime(_sessionLogger.UtcSessionStartTime.Add(_sessionLogger.SessionDuration));
-            chest.SetOpenTime(chest.ReceivedTime.AddMinutes(minutes));
-            Debug.Log("chest activated");
+            var utcTime = _sessionController.GetAccurateUtcTime();
+            chestModel.SetReceivedTime(utcTime);
+            chestModel.SetOpenTime(chestModel.ReceivedTime.AddMinutes(minutes));
+            chestModel.SetInitialTimer(TimeSpan.FromMinutes(minutes));
+            Debug.Log("activated with mins : " + minutes);
+        }
+        
+        public void SetChestData(
+            ChestModel chestModel, 
+            string chestId, 
+            List<IReward> rewards)
+        {
+            chestModel.GetChestPresenter().SetViewPanelTitle(chestId);
+            chestModel.SetId(chestId);
+            chestModel.SetRewards(rewards);
         }
     }
 }

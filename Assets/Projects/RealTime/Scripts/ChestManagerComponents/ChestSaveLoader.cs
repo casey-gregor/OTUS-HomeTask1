@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace RealTime
 {
@@ -20,13 +21,14 @@ namespace RealTime
             return _saveLoadJson.LoadChests();
         }
 
-        public void SaveChests(List<Chest> chestsToSave)
+        public void SaveChests(List<ChestModel> chestsToSave)
         {
             ChestCollection chestCollection = new ChestCollection();
-            foreach (Chest chest in chestsToSave)
+            foreach (ChestModel chest in chestsToSave)
             {
-                ChestData chestData = _chestDataFactory.CreateChestData(chest);
-                chestCollection.chests.Add(chestData);
+                Debug.Log("in chest save loader. chest default timer : " + chest.InitialTimer);
+                ChestSaveData chestSaveData = _chestDataFactory.CreateChestData(chest);
+                chestCollection.chests.Add(chestSaveData);
             }
             
             _saveLoadJson.SaveChests(chestCollection);
