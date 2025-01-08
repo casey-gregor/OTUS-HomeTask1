@@ -11,14 +11,13 @@ namespace RealTime
         public event Action OnChestSpawned;
         
         public Transform chestContainer;
-        // public List<ChestConfig> chestConfigs;
+        public GameObject rewardPopup;
         
         private IReadOnlyList<ChestConfigData> _chestConfigsData;
         private ChestSpawner _chestSpawner;
         private ChestActivator _chestActivator;
         private ChestDestroyer _chestDestroyer;
         private SessionController _sessionController;
-        
         private IChestSaveLoader _chestSaveLoader;
 
         [Inject]

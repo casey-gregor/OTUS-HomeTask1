@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,17 +11,16 @@ namespace RealTime
         public ChestPresenter(ChestView chestView)
         {
             _chestView = chestView;
-            _chestView.OnChestOpened += OpenChest;
         }
 
         public ChestView GetChestView()
         {
             return _chestView;
         }
-        public Button GetOpenButton()
-        {
-            return _chestView.OpenButton;
-        }
+        // public Button GetOpenButton()
+        // {
+        //     return _chestView.OpenButton;
+        // }
         
         public void SetViewPanelTitle(string title)
         {
@@ -32,6 +30,11 @@ namespace RealTime
         public void ToggleOpenButton(bool value)
         {
             _chestView.OpenButton.gameObject.SetActive(value);
+        }
+
+        public void ToggleTimerVisibility(bool value)
+        {
+            _chestView.Timer.transform.parent.gameObject.SetActive(value);
         }
         
         public void OpenChest()
@@ -51,7 +54,6 @@ namespace RealTime
 
         public void Dispose()
         {
-            _chestView.OnChestOpened -= OpenChest;
             GameObject.Destroy(_chestView.gameObject);
         }
     }

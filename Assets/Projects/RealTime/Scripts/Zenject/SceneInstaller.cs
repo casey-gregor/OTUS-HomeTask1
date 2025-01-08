@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using RealTime.Rewards;
+using UnityEngine;
 using Zenject;
 
 namespace RealTime.Zenject
 {
     public class SceneInstaller : MonoInstaller
     {
-        public List<ChestConfig> chestConfigs;
+        [SerializeField] private List<ChestConfig> chestConfigs;
+        [SerializeField] private RewardsView rewardsPopupPrefab;
+        
         public override void InstallBindings()
         {
             
@@ -28,7 +32,6 @@ namespace RealTime.Zenject
             Container.Bind<ChestActivator>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ChestDestroyer>().AsSingle().NonLazy();
             Container.Bind<ChestDataFactory>().AsSingle().NonLazy();
-            Container.Bind<ChestLockChecker>().AsSingle().NonLazy();
             Container.Bind<ChestLocker>().AsSingle().NonLazy();
             Container.Bind<ChestButtonTracker>().AsSingle().NonLazy();
             Container.Bind<ApplyChestReward>().AsSingle().NonLazy();
@@ -36,10 +39,17 @@ namespace RealTime.Zenject
             Container.BindInterfacesAndSelfTo<ServerEventDispatcher>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ChestEventsDispatcher>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ChestTimerCalculator>().AsSingle().NonLazy();
+            Container.Bind<RewardsView>().FromInstance(rewardsPopupPrefab).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RewardsMover>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RewardsPresenter>().AsSingle().NonLazy();
         }
         
         private IReadOnlyList<ChestConfigData> CreateChestConfigDataList(List<ChestConfig> chestConfigs)
         {
+            if (chestConfigs.Count == 0)
+            {
+                Debug.Log("No chest config found");
+            }
             List<ChestConfigData> chestConfigDataList = new List<ChestConfigData>();
             foreach (var config in chestConfigs)
             {

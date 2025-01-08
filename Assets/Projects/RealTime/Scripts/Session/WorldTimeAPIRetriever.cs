@@ -38,11 +38,10 @@ namespace RealTime
                     if (request.result == UnityWebRequest.Result.Success)
                     {
                         success = true; 
-
+                        
                         string responseText = request.downloadHandler.text;
                         TimeSpan serverResponseDuration = DateTime.Now - start;
-                        
-                       ConvertServerResponse(responseText, serverResponseDuration);
+                        ConvertServerResponse(responseText, serverResponseDuration);
                     }
                     else
                     {
@@ -62,7 +61,6 @@ namespace RealTime
         {
             ServerTimeData serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(serverTimeText);
             DateTime serverCurrentUtcTime = TextFormatter.StringToDateTimeUtcNonStrict(serverTimeData.utc_datetime);
-            // Debug.Log($"serverTime at {serverTime}");
             
             OnServerTimeReceived?.Invoke(serverCurrentUtcTime, responseDuration);
         }

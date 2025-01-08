@@ -44,11 +44,13 @@ namespace RealTime
             IsUnlocked = value;
             if (IsUnlocked)
             {
+                _chestPresenter.ToggleTimerVisibility(false);
                 _chestPresenter.ToggleOpenButton(true);
             }
             else
             {
                 _chestPresenter.ToggleOpenButton(false);
+                _chestPresenter.ToggleTimerVisibility(true);
             }
         }
 

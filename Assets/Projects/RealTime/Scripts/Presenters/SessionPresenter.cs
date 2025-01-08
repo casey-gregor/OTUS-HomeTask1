@@ -36,7 +36,6 @@ namespace RealTime
             _sessionStart = dateTime;
             string sessionStartText = "Previous session started at : " + dateTime;
             _logView.ShowPreviousSessionStart(sessionStartText);
-            
         }
 
         private void CalculatePreviousSessionEnd(DateTime sessionStart, TimeSpan sessionDuration)

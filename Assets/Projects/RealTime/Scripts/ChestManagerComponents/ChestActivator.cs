@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,11 +15,12 @@ namespace RealTime
 
         public void ActivateChest(int minutes, ChestModel chestModel)
         {
+            Debug.Log("activating chest with minutes : " + minutes);
             var utcTime = _sessionController.GetAccurateUtcTime();
             chestModel.SetReceivedTime(utcTime);
             chestModel.SetOpenTime(chestModel.ReceivedTime.AddMinutes(minutes));
             chestModel.SetInitialTimer(TimeSpan.FromMinutes(minutes));
-            Debug.Log("activated with mins : " + minutes);
+            Debug.Log("Set InitialTimer : " + TimeSpan.FromMinutes(minutes));
         }
         
         public void SetChestData(

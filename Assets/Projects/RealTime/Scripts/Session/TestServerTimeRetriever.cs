@@ -16,8 +16,8 @@ namespace RealTime
 
         private async UniTaskVoid DelayConnection()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(10));
-            OnServerTimeReceived?.Invoke(DateTime.Now, TimeSpan.FromSeconds(10));
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
+            OnServerTimeReceived?.Invoke(DateTime.UtcNow, TimeSpan.FromSeconds(10));
         }
     }
 }

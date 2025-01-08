@@ -18,6 +18,7 @@ MonoBehaviour:
   minutesBeforeOpen: 1
   bonuses:
   - rid: 2115232896257622016
+  - rid: 3293567461129453708
   references:
     version: 2
     RefIds:
@@ -25,3 +26,7 @@ MonoBehaviour:
       type: {class: MoneyReward, ns: RealTime, asm: Assembly-CSharp}
       data:
         Money: 10
+    - rid: 3293567461129453708
+      type: {class: ResourceReward, ns: RealTime, asm: Assembly-CSharp}
+      data:
+        Resource: 50

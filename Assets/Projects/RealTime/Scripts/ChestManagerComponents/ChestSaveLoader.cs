@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace RealTime
 {
@@ -26,7 +25,6 @@ namespace RealTime
             ChestCollection chestCollection = new ChestCollection();
             foreach (ChestModel chest in chestsToSave)
             {
-                Debug.Log("in chest save loader. chest default timer : " + chest.InitialTimer);
                 ChestSaveData chestSaveData = _chestDataFactory.CreateChestData(chest);
                 chestCollection.chests.Add(chestSaveData);
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,11 +13,12 @@ namespace RealTime
         [SerializeField] private Sprite closedSprite;
         [SerializeField] private Button openButton;
         [SerializeField] private TextMeshProUGUI timer;
-
-        public event Action OnChestOpened;
+        [SerializeField] private ParticleSystem openEffect;
+        
         public Button OpenButton => openButton;
-
+        public TextMeshProUGUI Timer => timer;
         public Image ImageComponent => chestImage;
+        public ParticleSystem OpenEffect => openEffect;
 
         public void SetChestPanelTitle(string value)
         {
@@ -39,12 +39,7 @@ namespace RealTime
 
         public void UpdateChestTimer(TimeSpan time)
         {
-            timer.text = $"Open timer : \n{time.Minutes:D2}:{time.Seconds:D2}";
-        }
-
-        public void OpenChest()
-        {
-            OnChestOpened?.Invoke();
+            timer.text = $"Open timer : \n{time.Hours:D2}:{time.Minutes:D2}:{time.Seconds:D2}";
         }
         
     }

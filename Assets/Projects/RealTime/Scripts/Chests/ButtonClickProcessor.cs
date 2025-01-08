@@ -7,7 +7,7 @@ namespace RealTime
     [RequireComponent(typeof(Button))]
     public class ButtonClickProcessor : MonoBehaviour
     {
-        [SerializeField] private ChestView _chestView;
+        [SerializeField] private ChestView chestView;
         public event Action<ChestView> OnButtonClick;
         private Button _button;
         private void Awake()
@@ -15,7 +15,7 @@ namespace RealTime
             _button = GetComponent<Button>();
             _button.onClick.AddListener(HandleClick);
 
-            if (_chestView == null)
+            if (chestView == null)
             {
                 Debug.LogWarning("No chest view assigned to ButtonClickProcessor.");
             }
@@ -23,7 +23,7 @@ namespace RealTime
 
         private void HandleClick()
         {
-            OnButtonClick?.Invoke(_chestView);
+            OnButtonClick?.Invoke(chestView);
         }
 
         private void OnDestroy()

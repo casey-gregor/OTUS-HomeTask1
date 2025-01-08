@@ -33,10 +33,8 @@ namespace RealTime
                         chestConfigData.ChestId,
                         chestConfigData.Rewards,
                         chestConfigData.InitialTimer,
-                        chestSaveData.ReceivedTime,
                         chestSaveData.TimeToOpen,
-                        chestSaveData.IsUnlocked,
-                        chestSaveData.CurrentTimer);
+                        chestSaveData.IsUnlocked);
                 }
             }
             SpawnedSavedChests?.Invoke();

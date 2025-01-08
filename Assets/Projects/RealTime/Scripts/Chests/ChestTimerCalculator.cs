@@ -22,13 +22,11 @@ namespace RealTime
             {
                 if (chest.IsUnlocked)
                 {
-                    Debug.Log("chest is unlocked");
                     TimerText(chest, TimeSpan.Zero);
                     OnChestUnlocked?.Invoke(chest);
                     return;
                 }
             }
-            
         }
 
         public void Tick()
@@ -42,14 +40,12 @@ namespace RealTime
             {
                 if (chest.IsUnlocked)
                 {
-                    return;
+                    continue;
                 }
                 DateTime currentUtcTime = _sessionController.GetAccurateUtcTime();
                 TimeSpan timeLeft =  chest.TimeToOpen - currentUtcTime;
-                // Debug.Log("timeleft : " + timeLeft);
                 if (timeLeft <= TimeSpan.Zero && !chest.IsUnlocked)
                 {
-                    Debug.Log("chest unlocked");
                     TimerText(chest, TimeSpan.Zero);
                     chest.SetIsUnlocked(true);
                     OnChestUnlocked?.Invoke(chest);
