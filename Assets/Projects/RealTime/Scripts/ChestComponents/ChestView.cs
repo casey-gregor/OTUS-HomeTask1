@@ -27,20 +27,36 @@ namespace RealTime
 
         public void SetChestSpriteImage(bool value)
         {
-            if (value)
-            {
-                ImageComponent.sprite = openSprite;
-            }
-            else
-            {
-                ImageComponent.sprite = closedSprite;
-            }
+            chestImage.sprite = value ? openSprite : closedSprite;
         }
 
         public void UpdateChestTimer(TimeSpan time)
         {
             timer.text = $"Open timer : \n{time.Hours:D2}:{time.Minutes:D2}:{time.Seconds:D2}";
         }
+
+        public void SetIsUnlocked(bool value)
+        {
+            if (value)
+            {
+                ToggleTimerVisibility(false);
+                ToggleOpenButton(true);
+            }
+            else
+            {
+                ToggleOpenButton(false);
+                ToggleTimerVisibility(true);
+            }
+        }
         
+        private void ToggleOpenButton(bool value)
+        {
+            openButton.gameObject.SetActive(value);
+        }
+
+        private void ToggleTimerVisibility(bool value)
+        {
+            timer.transform.parent.gameObject.SetActive(value);
+        }
     }
 }

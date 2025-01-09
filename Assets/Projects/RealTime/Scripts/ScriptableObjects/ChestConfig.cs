@@ -8,7 +8,6 @@ namespace RealTime
     public class ChestConfig : ScriptableObject
     {
         [SerializeField] private string chestId;
-        [SerializeField] private ChestType chestType;
         [SerializeField] private GameObject chestPrefab;
         [SerializeField] private int minutesBeforeOpen;
         [SerializeReference] private List<IReward> bonuses;
@@ -17,7 +16,6 @@ namespace RealTime
         {
             return new ChestConfigData(
                 chestId,
-                chestType,
                 chestPrefab,
                 minutesBeforeOpen,
                 bonuses);
@@ -27,20 +25,17 @@ namespace RealTime
     public struct ChestConfigData : IEquatable<ChestConfigData>
     {
         public string ChestId;
-        public ChestType ChestType;
         public GameObject ChestPrefab;
         public int InitialTimer;
         public List<IReward> Rewards;
 
         public ChestConfigData(
             string chestId, 
-            ChestType chestType, 
             GameObject chestPrefab, 
             int initialTimer, 
             List<IReward> rewards)
         {
             ChestId = chestId;
-            ChestType = chestType;
             ChestPrefab = chestPrefab;
             InitialTimer = initialTimer;
             Rewards = rewards;

@@ -20,12 +20,12 @@ namespace RealTime
             return _saveLoadJson.LoadChests();
         }
 
-        public void SaveChests(List<ChestModel> chestsToSave)
+        public void SaveChests(IReadOnlyList<ChestPresenter> chestsToSave)
         {
             ChestCollection chestCollection = new ChestCollection();
-            foreach (ChestModel chest in chestsToSave)
+            foreach (ChestPresenter chestPresenter in chestsToSave)
             {
-                ChestSaveData chestSaveData = _chestDataFactory.CreateChestData(chest);
+                ChestSaveData chestSaveData = _chestDataFactory.CreateChestData(chestPresenter);
                 chestCollection.chests.Add(chestSaveData);
             }
             

@@ -8,8 +8,9 @@ namespace RealTime
     public sealed class ChestSpawner
     {
         public event Action SpawnedSavedChests;
-        public List<ChestModel> SpawnedChests = new();
-        private readonly Dictionary<string, ChestConfigData> _chestConfigDataDict = new();
+        public IReadOnlyList<ChestPresenter> SpawnedChests => _spawnedChests;
+        private readonly List<ChestPresenter> _spawnedChests = new();
+        private readonly Dictionary<string, ChestConfigData> _chestConfigDataDict;
         private readonly SavedChestsInitializer _savedChestsInitializer;
 
         public ChestSpawner(
@@ -27,9 +28,9 @@ namespace RealTime
             {
                 if (_chestConfigDataDict.TryGetValue(chestSaveData.ChestId, out ChestConfigData chestConfigData))
                 {
-                    ChestModel chestModelComponent = SpawnChest(chestConfigData.ChestPrefab, chestContainer);
+                    ChestPresenter chestPresenter = SpawnChest(chestConfigData.ChestPrefab, chestContainer);
                     _savedChestsInitializer.InitializeSavedChest(
-                        chestModelComponent,
+                        chestPresenter,
                         chestConfigData.ChestId,
                         chestConfigData.Rewards,
                         chestConfigData.InitialTimer,
@@ -41,15 +42,20 @@ namespace RealTime
             
         }
 
-        public ChestModel SpawnChest(GameObject prefab, Transform chestContainer)
+        public ChestPresenter SpawnChest(GameObject prefab, Transform chestContainer)
         {
             GameObject chest = GameObject.Instantiate(prefab, chestContainer);
             ChestView chestView = chest.GetComponentInChildren<ChestView>();
-            ChestPresenter chestPresenter = new ChestPresenter(chestView);
-            ChestModel chestModel = new ChestModel(chestPresenter);
-            SpawnedChests.Add(chestModel);
+            ChestModel chestModel = new ChestModel();
+            ChestPresenter chestPresenter = new ChestPresenter(chestModel, chestView);
+            _spawnedChests.Add(chestPresenter);
             
-            return chestModel;
+            return chestPresenter;
+        }
+
+        public void RemoveChest(ChestPresenter chestPresenter)
+        {
+            _spawnedChests.Remove(chestPresenter);
         }
     }
     

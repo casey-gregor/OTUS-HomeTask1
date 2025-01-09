@@ -10,6 +10,7 @@ namespace RealTime
         private readonly ApplyChestReward _applyChestReward;
         private readonly ChestButtonTracker _chestButtonTracker;
         private readonly ChestTimerCalculator _chestTimerCalculator;
+        private readonly ChestActivator _chestActivator;
 
         public ChestEventsDispatcher(
             ChestSaveLoader chestSaveLoader,
@@ -17,7 +18,8 @@ namespace RealTime
             ApplyChestReward applyChestReward, 
             ChestButtonTracker chestButtonTracker, 
             ChestLocker chestLocker, 
-            ChestTimerCalculator chestTimerCalculator)
+            ChestTimerCalculator chestTimerCalculator, 
+            ChestActivator chestActivator)
         {
             _chestSaveLoader = chestSaveLoader;
             _chestSpawner = chestSpawner;
@@ -25,6 +27,7 @@ namespace RealTime
             _chestButtonTracker = chestButtonTracker;
             _chestLocker = chestLocker;
             _chestTimerCalculator = chestTimerCalculator;
+            _chestActivator = chestActivator;
 
             _chestSpawner.SpawnedSavedChests += HandleSavedChestsSpawned;
             _chestTimerCalculator.OnChestUnlocked += HandleChestUnlocked;
@@ -37,22 +40,24 @@ namespace RealTime
             _chestTimerCalculator.CheckSpawnedChests();
         }
 
-        private void HandleChestLocked(ChestModel chestModel)
+        private void HandleChestLocked(ChestPresenter chestPresenter)
         {
+            _chestActivator.ActivateChest(
+                (int)chestPresenter.InitialTimer.TotalMinutes, 
+                chestPresenter);
             _chestSaveLoader.SaveChests(_chestSpawner.SpawnedChests);
         }
 
-        private void HandleChestUnlocked(ChestModel chestView)
+        private void HandleChestUnlocked(ChestPresenter chestPresenter)
         {
-            _chestButtonTracker.AddToList(chestView);
+            _chestButtonTracker.AddToList(chestPresenter);
             _chestSaveLoader.SaveChests(_chestSpawner.SpawnedChests);
         }
 
-        private void HandleChestOpened(ChestModel chestModel)
+        private void HandleChestOpened(ChestPresenter chestPresenter)
         {
-            chestModel.GetChestPresenter().OpenChest();
-            _applyChestReward.ApplyReward(chestModel.Rewards);
-            _chestLocker.InitiateChestLock(chestModel);
+            chestPresenter.OpenChest();
+            _applyChestReward.ApplyReward(chestPresenter.Rewards);
             _chestSaveLoader.SaveChests(_chestSpawner.SpawnedChests);
         }
 

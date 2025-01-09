@@ -40,8 +40,9 @@ namespace RealTime.Zenject
             Container.BindInterfacesAndSelfTo<ChestEventsDispatcher>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ChestTimerCalculator>().AsSingle().NonLazy();
             Container.Bind<RewardsView>().FromInstance(rewardsPopupPrefab).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<RewardsMover>().AsSingle().NonLazy();
+            Container.Bind<RewardsPopupController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<RewardsPresenter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RewardsEventDispatcher>().AsSingle().NonLazy();
         }
         
         private IReadOnlyList<ChestConfigData> CreateChestConfigDataList(List<ChestConfig> chestConfigs)

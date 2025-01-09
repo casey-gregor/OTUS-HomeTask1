@@ -2,16 +2,16 @@
 
 namespace RealTime
 {
-    public class ApplyChestReward
+    public sealed class ApplyChestReward
     {
-        private IEntity _entity;
+        private readonly IEntity _entity;
 
         public ApplyChestReward(IEntity entity)
         {
             _entity = entity;
         }
 
-        public void ApplyReward(List<IReward> rewards)
+        public void ApplyReward(IReadOnlyList<IReward> rewards)
         {
             foreach (IReward reward in rewards)
             {

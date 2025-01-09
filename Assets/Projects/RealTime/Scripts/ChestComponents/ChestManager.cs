@@ -11,7 +11,6 @@ namespace RealTime
         public event Action OnChestSpawned;
         
         public Transform chestContainer;
-        public GameObject rewardPopup;
         
         private IReadOnlyList<ChestConfigData> _chestConfigsData;
         private ChestSpawner _chestSpawner;
@@ -37,23 +36,14 @@ namespace RealTime
             _sessionController = sessionController;
             
         }
-
-        private void Awake()
-        {
-            ChestCollection chestCollection = _chestSaveLoader.LoadChests();
-            if (chestCollection != null && chestCollection.chests.Count > 0 && _chestConfigsData.Count > 0)
-            {
-                _chestSpawner.SpawnSavedChests(chestCollection, chestContainer);
-            }
-        }
         
         [Button, EnableIf(nameof(IsServerDataAvailable))]
         public void SpawnChest(ChestConfig config)
         {
             ChestConfigData configData = config.GetChestData();
-            ChestModel chestModel = _chestSpawner.SpawnChest(configData.ChestPrefab, chestContainer);
-            _chestActivator.ActivateChest(configData.InitialTimer, chestModel);
-            _chestActivator.SetChestData(chestModel, configData.ChestId, configData.Rewards);
+            ChestPresenter chestPresenter = _chestSpawner.SpawnChest(configData.ChestPrefab, chestContainer);
+            _chestActivator.ActivateChest(configData.InitialTimer, chestPresenter);
+            _chestActivator.SetChestData(chestPresenter, configData.ChestId, configData.Rewards);
             _chestSaveLoader.SaveChests(_chestSpawner.SpawnedChests);
             OnChestSpawned?.Invoke();
         }
@@ -70,12 +60,18 @@ namespace RealTime
             _chestSaveLoader.SaveChests(_chestSpawner.SpawnedChests);
         }
         
+        private void Awake()
+        {
+            ChestCollection chestCollection = _chestSaveLoader.LoadChests();
+            if (chestCollection != null && chestCollection.chests.Count > 0 && _chestConfigsData.Count > 0)
+            {
+                _chestSpawner.SpawnSavedChests(chestCollection, chestContainer);
+            }
+        }
+        
         private bool IsServerDataAvailable()
         {
             return _sessionController != null && _sessionController.GotServerTime;
         }
-
-        
-        
     }
 }

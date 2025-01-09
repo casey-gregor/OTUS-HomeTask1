@@ -1,17 +1,10 @@
 fileFormatVersion: 2
-guid: 70b674ed6c1298644aee2e129a94c4df
-AssetOrigin:
-  serializedVersion: 1
-  productId: 235559
-  packageName: Violet Themed UI
-  packageVersion: 1.1
-  assetPath: Assets/Projects/RealTime/Images/White Panel Violet.png
-  uploadId: 700144
+guid: cbf58c37249d82a4e97598dfc07d9058
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6538322467141438242
-    second: White Panel Violet_0
+      213: 5248415023898783801
+    second: Close_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -77,7 +70,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -90,7 +83,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -103,21 +96,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -133,29 +113,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: White Panel Violet_0
+      name: Close_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 1212
-        height: 1115
+        width: 244
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed4341f8b563345a0800000000000000
-      internalID: -6538322467141438242
+      spriteID: 9307f4d28ad16d840800000000000000
+      internalID: 5248415023898783801
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
-    customData: 
     physicsShape: []
     bones: []
     spriteID: 
@@ -165,12 +143,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
     nameFileIdTable:
-      White Panel Violet_0: -6538322467141438242
+      Close_0: 5248415023898783801
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235559
+  packageName: Violet Themed UI
+  packageVersion: 1.1
+  assetPath: Assets/Violet Theme Ui/Colored Icons/Close.png
+  uploadId: 700144

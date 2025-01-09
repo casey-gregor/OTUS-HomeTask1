@@ -1,36 +1,36 @@
-﻿using System;
+﻿
+using UnityEngine;
 
 namespace RealTime.Rewards
 {
-    public class RewardsPresenter : IDisposable
+    public sealed class RewardsPresenter
     {
-        private RewardsMover _rewardsMover;
-
-        public RewardsPresenter(RewardsMover rewardsMover)
+        public void RewardInstantiated(RewardsView rewardsView, ChestPresenter chestPresenter)
         {
-            _rewardsMover = rewardsMover;
-            
-            _rewardsMover.OnSetRewards += SetRewards;
-        }
-
-        private void SetRewards(RewardsView rewardsView, ChestModel chestModel)
-        {
-            foreach (IReward reward in chestModel.Rewards)
+            foreach (IReward reward in chestPresenter.Rewards)
             {
-                if (reward is MoneyReward moneyReward)
-                {
-                    rewardsView.SetMoneyReward(moneyReward.Money.ToString());
-                }
-                else if (reward is ResourceReward resourceReward)
-                {
-                    rewardsView.SetResourcesReward(resourceReward.Resource.ToString());
-                }
+                HandleReward(reward, rewardsView);
             }
         }
-
-        public void Dispose()
+        
+        private void HandleReward(IReward reward, RewardsView rewardsView)
         {
-            _rewardsMover.OnSetRewards -= SetRewards;
+            switch (reward)
+            {
+                case MoneyReward moneyReward:
+                    string moneyText = moneyReward.Money.ToString();
+                    rewardsView.SetMoneyReward(moneyText);
+                    break;
+
+                case ResourceReward resourceReward:
+                    string resourceText = resourceReward.Resource.ToString();
+                    rewardsView.SetResourcesReward(resourceText);
+                    break;
+
+                default:
+                    Debug.LogWarning($"Unhandled reward type: {reward.GetType().Name}");
+                    break;
+            }
         }
     }
 }

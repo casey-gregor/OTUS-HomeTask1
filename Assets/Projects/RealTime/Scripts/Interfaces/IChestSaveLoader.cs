@@ -5,6 +5,6 @@ namespace RealTime
     public interface IChestSaveLoader
     {
         public ChestCollection LoadChests();
-        public void SaveChests(List<ChestModel> chests);
+        public void SaveChests(IReadOnlyList<ChestPresenter> chestsToSave);
     }
 }
