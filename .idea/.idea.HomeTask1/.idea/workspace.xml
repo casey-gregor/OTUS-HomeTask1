@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json" afterDir="false" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="minor">
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +153,7 @@
       <workItem from="1736348387135" duration="15819000" />
       <workItem from="1736421143794" duration="373000" />
       <workItem from="1736423378428" duration="23733000" />
+      <workItem from="1736502030298" duration="74000" />
     </task>
     <task id="LOCAL-00001" summary="changed ui">
       <option name="closed" value="true" />
@@ -186,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736460711033</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="minor">
+      <option name="closed" value="true" />
+      <created>1736502068959</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1736502068959</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -203,6 +212,7 @@
     <MESSAGE value="added chest timer&#10;added chest ui&#10;added TestServerTimeRetriever.cs&#10;removed ChestLockChecker.cs&#10;fixed issues and refactored" />
     <MESSAGE value="fixed UI&#10;added setting rewards and DOTWeen animation" />
     <MESSAGE value="finished refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished refactoring" />
+    <MESSAGE value="minor" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor" />
   </component>
 </project>

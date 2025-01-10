@@ -21,8 +21,8 @@ namespace RealTime.Zenject
             Container.Bind<SessionController>().AsSingle().NonLazy();
             Container.Bind<SessionPresenter>().AsSingle().NonLazy();
             Container.Bind<ServerConnectPresenter>().AsSingle().NonLazy();
-            // Container.BindInterfacesAndSelfTo<WorldTimeAPIRetriever>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<TestServerTimeRetriever>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WorldTimeAPIRetriever>().AsSingle().NonLazy();
+            // Container.BindInterfacesAndSelfTo<TestServerTimeRetriever>().AsSingle().NonLazy(); //this is for testing purposes
             Container.Bind<LogManager>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<Entity>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.Bind<SaveLoadToJson>().AsSingle().NonLazy();
