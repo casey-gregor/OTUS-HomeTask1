@@ -4,64 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="fixed UI&#10;added setting rewards and DOTWeen animation">
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/RewardsEventDispatcher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/RewardsEventDispatcher.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/GoldChestConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/GoldChestConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/SilverChestConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Configs/SilverChestConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Images/White Panel Style 2 Violet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Images/White Panel Style 2 Violet.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Images/White Panel Violet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Images/White Panel Violet.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Prefabs/RewardPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Prefabs/RewardPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ApplyChestReward.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ApplyChestReward.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ApplyChestReward.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ApplyChestReward.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestActivator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestActivator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestActivator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestActivator.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestButtonTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestButtonTracker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestButtonTracker.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestButtonTracker.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestCollection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestCollection.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestCollection.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestDataFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestDataFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestDataFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestDataFactory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLocker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestLocker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestLocker.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestLocker.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSaveLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSaveLoader.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSaveLoader.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/ChestSpawner.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSpawner.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/SavedChestsInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/SavedChestsInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestManagerComponents/SavedChestsInitializer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/SavedChestsInitializer.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ButtonClickProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ButtonClickProcessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ButtonClickProcessor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ButtonClickProcessor.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestDestroyer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestDestroyer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestDestroyer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestDestroyer.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestModel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestModel.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestPresenter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestPresenter.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestSaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSaveData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestSaveData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestSaveData.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerCalculator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestTimerCalculator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestTimerCalculator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestTimerCalculator.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Chests/ChestView.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ChestComponents/ChestView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Enums.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Enums/ChestType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Enums/ChestType.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ChestEventsDispatcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/EventDispatchers/ChestEventsDispatcher.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IChestSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Interfaces/IChestSaveLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsMover.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsPopupController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsMover.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsPopupController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/RewardsComponent/RewardsView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ScriptableObjects/ChestConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/ScriptableObjects/ChestConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/Scripts/Zenject/SceneInstaller.cs" afterDir="false" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/RealTime/JSON/Chests.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +152,7 @@
       <workItem from="1736256733915" duration="11567000" />
       <workItem from="1736348387135" duration="15819000" />
       <workItem from="1736421143794" duration="373000" />
-      <workItem from="1736423378428" duration="22843000" />
+      <workItem from="1736423378428" duration="23733000" />
     </task>
     <task id="LOCAL-00001" summary="changed ui">
       <option name="closed" value="true" />
@@ -234,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736354285783</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="finished refactoring">
+      <option name="closed" value="true" />
+      <created>1736460711033</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1736460711033</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -250,6 +202,7 @@
     <MESSAGE value="changed ui" />
     <MESSAGE value="added chest timer&#10;added chest ui&#10;added TestServerTimeRetriever.cs&#10;removed ChestLockChecker.cs&#10;fixed issues and refactored" />
     <MESSAGE value="fixed UI&#10;added setting rewards and DOTWeen animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed UI&#10;added setting rewards and DOTWeen animation" />
+    <MESSAGE value="finished refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished refactoring" />
   </component>
 </project>
