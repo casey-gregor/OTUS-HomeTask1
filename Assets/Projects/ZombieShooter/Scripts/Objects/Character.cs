@@ -20,6 +20,9 @@ namespace ZombieShooter
         [Get(CharacterAPIKeys.SHOOT_REQUEST)]
         public IAtomicAction ShootRequest => _core.ShootComponent.shootRequestEvent;
 
+        [Get(CharacterAPIKeys.HITPOINTS)]
+        public IAtomicVariable<int> HitPoints => _core.LifeComponent.HitPoints;
+        
         [Get(CharacterAPIKeys.DEDUCT_HITPOINTS)]
         public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.DeductHitPointEvent;
 

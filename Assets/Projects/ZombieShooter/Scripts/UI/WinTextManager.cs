@@ -2,7 +2,7 @@
 
 namespace ZombieShooter
 {
-    public class WinTextManager : MonoBehaviour
+    public sealed class WinTextManager : MonoBehaviour
     {
         [SerializeField] private ZombieSpawnController zombieSpawner;
         [SerializeField] private GameObject popupObject;

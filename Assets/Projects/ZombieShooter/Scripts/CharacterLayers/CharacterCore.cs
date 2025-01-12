@@ -20,8 +20,6 @@ namespace ZombieShooter
         private BulletSpawnerMechanics _bulletSpawnerMechanics;
         private BulletInitiateMechanics _bulletInitiateMechanics;
         private BulletsObserveMechanics _bulletsObserveMechanics;
-        
-        private BulletCounterPresenter _bulletCounterPresenter;
 
         public void Construct(Character character)
         {
@@ -70,11 +68,6 @@ namespace ZombieShooter
                 _bulletSpawnerMechanics.BulletSpawned,
                 ShootComponent.newBullet,
                 LifeComponent.IsDead);
-
-            _bulletCounterPresenter = new BulletCounterPresenter(
-                ShootComponent.bulletShot,
-                ShootComponent.bulletReloaded);
-
 
             MoveComponent.Construct();
             RotationComponent.Construct();

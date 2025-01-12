@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ZombieShooter
 {
-    public class GameoverTextManager : MonoBehaviour
+    public sealed class GameoverTextManager : MonoBehaviour
     {
         [SerializeField] private Character character;
         [SerializeField] private GameObject popupObject;

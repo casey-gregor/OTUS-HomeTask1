@@ -1,10 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace ZombieShooter
 {
-    public class ZombiesCounterView : MonoBehaviour
+    public sealed class ZombiesCounterView : MonoBehaviour
     {
         [SerializeField] ZombieSpawnController zombieSpawner;
         [SerializeField] TextMeshProUGUI zombieCountText;

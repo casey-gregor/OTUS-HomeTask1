@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace ZombieShooter
 {
-    public class BulletCounterView : MonoBehaviour
+    public sealed class BulletCounterView : MonoBehaviour
     {
         [SerializeField] private Transform bulletsParent;
         [SerializeField] private GameObject bulletImageUI;
