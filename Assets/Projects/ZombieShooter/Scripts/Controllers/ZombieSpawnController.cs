@@ -2,6 +2,7 @@
 using Atomic.Extensions;
 using Atomic.Objects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ZombieShooter
 {
@@ -20,7 +21,7 @@ namespace ZombieShooter
         [SerializeField] private AtomicObject _target;
 
         [SerializeField] private float _spawnInterval;
-        [SerializeField] private int _numToSpawn;
+        [SerializeField] private int _numInPool;
         [SerializeField] private int _zombiesOnStage;
 
         private Pool<Zombie> _zombiePool;
@@ -32,7 +33,7 @@ namespace ZombieShooter
 
         private void Awake()
         {
-            _zombiePool = new Pool<Zombie>(_zombiePrefab, _numToSpawn, _parent, _world);
+            _zombiePool = new Pool<Zombie>(_zombiePrefab, _numInPool, _parent, _world);
             _initiateMechanics = new ZombieInitiateMechanics(_zombie, _target, InitiateEvent, EnqueueEvent);
 
             ZombiesAlive.Value = _zombiesOnStage;
