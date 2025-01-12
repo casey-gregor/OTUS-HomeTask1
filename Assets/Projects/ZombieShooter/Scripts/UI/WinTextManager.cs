@@ -1,17 +1,15 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ZombieShooter
 {
     public class WinTextManager : MonoBehaviour
     {
-        [SerializeField] ZombieSpawnController _zombieSpawner;
-        private TextMeshProUGUI _winText;
+        [SerializeField] private ZombieSpawnController zombieSpawner;
+        [SerializeField] private GameObject popupObject;
+        
         void Awake()
         {
-            _winText = GetComponentInChildren<TextMeshProUGUI>();
-
-            _zombieSpawner.ZombiesAlive.Subscribe(value =>
+            zombieSpawner.ZombiesAlive.Subscribe(value =>
             {
                 if(value <= 0)
                     HandleZeroZombies();
@@ -21,7 +19,7 @@ namespace ZombieShooter
 
         private void HandleZeroZombies()
         {
-            _winText.enabled = true;
+            popupObject.SetActive(true);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace ZombieShooter
 {
     public class ShootController : MonoBehaviour
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private Character character;
 
         private void Update()
         {
@@ -17,7 +17,7 @@ namespace ZombieShooter
 
         private void Shoot()
         {
-            _character.GetAction(CharacterAPIKeys.SHOOT_REQUEST).Invoke();
+            character.GetAction(CharacterAPIKeys.SHOOT_REQUEST).Invoke();
         }
     }
 }

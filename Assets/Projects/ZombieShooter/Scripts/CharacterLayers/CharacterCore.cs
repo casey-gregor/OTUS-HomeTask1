@@ -20,6 +20,8 @@ namespace ZombieShooter
         private BulletSpawnerMechanics _bulletSpawnerMechanics;
         private BulletInitiateMechanics _bulletInitiateMechanics;
         private BulletsObserveMechanics _bulletsObserveMechanics;
+        
+        private BulletCounterPresenter _bulletCounterPresenter;
 
         public void Construct(Character character)
         {
@@ -43,30 +45,35 @@ namespace ZombieShooter
                 character);
 
             _bulletCountMechanics = new BulletCountMechanics(
-                ShootComponent.BulletsInMagazine, 
-                ShootComponent.ReloadTime,
-                ShootComponent.IsReloading,
-                ShootComponent.BulletShot);
+                ShootComponent.bulletsInMagazine, 
+                ShootComponent.reloadTime,
+                ShootComponent.isReloading,
+                ShootComponent.bulletShot,
+                ShootComponent.bulletReloaded);
 
             _bulletSpawnerMechanics = new BulletSpawnerMechanics(
-                ShootComponent.InitialBulletCount,
-                ShootComponent.BulletPrefab,
-                ShootComponent.BulletParent,
-                ShootComponent.World,
-                ShootComponent.NewBullet,
-                ShootComponent.BulletShot);
+                ShootComponent.initialBulletCount,
+                ShootComponent.bulletPrefab,
+                ShootComponent.bulletParent,
+                ShootComponent.world,
+                ShootComponent.newBullet,
+                ShootComponent.bulletShot);
 
             _bulletInitiateMechanics = new BulletInitiateMechanics(
-                ShootComponent.NewBullet,
-                ShootComponent.FirePoint,
+                ShootComponent.newBullet,
+                ShootComponent.firePoint,
                 _bulletSpawnerMechanics.RemoveBulletEvent,
                 _bulletSpawnerMechanics.BulletSpawned,
-                ShootComponent.LevelBounds);
+                ShootComponent.levelBounds);
 
             _bulletsObserveMechanics = new BulletsObserveMechanics(
                 _bulletSpawnerMechanics.BulletSpawned,
-                ShootComponent.NewBullet,
+                ShootComponent.newBullet,
                 LifeComponent.IsDead);
+
+            _bulletCounterPresenter = new BulletCounterPresenter(
+                ShootComponent.bulletShot,
+                ShootComponent.bulletReloaded);
 
 
             MoveComponent.Construct();

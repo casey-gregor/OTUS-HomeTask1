@@ -4,7 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="minor changes">
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterPresenter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterPresenter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/ZombiesCounterView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/ZombiesCounterView.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEditor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Demos.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Demos/Custom Attribute Processors.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Demos/Custom Drawers.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Demos/Editor Windows.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Demos/Sample - RPG Editor.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Bullet.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Bullet.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Character.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Character.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/AssaultRifle.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/AssaultRifle.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/Soldier.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/Soldier.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/ZombieModel.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/ModelPrefabs/ZombieModel.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/SimplePrefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/SimplePrefabs/ZombieSimple.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/SimplePrefabs/ZombieSimple.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Zombie.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Prefabs/Zombie.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scenes/ZombieShooter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scenes/ZombieShooter.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/APIKeys/CharacterAPIKeys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/APIKeys/CharacterAPIKeys.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterCore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterCore.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterSFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterSFX.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterVFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterVFX.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Components/ShootComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Components/ShootComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Controllers/ShootController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Controllers/ShootController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Controllers/ZombieSpawnController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Controllers/ZombieSpawnController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Mechanics/BulletCountMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Mechanics/BulletCountMechanics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Objects/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Objects/Character.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/GameoverTextManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/GameoverTextManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/WinTextManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/WinTextManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +156,25 @@
       <workItem from="1726402390664" duration="55000" />
       <workItem from="1727642935561" duration="626000" />
       <workItem from="1733765393308" duration="40000" />
+      <workItem from="1736685548526" duration="2676000" />
     </task>
+    <task id="LOCAL-00001" summary="removed unnecessary files and projects">
+      <option name="closed" value="true" />
+      <created>1736521254513</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1736521254513</updated>
+    </task>
+    <task id="LOCAL-00002" summary="minor changes">
+      <option name="closed" value="true" />
+      <created>1736521436691</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1736521436691</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
@@ -130,5 +198,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="removed unnecessary files and projects" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
 </project>

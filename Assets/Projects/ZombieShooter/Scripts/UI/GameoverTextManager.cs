@@ -1,20 +1,16 @@
 ﻿using Atomic.Extensions;
-using TMPro;
 using UnityEngine;
 
 namespace ZombieShooter
 {
     public class GameoverTextManager : MonoBehaviour
     {
-        [SerializeField] private Character _character;
-
-        private TextMeshProUGUI _gameOverText;
+        [SerializeField] private Character character;
+        [SerializeField] private GameObject popupObject;
 
         private void Awake()
         {
-            _gameOverText = GetComponentInChildren<TextMeshProUGUI>();
-
-            var isDeadObservable = _character.GetObservable<bool>(CharacterAPIKeys.IS_DEAD);
+            var isDeadObservable = character.GetObservable<bool>(CharacterAPIKeys.IS_DEAD);
             isDeadObservable.Subscribe(value =>
             {
                 isDeadObservable.Unsubscribe(HandleCharacterDead);
@@ -25,7 +21,7 @@ namespace ZombieShooter
 
         private void HandleCharacterDead(bool value)
         {
-            _gameOverText.enabled = value;
+            popupObject.SetActive(value);
         }
     }
 }

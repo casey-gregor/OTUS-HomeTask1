@@ -6,6 +6,7 @@ namespace ZombieShooter
 {
     public class BulletCountMechanics : IAtomicUpdate
     {
+        private AtomicEvent _bulletReloaded;
         private IAtomicValue<int> _bulletsInMagazine;
         private IAtomicValue<float> _reloadTime;
         private AtomicVariable<bool> _isReloading;
@@ -17,12 +18,14 @@ namespace ZombieShooter
             IAtomicValue<int> bulletsInMagazine, 
             IAtomicValue<float> reloadTime,
             AtomicVariable<bool> isReloading,
-            AtomicEvent bulletShot)
+            AtomicEvent bulletShot,
+            AtomicEvent bulletReloaded)
         {
             _bulletsCount = bulletsInMagazine.Value;
             _bulletsInMagazine = bulletsInMagazine;
             _reloadTime = reloadTime;
             _isReloading = isReloading;
+            _bulletReloaded = bulletReloaded;
 
             bulletShot.Subscribe(DeductBullet);
         }
@@ -43,6 +46,7 @@ namespace ZombieShooter
                 {
                     _bulletsCount++;
                     _reloadTimer = _reloadTime.Value;
+                    _bulletReloaded?.Invoke();
                 }
             }
         }

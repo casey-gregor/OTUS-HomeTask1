@@ -26,7 +26,7 @@ namespace ZombieShooter
             _moveAnimationMechanics = new SetAnimationBoolMechanics(_animator, _isMovingHash, _core.MoveComponent.IsMoving);
             _deadAnimationMechanics = new SetAnimationBoolMechanics(_animator, _isDeadHash, _core.LifeComponent.IsDead);
 
-            _core.ShootComponent.ShootActionEvent.Subscribe(HandleShootActionEvent);
+            _core.ShootComponent.shootActionEvent.Subscribe(HandleShootActionEvent);
 
             _animatorDispatcher.AnimationEvent += HandleShootAction;
 
@@ -36,7 +36,7 @@ namespace ZombieShooter
         {
             if(value == "Shoot")
             {
-                _core.ShootComponent.FireEvent?.Invoke();
+                _core.ShootComponent.fireEvent?.Invoke();
                 _canSetShootTrigger = true;
             }
         }

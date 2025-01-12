@@ -1,29 +1,31 @@
 using Atomic.Elements;
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ZombieShooter
 {
     [Serializable]
     public class ShootComponent
     {
-        public Transform FirePoint;
-        public AtomicVariable<LevelBounds> LevelBounds;
+        public Transform firePoint;
+        public AtomicVariable<LevelBounds> levelBounds;
         
-        [HideInInspector] public AtomicEvent ShootRequestEvent;
-        [HideInInspector] public AtomicEvent ShootActionEvent;
-        [HideInInspector] public AtomicEvent FireEvent;
-        [HideInInspector] public AtomicEvent BulletShot;
+        [HideInInspector] public AtomicEvent shootRequestEvent;
+        [HideInInspector] public AtomicEvent shootActionEvent;
+        [HideInInspector] public AtomicEvent fireEvent;
+        [HideInInspector] public AtomicEvent bulletShot;
+        [HideInInspector] public AtomicEvent bulletReloaded;
 
-        [HideInInspector] public AtomicVariable<bool> IsReloading;
-        [HideInInspector] public AtomicVariable<Bullet> NewBullet;
-        public AtomicVariable<float> ReloadTime;
-        public AtomicVariable<int> BulletsInMagazine;
+        [HideInInspector] public AtomicVariable<bool> isReloading;
+        [HideInInspector] public AtomicVariable<Bullet> newBullet;
+        public AtomicVariable<float> reloadTime;
+        public AtomicVariable<int> bulletsInMagazine;
 
-        public int InitialBulletCount;
-        public Bullet BulletPrefab;
-        public Transform BulletParent;
-        public Transform World;
+        public int initialBulletCount;
+        public Bullet bulletPrefab;
+        public Transform bulletParent;
+        public Transform world;
         
         private bool _canFire = true;
 
@@ -32,21 +34,21 @@ namespace ZombieShooter
         public void Construct()
         {
             
-            ShootRequestEvent.Subscribe(() =>
+            shootRequestEvent.Subscribe(() =>
             {
                 if (CanFire())
                 {    
-                    ShootActionEvent.Invoke();
+                    shootActionEvent.Invoke();
                 }
             });
 
-            FireEvent.Subscribe(Shoot);
+            fireEvent.Subscribe(Shoot);
 
         }
 
         public bool CanFire()
         {
-            return _canFire && !IsReloading.Value && _condition.IsTrue();
+            return _canFire && !isReloading.Value && _condition.IsTrue();
         }
 
         private void Shoot()
@@ -54,7 +56,7 @@ namespace ZombieShooter
             if (!CanFire())
                 return;
 
-            BulletShot?.Invoke();
+            bulletShot?.Invoke();
         }
 
         public void AddCondition(Func<bool> condition)

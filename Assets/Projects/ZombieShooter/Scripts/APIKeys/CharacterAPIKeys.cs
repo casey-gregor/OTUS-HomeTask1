@@ -13,6 +13,11 @@ namespace ZombieShooter
         public const string DEDUCT_HITPOINTS = nameof(DEDUCT_HITPOINTS);
 
         public const string IS_DEAD = nameof(IS_DEAD);
-
+        
+        public const string ADD_BULLET = nameof(ADD_BULLET);
+        
+        public const string REMOVE_BULLET = nameof(REMOVE_BULLET);
+        
+        public const string BULLET_COUNT = nameof(BULLET_COUNT);
     }
 }

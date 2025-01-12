@@ -13,7 +13,7 @@ namespace ZombieShooter
 
         public void Construct(CharacterCore core)
         {
-            core.ShootComponent.FireEvent.Subscribe(HandleShootActionEvent);
+            core.ShootComponent.fireEvent.Subscribe(HandleShootActionEvent);
             core.LifeComponent.DeductHitPointEvent.Subscribe(HandleTakeDamageEvent);
         }
 
