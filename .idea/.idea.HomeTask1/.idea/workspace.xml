@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="minor">
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/PlayerHealthView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/PlayerHealthView.cs.meta" afterDir="false" />
+    <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scenes/ZombieShooter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scenes/ZombieShooter.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/APIKeys/CharacterAPIKeys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/APIKeys/CharacterAPIKeys.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterCore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/CharacterLayers/CharacterCore.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Objects/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/Objects/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterPresenter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterPresenter.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/BulletCounterView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/GameoverTextManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/GameoverTextManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/WinTextManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/WinTextManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/ZombiesCounterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Projects/ZombieShooter/Scripts/UI/ZombiesCounterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +114,8 @@
       <workItem from="1726402390664" duration="55000" />
       <workItem from="1727642935561" duration="626000" />
       <workItem from="1733765393308" duration="40000" />
-      <workItem from="1736685548526" duration="5567000" />
+      <workItem from="1736685548526" duration="5838000" />
+      <workItem from="1736692731907" duration="193000" />
     </task>
     <task id="LOCAL-00001" summary="removed unnecessary files and projects">
       <option name="closed" value="true" />
@@ -167,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736689076348</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added player hitpoints ui">
+      <option name="closed" value="true" />
+      <created>1736691367641</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736691367641</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
@@ -196,6 +194,7 @@
     <MESSAGE value="added dotween and blinking text reloading" />
     <MESSAGE value="minor and added font" />
     <MESSAGE value="minor" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor" />
+    <MESSAGE value="added player hitpoints ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="added player hitpoints ui" />
   </component>
 </project>
