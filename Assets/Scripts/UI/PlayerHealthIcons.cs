@@ -33,7 +33,6 @@ namespace ShootEmUp
         {
             for (int i = 0; i < _playerHitPointsComponent.GetHitPoints(); i++)
             {
-                Debug.Log("instantiate");
                 GameObject heartIcon = GameObject.Instantiate(_heartIconPrefab, _parent);
                 _heartIcons.Add(heartIcon);
             }
