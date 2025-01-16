@@ -32,9 +32,14 @@ namespace ShootEmUp
         private void InitilizeEnemy(GameObject enemyObject)
         {
             Transform spawnPosition = this.enemyPositions.RandomSpawnPosition();
+            Transform attackPosition = this.enemyPositions.RandomAttackPosition(enemyObject);
+            if (spawnPosition == null || attackPosition == null)
+            {
+                Debug.Log("spawn failed");
+                enemySpawner.EnemySpawnFailed(enemyObject);
+                return;
+            }
             enemyObject.transform.position = spawnPosition.position;
-
-            Transform attackPosition = this.enemyPositions.RandomAttackPosition();
 
             this.enemyInitializedEvent?.Invoke(enemyObject, attackPosition);
 

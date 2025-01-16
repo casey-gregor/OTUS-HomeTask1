@@ -6,6 +6,7 @@ namespace ShootEmUp
     public sealed class PlayerHitPointsComponent
     {
         public event Action<GameObject> hpEmptyEvent;
+        public event Action<int> hpChangedEvent;
         
         private int hitPoints;
 
@@ -47,10 +48,16 @@ namespace ShootEmUp
         public void TakeDamage(GameObject _, int damage)
         {
             this.hitPoints -= damage;
+            hpChangedEvent?.Invoke(this.hitPoints);
             if (!IsAlive())
             {
                 this.hpEmptyEvent?.Invoke(_);
             }
+        }
+
+        public int GetHitPoints()
+        {
+            return this.hitPoints;
         }
     }
 }

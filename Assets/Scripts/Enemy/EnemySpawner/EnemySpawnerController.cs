@@ -13,19 +13,20 @@ namespace ShootEmUp
         private LevelProvider levelProvider;
         private Transform enemyContainer;
         private EnemySpawnerConfig spawnerConfig;
-        private EnemyHitPointsController hitPoints;
+        private EnemyHitPointsController hitPointsController;
         private Timer timer;
         private DiContainer diContainer;
         private Pool enemyPool;
         private EnemyObserver enemyObserver;
 
         public event Action<GameObject> enemySpawnedEvent;
+        public event Action<GameObject> enemySpawnFailed;
 
         public EnemySpawnerController
             (
             LevelProvider levelProvider,
             EnemySpawnerConfig spawnerConfig,
-            EnemyHitPointsController hitPointComponent,
+            EnemyHitPointsController hitPointControllerComponent,
             Timer timer,
             DiContainer diContainer
             )
@@ -35,7 +36,7 @@ namespace ShootEmUp
             this.diContainer = diContainer;
             this.spawnerConfig = spawnerConfig;
             this.timer = timer;
-            this.hitPoints = hitPointComponent;
+            this.hitPointsController = hitPointControllerComponent;
 
             this.enemyPool = diContainer.Instantiate<Pool>
                 (new object[] 
@@ -50,10 +51,11 @@ namespace ShootEmUp
                 (new object[] 
                 { 
                     this.enemyPool, 
-                    this.hitPoints 
+                    this.hitPointsController,
+                    this
                 });
 
-            this.hitPoints.SetSpawnerAndSubscribe(this);
+            this.hitPointsController.SetSpawnerAndSubscribe(this);
         }
 
         public void OnStart()
@@ -76,6 +78,11 @@ namespace ShootEmUp
         private void HandleTimeOver()
         {
             SpawnEnemy();
+        }
+
+        public void EnemySpawnFailed(GameObject enemy)
+        {
+            enemySpawnFailed?.Invoke(enemy);
         }
 
         public void OnPause()
