@@ -6,7 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="16815e59-5c11-4ecb-b4d5-ac6b977bb64c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HomeTask1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTween.Modules.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTween.Modules.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +65,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.36f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -65,7 +73,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Program Files\Unity Hub\Editor\6000.0.36f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Development\Unity_projects\OTUS\Untangle&amp;ZenjectHT\HomeTask1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -116,6 +124,8 @@
       <workItem from="1733765393308" duration="40000" />
       <workItem from="1736685548526" duration="5838000" />
       <workItem from="1736692731907" duration="193000" />
+      <workItem from="1743069899553" duration="8221000" />
+      <workItem from="1743150085831" duration="3097000" />
     </task>
     <task id="LOCAL-00001" summary="removed unnecessary files and projects">
       <option name="closed" value="true" />
